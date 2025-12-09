@@ -19,7 +19,7 @@ CREATE TABLE Tipo_atividade (
 -- Tipo_alojamento (tipo alojamento)
 CREATE TABLE Tipo_alojamento (
     tipo_alojamento TEXT PRIMARY KEY,
-    CHECK (tipo_alojamento IN ('Hostel', 'Hotel', 'Outro'))
+    CHECK (tipo_alojamento IN ('Hostel', 'Hotel', 'Alojamento Local', 'Outro'))
 );
 
 -- Utilizador (nome de utilizador (PK), nome, e-mail(UNIQUE), país_de_origem (FK), preferência_de_viagem, foto_de_perfil)
@@ -30,6 +30,7 @@ CREATE TABLE Utilizador (
     pais_de_origem TEXT NOT NULL,
     preferencia_de_viagem TEXT NOT NULL,
     foto_de_perfil TEXT NOT NULL,
+    palavra_passe TEXT NOT NULL,
 
     FOREIGN KEY (pais_de_origem) REFERENCES Pais(nome)
 );
