@@ -39,7 +39,7 @@ $posts = getFeed($db, $current_user);
             <ul>
                 <li><a href="feed.php">Feed</a></li>
                 <li><a href="explore.php">Explorar</a></li>
-                <li><a href="profile.php?user=<?php echo htmlspecialchars($current_user); ?>">Perfil</a></li>
+                <li><a href="perfil.php?user=<?php echo htmlspecialchars($current_user); ?>">Perfil</a></li>
                 <li><a href="logout.php" class="btn-logout">Sair</a></li>
             </ul>
         </nav>
