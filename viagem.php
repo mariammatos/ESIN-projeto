@@ -14,6 +14,11 @@ $id_viagem = (int)$_GET['id'];
 $db = getDatabaseConnection();
 $viagem = getViagemDetalhes($db, $id_viagem);
 $likes = getViagemLikes($db, $id_viagem);
+$likes_count = getViagemLikesCount($db, $id_viagem);
+
+session_start();
+$current_user = $_SESSION['username'] ?? null;
+$user_liked = $current_user ? userLikedViagem($db, $id_viagem, $current_user) : false;
 
 // --- 2. APRESENTAÇÃO HTML/CSS ---
 ?>
@@ -59,11 +64,17 @@ $likes = getViagemLikes($db, $id_viagem);
         </section>
 
         <section class="like">
-            <form action="actions/action_like.php" method="get">
-                <input type="hidden" name="post_id" value="<?php echo $id_viagem; ?>">
-                <button type="submit">Like</button>
-            </form>
-
+            <?php if ($current_user): ?>
+                <form action="actions/action_like.php" method="get">
+                    <input type="hidden" name="post_id" value="<?php echo $id_viagem; ?>">
+                    <button type="submit" ><?php echo $user_liked ? 'Liked' : 'Like'; ?>
+                    </button>
+                </form>
+                <span><?php echo $likes_count; ?> likes</span>
+            <?php else: ?>
+                <p>Faça login para dar like.</p>
+                <span><?php echo $likes_count; ?> likes</span>
+            <?php endif; ?>
         </section>
 
 

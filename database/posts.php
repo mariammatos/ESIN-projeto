@@ -1,5 +1,5 @@
 <?php
-
+require_once 'database/posts.php';
   function getFeed($db, $current_user) {
     $stmt = $db->prepare(
       'SELECT 
@@ -65,4 +65,22 @@ function getViagemLikes($db, $id) {
     $stmt->execute();
     return $stmt->fetch(); // Usamos fetch() porque só esperamos um resultado
 }
+function userLikedViagem($db, $viagem_id, $username) {
+    $stmt = $db->prepare(
+        'SELECT 1 FROM Like_Viagem WHERE viagem = :viagem_id AND utilizador = :username'
+    );
+    $stmt->bindParam(':viagem_id', $viagem_id, PDO::PARAM_INT);
+    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetch() !== false;
+}
+
+function getViagemLikesCount($db, $viagem_id) {
+    $stmt = $db->prepare('SELECT COUNT(*) as total FROM Like_Viagem WHERE viagem = :viagem_id');
+    $stmt->bindParam(':viagem_id', $viagem_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    return $result ? $result['total'] : 0;
+}
+
 ?>
