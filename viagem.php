@@ -13,6 +13,7 @@ $id_viagem = (int)$_GET['id'];
 // Esta consulta junta Viagens (V) com Utilizador (U) e Seguir (S).
 $db = getDatabaseConnection();
 $viagem = getViagemDetalhes($db, $id_viagem);
+$likes = getViagemLikes($db, $id_viagem);
 
 // --- 2. APRESENTAÇÃO HTML/CSS ---
 ?>
@@ -56,6 +57,15 @@ $viagem = getViagemDetalhes($db, $id_viagem);
             <h2>🗺️ Atividades e Alojamentos</h2>
             <p>Esta secção será preenchida com as Atividades e Alojamentos registados durante a viagem.</p>
         </section>
+
+        <section class="like">
+            <form action="actions/action_like.php" method="get">
+                <input type="hidden" name="post_id" value="<?php echo $id_viagem; ?>">
+                <button type="submit">Like</button>
+            </form>
+
+        </section>
+
 
         <section class="comentarios">
             <h2>💬 Comentários</h2>

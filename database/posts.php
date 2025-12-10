@@ -54,5 +54,15 @@
     $stmt->execute();
     return $stmt->fetch(); // Usamos fetch() porque só esperamos um resultado
 }
-?>
+
+function getViagemLikes($db, $id) {
+    // Esta query junta Viagens, Utilizador, Destino e o TravelJournal.
+    $stmt = $db->prepare(
+        'SELECT * FROM Like_Viagem WHERE viagem = :viagem_id'
+    );
+
+    $stmt->bindParam(':viagem_id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetch(); // Usamos fetch() porque só esperamos um resultado
+}
 ?>
