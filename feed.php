@@ -1,13 +1,19 @@
 <?php
-// Inclui o ficheiro que faz a ligação à base de dados.
+session_start();
 require_once 'database/db_connect.php';
 require_once 'database/posts.php';
+
 
 // --- 1. LÓGICA DE AUTENTICAÇÃO E BUSCA DE DADOS ---
 
 // SIMULAÇÃO: Aqui, o seu código real iria verificar a sessão para obter o nome de utilizador logado.
 // Usamos 'sara' como um utilizador de teste por agora.
-$current_user = 'mariasouza'; 
+// $current_user = 'mariasouza'; 
+if (!isset($_SESSION['username'])) {
+    header('Location: loginlogin.php'); // Se falhar, volta para a página de login
+    exit();
+}
+$current_user = $_SESSION['username'];
 
 // Consulta SQL para obter as publicações das pessoas que o utilizador segue.
 // Esta consulta junta Viagens (V) com Utilizador (U) e Seguir (S).
