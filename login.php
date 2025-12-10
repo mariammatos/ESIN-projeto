@@ -8,8 +8,7 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 
 // check if username and password are correct
-function loginSuccess($username, $password) {
-    global $dbh;
+function loginSuccess($dbh, $username, $password) {
     // Tabela alterada de 'Users' para 'Utilizador'
     // Coluna alterada de 'username' para 'nome_de_utilizador'
     $stmt = $dbh->prepare('SELECT * FROM Utilizador WHERE nome_de_utilizador = ? AND palavra_passe = ?');
@@ -27,7 +26,7 @@ try {
     $dbh = getDatabaseConnection();
 
 
-    if (loginSuccess($username, $password)) {
+    if (loginSuccess($dbh, $username, $password)) {
         $_SESSION['username'] = $username;
         // Redirecionamento alterado para 'feed.php'
         header('Location: feed.php');
