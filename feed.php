@@ -1,47 +1,18 @@
 <?php
 // Inclui o ficheiro que faz a ligação à base de dados.
-require_once 'db_connect.php'; 
+require_once 'db_connect.php';
+require_once 'posts.php';
 
 // --- 1. LÓGICA DE AUTENTICAÇÃO E BUSCA DE DADOS ---
 
 // SIMULAÇÃO: Aqui, o seu código real iria verificar a sessão para obter o nome de utilizador logado.
 // Usamos 'sara' como um utilizador de teste por agora.
-$current_user = 'sara_gouveia'; 
+$current_user = 'joaosilva'; 
 
 // Consulta SQL para obter as publicações das pessoas que o utilizador segue.
 // Esta consulta junta Viagens (V) com Utilizador (U) e Seguir (S).
-$sql = "
-    SELECT 
-        V.id, V.titulo, U.nome_de_utilizador, U.nome, D.cidade_local, D.pais
-    FROM 
-        Viagens V
-    JOIN 
-        Utilizador U ON V.utilizador = U.nome_de_utilizador
-    JOIN 
-        Seguir S ON U.nome_de_utilizador = S.utilizador2 
-    JOIN
-        Destino D ON V.destino = D.id
-    WHERE 
-        S.utilizador1 = :current_user
-    ORDER BY 
-        V.data_ida DESC;
-";
-
-$posts = [];
-try {
-    // Prepara a query SQL
-    $stmt = $db->prepare($sql);
-    // Liga o parâmetro :current_user com o nome de utilizador real
-    $stmt->bindParam(':current_user', $current_user);
-    // Executa a query
-    $stmt->execute();
-    // Obtém todos os resultados
-    $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-} catch (PDOException $e) {
-    // Em caso de erro na query, guarda o erro em vez de mostrar a página
-    $error_message = "Erro ao carregar o feed: " . $e->getMessage();
-}
+$db = getDatabaseConnection()
+$posts = getFeed($db, $current_user);
 
 // --- 2. APRESENTAÇÃO HTML/CSS ---
 ?>
