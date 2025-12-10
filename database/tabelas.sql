@@ -29,7 +29,7 @@ CREATE TABLE Utilizador (
     email TEXT NOT NULL UNIQUE,
     pais_de_origem TEXT NOT NULL,
     preferencia_de_viagem TEXT NOT NULL,
-    foto_de_perfil TEXT NOT NULL,
+    foto_de_perfil TEXT,
     palavra_passe TEXT NOT NULL,
 
     FOREIGN KEY (pais_de_origem) REFERENCES Pais(nome)
