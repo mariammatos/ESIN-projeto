@@ -9,12 +9,14 @@ require_once 'database/posts.php';
 // Usamos 'sara' como um utilizador de teste por agora.
 $id_viagem = (int)$_GET['id'];
 
+
 // Consulta SQL para obter as publicações das pessoas que o utilizador segue.
 // Esta consulta junta Viagens (V) com Utilizador (U) e Seguir (S).
 $db = getDatabaseConnection();
 $viagem = getViagemDetalhes($db, $id_viagem);
 $likes = getViagemLikes($db, $id_viagem);
 $likes_count = getViagemLikesCount($db, $id_viagem);
+$comentarios = getComentarios($db, $id_viagem);
 
 session_start();
 $current_user = $_SESSION['username'] ?? null;
@@ -80,7 +82,30 @@ $user_liked = $current_user ? userLikedViagem($db, $id_viagem, $current_user) : 
 
         <section class="comentarios">
             <h2>💬 Comentários</h2>
-            <p>...</p>
+            <?php if ($current_user): ?>
+                <form action="actions/action_comentar.php" method="post">
+                    <input type="hidden" name="viagem_id" value="<?php echo $id_viagem; ?>">
+                    <textarea name="comentario" required placeholder="Escreve um comentário..."></textarea>
+                    <button type="submit">Comentar</button>
+        
+                </form>
+            <?php else: ?>
+                <p>Faça login para comentar.</p>
+            <?php endif; ?>
+
+            <?php if (count($comentarios) === 0): ?>
+                <p>Sem comentários ainda.</p>
+            <?php else: ?>
+                <ul class="lista-comentarios">
+                    <?php foreach ($comentarios as $c): ?>
+                        <li>
+                            <strong>@<?= htmlspecialchars($c['utilizador']) ?>:</strong>
+                            <?= htmlspecialchars($c['texto']) ?>
+                            <em>(<?= htmlspecialchars($c['data']) ?>)</em>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
         </section>
 
     </main>

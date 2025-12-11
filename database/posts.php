@@ -1,5 +1,6 @@
 <?php
-require_once 'database/posts.php';
+//require_once 'database/posts.php';
+
   function getFeed($db, $current_user) {
     $stmt = $db->prepare(
       'SELECT 
@@ -83,4 +84,16 @@ function getViagemLikesCount($db, $viagem_id) {
     return $result ? $result['total'] : 0;
 }
 
+function getComentarios($db, $viagem_id) {
+    $stmt = $db->prepare('SELECT * FROM Comentario WHERE viagem = ? ORDER BY data DESC');
+    $stmt->execute([$viagem_id]);
+    return $stmt->fetchAll();
+}
+
+function adicionarComentario($db, $viagem_id, $username, $texto) {
+    $data = date('Y-m-d');
+    $hora = date('H:i:s');
+    $stmt = $db->prepare('INSERT INTO Comentario (viagem, utilizador, texto, data, hora) VALUES (?, ?, ?, ?, ?)');
+    $stmt->execute([$viagem_id, $username, $texto, $data, $hora]);
+}
 ?>

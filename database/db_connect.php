@@ -1,7 +1,7 @@
 <?php
 
   function getDatabaseConnection() {
-    $dbh = new PDO('sqlite:database/triptales.db');
+    $dbh = new PDO('sqlite:' . __DIR__ . '/triptales.db');
     // Configurações standard para o seu projeto:
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
