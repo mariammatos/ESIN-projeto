@@ -155,6 +155,9 @@ main {
     text-decoration: none;
 }
 
+.cartao a :hover {
+    color: blue
+}
 /* ================= FOOTER ================= */
 
 footer {
