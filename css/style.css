@@ -104,6 +104,10 @@ main {
     border-radius: 4px;
 }
 
+.btn-cta:hover {
+    background-color: lightcoral ;
+}
+
 /* ================= DESTAQUES ================= */
 
 .destaques {
