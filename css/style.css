@@ -68,7 +68,8 @@ color: #4e8098
 }
 
 .btn-signup:hover {
-    background-color: lightcoral ;
+    background-color: #b66168 ;
+    color: #fffae2
 }
 
 /* ================= MAIN ================= */
