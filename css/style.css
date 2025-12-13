@@ -159,8 +159,9 @@ main {
 }
 
 .cartao a:hover {
-    color: #4e8098;
+    color: blue;
 }
+
 /* ================= FOOTER ================= */
 
 footer {
