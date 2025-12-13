@@ -8,7 +8,7 @@
 body {
     font-family: "Segoe UI", Arial, sans-serif;
     background-color: #fcf7f8;
-    color: var(--texto-escuro);
+    color: #444;
     line-height: 1.6;
 }
 
