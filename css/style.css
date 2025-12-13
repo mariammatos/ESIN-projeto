@@ -55,13 +55,16 @@ nav ul li a {
 
 .btn-login:hover {
 background-color: #fcf7f8;
-color: #4e8098
 }
 
 .btn-signup {
     padding: 6px 14px;
     background-color: #a31621;
     border-radius: 4px;
+}
+
+.btn-signup:hover {
+    background-color: lightcoral ;
 }
 
 /* ================= MAIN ================= */
