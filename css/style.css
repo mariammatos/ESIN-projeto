@@ -47,7 +47,7 @@ nav ul li a {
 
 /* BOTÕES */
 
-.btn-login {
+#btn-login {
     padding: 6px 14px;
     border: 1px solid #fcf7f8;
     border-radius: 4px;
@@ -57,7 +57,7 @@ nav ul li a {
         background-color: lightblue;
 }
 
-.btn-signup {
+#btn-signup {
     padding: 6px 14px;
     background-color: #a31621;
     border-radius: 4px;
