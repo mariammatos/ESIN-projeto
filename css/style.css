@@ -44,6 +44,10 @@ nav ul li a {
     font-size: 0.95rem;
 }
 
+nav ul li a:hover {
+    color: grey
+}
+
 /* BOTÕES */
 
 .btn-login {
