@@ -133,27 +133,30 @@ main {
     gap: 20px;
 }
 
+
 .cartao {
     background-color: var(--snow);
-    border-left: 5px solid var(--air-force-blue);
-    padding: 18px;
-    border-radius: 6px;
+    border-left: 5px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 5px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.cartao:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+
+.cartao a:hover {
+    text-decoration: underline;
 }
 
+
 .cartao h3 {
-    color: var(--ruby-red);
+    color:  #0e5aa7;
     margin-bottom: 8px;
 }
 
 .cartao p {
     font-size: 0.9rem;
     margin-bottom: 12px;
+    color: #555;
 }
 
 .cartao a {
@@ -164,6 +167,10 @@ main {
     margin-top: 10px;
 }
 
+.cartao:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
 /* ================= FOOTER ================= */
 
