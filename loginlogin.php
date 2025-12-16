@@ -15,7 +15,7 @@
   </head>
   <body>
 
-
+    <?php echo $msg ?>
     <section id="login">
       <h2>Login</h2>
       <form action="login.php" method="post">

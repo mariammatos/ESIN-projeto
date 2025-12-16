@@ -67,7 +67,7 @@ $user_liked = $current_user ? userLikedViagem($db, $id_viagem, $current_user) : 
 
         <section class="like">
             <?php if ($current_user): ?>
-                <form action="actions/action_like.php" method="get">
+                <form action="actions/action_like.php" method="post">
                     <input type="hidden" name="post_id" value="<?php echo $id_viagem; ?>">
                     <button type="submit" ><?php echo $user_liked ? 'Liked' : 'Like'; ?>
                     </button>

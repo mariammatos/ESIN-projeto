@@ -4,7 +4,7 @@ require_once 'db_connect.php';
 $db = getDatabaseConnection();
 
 $current_user = $_SESSION['username'];
-$liked_post = $_GET['post_id'];
+$liked_post = $_POST['post_id'];
 
 // 1. Verifica se já existe like
 $stmt = $db->prepare("SELECT COUNT(*) FROM Like_Viagem WHERE utilizador = :utilizador AND viagem = :viagem_id");

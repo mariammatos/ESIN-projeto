@@ -61,8 +61,7 @@ $viagens = $stmt->fetchAll();
 <main class="perfil-container">
 
     <section class="perfil-info">
-        <img src="media/<?= htmlspecialchars($utilizador['foto_de_perfil']) ?>" class="foto-perfil">
-        <?php echo $utilizador['foto_de_perfil']?>
+        <img width="50" height= "50" src="media/<?= htmlspecialchars($utilizador['foto_de_perfil']) ?>" class="foto-perfil">
         <h1>@<?= htmlspecialchars($utilizador['nome_de_utilizador']) ?></h1>
         <h2><?= htmlspecialchars($utilizador['nome']) ?></h2>
 
