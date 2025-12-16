@@ -1,0 +1,133 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== CORES (PALETA) ===== */
+:root {
+    --ruby-red: #A31621;
+    --snow: #FCF7F8;
+    --pale-slate: #CED3DC;
+    --air-force-blue: #4E8098;
+    --sky-blue: #90C2E7;
+    --texto: #2b2b2b;
+}
+
+/* ===== BODY ===== */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, var(--air-force-blue), var(--sky-blue));
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--texto);
+}
+
+/* ===== MENSAGEM PHP (ERROS / SUCESSO) ===== */
+body > p {
+    margin-bottom: 15px;
+    color: var(--ruby-red);
+    font-weight: 500;
+}
+
+/* ===== CARTÃO LOGIN ===== */
+#login {
+    background-color: var(--snow);
+    padding: 35px 40px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    margin-bottom: 25px;
+}
+
+/* ===== TÍTULO LOGIN ===== */
+#login h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--air-force-blue);
+}
+
+/* ===== FORM ===== */
+#login form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== INPUTS ===== */
+#login input {
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid var(--pale-slate);
+    font-size: 0.95rem;
+}
+
+#login input::placeholder {
+    color: #999;
+}
+
+#login input:focus {
+    outline: none;
+    border-color: var(--air-force-blue);
+    box-shadow: 0 0 0 2px rgba(78, 128, 152, 0.25);
+}
+
+/* ===== BOTÃO LOGIN ===== */
+#login button {
+    padding: 12px;
+    background-color: var(--ruby-red);
+    color: var(--snow);
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+#login button:hover {
+    background-color: var(--air-force-blue);
+    transform: translateY(-2px);
+}
+
+/* ===== SECÇÃO REGISTAR ===== */
+#registar {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#registar h1 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--snow);
+}
+
+/* BOTÃO REGISTAR */
+#registar .btn-signup {
+    display: inline-block;
+    padding: 10px 18px;
+    background-color: var(--snow);
+    color: var(--ruby-red);
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+#registar .btn-signup:hover {
+    background-color: var(--ruby-red);
+    color: var(--snow);
+}
+
+/* ===== FOOTER ===== */
+footer {
+    margin-top: auto;
+    padding: 15px;
+    font-size: 0.8rem;
+    color: var(--snow);
+    opacity: 0.85;
+}
