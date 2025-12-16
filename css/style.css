@@ -134,33 +134,36 @@ main {
 }
 
 .cartao {
-    background-color: #fcf7f8;
-    border-left: 5px solid #90c2e7;
-    padding: 20px;
-    border-radius: 4px;
+    background-color: var(--snow);
+    border-left: 5px solid var(--air-force-blue);
+    padding: 18px;
+    border-radius: 6px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cartao:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
 }
 
 .cartao h3 {
-    color: #a31621;
+    color: var(--ruby-red);
+    margin-bottom: 8px;
 }
 
 .cartao p {
     font-size: 0.9rem;
-}
-
-.cartao .destino {
-    color: #4e8098;
-    font-style: italic;
+    margin-bottom: 12px;
 }
 
 .cartao a {
-    color: #4e8098;
-    font-weight: 500;
     text-decoration: none;
+    color: var(--air-force-blue);
+    font-weight: 500;
 }
 
 .cartao a:hover {
-    color: #334f5c;
+    text-decoration: underline;
 }
 
 /* ================= FOOTER ================= */
