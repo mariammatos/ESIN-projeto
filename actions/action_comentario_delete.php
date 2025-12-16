@@ -8,12 +8,11 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-if (isset($_POST['comentario'], $_POST['viagem_id'])) {
+
+if (isset($_POST['comentario_id'])) {
     $db = getDatabaseConnection();
-    adicionarComentario($db, $_POST['viagem_id'], $_SESSION['username'], $_POST['comentario']);
+    removerComentario($db, $_POST['comentario_id']);
 }
-
-
 
 header("Location: ../viagem.php?id=" . $_POST['viagem_id']);
 exit();
