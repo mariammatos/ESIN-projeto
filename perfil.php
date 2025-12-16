@@ -43,7 +43,7 @@ $viagens = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <title>Perfil - <?= htmlspecialchars($utilizador['nome_de_utilizador']) ?></title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styleperfil.css">
 </head>
 
 <body>
