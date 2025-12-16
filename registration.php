@@ -2,6 +2,7 @@
   session_start();
 
   $msg = $_SESSION['msg'];
+  $msg1 = $_SESSION['msg1'];
   unset($_SESSION['msg']);
 ?>
 
@@ -16,23 +17,61 @@
   <body>
 
 
-    <section id="registration">
-      <h2>Registration</h2>
-      <form action="register.php" method="post">
-        <input type="text" name="username" placeholder="username">
-        <input type="password" name="password" placeholder="password">
-        <input type="password" name="password_confirm" placeholder="Confirmar Palavra-passe" required>
-        <input type="email" name="email" placeholder="Endereço de E-mail" required>
-        <input type="text" name="nome" placeholder="Nome Completo" required>
-        <input type="text" name="pais_de_origem" placeholder="País de Origem" required> 
-        <textarea name="preferencia_de_viagem" placeholder="As suas preferências de viagem" required></textarea>
-        <input type="text" name="foto_de_perfil" placeholder="Link da Foto de Perfil" required>
-        <button>Register</button>
-      </form>
-    </section>
+  <section id="registration">
+    <?php echo $msg ?>
+    <h2>Registration</h2>
+
+    <form action="register.php" method="post">
+
+      <div class="form-group">
+        <label for="username">Nome de utilizador:</label>
+        <input type="text" name="username" id="username" ?>
+        <?php echo $msg1 ?>
+        <button type="submit" formaction="action_checkusername.php" formnovalidate>Verificar</button>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Palavra-passe:</label>
+        <input type="password" id="password" name="password">
+      </div>
+
+      <div class="form-group">
+        <label for="password_confirm">Confirmar palavra-passe:</label>
+        <input type="password" id="password_confirm" name="password_confirm" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Endereço de e-mail:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="nome">Nome completo:</label>
+        <input type="text" id="nome" name="nome" required>
+      </div>
+
+      <div class="form-group">
+        <label for="pais_de_origem">País de origem:</label>
+        <input type="text" id="pais_de_origem" name="pais_de_origem" required>
+      </div>
+
+      <div class="form-group">
+        <label for="preferencia_de_viagem">Preferências de viagem:</label>
+        <textarea id="preferencia_de_viagem" name="preferencia_de_viagem" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="foto_de_perfil">Link da foto de perfil:</label>
+        <input type="text" id="foto_de_perfil" name="foto_de_perfil" required>
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
+  </section>
+
 
     <footer>
-      <p>Copyright &copy; André Restivo, 2018</p>
+      <p>&copy; 2025 TripTales. Projeto ESIN.</p>
     </footer>
   </body>
 </html>

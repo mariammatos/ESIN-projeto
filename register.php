@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once 'database/db_connect.php';
+$dbh = getDatabaseConnection();
 
 $username = $_POST['username'];
 $password = $_POST['password'];
@@ -12,26 +14,22 @@ $foto_de_perfil = $_POST['foto_de_perfil'];     // Novo campo para Foto
 
 function insertUser($username, $password, $email, $nome, $pais_de_origem, $preferencia_de_viagem, $foto_de_perfil) { // Parâmetros adicionados
     global $dbh;
-    // Query SQL alterada para a tabela 'Utilizador' e todos os campos NOT NULL necessários
-    $stmt = $dbh->prepare('INSERT INTO Utilizador (nome_de_utilizador, email, nome, pais_de_origem, preferencia_de_viagem, foto_de_perfil, password) VALUES (?, ?, ?, ?, ?, ?, ?)');
+    $stmt = $dbh->prepare('INSERT INTO Utilizador (nome_de_utilizador, email, nome, pais_de_origem, preferencia_de_viagem, foto_de_perfil, palavra_passe) VALUES (?, ?, ?, ?, ?, ?, ?)');
     $stmt->execute(array($username, $email, $nome, $pais_de_origem, $preferencia_de_viagem, $foto_de_perfil, hash('sha256', $password)));
 }
 
-// 1. Validação de campos em falta (NOT NULL) e confirmação de password
 if (strlen($username) == 0 || strlen($email) == 0 || strlen($nome) == 0 || strlen($pais_de_origem) == 0 || strlen($preferencia_de_viagem) == 0 || strlen($foto_de_perfil) == 0) { // Campos adicionados à verificação
     $_SESSION['msg'] = 'Por favor, preencha todos os campos obrigatórios.';
     header('Location: registration.php');
     die();
 }
 
-// 2. Verificação de correspondência de passwords
-if ($password != $password_confirm) { // Nova validação
+if ($password != $password_confirm) {
     $_SESSION['msg'] = 'A palavra-passe e a confirmação não correspondem.';
     header('Location: registration.php');
     die();
 }
 
-// 3. Validação de tamanho da password
 if (strlen($password) < 8) {
     $_SESSION['msg'] = 'A palavra-passe deve ter pelo menos 8 caracteres.';
     header('Location: registration.php');
@@ -39,17 +37,12 @@ if (strlen($password) < 8) {
 }
 
 try {
-    // DB alterada para 'triptales.db'
-    $dbh = new PDO('sqlite:triptales.db');
-    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    // Linha adicionada para ativar as Foreign Keys
-    $dbh->exec('PRAGMA foreign_keys = ON;');
 
     insertUser($username, $password, $email, $nome, $pais_de_origem, $preferencia_de_viagem, $foto_de_perfil); // Parâmetros adicionados
-    $_SESSION['msg'] = 'Registo bem-sucedido! Faça login para começar.'; // Mensagem ajustada
-    header('Location: index.html'); // Redireciona para a página de Login/Index
+    $_SESSION['username'] = $username;
+    $_SESSION['msg'] = 'Registo bem-sucedido! Faça login para começar.';
+    header('Location: feed.php');
+
 } catch (PDOException $e) {
     $error_msg = $e->getMessage();
 
