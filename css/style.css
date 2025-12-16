@@ -160,11 +160,10 @@ main {
     text-decoration: none;
     color: var(--air-force-blue);
     font-weight: 500;
+    display: inline-block;
+    margin-top: 10px;
 }
 
-.cartao a:hover {
-    text-decoration: underline;
-}
 
 /* ================= FOOTER ================= */
 
