@@ -17,7 +17,7 @@
 
 /* ===== BODY ===== */
 body {
-    font-family: "Libre Franklin", Arial, sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
     background-color: var(--snow);
     color: var(--texto);
     min-height: 100vh;
@@ -28,6 +28,7 @@ body {
 /* ===== HEADER ===== */
 header {
     background-color: var(--air-force-blue);
+
 }
 
 nav {
@@ -40,7 +41,7 @@ nav {
 }
 
 .logo {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: bold;
     color: var(--snow);
 }
@@ -54,22 +55,16 @@ nav ul {
 nav ul li a {
     color: var(--snow);
     text-decoration: none;
-    font-weight: 500;
+   font-size: 0.95rem;
 }
 
 nav ul li a:hover {
-    text-decoration: underline;
+    color: #334f5c;
 }
 
+
 /* ===== MAIN ===== */
-.perfil-container {
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 0 20px;
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 30px;
-}
+
 
 /* ===== PERFIL INFO ===== */
 .perfil-info {
