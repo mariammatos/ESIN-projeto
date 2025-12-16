@@ -36,5 +36,4 @@ header("Location: ../viagem.php?id=" . $liked_post);
 exit;
 ?>
 
-// ob_iconv_handler
 
