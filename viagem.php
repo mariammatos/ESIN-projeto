@@ -99,9 +99,17 @@ $user_liked = $current_user ? userLikedViagem($db, $id_viagem, $current_user) : 
                 <ul class="lista-comentarios">
                     <?php foreach ($comentarios as $c): ?>
                         <li>
-                            <strong>@<?= htmlspecialchars($c['utilizador']) ?>:</strong>
+                            <strong>@<?= htmlspecialchars($c['utilizador']) ?>:</strong> 
                             <?= htmlspecialchars($c['texto']) ?>
                             <em>(<?= htmlspecialchars($c['data']) ?>)</em>
+                            <?php if ($c['utilizador'] === $current_user): ?>
+
+                                <form action="actions/action_comentario_delete.php" method="post">
+                                    <input type="hidden" name="comentario_id" value="<?= $c['id'] ?>">
+                                    <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                                    <button type="submit" onclick="return confirm('Tem a certeza que quer eliminar este comentário?');">Eliminar</button>
+                                </form>
+                            <?php endif; ?>
                         </li>
                     <?php endforeach; ?>
                 </ul>

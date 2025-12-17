@@ -96,4 +96,9 @@ function adicionarComentario($db, $viagem_id, $username, $texto) {
     $stmt = $db->prepare('INSERT INTO Comentario (viagem, utilizador, texto, data, hora) VALUES (?, ?, ?, ?, ?)');
     $stmt->execute([$viagem_id, $username, $texto, $data, $hora]);
 }
+
+function removerComentario($db, $comentario_id) {
+    $stmt = $db->prepare('DELETE FROM Comentario WHERE id = ?');
+    $stmt->execute([$comentario_id]);
+}
 ?>
