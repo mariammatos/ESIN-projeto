@@ -1,0 +1,207 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== CORES (PALETA) ===== */
+:root {
+    --ruby-red: #A31621;
+    --snow: #FCF7F8;
+    --pale-slate: #CED3DC;
+    --air-force-blue: #4E8098;
+    --sky-blue: #90C2E7;
+    --texto: #2b2b2b;
+}
+
+
+/* ================= HEADER ================= */
+
+header {
+    background-color: #4e8098;
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color:black;
+}
+
+
+/* ===== BODY ===== */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #4e8098;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--texto);
+}
+
+
+head {
+    background-color: #4e8098;
+}
+
+.logor {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: var #fcf7f8;
+}
+
+
+/* BOTÕES */
+
+.btn-login {
+    padding: 6px 14px;
+    border: 1px solid #fcf7f8;
+    border-radius: 4px;
+}
+
+.btn-login:hover {
+background-color: #fcf7f8;
+color: #4e8098
+}
+
+.btn-signup {
+    padding: 6px 14px;
+    background-color: #a31621;
+    border-radius: 4px;
+}
+
+.btn-signup:hover {
+    background-color: #b66168 ;
+    color: #fffae2
+}
+
+/* ================= MAIN ================= */
+
+main {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+}
+
+
+/* ================= HERO ================= */
+
+.hero {
+    background-color: #ced3dc;
+    padding: 50px 40px;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    color: #4e8098;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    color: #444;
+    margin-bottom: 25px;
+}
+
+.btn-cta {
+    background-color: #a31621;
+    color: #fcf7f8;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.btn-cta:hover {
+    background-color: #b66168 ;
+}
+
+
+/* ===== CARTÃO REGISTO ===== */
+#registration {
+    background-color: var(--snow);
+    margin-top: 10px;
+    padding: 35px 40px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 520px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== TÍTULO ===== */
+#registration h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--air-force-blue);
+}
+
+/* ===== FORM ===== */
+#registration form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== INPUTS E TEXTAREA ===== */
+#registration input,
+#registration textarea {
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid var(--pale-slate);
+    font-size: 0.95rem;
+    font-family: inherit;
+}
+
+#registration textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+#registration input::placeholder,
+#registration textarea::placeholder {
+    color: #999;
+}
+
+#registration input:focus,
+#registration textarea:focus {
+    outline: none;
+    border-color: var(--air-force-blue);
+    box-shadow: 0 0 0 2px rgba(78, 128, 152, 0.25);
+}
+
+/* ===== BOTÃO REGISTAR ===== */
+#registration button {
+    margin-top: 10px;
+    padding: 13px;
+    background-color: var(--ruby-red);
+    color: var(--snow);
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+#registration button:hover {
+    background-color: var(--air-force-blue);
+    transform: translateY(-2px);
+}
+
+/* ================= FOOTER ================= */
+footer {
+    color: #fcf7f8;
+    text-align: center;
+    padding: 15px;
+    margin-top: none;
+}
+
