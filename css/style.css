@@ -138,6 +138,13 @@ main {
     border-left: 5px solid #90c2e7;
     padding: 20px;
     border-radius: 4px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+}
+.cartao:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+    border-left-color: #4e8098;
 }
 
 .cartao h3 {
@@ -160,7 +167,8 @@ main {
 }
 
 .cartao a:hover {
-    color: #334f5c;
+    text-decoration: underline;
+
 }
 
 /* ================= FOOTER ================= */
