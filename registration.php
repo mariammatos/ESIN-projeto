@@ -25,7 +25,7 @@
 
       <div class="form-group">
         <label for="username">Nome de utilizador:</label>
-        <input type="text" name="username" id="username" ?>
+        <input type="text" name="username" id="username" value="<?= htmlspecialchars($_SESSION['form_data']['username'] ?? '') ?>" required>
         <?php echo $msg1 ?>
         <button type="submit" formaction="action_checkusername.php" formnovalidate>Verificar</button>
       </div>
@@ -42,17 +42,17 @@
 
       <div class="form-group">
         <label for="email">Endereço de e-mail:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" value="<?= htmlspecialchars($_SESSION['form_data']['email'] ?? '') ?>" required>
       </div>
 
       <div class="form-group">
         <label for="nome">Nome completo:</label>
-        <input type="text" id="nome" name="nome" required>
+        <input type="text" id="nome" name="nome" value="<?= htmlspecialchars($_SESSION['form_data']['nome'] ?? '') ?>" required>
       </div>
 
       <div class="form-group">
         <label for="pais_de_origem">País de origem:</label>
-        <input type="text" id="pais_de_origem" name="pais_de_origem" required>
+        <input type="text" id="pais_de_origem" name="pais_de_origem" value="<?= htmlspecialchars($_SESSION['form_data']['pais_de_origem'] ?? '') ?>" required>
       </div>
 
       <div class="form-group">
@@ -62,7 +62,7 @@
 
       <div class="form-group">
         <label for="foto_de_perfil">Link da foto de perfil:</label>
-        <input type="text" id="foto_de_perfil" name="foto_de_perfil" required>
+        <input type="text" id="foto_de_perfil" name="foto_de_perfil" value="<?= htmlspecialchars($_SESSION['form_data']['foto_de_perfil'] ?? '') ?>" required>
       </div>
 
       <button type="submit">Register</button>

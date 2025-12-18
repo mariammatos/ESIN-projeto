@@ -29,7 +29,7 @@
         <a href="registration.php" class="btn-signup">Registe-se agora!</a>
     </section>
     <footer>
-      <p>Copyright &copy; André Restivo, 2018</p>
+      <p>&copy; 2025 TripTales. Projeto ESIN.</p>
     </footer>
   </body>
 </html>

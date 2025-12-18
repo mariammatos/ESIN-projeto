@@ -1,22 +1,27 @@
 <?php
 session_start();
 require_once 'database/db_connect.php';
+require_once 'database/users.php';
 $dbh = getDatabaseConnection();
 
 $username = $_POST['username'];
 $password = $_POST['password'];
-$password_confirm = $_POST['password_confirm']; // Novo campo para confirmação
-$email = $_POST['email'];                       // Novo campo para e-mail
-$nome = $_POST['nome'];                         // Novo campo para Nome
-$pais_de_origem = $_POST['pais_de_origem'];     // Novo campo para País
-$preferencia_de_viagem = $_POST['preferencia_de_viagem']; // Novo campo para Preferência
-$foto_de_perfil = $_POST['foto_de_perfil'];     // Novo campo para Foto
+$password_confirm = $_POST['password_confirm']; 
+$email = $_POST['email'];                       
+$nome = $_POST['nome'];                         
+$pais_de_origem = $_POST['pais_de_origem'];     
+$preferencia_de_viagem = $_POST['preferencia_de_viagem']; 
+$foto_de_perfil = $_POST['foto_de_perfil'];     
 
-function insertUser($username, $password, $email, $nome, $pais_de_origem, $preferencia_de_viagem, $foto_de_perfil) { // Parâmetros adicionados
-    global $dbh;
-    $stmt = $dbh->prepare('INSERT INTO Utilizador (nome_de_utilizador, email, nome, pais_de_origem, preferencia_de_viagem, foto_de_perfil, palavra_passe) VALUES (?, ?, ?, ?, ?, ?, ?)');
-    $stmt->execute(array($username, $email, $nome, $pais_de_origem, $preferencia_de_viagem, $foto_de_perfil, hash('sha256', $password)));
-}
+$_SESSION['form_data'] = [
+    'username' => $username,
+    'email' => $email,
+    'nome' => $nome,
+    'pais_de_origem' => $pais_de_origem,
+    'preferencia_de_viagem' => $preferencia_de_viagem,
+    'foto_de_perfil' => $foto_de_perfil
+];
+
 
 if (strlen($username) == 0 || strlen($email) == 0 || strlen($nome) == 0 || strlen($pais_de_origem) == 0 || strlen($preferencia_de_viagem) == 0 || strlen($foto_de_perfil) == 0) { // Campos adicionados à verificação
     $_SESSION['msg'] = 'Por favor, preencha todos os campos obrigatórios.';
@@ -39,8 +44,9 @@ if (strlen($password) < 8) {
 try {
 
     insertUser($username, $password, $email, $nome, $pais_de_origem, $preferencia_de_viagem, $foto_de_perfil); // Parâmetros adicionados
+    unset($_SESSION['form_data']);
     $_SESSION['username'] = $username;
-    $_SESSION['msg'] = 'Registo bem-sucedido! Faça login para começar.';
+    $_SESSION['msg'] = 'Registo bem-sucedido, bem-vindo ao TripTales!';
     header('Location: feed.php');
 
 } catch (PDOException $e) {
