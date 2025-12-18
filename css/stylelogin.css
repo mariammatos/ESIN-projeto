@@ -125,9 +125,12 @@ body > p {
 
 /* ===== FOOTER ===== */
 footer {
-    margin-top: auto;
-    padding: 15px;
+    margin-top: 50px;
+    padding: 20px;
     font-size: 0.8rem;
     color: var(--snow);
     opacity: 0.85;
 }
+
+
+
