@@ -28,6 +28,7 @@ body {
 /* ===== HEADER ===== */
 header {
     background-color: var(--air-force-blue);
+    color: black
 
 }
 
@@ -43,7 +44,6 @@ nav {
 .logo {
     font-size: 1.6rem;
     font-weight: bold;
-    color: var(--snow);
 }
 
 nav ul {
@@ -123,7 +123,7 @@ nav ul li a:hover {
 /* ===== CARTÕES ===== */
 .cartao {
     background-color: var(--snow);
-    border-left: 5px solid var(--air-force-blue);
+    border-left: 5px solid #90c2e7;
     padding: 18px;
     border-radius: 6px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -132,6 +132,8 @@ nav ul li a:hover {
 .cartao:hover {
     transform: translateY(-4px);
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+    border-left-color: #4e8098;
+
 }
 
 .cartao h3 {
