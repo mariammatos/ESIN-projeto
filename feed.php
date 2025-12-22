@@ -10,7 +10,7 @@ require_once 'database/posts.php';
 // Usamos 'sara' como um utilizador de teste por agora.
 // $current_user = 'mariasouza'; 
 if (!isset($_SESSION['username'])) {
-    header('Location: loginlogin.php'); // Se falhar, volta para a página de login
+    header('Location: login.php'); // Se falhar, volta para a página de login
     exit();
 }
 $current_user = $_SESSION['username'];

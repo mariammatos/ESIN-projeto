@@ -4,7 +4,7 @@ require_once 'database/db_connect.php';
 
 // Se não estiver login, manda para login
 if (!isset($_SESSION['username'])) {
-    header("Location: loginlogin.php");
+    header("Location: login.php");
     exit();
 }
 
@@ -61,7 +61,7 @@ $viagens = $stmt->fetchAll();
 <main class="perfil-container">
 
     <section class="perfil-info">
-        <img width="50" height= "50" src="media/<?= htmlspecialchars($utilizador['foto_de_perfil']) ?>" class="foto-perfil">
+        <img width="50" height= "50" src="media/profile_pictures/<?= htmlspecialchars($utilizador['foto_de_perfil']) ?>" class="foto-perfil">
         <h1>@<?= htmlspecialchars($utilizador['nome_de_utilizador']) ?></h1>
         <h2><?= htmlspecialchars($utilizador['nome']) ?></h2>
 

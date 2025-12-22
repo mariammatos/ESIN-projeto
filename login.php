@@ -1,43 +1,35 @@
 <?php
-require_once 'database/db_connect.php';
+  session_start();
 
-session_start();
+  $msg = $_SESSION['msg'];
+  unset($_SESSION['msg']);
+?>
 
-// get username and password from HTTP parameters
-$username = $_POST['username'];
-$password = $_POST['password'];
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TripTales</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/stylelogin.css"> 
+    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin%7CMerriweather" rel="stylesheet"> 
+  </head>
+  <body>
 
-// check if username and password are correct
-function loginSuccess($dbh, $username, $password) {
-    // Tabela alterada de 'Users' para 'Utilizador'
-    // Coluna alterada de 'username' para 'nome_de_utilizador'
-    $stmt = $dbh->prepare('SELECT * FROM Utilizador WHERE nome_de_utilizador = ? AND palavra_passe = ?');
-    $stmt->execute(array($username, hash('sha256', $password)));
-    return $stmt->fetch();
-}
-
-// if login successful:
-// - redirect user to feed page
-// else:
-// - set error msg "Login failed!"
-// - redirect user back to index page
-
-try {
-    $dbh = getDatabaseConnection();
-
-
-    if (loginSuccess($dbh, $username, $password)) {
-        $_SESSION['username'] = $username;
-        // Redirecionamento alterado para 'feed.php'
-        header('Location: feed.php');
-        exit();
-    } else {
-        $_SESSION['msg'] = 'Nome de utilizador ou password inválidos!';
-        // Redirecionamento alterado para a página inicial (se falhar)
-        header('Location: loginlogin.php');
-        exit();
-    }
-
-} catch (PDOException $e) {
-    $_SESSION['msg'] = 'Erro: ' . $e->getMessage();
-}
+    <?php echo $msg ?>
+    <section id="login">
+      <h2>Login</h2>
+      <form action="actions/action_login.php" method="post">
+        <input type="text" name="username" placeholder="username">
+        <input type="password" name="password" placeholder="password">
+        <button>Login</button>
+      </form>
+    </section>
+    <section id="registar">
+        <h1>Ainda não tem uma conta?</h1>
+        <a href="registration.php" class="btn-signup">Registe-se agora!</a>
+    </section>
+    <footer>
+      <p>&copy; 2025 TripTales. Projeto ESIN.</p>
+    </footer>
+  </body>
+</html>

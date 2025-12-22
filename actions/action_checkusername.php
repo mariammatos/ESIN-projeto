@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'database/db_connect.php';
+require_once '../database/db_connect.php';
 $dbh = getDatabaseConnection();
 
 $username = $_POST['username'] ?? '';
@@ -8,7 +8,7 @@ $username = $_POST['username'] ?? '';
 if (strlen($username) == 0) {
     $_SESSION['msg1'] = 'Por favor, insira um nome de utilizador.';
     // $_SESSION['form_data'] = $_POST;
-    header('Location: registration.php');
+    header('Location: ../registration.php');
     exit;
 }
 
@@ -22,5 +22,5 @@ if ($stmt->fetch()) {
 }
 
 $_SESSION['form_data'] = $_POST;
-header('Location: registration.php');
+header('Location: ../registration.php');
 exit;

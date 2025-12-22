@@ -21,13 +21,13 @@
     <?php echo $msg ?>
     <h2>Registration</h2>
 
-    <form action="register.php" method="post">
+    <form action="actions/action_register.php" method="post" enctype="multipart/form-data">
 
       <div class="form-group">
         <label for="username">Nome de utilizador:</label>
         <input type="text" name="username" id="username" value="<?= htmlspecialchars($_SESSION['form_data']['username'] ?? '') ?>" required>
         <?php echo $msg1 ?>
-        <button type="submit" formaction="action_checkusername.php" formnovalidate>Verificar</button>
+        <button type="submit" formaction="actions/action_checkusername.php" formnovalidate>Verificar</button>
       </div>
 
       <div class="form-group">
@@ -59,10 +59,10 @@
         <label for="preferencia_de_viagem">Preferências de viagem:</label>
         <textarea id="preferencia_de_viagem" name="preferencia_de_viagem" required></textarea>
       </div>
-
+      
       <div class="form-group">
-        <label for="foto_de_perfil">Link da foto de perfil:</label>
-        <input type="text" id="foto_de_perfil" name="foto_de_perfil" value="<?= htmlspecialchars($_SESSION['form_data']['foto_de_perfil'] ?? '') ?>" required>
+        <label for="profile_pic">Profile Picture</label>
+        <input type="file" id="profile_pic" name="profile_pic">
       </div>
 
       <button type="submit">Register</button>
