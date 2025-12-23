@@ -32,7 +32,7 @@ $user_liked = $current_user ? userLikedViagem($db, $id_viagem, $current_user) : 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($viagem['titulo']); ?> | TripTales</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/styleviagem.css">
 </head>
 <body>
 
