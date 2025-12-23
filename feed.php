@@ -41,6 +41,7 @@ $posts = getFeed($db, $current_user);
                 <li><a href="explore.php">Explorar</a></li>
                 <li><a href="perfil.php?user=<?php echo htmlspecialchars($current_user); ?>">Perfil</a></li>
                 <li><a href="logout.php" class="btn-logout">Sair</a></li>
+                <li><a href="nova_viagem.php" class="btn-novaviagem">Nova Viagem</a></li>
             </ul>
         </nav>
     </header>

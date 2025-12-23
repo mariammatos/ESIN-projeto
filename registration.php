@@ -4,6 +4,7 @@
   $msg = $_SESSION['msg'];
   $msg1 = $_SESSION['msg1'];
   unset($_SESSION['msg']);
+  unset($_SESSION['msg1']);
 ?>
 
 <!DOCTYPE html>
