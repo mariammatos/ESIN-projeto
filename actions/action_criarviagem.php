@@ -1,9 +1,10 @@
 <?php
 session_start();
-require_once 'db_connect.php';
-require_once 'database/destinos.php';
+require_once '../database/db_connect.php';
+require_once '../database/destinos.php';
+require_once '../database/posts.php';
 
-$pdo = getDatabaseConnection();
+$dbh = getDatabaseConnection();
 
 if ($_SESSION['em_andamento']) {
     $data_volta = null;
@@ -31,26 +32,15 @@ if ($data_volta && strtotime($data_volta) <= strtotime($data_ida)) {
 
 
 
-$destino_id = getDestinoId($pais, $local_input);
+$destino_id = getDestinoId($dbh, $pais, $local_input);
 
 if (!$destino_id) {
-    $destino_id = insertdestino($pais, $local_input);
+    $destino_id = insertdestino($dbh, $pais, $local_input);
 }
 
 
-// -------------------
-// 4. ISTO AINDA NÃO ESTA ACABADO EU PAREI AQUI MAS O POST AINDA NÃO FUNCIONA
-// -------------------
-$stmt = $pdo->prepare("INSERT INTO TraveJournals DEFAULT VALUES");
-$stmt->execute();
-$travel_journal_id = $pdo->lastInsertId();
-
-// -------------------
-// 5. Criar Viagem
-// -------------------
-$stmt = $pdo->prepare("INSERT INTO Viagens (titulo, data_ida, data_volta, utilizador, destino, travel_journal) VALUES (?, ?, ?, ?, ?, ?)");
-$stmt->execute([$titulo, $data_ida, $data_volta, $utilizador, $destino_id, $travel_journal_id]);
+$viagem_id = insertviagem($dbh, $titulo, $data_ida, $data_volta, $utilizador, $destino_id);
 
 $_SESSION['success'] = "Viagem criada com sucesso!";
-header("Location: ../nova_viagem.php");
+header("Location: /viagem.php?id=" . $viagem_id);
 exit;
