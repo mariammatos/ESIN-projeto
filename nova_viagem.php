@@ -20,10 +20,6 @@
     $_SESSION['pais_matches'] = [];
   }
 
-  if (!isset($_SESSION['local_matches'])) {
-    $_SESSION['local_matches'] = [];
-  }
-
 ?>
 
 <!DOCTYPE html>
@@ -86,14 +82,7 @@
 
         <div class="form-group">
             <label for="local">Cidade/região/local:</label>
-            <input 
-                type="text" 
-                name="local" 
-                id="local" 
-                value="<?= htmlspecialchars($_SESSION['local'] ?? '') ?>" 
-                placeholder="Digite o local" 
-                required
-            >
+            <input type="text" name="local" id="local" value="<?= htmlspecialchars($_SESSION['local'] ?? '') ?>" placeholder="Digite o local" required>
         </div>
 
 

@@ -32,29 +32,37 @@
  * @param int $id O ID da viagem a procurar.
  * @return array Os detalhes da viagem.
  */
-    function getViagemDetalhes($db, $id) {
-    // Esta query junta Viagens, Utilizador, Destino e o TravelJournal.
+
+function getViagemDetalhes($db, $id) {
+    // Esta query junta Viagens, Utilizador, Destino e, opcionalmente, o TravelJournal.
     $stmt = $db->prepare(
         'SELECT 
-            V.titulo, U.nome_de_utilizador, U.nome, 
-            D.cidade_local, D.pais, V.data_ida, V.data_volta,
-            TJ.descricao AS journal_descricao, TJ.avaliacao AS journal_avaliacao
+            V.titulo, 
+            U.nome_de_utilizador, 
+            U.nome, 
+            D.cidade_local, 
+            D.pais, 
+            V.data_ida, 
+            V.data_volta,
+            TJ.descricao AS journal_descricao, 
+            TJ.avaliacao AS journal_avaliacao
         FROM 
             Viagens V
         JOIN 
             Utilizador U ON V.utilizador = U.nome_de_utilizador
         JOIN
             Destino D ON V.destino = D.id
-        JOIN
-            TraveJournals TJ ON V.travel_journal = TJ.id
+        LEFT JOIN
+            TravelJournals TJ ON TJ.viagem_id = V.id
         WHERE 
             V.id = :id'
     );
 
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
-    return $stmt->fetch(); // Usamos fetch() porque só esperamos um resultado
+    return $stmt->fetch(PDO::FETCH_ASSOC); // fetch associativo
 }
+
 
 function getViagemLikes($db, $id) {
     // Esta query junta Viagens, Utilizador, Destino e o TravelJournal.
@@ -100,5 +108,12 @@ function adicionarComentario($db, $viagem_id, $username, $texto) {
 function removerComentario($db, $comentario_id) {
     $stmt = $db->prepare('DELETE FROM Comentario WHERE id = ?');
     $stmt->execute([$comentario_id]);
+}
+
+
+function insertviagem($db, $titulo, $data_ida, $data_volta, $utilizador, $destino) {
+    $stmt = $db->prepare('INSERT INTO Viagens (titulo, data_ida, data_volta, utilizador, destino) VALUES (?, ?, ?, ?, ?)');
+    $stmt->execute([$titulo, $data_ida, $data_volta, $utilizador, $destino]);
+    return $db->lastInsertId();
 }
 ?>

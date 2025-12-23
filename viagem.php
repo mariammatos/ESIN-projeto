@@ -49,19 +49,19 @@ $user_liked = $current_user ? userLikedViagem($db, $id_viagem, $current_user) : 
         </div>
         
         <section class="informacao-base">
-            <h2>🌍 Destino e Datas</h2>
+            <h2>Destino e Datas</h2>
             <p><strong>Local:</strong> <?php echo htmlspecialchars($viagem['cidade_local']); ?>, <?php echo htmlspecialchars($viagem['pais']); ?></p>
             <p><strong>De:</strong> <?php echo htmlspecialchars($viagem['data_ida']); ?> <strong>A:</strong> <?php echo htmlspecialchars($viagem['data_volta'] ?? 'Em andamento'); ?></p>
         </section>
 
         <section class="travel-journal">
-            <h2>📔 Travel Journal</h2>
+            <h2>Travel Journal</h2>
             <p class="journal-texto"><?php echo nl2br(htmlspecialchars($viagem['journal_descricao'])); ?></p>
             <p>Avaliação Final: <?php echo htmlspecialchars($viagem['journal_avaliacao'] ?? 'N/A'); ?>/5</p>
             </section>
 
         <section class="atividades-alojamentos">
-            <h2>🗺️ Atividades e Alojamentos</h2>
+            <h2>Atividades e Alojamentos</h2>
             <p>Esta secção será preenchida com as Atividades e Alojamentos registados durante a viagem.</p>
         </section>
 
@@ -81,7 +81,7 @@ $user_liked = $current_user ? userLikedViagem($db, $id_viagem, $current_user) : 
 
 
         <section class="comentarios">
-            <h2>💬 Comentários</h2>
+            <h2>Comentários</h2>
             <?php if ($current_user): ?>
                 <form action="actions/action_comentar.php" method="post">
                     <input type="hidden" name="viagem_id" value="<?php echo $id_viagem; ?>">

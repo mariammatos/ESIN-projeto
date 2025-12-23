@@ -47,8 +47,11 @@ CREATE TABLE Destino (
 -- TraveJournals (id (PK), descrição, avaliação)
 CREATE TABLE TraveJournals (
     id INTEGER PRIMARY KEY,
+    viagem_id INTEGER UNIQUE NOT NULL,
     descricao TEXT NOT NULL,
-    avaliacao INTEGER
+    avaliacao INTEGER,
+
+    FOREIGN KEY (viagem_id) REFERENCES Viagens(id)
 );
 
 -- WishList (id (PK), utilizador (FK/UNIQUE))
@@ -125,14 +128,12 @@ CREATE TABLE Viagens (
 
     utilizador TEXT NOT NULL,
     destino INTEGER NOT NULL,
-    travel_journal INTEGER NOT NULL UNIQUE, 
 
     -- Restrição de datas: data_volta deve ser > data_ida
     CHECK (data_volta IS NULL OR julianday(data_volta) > julianday(data_ida)),
 
     FOREIGN KEY (utilizador) REFERENCES Utilizador(nome_de_utilizador),
-    FOREIGN KEY (destino) REFERENCES Destino(id),
-    FOREIGN KEY (travel_journal) REFERENCES TraveJournals(id)
+    FOREIGN KEY (destino) REFERENCES Destino(id)
 );
 
 -- Atividade (id (PK), data, viagem (FK), detalhes (FK))
