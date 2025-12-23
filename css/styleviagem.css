@@ -254,44 +254,138 @@ form button:hover {
 }
 
 /* =========================
-   LIKES
+   LIKE 
 ========================= */
 
+.like {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 25px 0;
+}
+
+/* FORM NÃO OCUPA LINHA TODA */
+.like form {
+    margin: 0;
+}
+
+/* BOTÃO LIKE */
 .like button {
-    background-color: #a31621;
-    color: #fcf7f8;
-    border: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: transparent;
+    border: 1px solid #ced3dc;
+    color: #a31621;
     padding: 6px 14px;
-    border-radius: 4px;
+    border-radius: 20px;
+    font-size: 0.9rem;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 
+/* HOVER */
 .like button:hover {
-    background-color: #b66168;
+    background-color: #a31621;
+    color: #fff;
+    border-color: #a31621;
 }
 
+/* CONTADOR */
 .like span {
-    margin-left: 10px;
+    font-size: 0.9rem;
+    color: #555;
 }
+
 
 /* =========================
-   COMENTÁRIOS
+   COMENTÁRIOS 
 ========================= */
 
-.comentarios textarea {
-    width: 100%;
-    min-height: 80px;
-    margin-bottom: 10px;
+.comentarios form {
+    margin-bottom: 25px;
 }
 
-.lista-comentarios {
-    list-style: none;
+.comentarios textarea {
+    resize: vertical;
+    border-radius: 6px;
+}
+
+.comentarios button[type="submit"] {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: transparent;
+    border: 1px solid #ced3dc;
+    color: #a31621;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: auto;
+    padding: 10px 20px;
+    border-radius: 6px;
     margin-top: 10px;
 }
 
+.comentarios button:hover {
+    background-color: #a31621;
+    color: #fff;
+    border-color: #a31621;
+}
+
+/* LISTA */
+
+.lista-comentarios {
+    list-style: none;
+    margin-top: 20px;
+}
+
+/* CARD DO COMENTÁRIO */
+
 .lista-comentarios li {
-    border-bottom: 1px solid #ced3dc;
-    padding: 8px 0;
+    background-color: #ffffff;
+    border: 1px solid #ced3dc;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* AUTOR */
+
+.lista-comentarios strong {
+    color: #4e8098;
+    font-weight: 600;
+}
+
+/* TEXTO */
+
+.lista-comentarios li em {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+/* BOTÃO ELIMINAR */
+
+.lista-comentarios form {
+    align-self: flex-end;
+}
+
+.lista-comentarios form button {
+    background-color: transparent;
+    color: #a31621;
+    border: 1px solid #a31621;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.lista-comentarios form button:hover {
+    background-color: #a31621;
+    color: #fff;
 }
 
 
