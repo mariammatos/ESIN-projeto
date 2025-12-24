@@ -38,7 +38,7 @@ $posts = getFeed($db, $current_user);
             <div class="logo">TripTales</div>
             <ul>
                 <li><a href="feed.php">Feed</a></li>
-                <li><a href="explore.php">Explorar</a></li>
+                <li><a href="explorar.php">Explorar</a></li>
                 <li><a href="perfil.php?user=<?php echo htmlspecialchars($current_user); ?>">Perfil</a></li>
                 <li><a href="logout.php" class="btn-logout">Sair</a></li>
                 <li><a href="nova_viagem.php" class="btn-novaviagem">Nova Viagem</a></li>
@@ -54,7 +54,7 @@ $posts = getFeed($db, $current_user);
         <?php elseif (empty($posts)): ?>
             <div class="sem-posts">
                 <p>Ninguém que segue publicou uma viagem recentemente.</p>
-                <p>Que tal começar a <a href="explore.php">Explorar</a> novos viajantes?</p>
+                <p>Que tal começar a <a href="explorar.php">Explorar</a> novos viajantes?</p>
             </div>
         <?php else: ?>
             <?php foreach ($posts as $post): ?>
@@ -70,8 +70,11 @@ $posts = getFeed($db, $current_user);
                     </div>
 
                     <div class="post-interacoes">
-                        <span>15 Likes</span> | <span>3 Comentários</span>
+                        <?php $likes_count = getViagemLikesCount($db, $post['id']); ?>
+                        <?php $comentarios_count = getViagemComentariosCount($db, $post['id']); ?>
+                        <span><?php echo $likes_count; ?> Likes</span> | <span><?php echo $comentarios_count; ?> Comentários</span>
                     </div>
+                    
                 </article>
             <?php endforeach; ?>
         <?php endif; ?>
