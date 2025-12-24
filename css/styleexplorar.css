@@ -1,0 +1,214 @@
+/* ================= RESET ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #fcf7f8;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* ================= HEADER ================= */
+
+header {
+    background-color: #4e8098;
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    color: #fcf7f8;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+nav ul li a:hover {
+    color: #334f5c;
+}
+
+/* ================= PESQUISA ================= */
+
+.pesquisar {
+    max-width: 900px;
+    margin: 30px auto 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.pesquisar form {
+    display: flex;
+    gap: 10px;
+}
+
+.pesquisar input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ced3dc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.pesquisar input:focus {
+    outline: none;
+    border-color: #4e8098;
+}
+
+.pesquisar button {
+    background-color: #4e8098;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.pesquisar button:hover {
+    background-color: #334f5c;
+}
+
+/* ================= CONTAINER ================= */
+
+.feed-container {
+    max-width: 900px;
+    margin: 20px auto 60px;
+    padding: 0 20px;
+}
+
+/* ================= RESULTADOS ================= */
+
+.post-viagem,
+.post-usuario {
+    background-color: #ffffff;
+    border-left: 5px solid #90c2e7;
+    padding: 22px 24px;
+    margin-bottom: 30px;
+    border-radius: 6px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-viagem:hover,
+.post-usuario:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    border-left-color: #4e8098;
+}
+
+/* ================= CABEÇALHO ================= */
+
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.post-header h2 {
+    color: #a31621;
+    font-size: 1.2rem;
+}
+
+.post-header .autor {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* ================= PERFIL ================= */
+
+.foto-perfil {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* ================= DETALHES ================= */
+
+.post-detalhes p {
+    margin: 6px 0;
+    font-size: 0.95rem;
+}
+
+.post-detalhes a {
+    color: #4e8098;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.post-detalhes a:hover {
+    text-decoration: underline;
+}
+
+/* ================= INTERAÇÕES ================= */
+
+.post-interacoes {
+    margin-top: 14px;
+    font-size: 0.85rem;
+    color: #666;
+    display: flex;
+    gap: 15px;
+}
+
+.post-interacoes span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    background-color: #4e8098;
+    color: #fcf7f8;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+/* ================= RESPONSIVO ================= */
+
+@media (max-width: 768px) {
+
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .pesquisar {
+        grid-template-columns: 1fr;
+    }
+}
