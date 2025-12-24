@@ -42,7 +42,7 @@ if (strlen($password) < 8) {
 
 try {
 
-    insertUser($username, $password, $email, $nome, $pais_de_origem, $preferencia_de_viagem, $foto_de_perfil); // Parâmetros adicionados
+    insertUser($dbh, $username, $password, $email, $nome, $pais_de_origem, $preferencia_de_viagem, $foto_de_perfil); // Parâmetros adicionados
     saveProfilePic($username);
     unset($_SESSION['form_data']);
     $_SESSION['username'] = $username;

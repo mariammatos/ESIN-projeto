@@ -1,5 +1,5 @@
 <?php
-//require_once 'database/posts.php';
+require_once 'destinos.php';
 
   function getFeed($db, $current_user) {
     $stmt = $db->prepare(
@@ -98,6 +98,14 @@ function getComentarios($db, $viagem_id) {
     return $stmt->fetchAll();
 }
 
+function getViagemComentariosCount($db, $viagem_id) {
+    $stmt = $db->prepare('SELECT COUNT(*) as total FROM Comentario WHERE viagem = :viagem_id');
+    $stmt->bindParam(':viagem_id', $viagem_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    return $result ? $result['total'] : 0;
+}
+
 function adicionarComentario($db, $viagem_id, $username, $texto) {
     $data = date('Y-m-d');
     $hora = date('H:i:s');
@@ -115,5 +123,55 @@ function insertviagem($db, $titulo, $data_ida, $data_volta, $utilizador, $destin
     $stmt = $db->prepare('INSERT INTO Viagens (titulo, data_ida, data_volta, utilizador, destino) VALUES (?, ?, ?, ?, ?)');
     $stmt->execute([$titulo, $data_ida, $data_volta, $utilizador, $destino]);
     return $db->lastInsertId();
+}
+
+
+function getexplorar($db, $limite = 10) {
+    $stmt = $db->prepare(
+        'SELECT 
+            V.id, 
+            V.titulo, 
+            U.nome_de_utilizador, 
+            U.nome, 
+            D.cidade_local, 
+            D.pais
+        FROM 
+            Viagens V
+        JOIN 
+            Utilizador U ON V.utilizador = U.nome_de_utilizador
+        JOIN
+            Destino D ON V.destino = D.id
+        ORDER BY RANDOM()
+        LIMIT :limite;'
+    );
+
+    $stmt->bindParam(':limite', $limite, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function procurarviagens($db, $viagem_input) {
+    $viagem_normalizado = normalize_string($viagem_input);
+    $db->sqliteCreateFunction('removeacentos', 'normalize_string', 1);
+    
+    $stmt = $db->prepare(       
+        'SELECT 
+            V.id, 
+            V.titulo, 
+            U.nome_de_utilizador, 
+            U.nome, 
+            D.cidade_local, 
+            D.pais
+        FROM 
+            Viagens V
+        JOIN 
+            Utilizador U ON V.utilizador = U.nome_de_utilizador
+        JOIN
+            Destino D ON V.destino = D.id
+        WHERE 
+            LOWER(removeacentos(V.titulo)) LIKE ? OR LOWER(removeacentos(D.cidade_local)) LIKE ?'
+    );
+    $stmt->execute(array("%$viagem_normalizado%", "%$viagem_normalizado%"));
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
