@@ -10,6 +10,9 @@ if (!isset($_SESSION['username'])) {
 
 $dbh = getDatabaseConnection();
 
+
+
+
 // --- 1. Obter utilizador do perfil ---
 if (isset($_GET['user'])) {
     $user = $_GET['user'];      // ver perfil de outro utilizador
@@ -25,6 +28,22 @@ $utilizador = $stmt->fetch();
 if (!$utilizador) {
     echo "<h2>Utilizador não encontrado.</h2>";
     exit();
+}
+
+// seguir
+$perfil_user = $utilizador['nome_de_utilizador'];
+$current_user = $_SESSION['username'];
+
+$segue = false;
+
+if ($perfil_user !== $current_user) {
+    $stmt = $dbh->prepare("
+        SELECT COUNT(*) 
+        FROM Seguir 
+        WHERE utilizador1 = ? AND utilizador2 = ?
+    ");
+    $stmt->execute([$current_user, $perfil_user]);
+    $segue = $stmt->fetchColumn() > 0;
 }
 
 // --- 2. Obter viagens do utilizador ---
@@ -67,6 +86,14 @@ $viagens = $stmt->fetchAll();
 
         <p><strong>País de origem:</strong> <?= htmlspecialchars($utilizador['pais_de_origem']) ?></p>
         <p><strong>Preferências de viagem:</strong> <?= htmlspecialchars($utilizador['preferencia_de_viagem']) ?></p>
+        <?php if ($perfil_user !== $current_user): ?>
+            <form action="actions/action_seguir.php" method="post">
+                <input type="hidden" name="seguido" value="<?= htmlspecialchars($perfil_user) ?>">
+                <button type="submit" class="btn-follow">
+                    <?= $segue ? 'Deixar de seguir' : 'Seguir' ?>
+                </button>
+            </form>
+        <?php endif; ?>
     </section>
 
     <section class="perfil-viagens">
