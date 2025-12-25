@@ -174,4 +174,74 @@ function procurarviagens($db, $viagem_input) {
     $stmt->execute(array("%$viagem_normalizado%", "%$viagem_normalizado%"));
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function publicacaoGuardada($db, $utilizador, $viagem_id) {
+    $stmt = $db->prepare("SELECT COUNT(*) FROM Guardar_publicacao WHERE utilizador = :utilizador AND viagem = :viagem_id");
+    $stmt->bindParam(':utilizador', $utilizador);
+    $stmt->bindParam(':viagem_id', $viagem_id);
+    $stmt->execute();
+
+    $guardado = $stmt->fetchColumn();
+    return $guardado > 0;
+}
+
+function guardarPublicacao($db, $utilizador, $viagem_id) {
+    $data_atual = date('Y-m-d H:i:s');    
+    $stmt = $db->prepare('INSERT INTO Guardar_publicacao (utilizador, viagem, data) VALUES (?, ?, ?)');
+    $stmt->execute(array($utilizador, $viagem_id, $data_atual));
+}
+
+function removerPublicacaoGuardada($db, $utilizador, $viagem_id) {
+    $stmt = $db->prepare('DELETE FROM Guardar_publicacao WHERE utilizador = ? AND viagem = ?');
+    $stmt->execute(array($utilizador, $viagem_id));}
+
+  function getguardados($db, $current_user) {
+    $stmt = $db->prepare(
+      'SELECT 
+            V.id, 
+            V.titulo, 
+            U.nome_de_utilizador, -- O criador da viagem
+            U.nome,               -- O nome do criador
+            D.cidade_local, 
+            D.pais
+        FROM 
+            Viagens V
+        JOIN 
+            Guardar_publicacao GP ON V.id = GP.viagem
+        JOIN 
+            Utilizador U ON V.utilizador = U.nome_de_utilizador
+        JOIN
+            Destino D ON V.destino = D.id
+        WHERE 
+            GP.utilizador = :current_user
+        ORDER BY 
+            V.data_ida DESC;'
+    );
+
+    $stmt->bindParam(':current_user', $current_user);
+
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
+
+  function getPostsporDestino($db, $destino) {
+    $stmt = $db->prepare(
+        'SELECT 
+            V.id, V.titulo, V.data_ida, U.nome_de_utilizador, U.nome, D.cidade_local, D.pais
+        FROM 
+            Viagens V
+        JOIN 
+            Utilizador U ON V.utilizador = U.nome_de_utilizador
+        JOIN
+            Destino D ON V.destino = D.id
+        WHERE 
+            V.destino = :destino
+        ORDER BY 
+            V.data_ida DESC;'
+    );
+    
+    $stmt->bindParam(':destino', $destino);
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
 ?>
