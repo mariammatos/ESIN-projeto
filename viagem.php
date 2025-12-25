@@ -2,6 +2,7 @@
 // Inclui o ficheiro que faz a ligação à base de dados.
 require_once 'database/db_connect.php';
 require_once 'database/posts.php';
+require_once 'database/alojamentos.php';
 
 // --- 1. LÓGICA DE AUTENTICAÇÃO E BUSCA DE DADOS ---
 
@@ -17,6 +18,7 @@ $viagem = getViagemDetalhes($db, $id_viagem);
 $likes = getViagemLikes($db, $id_viagem);
 $likes_count = getViagemLikesCount($db, $id_viagem);
 $comentarios = getComentarios($db, $id_viagem);
+$alojamentos = getAlojamentosViagem($db, $id_viagem);
 
 session_start();
 $current_user = $_SESSION['username'] ?? null;
@@ -45,7 +47,11 @@ $user_liked = $current_user ? userLikedViagem($db, $id_viagem, $current_user) : 
         <h1><?php echo htmlspecialchars($viagem['titulo']); ?></h1>
         
         <div class="autor-info">
-            Publicado por: <a href="profile.php?user=<?php echo htmlspecialchars($viagem['nome_de_utilizador']); ?>">@<?php echo htmlspecialchars($viagem['nome_de_utilizador']); ?></a> (<?php echo htmlspecialchars($viagem['nome']); ?>)
+            Publicado por:
+            <a href="perfil.php?user=<?= urlencode($viagem['nome_de_utilizador']) ?>">
+                @<?= htmlspecialchars($viagem['nome_de_utilizador']) ?>
+            </a>
+            (<?= htmlspecialchars($viagem['nome']) ?>)
         </div>
         
         <section class="informacao-base">
@@ -58,13 +64,72 @@ $user_liked = $current_user ? userLikedViagem($db, $id_viagem, $current_user) : 
             <h2>Travel Journal</h2>
             <p class="journal-texto"><?php echo nl2br(htmlspecialchars($viagem['journal_descricao'])); ?></p>
             <p>Avaliação Final: <?php echo htmlspecialchars($viagem['journal_avaliacao'] ?? 'N/A'); ?>/5</p>
-            </section>
+        </section>
 
         <section class="atividades-alojamentos">
             <h2>Atividades e Alojamentos</h2>
-            <p>Esta secção será preenchida com as Atividades e Alojamentos registados durante a viagem.</p>
+
+            <?php if (count($alojamentos) === 0): ?>
+                <p>Sem alojamentos registados nesta viagem.</p>
+                    <?php if ($current_user == $viagem['nome_de_utilizador']): ?>
+                    <!-- FORMULÁRIO PARA ADICIONAR ALOJAMENTO -->
+                    <section class="adicionar-alojamento">
+                        <h3>Adicionar Alojamento</h3>
+                        <form action="actions/action_add_alojamento.php" method="post">
+                            <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+
+                            <label for="nome">Nome do Alojamento:</label>
+                            <input type="text" name="nome" id="nome" required>
+
+                            <label for="localizacao">Localização:</label>
+                            <input type="text" name="localizacao" id="localizacao" required>
+
+                            <label for="tipo">Tipo:</label>
+                            <select name="tipo" id="tipo" required>
+                                <option value="Hostel">Hostel</option>
+                                <option value="Hotel">Hotel</option>
+                                <option value="Alojamento Local">Alojamento Local</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+
+                            <label for="data_inicio">Data Início:</label>
+                            <input type="date" name="data_inicio" id="data_inicio" required>
+
+                            <label for="data_fim">Data Fim:</label>
+                            <input type="date" name="data_fim" id="data_fim">
+
+                            <label for="rating">Avaliação:</label>
+                            <input type="number" name="rating" id="rating" min="0" max="5" step="0.5">
+
+                            <label for="comentario">Comentário:</label>
+                            <textarea name="comentario" id="comentario"></textarea>
+
+                            <button type="submit">Adicionar Alojamento</button>
+                        </form>
+                    </section>
+                    <?php endif; ?>
+            <?php else: ?>
+                <ul>
+                <?php foreach ($alojamentos as $a): ?>
+                    <li>
+                        <strong><?= htmlspecialchars($a['nome_alojamento']) ?></strong> (<?= htmlspecialchars($a['tipo_alojamento']) ?>)<br>
+                        Local: <?= htmlspecialchars($a['localizacao']) ?><br>
+                        De: <?= htmlspecialchars($a['data_inicio']) ?> 
+                        <?php if ($a['data_fim']): ?>
+                            Até: <?= htmlspecialchars($a['data_fim']) ?>
+                        <?php else: ?>
+                            Em andamento
+                        <?php endif; ?><br>
+                        Avaliação média: <?= $a['media_avaliacao'] ? round($a['media_avaliacao'], 1) : 'N/A' ?>/5
+                    </li>
+                <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+
+
         </section>
 
+    
         <section class="like">
             <?php if ($current_user): ?>
                 <form action="actions/action_like.php" method="post">

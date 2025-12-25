@@ -61,7 +61,12 @@ $posts = getFeed($db, $current_user);
                 <article class="post-viagem">
                     <div class="post-header">
                         <h2><?php echo htmlspecialchars($post['titulo']); ?></h2>
-                        <span class="autor">por <a href="profile.php?user=<?php echo htmlspecialchars($post['nome_de_utilizador']); ?>">@<?php echo htmlspecialchars($post['nome_de_utilizador']); ?> (<?php echo htmlspecialchars($post['nome']); ?>)</a></span>
+                        <span class="autor">
+                            por 
+                            <a href="perfil.php?user=<?= urlencode($post['nome_de_utilizador']) ?>">
+                                @<?= htmlspecialchars($post['nome_de_utilizador']) ?> (<?= htmlspecialchars($post['nome']) ?>)
+                            </a>
+                        </span>
                     </div>
                     
                     <div class="post-detalhes">
