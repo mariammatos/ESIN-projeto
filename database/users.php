@@ -27,4 +27,10 @@ function getuserdetails($db, $username) {
     $stmt->execute(array($username));
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+
+function getuserwishlist($db, $username) {
+    $stmt = $db->prepare('SELECT id FROM WishList WHERE utilizador = ?');
+    $stmt->execute(array($username));
+    return $stmt->fetch(PDO::FETCH_COLUMN);
+}
 ?>

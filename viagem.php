@@ -3,6 +3,8 @@
 require_once 'database/db_connect.php';
 require_once 'database/posts.php';
 require_once 'database/alojamentos.php';
+require_once 'database/users.php';
+require_once 'database/destinos.php';
 
 // --- 1. LÓGICA DE AUTENTICAÇÃO E BUSCA DE DADOS ---
 
@@ -22,7 +24,11 @@ $alojamentos = getAlojamentosViagem($db, $id_viagem);
 
 session_start();
 $current_user = $_SESSION['username'] ?? null;
+$wishlist = $current_user ? getuserwishlist($db, $current_user) : null;
 $user_liked = $current_user ? userLikedViagem($db, $id_viagem, $current_user) : false;
+$user_guardou = $current_user ? publicacaoGuardada($db, $current_user, $id_viagem) : false;
+$destino = getDestinoId($db, $viagem['pais'], $viagem['cidade_local']);
+$user_wishlist = $wishlist ? destinonaWishlist($db, $destino, $wishlist) : false;
 
 // --- 2. APRESENTAÇÃO HTML/CSS ---
 ?>
@@ -56,7 +62,13 @@ $user_liked = $current_user ? userLikedViagem($db, $id_viagem, $current_user) : 
         
         <section class="informacao-base">
             <h2>Destino e Datas</h2>
-            <p><strong>Local:</strong> <?php echo htmlspecialchars($viagem['cidade_local']); ?>, <?php echo htmlspecialchars($viagem['pais']); ?></p>
+            <p><strong>Local:</strong> <?php echo htmlspecialchars($viagem['cidade_local']); ?>, <?php echo htmlspecialchars($viagem['pais']); ?>
+                <form action="actions/action_adicionarwishlist.php" method="post">
+                    <input type="hidden" name="post_id" value="<?php echo $id_viagem; ?>">
+                    <input type="hidden" name="destino_id" value="<?php echo $destino; ?>">
+                    <button type="submit" ><?php echo $user_wishlist ? 'Remover da Wishlist' : 'Adicionar à Wishlist'; ?>
+                    </button>
+                </form></p>
             <p><strong>De:</strong> <?php echo htmlspecialchars($viagem['data_ida']); ?> <strong>A:</strong> <?php echo htmlspecialchars($viagem['data_volta'] ?? 'Em andamento'); ?></p>
         </section>
 
@@ -141,6 +153,18 @@ $user_liked = $current_user ? userLikedViagem($db, $id_viagem, $current_user) : 
             <?php else: ?>
                 <p>Faça login para dar like.</p>
                 <span><?php echo $likes_count; ?> likes</span>
+            <?php endif; ?>
+        </section>
+
+        <section class="guardar">
+            <?php if ($current_user): ?>
+                <form action="actions/action_guardar.php" method="post">
+                    <input type="hidden" name="post_id" value="<?php echo $id_viagem; ?>">
+                    <button type="submit" ><?php echo $user_guardou ? 'Guardado' : 'Guardar'; ?>
+                    </button>
+                </form>
+            <?php else: ?>
+                <p>Faça login para dar guardar.</p>
             <?php endif; ?>
         </section>
 
