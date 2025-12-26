@@ -110,6 +110,7 @@ header {
     text-decoration: underline;
 }
 
+
 .informacao-base,
 .travel-journal,
 .atividades-alojamentos,
@@ -136,6 +137,7 @@ header {
    BOTÃO WISHLIST 
 ========================= */
 
+/* Garante que o botão mantenha o formato circular definido anteriormente */
 .informacao-base form button {
     background-color: transparent;
     border: 1px solid #ced3dc;
@@ -273,28 +275,46 @@ header {
     border-radius: 6px;
 }
 
-.comentarios button[type="submit"] {
+.comentarios button {
+    background-color: transparent;
+    border: 1px solid #ced3dc;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0;
     display: flex;
     align-items: center;
     gap: 6px;
-    background-color: transparent;
-    border: 1px solid #ced3dc;
-    color: #a31621;
-    font-size: 0.9rem;
-    cursor: pointer;
     transition: all 0.2s ease;
-    width: auto;
-    padding: 10px 20px;
-    border-radius: 6px;
-    margin-top: 10px;
+}
+
+
+/* CORAÇÃO */
+.comentarios button::before {
+    content: "💬";
+    font-size: 18px;
+}
+
+.comentarios button.btn-comentar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Espaço entre o ícone e o texto "Comentar" */
 }
 
 
 .comentarios button:hover {
     background-color: #a31621;
-    color: #fff;
     border-color: #a31621;
 }
+
+.comentarios button:hover::before {
+    filter: brightness(0) invert(1);
+}
+
+
+
+
 
 /* LISTA */
 

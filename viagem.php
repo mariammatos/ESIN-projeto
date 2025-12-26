@@ -62,7 +62,7 @@ $user_wishlist = $wishlist ? destinonaWishlist($db, $destino, $wishlist) : false
         
         <section class="informacao-base">
             <h2>Destino e Datas</h2>
-            <p><strong>Local:</strong> <?php echo htmlspecialchars($viagem['cidade_local']); ?>, <?php echo htmlspecialchars($viagem['pais']); ?>
+                <p><strong>Local:</strong> <?php echo htmlspecialchars($viagem['cidade_local']); ?>, <?php echo htmlspecialchars($viagem['pais']); ?>
                 <form action="actions/action_adicionarwishlist.php" method="post">
                     <input type="hidden" name="post_id" value="<?php echo $id_viagem; ?>">
                     <input type="hidden" name="destino_id" value="<?php echo $destino; ?>">
@@ -178,7 +178,6 @@ $user_wishlist = $wishlist ? destinonaWishlist($db, $destino, $wishlist) : false
                     <input type="hidden" name="viagem_id" value="<?php echo $id_viagem; ?>">
                     <textarea name="comentario" required placeholder="Escreve um comentário..."></textarea>
                     <button type="submit">Comentar</button>
-        
                 </form>
             <?php else: ?>
                 <p>Faça login para comentar.</p>
