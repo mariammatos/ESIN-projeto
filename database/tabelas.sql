@@ -45,7 +45,7 @@ CREATE TABLE Destino (
 );
 
 -- TraveJournals (id (PK), descrição, avaliação)
-CREATE TABLE TraveJournals (
+CREATE TABLE TravelJournals (
     id INTEGER PRIMARY KEY,
     viagem_id INTEGER UNIQUE NOT NULL,
     descricao TEXT NOT NULL,
@@ -76,10 +76,10 @@ CREATE TABLE Media (
     data TEXT NOT NULL,
     path TEXT NOT NULL,
     
-    TravelJournal INTEGER,
+    Viagem INTEGER,
     Feedback INTEGER,
 
-    FOREIGN KEY (TravelJournal) REFERENCES TraveJournals(id),
+    FOREIGN KEY (TravelJournal) REFERENCES TravelJournals(id),
     FOREIGN KEY (Feedback) REFERENCES Feedback(id)
 );
 

@@ -1,3 +1,9 @@
+<?php
+  session_start();
+  $current_user = $_SESSION['username'] ?? null;
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -12,17 +18,19 @@
     <header>
         <nav>
             <div class="logo">
-                <a href="index.html">
+                <a href="index.php">
                     <img src="logo TripTales.png" alt="TripTales Logo">
                     <span>TripTales</span>
                 </a>
             </div>
             <ul>
-                <li><a href="index.html">Início</a></li>
+                <li><a href="index.php">Início</a></li>
                 <li><a href="#descobrir">Descobrir</a></li>
                 <li><a href="#sobre">Sobre Nós</a></li>
-                <li><a href="login.php" class="btn-login">Login</a></li>
-                <li><a href="registration.php" class="btn-signup">Registar</a></li>
+                <?php if (!$current_user): ?>
+                    <li><a href="login.php" class="btn-login">Login</a></li>
+                    <li><a href="registration.php" class="btn-signup">Registar</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </header>

@@ -44,7 +44,7 @@ $posts = getexplorar($db);
     <header>
         <nav>
             <div class="logo">
-                <a href="index.html">
+                <a href="index.php">
                     <img src="logo TripTales.png" alt="TripTales Logo">
                     <span>TripTales</span>
                 </a>
