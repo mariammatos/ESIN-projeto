@@ -75,7 +75,7 @@ $viagens = $stmt->fetchAll();
             <li><a href="logout.php">Sair</a></li>
             <?php if ($perfil_user == $current_user): ?>
                 <li><a href="guardados.php">Viagens guardadas</a></li>
-                <li><a href="wishlist.php">Wishlist</a></li>
+                <li><a href="wishlist.php">Wishlist 🔖</a></li>
             <?php endif; ?>
         </ul>
     </nav>

@@ -243,7 +243,7 @@ header {
 ========================= */
 
 .guardar button{
-        display: flex;
+    display: flex;
     align-items: center;
     gap: 6px;
     background-color: transparent;
@@ -254,6 +254,7 @@ header {
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.2s ease;
+    margin-bottom: 25px;
 }
 
 .guardar button:hover {
@@ -311,8 +312,6 @@ header {
 .comentarios button:hover::before {
     filter: brightness(0) invert(1);
 }
-
-
 
 
 
