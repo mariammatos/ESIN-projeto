@@ -15,21 +15,43 @@ body {
 
 header {
     background-color: #4e8098;
+    padding: 1px 0;
 }
 
 nav {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 15px 20px;
+    padding: 9px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.logo {
-    font-size: 1.6rem;
+.logo a {
+    display: flex;
+    align-items: center; 
+    gap: 5px;           
+    text-decoration: none;
+}
+
+
+.logo img {
+    height: 100px;       
+    width: auto;
+    filter: brightness(0) invert(1); 
+    display: block;
+}
+
+.logo img:hover {
+    transform: scale(1.05); /* Pequeno efeito de zoom ao passar o rato */
+}
+
+.logo span {
+    font-size: 2rem;
     font-weight: bold;
-    color: var #fcf7f8;
+    color: black;     
+    letter-spacing: 1px;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
 nav ul {

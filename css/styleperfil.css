@@ -16,25 +16,47 @@ body {
     flex-direction: column;
 }
 
-/* ===== HEADER ===== */
-header {
-    background-color: #4E8098;
-    color: black
+/* ================= HEADER ================= */
 
+header {
+    background-color: #4e8098;
+    padding: 1px 0;
 }
 
 nav {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 15px 20px;
+    padding: 9px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.logo {
-    font-size: 1.6rem;
+.logo a {
+    display: flex;
+    align-items: center; 
+    gap: 5px;           
+    text-decoration: none;
+}
+
+
+.logo img {
+    height: 100px;       
+    width: auto;
+    filter: brightness(0) invert(1); 
+    display: block;
+}
+
+.logo img:hover {
+    transform: scale(1.05); /* Pequeno efeito de zoom ao passar o rato */
+}
+
+.logo span {
+    font-size: 2rem;
     font-weight: bold;
+    color: black;     
+    letter-spacing: 1px;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
 nav ul {
@@ -44,13 +66,37 @@ nav ul {
 }
 
 nav ul li a {
-    color:  #FCF7F8;
+    color: #fcf7f8;
     text-decoration: none;
-   font-size: 0.95rem;
+    font-size: 0.95rem;
 }
 
 nav ul li a:hover {
-    color: #334f5c;
+    color: #334f5c
+}
+
+/* BOTÕES */
+
+.btn-login {
+    padding: 6px 14px;
+    border: 1px solid #fcf7f8;
+    border-radius: 4px;
+}
+
+.btn-login:hover {
+background-color: #fcf7f8;
+color: #4e8098
+}
+
+.btn-signup {
+    padding: 6px 14px;
+    background-color: #a31621;
+    border-radius: 4px;
+}
+
+.btn-signup:hover {
+    background-color: #b66168 ;
+    color: #fffae2
 }
 
 
