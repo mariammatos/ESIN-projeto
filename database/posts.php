@@ -244,4 +244,22 @@ function removerPublicacaoGuardada($db, $utilizador, $viagem_id) {
     $stmt->execute();
     return $stmt->fetchAll();
   }
+
+  function getFotos($db, $viagem_id) {
+    $stmt = $db->prepare(
+        'SELECT 
+            Path, data
+        FROM 
+            Media
+        WHERE 
+            Viagem = :viagem_id
+        ORDER BY 
+            data DESC;'
+    );
+
+    $stmt->bindParam(':viagem_id', $viagem_id);
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
+
 ?>

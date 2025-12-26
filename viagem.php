@@ -5,6 +5,7 @@ require_once 'database/posts.php';
 require_once 'database/alojamentos.php';
 require_once 'database/users.php';
 require_once 'database/destinos.php';
+require_once 'database/traveljournals.php';
 
 // --- 1. LÓGICA DE AUTENTICAÇÃO E BUSCA DE DADOS ---
 
@@ -17,18 +18,34 @@ $id_viagem = (int)$_GET['id'];
 // Esta consulta junta Viagens (V) com Utilizador (U) e Seguir (S).
 $db = getDatabaseConnection();
 $viagem = getViagemDetalhes($db, $id_viagem);
+$fotos = getFotos($db, $id_viagem);
 $likes = getViagemLikes($db, $id_viagem);
 $likes_count = getViagemLikesCount($db, $id_viagem);
 $comentarios = getComentarios($db, $id_viagem);
 $alojamentos = getAlojamentosViagem($db, $id_viagem);
 
+
 session_start();
 $current_user = $_SESSION['username'] ?? null;
+$is_owner = ($current_user === $viagem['nome_de_utilizador']);
 $wishlist = $current_user ? getuserwishlist($db, $current_user) : null;
 $user_liked = $current_user ? userLikedViagem($db, $id_viagem, $current_user) : false;
 $user_guardou = $current_user ? publicacaoGuardada($db, $current_user, $id_viagem) : false;
 $destino = getDestinoId($db, $viagem['pais'], $viagem['cidade_local']);
 $user_wishlist = $wishlist ? destinonaWishlist($db, $destino, $wishlist) : false;
+
+$traveljournal_id = getTravelJournalId($db, $id_viagem);
+
+if ($traveljournal_id) {
+    $traveljournal = getTravelJournal($db, $traveljournal_id);
+    $viagem['journal_descricao'] = $traveljournal['descricao'];
+    $viagem['journal_avaliacao'] = $traveljournal['avaliacao'];
+    $has_journal = true;
+} else {
+    $viagem['journal_descricao'] = '';
+    $viagem['journal_avaliacao'] = null;
+    $has_journal = false;
+}
 
 // --- 2. APRESENTAÇÃO HTML/CSS ---
 ?>
@@ -73,11 +90,66 @@ $user_wishlist = $wishlist ? destinonaWishlist($db, $destino, $wishlist) : false
             <p><strong>De:</strong> <?php echo htmlspecialchars($viagem['data_ida']); ?> <strong>A:</strong> <?php echo htmlspecialchars($viagem['data_volta'] ?? 'Em andamento'); ?></p>
         </section>
 
+        <?php if (!empty($fotos)): ?>
+            <section class="galeria-fotos">
+                <div class="galeria-container">
+                    <?php foreach ($fotos as $foto): ?>
+                        <div class="foto-item">
+                            <img width="200" height= "200"
+                            src="/media/<?= htmlspecialchars($foto['path']) ?>" alt="Foto da viagem" />
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </section>
+        <?php endif; ?>
+
         <section class="travel-journal">
-            <h2>Travel Journal</h2>
-            <p class="journal-texto"><?php echo nl2br(htmlspecialchars($viagem['journal_descricao'])); ?></p>
-            <p>Avaliação Final: <?php echo htmlspecialchars($viagem['journal_avaliacao'] ?? 'N/A'); ?>/5</p>
-        </section>
+
+        <h2>Travel Journal</h2>
+
+        <?php if ($is_owner): ?>
+
+            <?php if (!$has_journal): ?>
+                <section class="adicionar-travel-journal">
+                    <form action="adicionartraveljournal.php" method="post">
+                        <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                        <button type="submit">Adicionar Travel Journal</button>
+                    </form>
+                </section>
+
+            <?php else: ?>
+                <section class="editar-travel-journal">
+                    <form action="adicionartraveljournal.php" method="post">
+                        <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                        <input type="hidden" name="descricao" value="<?= htmlspecialchars($viagem['journal_descricao'] ?? '') ?>">
+                        <input type="hidden" name="avaliacao" value="<?= htmlspecialchars($viagem['journal_avaliacao'] ?? 0) ?>">
+                        <input type="hidden" name="editar" value="1">
+                        <button type="submit">Editar Travel Journal</button>
+                    </form>
+                </section>
+
+                <p class="journal-texto">
+                    <?= nl2br(htmlspecialchars($viagem['journal_descricao'])) ?>
+                </p>
+                <p>Avaliação Final: <?= htmlspecialchars($viagem['journal_avaliacao'] ?? 'N/A') ?>/5</p>
+
+            <?php endif; ?>
+
+        <?php else: ?>
+
+            <?php if (!$has_journal): ?>
+                <p>Sem Travel Journal registado para esta viagem.</p>
+            <?php else: ?>
+                <p class="journal-texto">
+                    <?= nl2br(htmlspecialchars($viagem['journal_descricao'])) ?>
+                </p>
+                <p>Avaliação Final: <?= htmlspecialchars($viagem['journal_avaliacao'] ?? 'N/A') ?>/5</p>
+            <?php endif; ?>
+
+        <?php endif; ?>
+
+</section>
+
 
         <section class="atividades-alojamentos">
             <h2>Atividades e Alojamentos</h2>
