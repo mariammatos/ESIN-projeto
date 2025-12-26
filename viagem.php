@@ -66,7 +66,8 @@ $user_wishlist = $wishlist ? destinonaWishlist($db, $destino, $wishlist) : false
                 <form action="actions/action_adicionarwishlist.php" method="post">
                     <input type="hidden" name="post_id" value="<?php echo $id_viagem; ?>">
                     <input type="hidden" name="destino_id" value="<?php echo $destino; ?>">
-                    <button type="submit" ><?php echo $user_wishlist ? 'Remover da Wishlist' : 'Adicionar à Wishlist'; ?>
+                    <button type="submit" class="<?php echo $user_wishlist ? 'active' : ''; ?>">
+                        <?php echo $user_wishlist ? 'Remover da Wishlist' : 'Adicionar à Wishlist'; ?>
                     </button>
                 </form></p>
             <p><strong>De:</strong> <?php echo htmlspecialchars($viagem['data_ida']); ?> <strong>A:</strong> <?php echo htmlspecialchars($viagem['data_volta'] ?? 'Em andamento'); ?></p>
@@ -146,7 +147,8 @@ $user_wishlist = $wishlist ? destinonaWishlist($db, $destino, $wishlist) : false
             <?php if ($current_user): ?>
                 <form action="actions/action_like.php" method="post">
                     <input type="hidden" name="post_id" value="<?php echo $id_viagem; ?>">
-                    <button type="submit" ><?php echo $user_liked ? 'Liked' : 'Like'; ?>
+                    <button type="submit" class="<?php echo $user_liked ? 'active' : ''; ?>">
+                        <?php echo $user_liked ? 'Liked' : 'Like'; ?>
                     </button>
                 </form>
                 <span><?php echo $likes_count; ?> likes</span>

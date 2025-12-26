@@ -167,6 +167,11 @@ header {
     filter: brightness(0) invert(1);
 }
 
+.informacao-base form button.active {
+    background-color: #a31621;
+    border-color: #a31621;
+}
+
 
 
 /* =========================
@@ -215,6 +220,15 @@ header {
     content: "❤️";
 }
 
+.like button.active {
+    background-color: #a31621;
+    border-color: #a31621;
+}
+
+.like button.active::before {
+    content: "❤️"; /* Coração cheio */
+}
+
 /* TEXTO DO CONTADOR */
 .like span {
     font-size: 0.9rem;
@@ -238,6 +252,12 @@ header {
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.2s ease;
+}
+
+.guardar button:hover {
+    background-color: #a31621;
+    color: #fff;
+    border-color: #a31621;
 }
 
 /* =========================
@@ -268,6 +288,7 @@ header {
     border-radius: 6px;
     margin-top: 10px;
 }
+
 
 .comentarios button:hover {
     background-color: #a31621;
