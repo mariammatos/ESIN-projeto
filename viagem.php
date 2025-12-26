@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    $_SESSION['msg'] = "Faça login para ver mais!";
+    header('Location: login.php'); // Se falhar, volta para a página de login
+    exit();
+}
 // Inclui o ficheiro que faz a ligação à base de dados.
 require_once 'database/db_connect.php';
 require_once 'database/posts.php';
@@ -6,6 +13,7 @@ require_once 'database/alojamentos.php';
 require_once 'database/users.php';
 require_once 'database/destinos.php';
 require_once 'database/traveljournals.php';
+require_once 'database/media.php';
 
 // --- 1. LÓGICA DE AUTENTICAÇÃO E BUSCA DE DADOS ---
 
@@ -90,18 +98,41 @@ if ($traveljournal_id) {
             <p><strong>De:</strong> <?php echo htmlspecialchars($viagem['data_ida']); ?> <strong>A:</strong> <?php echo htmlspecialchars($viagem['data_volta'] ?? 'Em andamento'); ?></p>
         </section>
 
-        <?php if (!empty($fotos)): ?>
-            <section class="galeria-fotos">
+        <section class="galeria-fotos">
+            <?php if (!empty($fotos)): ?>
                 <div class="galeria-container">
                     <?php foreach ($fotos as $foto): ?>
                         <div class="foto-item">
-                            <img width="200" height= "200"
-                            src="/media/<?= htmlspecialchars($foto['path']) ?>" alt="Foto da viagem" />
+                            <img width="200" height="200"
+                                src="<?= htmlspecialchars($foto['path']) ?>"
+                                alt="Foto da viagem" />
                         </div>
                     <?php endforeach; ?>
                 </div>
-            </section>
-        <?php endif; ?>
+
+                <div class="editar-fotos">
+                    <?php if ($is_owner && count($fotos) < 16): ?>
+                        <form action="adicionarfotos.php" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                            <button type="submit">Adicionar Foto</button>
+                        </form>
+                    <?php endif; ?>
+                </div>
+
+            <?php else: ?>
+
+                <?php if ($is_owner): ?>
+                    <div class="editar-fotos">
+                        <form action="adicionarfotos.php" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                            <button type="submit">Adicionar Foto</button>
+                        </form>
+                    </div>
+                <?php endif; ?>
+
+            <?php endif; ?>
+        </section>
+
 
         <section class="travel-journal">
 
