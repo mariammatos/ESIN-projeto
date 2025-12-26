@@ -135,6 +135,25 @@ nav ul li a:hover {
     color: #555;
 }
 
+/* ================= SEM POSTS ================= */
+
+.sem-posts {
+    background: #ffffff;
+    padding: 40px;
+    text-align: center;
+    border-radius: 8px;
+    border: 2px dashed #ced3dc;
+}
+
+.sem-posts a {
+   color: #4e8098; 
+}
+
+.sem-posts a:hover {
+    color: #a31621;
+    font-weight: bold;
+    text-decoration: underline;
+}
 
 /* ================= FOOTER ================= */
 

@@ -31,7 +31,12 @@ $posts = getPostsporDestino($db, $destino_id);
 
     <header>
         <nav>
-            <div class="logo">TripTales</div>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="logo TripTales.png" alt="TripTales Logo">
+                    <span>TripTales</span>
+                </a>
+            </div>
             <ul>
                 <li><a href="feed.php">Feed</a></li>
                 <li><a href="explorar.php">Explorar</a></li>

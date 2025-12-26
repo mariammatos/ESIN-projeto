@@ -13,17 +13,16 @@ body {
     color: #333;
 }
 
-/* ================= HEADER ================= */
+/*================= HEADER ================= */
 
 header {
     background-color: #4e8098;
-    padding: 1px 0;
 }
 
 nav {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 9px 20px;
+    padding: 0px 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -31,16 +30,14 @@ nav {
 
 .logo a {
     display: flex;
-    align-items: center; 
-    gap: 5px;           
+    align-items: center;            
     text-decoration: none;
 }
 
 
 .logo img {
-    height: 100px;       
-    width: auto;
-    filter: brightness(0) invert(1); 
+    height: 140px;       
+    filter: brightness(1) invert(2); 
     display: block;
 }
 
@@ -71,6 +68,7 @@ nav ul li a {
 nav ul li a:hover {
     color: #334f5c
 }
+
 
 /* ================= PESQUISA ================= */
 

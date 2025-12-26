@@ -22,69 +22,15 @@ a {
 
 
 
-
 /* ================= HEADER ================= */
 
 header {
     background-color: #4e8098;
-    padding: 1px 0;
-}
-
-nav {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 9px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo a {
-    display: flex;
-    align-items: center; 
-    gap: 5px;           
-    text-decoration: none;
+    padding: 20px;
 }
 
 
-.logo img {
-    height: 100px;       
-    width: auto;
-    filter: brightness(0) invert(1); 
-    display: block;
-}
-
-.logo img:hover {
-    transform: scale(1.05); /* Pequeno efeito de zoom ao passar o rato */
-}
-
-.logo span {
-    font-size: 2rem;
-    font-weight: bold;
-    color: black;     
-    letter-spacing: 1px;
-    font-family: "Segoe UI", Arial, sans-serif;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-nav ul li a {
-    color: #fcf7f8;
-    text-decoration: none;
-    font-size: 0.95rem;
-}
-
-nav ul li a:hover {
-    color: #334f5c
-}
-
-/* =========================
-   FEED
-========================= */
+/* ==================== FEED ====================== */
 
 .feed-container {
     max-width: 900px;
@@ -119,9 +65,7 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
-/* =========================
-   DETALHE DA VIAGEM
-========================= */
+/* ========================= DETALHE DA VIAGEM ========================= */
 
 .viagem-detalhe-container {
     max-width: 900px;
@@ -183,11 +127,8 @@ nav ul li a:hover {
     margin-bottom: 10px;
 }
 
-/* =========================
-   BOTÃO WISHLIST 
-========================= */
+/* ========================= BOTÃO WISHLIST ========================= */
 
-/* Garante que o botão mantenha o formato circular definido anteriormente */
 .informacao-base form button {
     background-color: transparent;
     border: 1px solid #ced3dc;
@@ -209,7 +150,7 @@ nav ul li a:hover {
     font-size: 18px;
 }
 
-/* HOVER */
+
 .informacao-base form button:hover {
     background-color: #a31621;
     border-color: #a31621;
@@ -226,9 +167,7 @@ nav ul li a:hover {
 
 
 
-/* =========================
-   LIKE 
-========================= */
+/* ========================= LIKE ========================= */
 
 .like {
     display: flex;
@@ -237,12 +176,11 @@ nav ul li a:hover {
     margin: 25px 0;
 }
 
-/* FORM NÃO OCUPA LINHA TODA */
 .like form {
     margin: 0;
 }
 
-/* BOTÃO LIKE */
+
 .like button {
     background-color: transparent;
     border: 1px solid #ced3dc;
@@ -262,7 +200,6 @@ nav ul li a:hover {
     font-size: 18px;
 }
 
-/* HOVER */
 .like button:hover {
     background-color: #a31621;
     border-color: #a31621;
@@ -278,19 +215,17 @@ nav ul li a:hover {
 }
 
 .like button.active::before {
-    content: "❤️"; /* Coração cheio */
+    content: "❤️"; 
 }
 
-/* TEXTO DO CONTADOR */
+
 .like span {
     font-size: 0.9rem;
     color: #555;
 }
 
 
-/* =========================
-  BOTÃO GUARDAR
-========================= */
+/* ========================= BOTÃO GUARDAR ========================= */
 
 .guardar button{
     display: flex;
@@ -313,9 +248,7 @@ nav ul li a:hover {
     border-color: #a31621;
 }
 
-/* =========================
-   COMENTÁRIOS 
-========================= */
+/* ========================= COMENTÁRIOS ========================= */
 
 .comentarios form {
     margin-bottom: 25px;
@@ -340,7 +273,7 @@ nav ul li a:hover {
 }
 
 
-/* CORAÇÃO */
+/*ÍCONE */
 .comentarios button::before {
     content: "💬";
     font-size: 18px;
@@ -350,7 +283,7 @@ nav ul li a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px; /* Espaço entre o ícone e o texto "Comentar" */
+    gap: 8px; 
 }
 
 
@@ -364,8 +297,7 @@ nav ul li a:hover {
 }
 
 
-
-/* LISTA */
+/* LISTA COMENTÁRIOS*/
 
 .lista-comentarios {
     list-style: none;
