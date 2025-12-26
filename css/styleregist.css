@@ -5,37 +5,6 @@
     box-sizing: border-box;
 }
 
-/* ===== CORES (PALETA) ===== */
-:root {
-    --ruby-red: #A31621;
-    --snow: #FCF7F8;
-    --pale-slate: #CED3DC;
-    --air-force-blue: #4E8098;
-    --sky-blue: #90C2E7;
-    --texto: #2b2b2b;
-}
-
-
-/* ================= HEADER ================= */
-
-header {
-    background-color: #4e8098;
-}
-
-nav {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 1.6rem;
-    font-weight: bold;
-    color:black;
-}
 
 
 /* ===== BODY ===== */
@@ -46,7 +15,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: var(--texto);
+    color: #2b2b2b;
 }
 
 
@@ -61,30 +30,6 @@ head {
 }
 
 
-/* BOTÕES */
-
-.btn-login {
-    padding: 6px 14px;
-    border: 1px solid #fcf7f8;
-    border-radius: 4px;
-}
-
-.btn-login:hover {
-background-color: #fcf7f8;
-color: #4e8098
-}
-
-.btn-signup {
-    padding: 6px 14px;
-    background-color: #a31621;
-    border-radius: 4px;
-}
-
-.btn-signup:hover {
-    background-color: #b66168 ;
-    color: #fffae2
-}
-
 /* ================= MAIN ================= */
 
 main {
@@ -95,7 +40,7 @@ main {
 
 /* ===== CARTÃO REGISTO ===== */
 #registration {
-    background-color: var(--snow);
+    background-color: #FCF7F8;
     margin-top: 10px;
     padding: 35px 40px;
     border-radius: 8px;
@@ -108,7 +53,7 @@ main {
 #registration h2 {
     text-align: center;
     margin-bottom: 25px;
-    color: var(--air-force-blue);
+    color: #4E8098;
 }
 
 /* ===== FORM ===== */
@@ -123,7 +68,7 @@ main {
     padding: 12px;
     margin-bottom: 15px;
     border-radius: 4px;
-    border: 1px solid var(--pale-slate);
+    border: 1px solid #CED3DC;
     font-size: 0.95rem;
     font-family: inherit;
 }
@@ -141,7 +86,7 @@ main {
 #registration input:focus,
 #registration textarea:focus {
     outline: none;
-    border-color: var(--air-force-blue);
+    border-color: #4E8098;
     box-shadow: 0 0 0 2px rgba(78, 128, 152, 0.25);
 }
 
@@ -171,8 +116,8 @@ main {
 #registration button[type="submit"]:not([formnovalidate]) {
     margin-top: 10px;
     padding: 13px;
-    background-color: var(--ruby-red);
-    color: var(--snow);
+    background-color: #A31621;
+    color: #FCF7F8;
     border: none;
     border-radius: 4px;
     font-size: 1rem;
@@ -181,7 +126,7 @@ main {
 }
 
 #registration > form > button[type="submit"]:hover {
-    background-color: var(--air-force-blue);
+    background-color: #4E8098;
     transform: translateY(-2px);
 }
 

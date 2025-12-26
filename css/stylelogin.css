@@ -5,38 +5,28 @@
     box-sizing: border-box;
 }
 
-/* ===== CORES (PALETA) ===== */
-:root {
-    --ruby-red: #A31621;
-    --snow: #FCF7F8;
-    --pale-slate: #CED3DC;
-    --air-force-blue: #4E8098;
-    --sky-blue: #90C2E7;
-    --texto: #2b2b2b;
-}
-
 /* ===== BODY ===== */
 body {
     font-family: "Segoe UI", Arial, sans-serif;
-    background:  var(--air-force-blue);
+    background:  #4E8098;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: var(--texto);
+    color: #2b2b2b;
 }
 
 /* ===== MENSAGEM PHP (ERROS / SUCESSO) ===== */
 body > p {
     margin-bottom: 15px;
-    color: var(--ruby-red);
+    color: #A31621;
     font-weight: 500;
 }
 
 /* ===== CARTÃO LOGIN ===== */
 #login {
-    background-color: var(--snow);
+    background-color: #FCF7F8
     padding: 35px 40px;
     border-radius: 8px;
     width: 100%;
@@ -49,7 +39,7 @@ body > p {
 #login h2 {
     text-align: center;
     margin-bottom: 25px;
-    color: var(--air-force-blue);
+    color: #4E8098;
 }
 
 /* ===== FORM ===== */
@@ -63,7 +53,7 @@ body > p {
     padding: 12px;
     margin-bottom: 15px;
     border-radius: 4px;
-    border: 1px solid var(--pale-slate);
+    border: 1px solid #CED3DC;
     font-size: 0.95rem;
 }
 
@@ -73,15 +63,15 @@ body > p {
 
 #login input:focus {
     outline: none;
-    border-color: var(--air-force-blue);
+    border-color: #4E8098;
     box-shadow: 0 0 0 2px rgba(78, 128, 152, 0.25);
 }
 
 /* ===== BOTÃO LOGIN ===== */
 #login button {
     padding: 12px;
-    background-color: var(--ruby-red);
-    color: var(--snow);
+    background-color: #A31621;
+    color: #FCF7F8;
     border: none;
     border-radius: 4px;
     font-size: 1rem;
@@ -90,7 +80,7 @@ body > p {
 }
 
 #login button:hover {
-    background-color: var(--air-force-blue);
+    background-color: #4E8098;
     transform: translateY(-2px);
 }
 
@@ -103,15 +93,15 @@ body > p {
 #registar h1 {
     font-size: 1.2rem;
     margin-bottom: 10px;
-    color: var(--snow);
+    color: #FCF7F8;
 }
 
 /* BOTÃO REGISTAR */
 #registar .btn-signup {
     display: inline-block;
     padding: 10px 18px;
-    background-color: var(--snow);
-    color: var(--ruby-red);
+    background-color: #FCF7F8;
+    color: #A31621;
     border-radius: 4px;
     text-decoration: none;
     font-weight: 600;
@@ -119,8 +109,8 @@ body > p {
 }
 
 #registar .btn-signup:hover {
-    background-color: var(--ruby-red);
-    color: var(--snow);
+    background-color: #A31621;
+    color: #FCF7F8;
 }
 
 /* ===== FOOTER ===== */
@@ -128,7 +118,7 @@ footer {
     margin-top: 50px;
     padding: 20px;
     font-size: 0.8rem;
-    color: var(--snow);
+    color: #FCF7F8;
     opacity: 0.85;
 }
 

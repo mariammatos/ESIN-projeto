@@ -31,127 +31,6 @@ header {
     padding: 15px 30px;
 }
 
-nav {
-    max-width: 1100px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #000;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-nav ul li a {
-    color: #000;
-    font-weight: 500;
-}
-
-nav ul li a:hover {
-    text-decoration: underline;
-}
-
-.btn-logout {
-    background-color: #a31621;
-    color: #fcf7f8;
-    padding: 6px 14px;
-    border-radius: 4px;
-}
-
-.btn-logout:hover {
-    background-color: #b66168;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-    background-color: #4e8098;
-    color: #fcf7f8;
-    text-align: center;
-    padding: 15px;
-    margin-top: 60px;
-}
-
-/* =========================
-   FORMULÁRIOS (LOGIN / REGISTO)
-========================= */
-
-#login,
-#registration {
-    max-width: 400px;
-    margin: 60px auto;
-    background-color: #fcf7f8;
-    padding: 30px;
-    border-radius: 6px;
-}
-
-#login h2,
-#registration h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #a31621;
-}
-
-form input,
-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 12px;
-    border-radius: 4px;
-    border: 1px solid #ced3dc;
-}
-
-form button {
-    width: 100%;
-    background-color: #a31621;
-    color: #fcf7f8;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-form button:hover {
-    background-color: #b66168;
-}
-
-/* =========================
-   BOTÕES
-========================= */
-
-.btn-login {
-    padding: 6px 14px;
-    border: 1px solid #fcf7f8;
-    border-radius: 4px;
-    color: #fcf7f8;
-}
-
-.btn-login:hover {
-    background-color: #fcf7f8;
-    color: #a31621;
-}
-
-.btn-signup {
-    padding: 6px 14px;
-    background-color: #a31621;
-    border-radius: 4px;
-    color: #fcf7f8;
-}
-
-.btn-signup:hover {
-    background-color: #b66168;
-}
 
 /* =========================
    FEED
@@ -254,6 +133,24 @@ form button:hover {
 }
 
 /* =========================
+   BOTÃO WISHLIST 
+========================= */
+
+.informacao-base button[type="submit"] {
+    background: none;
+    border: none;
+    color: #a31621;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0;
+}
+
+.informacao-base button:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
    LIKE 
 ========================= */
 
@@ -297,6 +194,24 @@ form button:hover {
     color: #555;
 }
 
+
+/* =========================
+  BOTÃO GUARDAR
+========================= */
+
+.guardar button{
+        display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: transparent;
+    border: 1px solid #ced3dc;
+    color: #a31621;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
 
 /* =========================
    COMENTÁRIOS 
