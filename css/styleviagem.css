@@ -136,18 +136,37 @@ header {
    BOTÃO WISHLIST 
 ========================= */
 
-.informacao-base button[type="submit"] {
-    background: none;
-    border: none;
-    color: #a31621;
-    font-size: 0.9rem;
+.informacao-base form button {
+    background-color: transparent;
+    border: 1px solid #ced3dc;
+    padding: 8px;
+    border-radius: 50%;
     cursor: pointer;
-    padding: 0;
+    font-size: 0;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
 }
 
-.informacao-base button:hover {
-    text-decoration: underline;
+/* ÍCONE BOOKMARK */
+.informacao-base form button::before {
+    content: "🔖";
+    font-size: 18px;
 }
+
+/* HOVER */
+.informacao-base form button:hover {
+    background-color: #a31621;
+    border-color: #a31621;
+}
+
+.informacao-base form button:hover::before {
+    filter: brightness(0) invert(1);
+}
+
 
 
 /* =========================
@@ -168,27 +187,35 @@ header {
 
 /* BOTÃO LIKE */
 .like button {
+    background-color: transparent;
+    border: 1px solid #ced3dc;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0;
     display: flex;
     align-items: center;
     gap: 6px;
-    background-color: transparent;
-    border: 1px solid #ced3dc;
-    color: #a31621;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    cursor: pointer;
     transition: all 0.2s ease;
+}
+
+/* CORAÇÃO */
+.like button::before {
+    content: "🤍";
+    font-size: 18px;
 }
 
 /* HOVER */
 .like button:hover {
     background-color: #a31621;
-    color: #fff;
     border-color: #a31621;
 }
 
-/* CONTADOR */
+.like button:hover::before {
+    content: "❤️";
+}
+
+/* TEXTO DO CONTADOR */
 .like span {
     font-size: 0.9rem;
     color: #555;
