@@ -1,6 +1,9 @@
 <?php
   session_start();
 
+  $erro = $_SESSION['error'];
+  unset($_SESSION['error']);
+
   if (!isset($_SESSION['em_andamento'])) {
         $_SESSION['em_andamento'] = false;
    }
@@ -16,9 +19,15 @@
   if (isset($_POST['data_ida'])) {
       $_SESSION['form_data']['data_ida'] = $_POST['data_ida'];
   }
+
+  if (isset($_POST['data_volta'])) {
+      $_SESSION['form_data']['data_volta'] = $_POST['data_volta'];
+  }
   if (!isset($_SESSION['pais_matches'])) {
     $_SESSION['pais_matches'] = [];
   }
+
+  $data_volta_value = $disabled ? '' : ($_SESSION['form_data']['data_volta'] ?? '');
 
 ?>
 
@@ -34,7 +43,7 @@
 
 
   <section id="registration">
-    <?php echo $msg ?>
+    <?php echo $erro ?>
     <h2>Crie uma nova viagem!</h2>
 
     <form action="actions/action_criarviagem.php" method="post" enctype="multipart/form-data">
@@ -51,9 +60,7 @@
 
         <div class="form-group">
             <label for="data_volta">Fim:</label>
-            <input type="date"
-                name="data_volta"
-                id="data_volta"
+            <input type="date" name="data_volta" id="data_volta" min="<?= $_SESSION['form_data']['data_ida'] ?>" value="<?= htmlspecialchars($data_volta_value ?? '') ?>"
                 <?php if ($_SESSION['em_andamento']) echo 'disabled'; ?>>
 
         <button type="submit" formaction="nova_viagem.php" name="toggle_andamento" formnovalidate>
@@ -61,24 +68,24 @@
         </button>
         </div>
 
-        <div class="form-group">
-            <label for="pais">País:</label>
-            <input type="text" name="pais" id="pais" value="<?= htmlspecialchars($_SESSION['pais'] ?? '') ?>" required>
-            <button type="submit" formaction="actions/action_procurarpais.php" formnovalidate>Procurar país</button>
-        
+      <div class="form-group">
+          <label for="pais">País:</label>
+          <input type="text" name="pais" id="pais" value="<?= htmlspecialchars($_SESSION['pais'] ?? '') ?>" required>
+          <button type="submit" formaction="actions/action_procurarpais.php" formnovalidate>Procurar país</button>
+      
 
-            <?php
-            if (!empty($_SESSION['pais_matches'])):
-                echo '<p>Países encontrados:</p>';
-                foreach($_SESSION['pais_matches'] as $m):
-            ?>
-                <input type="radio" name="pais_selecionado" value="<?= htmlspecialchars($m) ?>" required>
-                <?= htmlspecialchars($m) ?><br>
-            <?php
-                endforeach;
-            endif;
-            ?>
-        </div>
+          <?php
+          if (!empty($_SESSION['pais_matches'])):
+              echo '<p>Países encontrados:</p>';
+              foreach($_SESSION['pais_matches'] as $m):
+          ?>
+              <input type="radio" name="pais_selecionado" value="<?= htmlspecialchars($m) ?>" required>
+              <?= htmlspecialchars($m) ?><br>
+          <?php
+              endforeach;
+          endif;
+          ?>
+      </div>
 
         <div class="form-group">
             <label for="local">Cidade/região/local:</label>
