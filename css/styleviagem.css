@@ -200,6 +200,41 @@ header {
     transition: all 0.2s ease;
 }
 
+.local-wishlist {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* remove margens que empurram o botão */
+.local-wishlist p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* evita que o form vá para baixo */
+.local-wishlist form {
+    margin: 0;
+}
+
+/* botão da wishlist */
+.local-wishlist form button {
+    background-color: transparent;
+    border: 1px solid #ced3dc;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+
 /* ÍCONE BOOKMARK */
 .informacao-base form button::before {
     content: "🔖";
@@ -668,8 +703,9 @@ footer {
     }
     
     .local-wishlist {
-        flex-direction: column;
-        align-items: flex-start;
+        display: flex;
+        align-items: center;
+        gap: 12px;
     }
     
     .btn-wishlist {
