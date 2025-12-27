@@ -244,6 +244,11 @@ header {
     font-size: 18px;
 }
 
+.local-wishlist form button.active {
+    background-color: #a31621;
+    border-color: #a31621;
+}
+
 /* HOVER */
 .local-wishlist form button:hover {
     background-color: #a31621;
