@@ -3,6 +3,7 @@ session_start();
 require_once 'database/db_connect.php';
 require_once 'database/posts.php';
 require_once 'database/users.php';
+require_once 'database/media.php';
 
 
 if (!isset($_SESSION['username'])) {
@@ -92,7 +93,6 @@ $posts = getexplorar($db);
                     </article>
                 <?php endforeach; ?>
             <?php elseif (!empty($posts)): ?>
-                <!-- Mostrar posts -->
                 <?php foreach ($posts as $post): ?>
                     <article class="post-viagem">
                         <div class="post-header">
@@ -101,6 +101,17 @@ $posts = getexplorar($db);
                         </div>
                         
                         <div class="post-detalhes">
+                                    <?php 
+                                        $fotos_post = getFotos($db, $post['id']); // todas as fotos da viagem
+                                        if (!empty($fotos_post)):
+                                            $foto_principal = $fotos_post[0]; // a de menor id
+                                    ?>
+                                        <div class="post-foto">
+                                            <img src="<?= htmlspecialchars($foto_principal['path']); ?>" 
+                                                alt="Foto da viagem <?= htmlspecialchars($post['titulo']); ?>" 
+                                                width="200" height="200">
+                                        </div>
+                                    <?php endif; ?>
                             <p><strong>Destino:</strong> <?php echo htmlspecialchars($post['cidade_local']); ?>, <?php echo htmlspecialchars($post['pais']); ?></p>
                             <p><a href="viagem.php?id=<?php echo $post['id']; ?>">Ver todos os detalhes da viagem...</a></p>
                         </div>
