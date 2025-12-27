@@ -9,7 +9,7 @@
 
 body {
     font-family: "Segoe UI", Arial, sans-serif;
-    background: #4e8098;
+    background: linear-gradient(135deg, #4e8098, #90c2e7);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -17,43 +17,49 @@ body {
     color: #2b2b2b;
 }
 
+
 #registration {
-  background-color: #fcf7f8;
-  margin-top: 10px;
-  padding: 35px 40px;
-  border-radius: 8px;
-  width: 100%;
-  max-width: 520px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+    margin-top: 60px;
+    padding: 45px 50px;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 520px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
 }
 
-/* ================= TÍTULO ================= */
+/* TÍTULO  */
 
 #registration h2 {
-  text-align: center;
-  color: #4e8098;
-  margin-bottom: 25px;
+    text-align: center;
+    color: #4e8098;
+    margin-bottom: 35px;
+    font-size: 1.6rem;
+    font-weight: 600;
 }
+
 
 /* ================= FORM ================= */
 
 #registration form {
     display: flex;
     flex-direction: column;
+    gap: 20px;
 }
 
 #registration input,
 #registration textarea {
-    padding: 12px;
-    margin-bottom: 15px;
-    border-radius: 4px;
-    border: 1px solid #CED3DC;
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: 1px solid #ced3dc;
     font-size: 0.95rem;
     font-family: inherit;
+    transition: all 0.25s ease;
+    background-color: #fafafa;
 }
 
 #registration textarea {
-    min-height: 90px;
+    min-height: 140px;
     resize: vertical;
 }
 
@@ -65,12 +71,31 @@ body {
 #registration input:focus,
 #registration textarea:focus {
     outline: none;
-    border-color: #4E8098;
-    box-shadow: 0 0 0 2px rgba(78, 128, 152, 0.25);
+    border-color: #4e8098;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(78, 128, 152, 0.25);
+}
+
+#registration input[type="number"] {
+    width: 100px;
+    text-align: center;
+    font-weight: 600;
 }
 
 .form-group label + input + button {
   justify-self: start;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: 500;
 }
 
 /* ================= BOTÕES TIPO "VERIFICAR" ================= */
@@ -96,34 +121,39 @@ body {
 
 /* ================= BOTÃO PUBLICAR ================= */
 
-#registration button[type="submit"]:not([formnovalidate]) {
-  width: 100%;
-  background-color: #a31621;
-  color: #fcf7f8;
-  border: none;
-  padding: 14px;
-  font-size: 1rem;
-  border-radius: 4px;
-  margin-top: 25px;
-  cursor: pointer;
-  transition: background-color 0.25s ease, transform 0.2s ease
-
+#registration button[type="submit"] {
+    width: 100%;
+    background-color: #a31621;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    font-size: 1.05rem;
+    border-radius: 30px;
+    margin-top: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    transition: all 0.25s ease;
 }
 
-#registration > form > button[type="submit"]:hover {
-  background-color: #4E8098;
-  transform: translateY(-2px);  
+#registration button[type="submit"]:hover {
+    background-color: #4e8098;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
+
 
 
 /* ================= FOOTER ================= */
 
 footer {
-  text-align: center;
-  margin-top: 40px;
-  color: #fcf7f8;
-  font-size: 0.85rem;
+    text-align: center;
+    margin-top: 35px;
+    color: #ffffff;
+    font-size: 0.85rem;
+    opacity: 0.85;
 }
+
 
 
 
