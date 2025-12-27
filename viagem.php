@@ -299,3 +299,24 @@ if ($traveljournal_id) {
 
 </body>
 </html>
+
+<script>
+document.querySelectorAll('.foto-item img').forEach(img => {
+    img.addEventListener('click', () => {
+        const overlay = document.createElement('div');
+        overlay.classList.add('foto-overlay');
+
+        const bigImg = document.createElement('img');
+        bigImg.src = img.src;
+
+        overlay.appendChild(bigImg);
+        document.body.appendChild(overlay);
+
+        overlay.classList.add('active');
+
+        overlay.addEventListener('click', () => {
+            overlay.remove();
+        });
+    });
+});
+</script>
