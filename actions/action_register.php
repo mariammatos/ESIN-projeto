@@ -9,8 +9,8 @@ $password = $_POST['password'];
 $password_confirm = $_POST['password_confirm']; 
 $email = $_POST['email'];                       
 $nome = $_POST['nome'];                         
-$pais_de_origem = $_POST['pais_de_origem'];     
-$pref = $_POST['pref']; 
+$pais_de_origem = $_POST['pais_selecionado'];     
+$pref = $_POST['pref'] ?? [];
 $preferencia_de_viagem = implode(', ', $pref);
 $foto_de_perfil = "$username.jpg";    
 
