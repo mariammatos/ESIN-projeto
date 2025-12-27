@@ -32,8 +32,13 @@
       <div class="form-group">
         <label for="username">Nome de utilizador:</label>
         <input type="text" name="username" id="username" value="<?= htmlspecialchars($_SESSION['form_data']['username'] ?? '') ?>" required>
-        <?php echo $msg1 ?>
-        <button type="submit" formaction="actions/action_checkusername.php" formnovalidate>Verificar</button>
+        <?php if (!empty($msg1)): ?>
+          <div class="validation-message <?= strpos($msg1, 'disponível') !== false ? 'success' : 'error' ?>">
+            <?= strip_tags($msg1) ?>
+          </div>
+        <?php endif; ?>
+        
+        <button type="submit" formaction="actions/action_checkusername.php" formnovalidate>Verificar </button>
       </div>
 
       <div class="form-group">

@@ -202,23 +202,43 @@ body > p,
 }
 
 /* ================= MENSAGENS DE VALIDAÇÃO ================= */
-.form-group p {
+.form-group p,
+.form-group .validation-message {
     font-size: 0.85rem;
-    padding: 8px 12px;
+    padding: 10px 14px;
     border-radius: 6px;
-    margin-top: 4px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.form-group p.success {
+.form-group p.success,
+.form-group .validation-message.success {
     background-color: rgba(40, 167, 69, 0.1);
     border-left: 3px solid #28a745;
     color: #28a745;
 }
 
-.form-group p.error {
+.form-group p.success::before,
+.form-group .validation-message.success::before {
+    content: "✓";
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.form-group p.error,
+.form-group .validation-message.error {
     background-color: rgba(163, 22, 33, 0.1);
     border-left: 3px solid #a31621;
     color: #a31621;
+}
+
+.form-group p.error::before,
+.form-group .validation-message.error::before {
+    content: "✕";
+    font-weight: bold;
+    font-size: 1.1rem;
 }
 
 /* ================= FOOTER ================= */
