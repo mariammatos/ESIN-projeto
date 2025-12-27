@@ -66,28 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <script>
-        const ratingInput = document.getElementById('rating');
-        const starDisplay = document.getElementById('star-display');
-        
-        function updateStars() {
-            const value = parseInt(ratingInput.value) || 0;
-            const clampedValue = Math.max(0, Math.min(5, value));
-            const filled = '★'.repeat(clampedValue);
-            const empty = '☆'.repeat(5 - clampedValue);
-            starDisplay.textContent = filled + empty;
-            
-            // Atualizar cor baseada na avaliação
-            if (clampedValue <= 2) {
-                starDisplay.style.color = '#ff6b6b';
-            } else if (clampedValue <= 3) {
-                starDisplay.style.color = '#ffa500';
-            } else {
-                starDisplay.style.color = '#ffd700';
-            }
-        }
-        
-        ratingInput.addEventListener('input', updateStars);
-        updateStars();
-    </script>
+    
 </body>
 </html>
