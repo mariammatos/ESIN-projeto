@@ -259,6 +259,9 @@ body {
     box-shadow: 0 4px 10px rgba(78, 128, 152, 0.3);
 }
 
+/* ================= PREFERÊNCIAS ================= */
+
+
 /* ================= BOTÃO PUBLICAR ================= */
 
 #registration button[type="submit"]:not([formnovalidate]) {
@@ -286,6 +289,7 @@ body {
     transform: translateY(-1px);
 }
 
+
 /* ================= FOOTER ================= */
 
 footer {
@@ -296,7 +300,7 @@ footer {
     opacity: 0.85;
 }
 
-/* ================= RESPONSIVIDADE ================= */
+/* ================= RESPONSIVIDADE ================ */
 
 @media (max-width: 600px) {
     #registration {

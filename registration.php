@@ -32,13 +32,14 @@
       <div class="form-group">
         <label for="username">Nome de utilizador:</label>
         <input type="text" name="username" id="username" value="<?= htmlspecialchars($_SESSION['form_data']['username'] ?? '') ?>" required>
+        
         <?php if (!empty($msg1)): ?>
           <div class="validation-message <?= strpos($msg1, 'disponível') !== false ? 'success' : 'error' ?>">
             <?= strip_tags($msg1) ?>
           </div>
         <?php endif; ?>
         
-        <button type="submit" formaction="actions/action_checkusername.php" formnovalidate>Verificar </button>
+        <button type="submit" formaction="actions/action_checkusername.php" formnovalidate>Verificar</button>
       </div>
 
       <div class="form-group">
@@ -48,9 +49,8 @@
 
       <div class="form-group">
         <label for="password_confirm">Confirmar palavra-passe:</label>
-        <input type="password" id="password_confirm" name="password_confirm"  placeholder="Repita a palavra-passe" required>
-      <div id="password-match-message" class="validation-message" style="display: none;">
-      </div>
+        <input type="password" id="password_confirm" name="password_confirm" required>
+          <div id="password-match-message" class="validation-message" style="display: none;"></div>
       </div>
 
       <div class="form-group">
@@ -70,18 +70,18 @@
             <button type="submit" formaction="actions/action_procurarpais.php" formnovalidate>Procurar país</button>
         
 
-       <?php if (!empty($_SESSION['pais_matches'])): ?>
-          <p>Países encontrados:</p>
-          <div class="radio-group">
-            <?php foreach($_SESSION['pais_matches'] as $m): ?>
-              <label class="radio-option">
+            <?php
+            if (!empty($_SESSION['pais_matches'])):
+                echo '<p>Países encontrados:</p>';
+                foreach($_SESSION['pais_matches'] as $m):
+            ?>
                 <input type="radio" name="pais_selecionado" value="<?= htmlspecialchars($m) ?>" required>
-                <?= htmlspecialchars($m) ?>
-              </label>
-            <?php endforeach; ?>
-          </div>
-        <?php endif; ?>
-      </div>
+                <?= htmlspecialchars($m) ?><br>
+            <?php
+                endforeach;
+            endif;
+            ?>
+        </div>
 
       <div class="form-group">
         <label for="preferencia_de_viagem">Preferências de viagem:</label>
@@ -113,7 +113,10 @@
     <footer>
       <p>&copy; 2025 TripTales. Projeto ESIN.</p>
     </footer>
-  <script>
+  </body>
+</html>
+
+<script>
     // Validação da palavra-passe em tempo real
     const password = document.getElementById('password');
     const passwordConfirm = document.getElementById('password_confirm');
@@ -140,18 +143,4 @@
     password.addEventListener('input', checkPasswordMatch);
     passwordConfirm.addEventListener('input', checkPasswordMatch);
     
-    // Validação das preferências de viagem no submit
-    const form = document.querySelector('form');
-    form.addEventListener('submit', function(e) {
-      const checkboxes = document.querySelectorAll('input[name="pref[]"]');
-      const checkedOne = Array.from(checkboxes).some(checkbox => checkbox.checked);
-      
-      if (!checkedOne && !e.target.hasAttribute('formnovalidate')) {
-        e.preventDefault();
-        alert('Por favor, selecione pelo menos uma preferência de viagem.');
-      }
-    });
   </script>
-
-  </body>
-</html>
