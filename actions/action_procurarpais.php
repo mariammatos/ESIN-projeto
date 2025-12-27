@@ -14,5 +14,19 @@ if (!empty($_POST['pais'])) {
 
 }
 
-header('Location: ../nova_viagem.php');
-exit;
+if (isset($_POST['registar'])) {
+    $_SESSION['form_data']['username'] = $_POST['username'] ?? '';
+    $_SESSION['form_data']['email'] = $_POST['email'] ?? '';
+    $_SESSION['form_data']['nome'] = $_POST['nome'] ?? '';
+    $_SESSION['local'] = $_POST['local'] ?? '';
+    header('Location: ../registration.php');
+    exit;
+}  
+else {
+    $_SESSION['form_data']['titulo'] = $_POST['titulo'] ?? '';
+    $_SESSION['form_data']['data_ida'] = $_POST['data_ida'] ?? '';
+    $_SESSION['form_data']['data_volta'] = $_POST['data_volta'] ?? '';
+    header('Location: ../nova_viagem.php');
+    exit;
+}
+?>
