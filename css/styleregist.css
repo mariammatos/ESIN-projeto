@@ -5,6 +5,37 @@
     box-sizing: border-box;
 }
 
+/* ================= BOTÃO VOLTAR ================= */
+.btn-voltar {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 16px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #4e8098;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(6px);
+
+    transition: all 0.25s ease;
+    z-index: 10;
+}
+
+.btn-voltar:hover {
+    color: #a31621;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
+}
+
 /* ===== BODY ===== */
 body {
     font-family: "Segoe UI", Arial, sans-serif;
@@ -65,10 +96,11 @@ body > p,
 }
 
 .form-group label {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #555;
     font-weight: 500;
 }
+
 
 /* ===== INPUTS E TEXTAREA ===== */
 #registration input,
@@ -163,12 +195,7 @@ body > p,
     cursor: pointer;
 }
 
-.form-group label[for^="pais"] {
-    display: inline;
-    margin-left: 4px;
-    font-weight: normal;
-    cursor: pointer;
-}
+
 
 /* Esconde o círculo original do rádio */
 .radio-option input[type="radio"] {
@@ -186,7 +213,7 @@ body > p,
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.25s ease;
-    font-size: 0.9rem;
+    font-size: 0.5rem;
     color: #555;
     width: 100%;
 }
@@ -261,7 +288,7 @@ body > p,
 
 /* Hover */
 .checkbox-option:hover {
-    border-color: #4e8098;
+    border-color: lightblue;
     background-color: #f0f7fa;
 }
 
@@ -275,10 +302,10 @@ body > p,
 
 /* Estilo quando selecionado */
 .checkbox-option:has(input[type="checkbox"]:checked) {
-    background-color: #4e8098;
-    border-color: #4e8098;
+    background-color: lightblue;
+    border-color: lightblue;
     color: #ffffff;
-    font-weight: 600;
+    font-weight: bold;
     box-shadow: 0 4px 10px rgba(78, 128, 152, 0.3);
 }
 
