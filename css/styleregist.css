@@ -65,10 +65,11 @@ body > p,
 }
 
 .form-group label {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #555;
     font-weight: 500;
 }
+
 
 /* ===== INPUTS E TEXTAREA ===== */
 #registration input,
@@ -163,12 +164,7 @@ body > p,
     cursor: pointer;
 }
 
-.form-group label[for^="pais"] {
-    display: inline;
-    margin-left: 4px;
-    font-weight: normal;
-    cursor: pointer;
-}
+
 
 /* Esconde o círculo original do rádio */
 .radio-option input[type="radio"] {
@@ -186,7 +182,7 @@ body > p,
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.25s ease;
-    font-size: 0.9rem;
+    font-size: 0.5rem;
     color: #555;
     width: 100%;
 }
@@ -261,7 +257,7 @@ body > p,
 
 /* Hover */
 .checkbox-option:hover {
-    border-color: #4e8098;
+    border-color: lightblue;
     background-color: #f0f7fa;
 }
 
@@ -275,10 +271,10 @@ body > p,
 
 /* Estilo quando selecionado */
 .checkbox-option:has(input[type="checkbox"]:checked) {
-    background-color: #4e8098;
-    border-color: #4e8098;
+    background-color: lightblue;
+    border-color: lightblue;
     color: #ffffff;
-    font-weight: 600;
+    font-weight: bold;
     box-shadow: 0 4px 10px rgba(78, 128, 152, 0.3);
 }
 
