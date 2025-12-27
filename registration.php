@@ -22,7 +22,7 @@
   </head>
   <body>
 
-    <a href="login.php" class="btn-voltar">← Voltar ao Feed</a>
+    <a href="login.php" class="btn-voltar">← Voltar ao Login</a>
 
 
   <section id="registration">
