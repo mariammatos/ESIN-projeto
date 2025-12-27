@@ -9,30 +9,44 @@
 
 body {
     font-family: "Segoe UI", Arial, sans-serif;
-    background: #4e8098;
+    background: linear-gradient(135deg, #4e8098, #90c2e7);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     color: #2b2b2b;
+    padding: 20px;
 }
 
 #registration {
-  background-color: #fcf7f8;
-  margin-top: 10px;
-  padding: 35px 40px;
-  border-radius: 8px;
-  width: 100%;
-  max-width: 520px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+    margin-top: 60px;
+    padding: 45px 50px;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 520px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
 }
 
 /* ================= TÍTULO ================= */
 
 #registration h2 {
-  text-align: center;
-  color: #4e8098;
-  margin-bottom: 25px;
+    text-align: center;
+    color: #4e8098;
+    margin-bottom: 35px;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+/* ================= MENSAGENS ================= */
+
+#registration > p,
+#registration > div > p {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
 }
 
 /* ================= FORM ================= */
@@ -40,20 +54,38 @@ body {
 #registration form {
     display: flex;
     flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: 500;
 }
 
 #registration input,
 #registration textarea {
-    padding: 12px;
-    margin-bottom: 15px;
-    border-radius: 4px;
-    border: 1px solid #CED3DC;
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: 1px solid #ced3dc;
     font-size: 0.95rem;
     font-family: inherit;
+    transition: all 0.25s ease;
+    background-color: #fafafa;
+}
+
+#registration input[type="date"] {
+    cursor: pointer;
 }
 
 #registration textarea {
-    min-height: 90px;
+    min-height: 140px;
     resize: vertical;
 }
 
@@ -65,65 +97,162 @@ body {
 #registration input:focus,
 #registration textarea:focus {
     outline: none;
-    border-color: #4E8098;
-    box-shadow: 0 0 0 2px rgba(78, 128, 152, 0.25);
+    border-color: #4e8098;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(78, 128, 152, 0.25);
 }
 
-.form-group label + input + button {
-  justify-self: start;
+#registration input:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+    opacity: 0.6;
 }
 
-/* ================= BOTÕES TIPO "VERIFICAR" ================= */
+/* ================= GRUPO DE INPUT + BOTÃO ================= */
+
+.form-group-inline {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+.form-group-inline input {
+    flex: 1;
+}
+
+/* ================= BOTÕES TIPO "VERIFICAR" / SECUNDÁRIOS ================= */
 
 .form-group button[formnovalidate] {
-  background-color: #fcf7f8;
-  color: #a31621;
-  border: 1px solid #ced3dc;
-  padding: 10px 14px;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  cursor: pointer;
-  white-space: nowrap;
+    background-color: #fcf7f8;
+    color: #a31621;
+    border: 1px solid #ced3dc;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.25s ease;
+    font-weight: 500;
+    align-self: flex-start;
+    margin-top: 8px;
 }
-
-
 
 .form-group button[formnovalidate]:hover {
     background-color: #a31621;
     color: #fcf7f8;
     border-color: #a31621;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(163, 22, 33, 0.2);
+}
+
+.form-group button[formnovalidate]:active {
+    transform: translateY(0);
+}
+
+/* ================= LISTA DE PAÍSES ================= */
+
+.form-group p {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input[type="radio"] {
+    width: auto;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.form-group label[for^="pais"] {
+    display: inline;
+    margin-left: 4px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+/* Container para os radio buttons */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.radio-option:hover {
+    background-color: #e9ecef;
+}
+
+.radio-option input[type="radio"] {
+    margin: 0;
+    margin-right: 10px;
 }
 
 /* ================= BOTÃO PUBLICAR ================= */
 
 #registration button[type="submit"]:not([formnovalidate]) {
-  width: 100%;
-  background-color: #a31621;
-  color: #fcf7f8;
-  border: none;
-  padding: 14px;
-  font-size: 1rem;
-  border-radius: 4px;
-  margin-top: 25px;
-  cursor: pointer;
-  transition: background-color 0.25s ease, transform 0.2s ease
-
+    width: 100%;
+    background-color: #a31621;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    font-size: 1.05rem;
+    border-radius: 30px;
+    margin-top: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    transition: all 0.25s ease;
 }
 
-#registration > form > button[type="submit"]:hover {
-  background-color: #4E8098;
-  transform: translateY(-2px);  
+#registration button[type="submit"]:not([formnovalidate]):hover {
+    background-color: #4e8098;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
+#registration button[type="submit"]:not([formnovalidate]):active {
+    transform: translateY(-1px);
+}
 
 /* ================= FOOTER ================= */
 
 footer {
-  text-align: center;
-  margin-top: 40px;
-  color: #fcf7f8;
-  font-size: 0.85rem;
+    text-align: center;
+    margin-top: 35px;
+    color: #ffffff;
+    font-size: 0.85rem;
+    opacity: 0.85;
 }
 
+/* ================= RESPONSIVIDADE ================= */
 
-
+@media (max-width: 600px) {
+    #registration {
+        padding: 35px 25px;
+        margin-top: 40px;
+    }
+    
+    #registration h2 {
+        font-size: 1.4rem;
+        margin-bottom: 25px;
+    }
+    
+    .form-group button[formnovalidate] {
+        width: 100%;
+    }
+}

@@ -66,6 +66,9 @@ if ($traveljournal_id) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($viagem['titulo']); ?> | TripTales</title>
     <link rel="stylesheet" href="css/styleviagem.css">
+
+
+
 </head>
 <body>
 
@@ -185,7 +188,7 @@ if ($traveljournal_id) {
                 <p class="journal-texto">
                     <?= nl2br(htmlspecialchars($viagem['journal_descricao'])) ?>
                 </p>
-                <p>Avaliação Final: <?= htmlspecialchars($viagem['journal_avaliacao'] ?? 'N/A') ?>/5</p>
+                <p>Avaliação Final: <?= htmlspecialchars($viagem['journal_avaliacao'] ?? 'N/A') ?>/5 ⭐</p>
             <?php endif; ?>
 
         <?php endif; ?>
@@ -308,23 +311,63 @@ if ($traveljournal_id) {
 </html>
 
 <script>
-document.querySelectorAll('.foto-item img').forEach(img => {
-    img.addEventListener('click', () => {
-        const overlay = document.createElement('div');
-        overlay.classList.add('foto-overlay');
-
-        const bigImg = document.createElement('img');
-        bigImg.src = img.src;
-
-        overlay.appendChild(bigImg);
-        document.body.appendChild(overlay);
-
-        overlay.classList.add('active');
-
-        overlay.addEventListener('click', () => {
-            overlay.remove();
+// Script para galeria tipo Instagram
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('modalGaleria');
+    const modalImg = document.getElementById('modalImg');
+    const fecharModal = document.getElementById('fecharModal');
+    const prevBtn = document.getElementById('prevFoto');
+    const nextBtn = document.getElementById('nextFoto');
+    
+    const fotos = document.querySelectorAll('.foto-item img');
+    let currentIndex = 0;
+    
+    // Abrir modal ao clicar em foto
+    fotos.forEach((foto, index) => {
+        foto.addEventListener('click', () => {
+            currentIndex = index;
+            modalImg.src = foto.src;
+            modal.classList.add('active');
         });
     });
+    
+    // Fechar modal
+    fecharModal.addEventListener('click', () => {
+        modal.classList.remove('active');
+    });
+    
+    // Fechar ao clicar fora da imagem
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+        }
+    });
+    
+    // Foto anterior
+    prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex - 1 + fotos.length) % fotos.length;
+        modalImg.src = fotos[currentIndex].src;
+    });
+    
+    // Próxima foto
+    nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex + 1) % fotos.length;
+        modalImg.src = fotos[currentIndex].src;
+    });
+    
+    // Navegação com teclado
+    document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('active')) return;
+        
+        if (e.key === 'Escape') {
+            modal.classList.remove('active');
+        } else if (e.key === 'ArrowLeft') {
+            prevBtn.click();
+        } else if (e.key === 'ArrowRight') {
+            nextBtn.click();
+        }
+    });
 });
-
 </script>

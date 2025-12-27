@@ -8,53 +8,82 @@
 /* ===== BODY ===== */
 body {
     font-family: "Segoe UI", Arial, sans-serif;
-    background:  #4E8098;
+    background: linear-gradient(135deg, #4e8098, #90c2e7);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: #2b2b2b;
+    padding: 20px;
+}
+
+/* ===== MENSAGEM SUPERIOR ===== */
+.login-message,
+body > p:first-of-type:not([class]) {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 25px;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    letter-spacing: 0.3px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px 24px;
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* ===== MENSAGEM PHP (ERROS / SUCESSO) ===== */
 body > p {
-    margin-bottom: 15px;
-    color: #A31621;
+    margin-bottom: 20px;
+    padding: 12px 20px;
+    background-color: rgba(163, 22, 33, 0.1);
+    border-left: 4px solid #a31621;
+    color: #a31621;
     font-weight: 500;
+    border-radius: 6px;
+    max-width: 420px;
+    width: 100%;
 }
 
 /* ===== CARTÃO LOGIN ===== */
 #login {
-    background-color: #FCF7F8
-    padding: 35px 40px;
-    border-radius: 8px;
+    background-color: #ffffff;
+    padding: 45px 50px;
+    border-radius: 14px;
     width: 100%;
     max-width: 420px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    margin-bottom: 25px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+    margin-bottom: 30px;
 }
 
 /* ===== TÍTULO LOGIN ===== */
 #login h2 {
     text-align: center;
-    margin-bottom: 25px;
-    color: #4E8098;
+    margin-bottom: 35px;
+    color: #4e8098;
+    font-size: 1.8rem;
+    font-weight: 600;
 }
 
 /* ===== FORM ===== */
 #login form {
     display: flex;
     flex-direction: column;
+    gap: 18px;
 }
 
 /* ===== INPUTS ===== */
 #login input {
-    padding: 12px;
-    margin-bottom: 15px;
-    border-radius: 4px;
-    border: 1px solid #CED3DC;
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: 1px solid #ced3dc;
     font-size: 0.95rem;
+    font-family: inherit;
+    transition: all 0.25s ease;
+    background-color: #fafafa;
 }
 
 #login input::placeholder {
@@ -63,25 +92,34 @@ body > p {
 
 #login input:focus {
     outline: none;
-    border-color: #4E8098;
-    box-shadow: 0 0 0 2px rgba(78, 128, 152, 0.25);
+    border-color: #4e8098;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(78, 128, 152, 0.25);
 }
 
 /* ===== BOTÃO LOGIN ===== */
 #login button {
-    padding: 12px;
-    background-color: #A31621;
-    color: #FCF7F8;
+    padding: 15px;
+    background-color: #a31621;
+    color: #fff;
     border: none;
-    border-radius: 4px;
-    font-size: 1rem;
+    border-radius: 30px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.4px;
     cursor: pointer;
-    transition: background-color 0.25s ease, transform 0.2s ease;
+    margin-top: 10px;
+    transition: all 0.25s ease;
 }
 
 #login button:hover {
-    background-color: #4E8098;
-    transform: translateY(-2px);
+    background-color: #4e8098;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+#login button:active {
+    transform: translateY(-1px);
 }
 
 /* ===== SECÇÃO REGISTAR ===== */
@@ -91,36 +129,60 @@ body > p {
 }
 
 #registar h1 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: #FCF7F8;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #ffffff;
+    font-weight: 500;
 }
 
 /* BOTÃO REGISTAR */
 #registar .btn-signup {
     display: inline-block;
-    padding: 10px 18px;
-    background-color: #FCF7F8;
-    color: #A31621;
-    border-radius: 4px;
+    padding: 12px 28px;
+    background-color: #ffffff;
+    color: #a31621;
+    border-radius: 30px;
     text-decoration: none;
     font-weight: 600;
-    transition: background-color 0.25s ease, color 0.25s ease;
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 #registar .btn-signup:hover {
-    background-color: #A31621;
-    color: #FCF7F8;
+    background-color: #a31621;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+#registar .btn-signup:active {
+    transform: translateY(0);
 }
 
 /* ===== FOOTER ===== */
 footer {
-    margin-top: 50px;
-    padding: 20px;
-    font-size: 0.8rem;
-    color: #FCF7F8;
+    margin-top: 20px;
+    padding: 15px;
+    font-size: 0.85rem;
+    color: #ffffff;
     opacity: 0.85;
+    text-align: center;
 }
 
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 500px) {
+    #login {
+        padding: 35px 30px;
+    }
+    
+    #login h2 {
+        font-size: 1.5rem;
+    }
+    
+    #registar h1 {
+        font-size: 1rem;
+    }
+}
 
 
