@@ -23,32 +23,49 @@ if (!$detalhes) {
 <head>
     <meta charset="UTF-8">
     <title>Detalhes do Alojamento | TripTales</title>
-    <link rel="stylesheet" href="css/stylefeedback.css">
+    <link rel="stylesheet" href="css/styledetalhesaloj.css">
 </head>
 <body>
-    <h2><?= htmlspecialchars($detalhes['nome_alojamento']) ?> (<?= htmlspecialchars($detalhes['tipo_alojamento']) ?>)</h2>
-    <p><strong>Localização:</strong> <?= htmlspecialchars($detalhes['localizacao']) ?></p>
-    <p><strong>Rating Global:</strong> <?= $detalhes['media_avaliacao'] !== null ? number_format($detalhes['media_avaliacao'], 1) . ' / 5' : 'Sem avaliações' ?></p>
+ <main class="detalhes-card">
+        
+        <h2><?= htmlspecialchars($detalhes['nome_alojamento']) ?></h2>
+        <p class="tipo-tag"><?= htmlspecialchars($detalhes['tipo_alojamento']) ?></p>
 
-    <h3>Comentários de Feedback</h3>
-    <?php if ($feedbacks): ?>
-        <ul>
-        <?php foreach ($feedbacks as $fb): ?>
-            <li>
-                <strong>Avaliação:</strong> <?= (int)$fb['rating'] ?> / 5<br>
-                <?php if ($fb['comentario']): ?>
-                    <em><?= htmlspecialchars($fb['comentario']) ?></em><br>
-                <?php endif; ?>
-                <?php if ($fb['precos']): ?>
-                    <small>Preços: <?= htmlspecialchars($fb['precos']) ?></small>
-                <?php endif; ?>
-            </li>
-        <?php endforeach; ?>
-        </ul>
-    <?php else: ?>
-        <p>Sem comentários ainda.</p>
-    <?php endif; ?>
+        <div class="info-geral">
+            <p><strong>📍 Localização:</strong> <?= htmlspecialchars($detalhes['localizacao']) ?></p>
+            <div class="rating-badge">
+                <span>Rating Global</span>
+                <strong><?= $detalhes['media_avaliacao'] !== null ? number_format($detalhes['media_avaliacao'], 1) . ' / 5.0' : '---' ?></strong>
+            </div>
+        </div>
 
-    <a href="viagem.php?id=<?= (int)($detalhes['viagem_id'] ?? 0) ?>">← Voltar à Viagem</a>
+        <hr>
+
+        <h3>Comentários de Feedback</h3>
+        <div class="lista-feedback">
+            <?php if ($feedbacks): ?>
+                <?php foreach ($feedbacks as $fb): ?>
+                    <div class="feedback-item">
+                        <div class="fb-header">
+                            <span class="stars"><?= str_repeat('⭐', (int)$fb['rating']) ?></span>
+                            <span class="fb-rating"><?= (int)$fb['rating'] ?>/5</span>
+                        </div>
+                        
+                        <?php if ($fb['comentario']): ?>
+                            <p class="fb-comentario">"<?= htmlspecialchars($fb['comentario']) ?>"</p>
+                        <?php endif; ?>
+                        
+                        <?php if ($fb['precos']): ?>
+                            <p class="fb-precos">💰 Preço: <span><?= htmlspecialchars($fb['precos']) ?>€</span></p>
+                        <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p class="sem-feedback">Ainda não existem comentários para este alojamento.</p>
+            <?php endif; ?>
+        </div>
+
+        <a href="viagem.php?id=<?= (int)($detalhes['viagem_id'] ?? 0) ?>" class="btn-voltar-viagem">← Voltar à Viagem</a>
+    </main>
 </body>
 </html>
