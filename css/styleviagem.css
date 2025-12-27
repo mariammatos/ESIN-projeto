@@ -21,6 +21,16 @@ a {
 }
 
 
+button {
+    font-family: inherit;
+}
+
+section h2 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 
 /* ================= HEADER ================= */
 
@@ -71,7 +81,12 @@ header {
     max-width: 900px;
     margin: 40px auto;
     padding: 0 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
+
 
 .btn-voltar {
     display: inline-block;
@@ -85,11 +100,19 @@ header {
 
 .viagem-detalhe-container h1 {
     color: #a31621;
+    font-size: 2.2rem;
+    margin-bottom: 6px;
+}
+
+.viagem-detalhe-container h2 {
+    color: #4e8098;
     margin-bottom: 10px;
 }
 
+
 .autor-info {
-    margin-bottom: 20px;
+    font-size: 0.95rem;
+    color: #555;
 }
 
 .autor-info a {
@@ -104,6 +127,14 @@ header {
     text-decoration: underline;
 }
 
+.informacao-base,
+.travel-journal,
+.atividades-alojamentos,
+.like,
+.guardar,
+.comentarios {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
 
 .informacao-base,
 .travel-journal,
@@ -122,10 +153,44 @@ header {
     border-left: 5px solid #90c2e7;
 }
 
-.viagem-detalhe-container h2 {
-    color: #4e8098;
-    margin-bottom: 10px;
+.travel-journal p {
+    margin-top: 10px;
 }
+
+.journal-texto {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ced3dc;
+}
+
+.like,
+.guardar {
+    justify-content: flex-start;
+}
+
+.editar-fotos button,
+.adicionar-travel-journal button,
+.editar-travel-journal button {
+    background-color: #4e8098;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.editar-fotos button:hover,
+.adicionar-travel-journal button:hover,
+.editar-travel-journal button:hover {
+    background-color: #a31621;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+}
+
 
 /* ========================= BOTÃO WISHLIST ========================= */
 
@@ -144,7 +209,14 @@ header {
     transition: all 0.2s ease;
 }
 
+
 /* ÍCONE BOOKMARK */
+.informacao-base p:first-of-type {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .informacao-base form button::before {
     content: "🔖";
     font-size: 18px;
@@ -227,6 +299,7 @@ header {
 
 /* ========================= BOTÃO GUARDAR ========================= */
 
+
 .guardar button{
     display: flex;
     align-items: center;
@@ -234,12 +307,13 @@ header {
     background-color: transparent;
     border: 1px solid #ced3dc;
     color: #a31621;
-    padding: 6px 14px;
+    padding: 10px 14px;
     border-radius: 20px;
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.2s ease;
     margin-bottom: 25px;
+
 }
 
 .guardar button:hover {
@@ -248,6 +322,7 @@ header {
     border-color: #a31621;
 }
 
+
 /* ========================= COMENTÁRIOS ========================= */
 
 .comentarios form {
@@ -255,8 +330,11 @@ header {
 }
 
 .comentarios textarea {
-    resize: vertical;
-    border-radius: 6px;
+    width: 100%;
+    min-height: 80px;
+    padding: 10px;
+    border: 1px solid #ced3dc;
+    font-family: inherit;
 }
 
 .comentarios button {
@@ -352,6 +430,59 @@ header {
     color: #fff;
 }
 
+/* ========================= FOTOS  ========================= */
+
+.galeria-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 8px;
+}
+
+.foto-item {
+    position: relative;
+    cursor: pointer;
+}
+
+.foto-item img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+    transition: all 0.25s ease;
+}
+
+.foto-item:hover img {
+    filter: brightness(0.85);
+}
+
+/* OVERLAY */
+.foto-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* IMAGEM GRANDE */
+.foto-overlay img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+}
+
+/* ATIVO */
+.foto-overlay.active {
+    display: flex;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
 /* ================= FOOTER ================= */
 
