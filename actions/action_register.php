@@ -10,7 +10,8 @@ $password_confirm = $_POST['password_confirm'];
 $email = $_POST['email'];                       
 $nome = $_POST['nome'];                         
 $pais_de_origem = $_POST['pais_de_origem'];     
-$preferencia_de_viagem = $_POST['preferencia_de_viagem']; 
+$pref = $_POST['pref']; 
+$preferencia_de_viagem = implode(', ', $pref);
 $foto_de_perfil = "$username.jpg";    
 
 $_SESSION['form_data'] = [
@@ -18,7 +19,6 @@ $_SESSION['form_data'] = [
     'email' => $email,
     'nome' => $nome,
     'pais_de_origem' => $pais_de_origem,
-    'preferencia_de_viagem' => $preferencia_de_viagem
 ];
 
 

@@ -23,7 +23,7 @@
       
       <div class="form-group">
         <label for="fotos">Fotos</label>
-        <input type="file" id="fotos" name="fotos[]" multiple>
+        <input type="file" id="fotos" name="fotos[]" accept="image/png,image/jpeg" multiple>
       </div>
 
       <button type="submit">Adicionar Fotos</button>

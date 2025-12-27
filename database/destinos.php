@@ -31,7 +31,7 @@
         $pais_normalizado = normalize_string($pais_input);
         $db->sqliteCreateFunction('removeacentos', 'normalize_string', 1);
 
-        $stmt = $db->prepare('SELECT pais FROM Destino WHERE LOWER(removeacentos(pais)) LIKE ?');
+        $stmt = $db->prepare('SELECT nome FROM Pais WHERE LOWER(removeacentos(nome)) LIKE ?');
         $stmt->execute(array("%$pais_normalizado%"));
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }

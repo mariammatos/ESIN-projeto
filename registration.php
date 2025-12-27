@@ -5,6 +5,11 @@
   $msg1 = $_SESSION['msg1'];
   unset($_SESSION['msg']);
   unset($_SESSION['msg1']);
+
+  if (!isset($_SESSION['pais_matches'])) {
+    $_SESSION['pais_matches'] = [];
+  }
+  
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +25,7 @@
 
   <section id="registration">
     <?php echo $msg ?>
-    <h2>Registration</h2>
+    <h2>Registo</h2>
 
     <form action="actions/action_register.php" method="post" enctype="multipart/form-data">
 
@@ -51,22 +56,49 @@
         <input type="text" id="nome" name="nome" value="<?= htmlspecialchars($_SESSION['form_data']['nome'] ?? '') ?>" required>
       </div>
 
-      <div class="form-group">
-        <label for="pais_de_origem">País de origem:</label>
-        <input type="text" id="pais_de_origem" name="pais_de_origem" value="<?= htmlspecialchars($_SESSION['form_data']['pais_de_origem'] ?? '') ?>" required>
-      </div>
+        <div class="form-group">
+            <label for="pais">País:</label>
+            <input type="text" name="pais" id="pais" value="<?= htmlspecialchars($_SESSION['pais'] ?? '') ?>" required>
+            <input type="hidden" name="registar" id="registar" value="1">
+            <button type="submit" formaction="actions/action_procurarpais.php" formnovalidate>Procurar país</button>
+        
+
+            <?php
+            if (!empty($_SESSION['pais_matches'])):
+                echo '<p>Países encontrados:</p>';
+                foreach($_SESSION['pais_matches'] as $m):
+            ?>
+                <input type="radio" name="pais_selecionado" value="<?= htmlspecialchars($m) ?>" required>
+                <?= htmlspecialchars($m) ?><br>
+            <?php
+                endforeach;
+            endif;
+            ?>
+        </div>
 
       <div class="form-group">
         <label for="preferencia_de_viagem">Preferências de viagem:</label>
-        <textarea id="preferencia_de_viagem" name="preferencia_de_viagem" required></textarea>
+          <input type="checkbox" name="pref[]" value="Praia">Praia
+          <input type="checkbox" name="pref[]" value="Cidade">Cidade
+          <input type="checkbox" name="pref[]" value="Natureza">Natureza
+          <input type="checkbox" name="pref[]" value="Neve">Neve
+          <input type="checkbox" name="pref[]" value="Aventura">Aventura
+          <input type="checkbox" name="pref[]" value="Relaxamento">Relaxamento
+          <input type="checkbox" name="pref[]" value="Cultura">Cultura
+          <input type="checkbox" name="pref[]" value="Gastronomia">Gastronomia
+          <input type="checkbox" name="pref[]" value="Romântica">Romântica
+          <input type="checkbox" name="pref[]" value="Familiar">Familiar
+          <input type="checkbox" name="pref[]" value="Compras">Compras
+          <input type="checkbox" name="pref[]" value="Económica">Económica
+          <input type="checkbox" name="pref[]" value="Luxo">Luxo
       </div>
       
       <div class="form-group">
-        <label for="profile_pic">Profile Picture</label>
-        <input type="file" id="profile_pic" name="profile_pic">
+        <label for="profile_pic">Foto de perfil</label>
+        <input type="file" id="profile_pic" name="profile_pic" accept="image/png,image/jpeg">
       </div>
 
-      <button type="submit">Register</button>
+      <button type="submit">Registar</button>
     </form>
   </section>
 
