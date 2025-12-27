@@ -41,6 +41,7 @@
   </head>
   <body>
 
+  <a href="feed.php" class="btn-voltar">← Voltar ao Feed</a>
 
   <section id="registration">
     <?php echo $erro ?>
@@ -74,17 +75,17 @@
           <button type="submit" formaction="actions/action_procurarpais.php" formnovalidate>Procurar país</button>
       
 
-          <?php
-          if (!empty($_SESSION['pais_matches'])):
-              echo '<p>Países encontrados:</p>';
-              foreach($_SESSION['pais_matches'] as $m):
-          ?>
-              <input type="radio" name="pais_selecionado" value="<?= htmlspecialchars($m) ?>" required>
-              <?= htmlspecialchars($m) ?><br>
-          <?php
-              endforeach;
-          endif;
-          ?>
+       <?php if (!empty($_SESSION['pais_matches'])): ?>
+          <p>Países encontrados:</p>
+          <div class="radio-group">
+            <?php foreach($_SESSION['pais_matches'] as $m): ?>
+              <label class="radio-option">
+                <input type="radio" name="pais_selecionado" value="<?= htmlspecialchars($m) ?>" required>
+                <?= htmlspecialchars($m) ?>
+              </label>
+            <?php endforeach; ?>
+          </div>
+        <?php endif; ?>
       </div>
 
         <div class="form-group">
