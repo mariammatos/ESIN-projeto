@@ -69,11 +69,10 @@ body > p:first-of-type:not([class]) {
 /* ===== MENSAGEM PHP (ERROS / SUCESSO) ===== */
 
 .error-message {
-    background-color: #fff; /* Fundo branco para destacar no azul */
-    color: #a31621;         /* Texto vermelho escuro */
+    background-color: #fff;  
+    color: #a31621;         
     padding: 15px 25px;
-    border-radius: 30px;    /* Formato de cápsula igual aos teus botões */
-    border-left: 6px solid #a31621;
+    border-radius: 30px;
     font-weight: 600;
     font-size: 0.95rem;
     text-align: center;
@@ -82,8 +81,6 @@ body > p:first-of-type:not([class]) {
     max-width: 420px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(10px);
-    
-    /* Animação para chamar a atenção */
     animation: fadeInShake 0.4s ease-in-out;
 }
 
