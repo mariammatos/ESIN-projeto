@@ -132,6 +132,53 @@ color: #4e8098
     font-size: 0.9rem;
 }
 
+/* ===== PSEGUIR / DEIXAR DE SEGUIR ===== */
+
+.perfil-info form {
+    margin-top: 20px;
+}
+
+.btn-follow {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: inherit;
+}
+
+/* "Seguir"  */
+.btn-follow:not(.following) {
+    background-color: #4e8098;
+    color: #ffffff;
+}
+
+.btn-follow:not(.following):hover {
+    background-color: #3d6576;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(78, 128, 152, 0.3);
+}
+
+/* "Deixar de seguir" */
+.btn-follow.following {
+    background-color: #ffffff;
+    color: #2b2b2b;
+    border: 1px solid #dbdbdb;
+}
+
+.btn-follow.following:hover {
+    background-color: #fafafa;
+    border-color: #a31621;
+    color: #a31621;
+}
+
+.btn-follow:active {
+    transform: scale(0.98);
+}
+
 /* ===== VIAGENS ===== */
 .perfil-viagens {
     background-color: #fff;
