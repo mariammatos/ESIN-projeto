@@ -189,40 +189,9 @@ if ($traveljournal_id) {
                 <p>Sem alojamentos registados nesta viagem.</p>
                     <?php if ($current_user == $viagem['nome_de_utilizador']): ?>
                     <!-- FORMULÁRIO PARA ADICIONAR ALOJAMENTO -->
-                    <section class="adicionar-alojamento">
-                        <h3>Adicionar Alojamento</h3>
-                        <form action="actions/action_add_alojamento.php" method="post">
-                            <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
-
-                            <label for="nome">Nome do Alojamento:</label>
-                            <input type="text" name="nome" id="nome" required>
-
-                            <label for="localizacao">Localização:</label>
-                            <input type="text" name="localizacao" id="localizacao" required>
-
-                            <label for="tipo">Tipo:</label>
-                            <select name="tipo" id="tipo" required>
-                                <option value="Hostel">Hostel</option>
-                                <option value="Hotel">Hotel</option>
-                                <option value="Alojamento Local">Alojamento Local</option>
-                                <option value="Outro">Outro</option>
-                            </select>
-
-                            <label for="data_inicio">Data Início:</label>
-                            <input type="date" name="data_inicio" id="data_inicio" required>
-
-                            <label for="data_fim">Data Fim:</label>
-                            <input type="date" name="data_fim" id="data_fim">
-
-                            <label for="rating">Avaliação:</label>
-                            <input type="number" name="rating" id="rating" min="0" max="5" step="0.5">
-
-                            <label for="comentario">Comentário:</label>
-                            <textarea name="comentario" id="comentario"></textarea>
-
-                            <button type="submit">Adicionar Alojamento</button>
-                        </form>
-                    </section>
+                        <a href="novo_alojamento.php?viagem_id=<?= $id_viagem ?>" class="btn-adicionar-alojamento">
+                            Adicionar Alojamento
+                        </a>
                     <?php endif; ?>
             <?php else: ?>
                 <ul>
@@ -237,6 +206,9 @@ if ($traveljournal_id) {
                             Em andamento
                         <?php endif; ?><br>
                         Avaliação média: <?= $a['media_avaliacao'] ? round($a['media_avaliacao'], 1) : 'N/A' ?>/5
+                        <?php if ($is_owner): ?>
+                            <a href="feedback_alojamento.php?alojamento_id=<?= $a['alojamento_id'] ?>">Dar Feedback</a>
+                        <?php endif; ?>
                     </li>
                 <?php endforeach; ?>
                 </ul>

@@ -58,4 +58,21 @@ function adicionarFeedbackAlojamento($db, $alojamento_id, $rating, $comentario =
 
     return $feedback_id;
 }
+
+function procurarAlojamentosPorDestino($db, $destino_id, $termo) {
+    $termo = '%' . mb_strtolower($termo, 'UTF-8') . '%';
+    $db->sqliteCreateFunction('removeacentos', 'normalize_string', 1);
+
+    $stmt = $db->prepare('
+        SELECT D.id, D.nome, D.localizacao, DA.tipo
+        FROM Detalhes D
+        JOIN Detalhes_alojamento DA ON D.id = DA.id
+        JOIN Alojamento A ON A.detalhes = D.id
+        WHERE A.viagem IN (SELECT id FROM Viagens WHERE destino = ?)
+        AND LOWER(removeacentos(D.nome)) LIKE ?
+        GROUP BY D.id
+    ');
+    $stmt->execute([$destino_id, $termo]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 ?>
