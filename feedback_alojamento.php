@@ -52,7 +52,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="rating">Avaliação (0 a 5):</label>
                 <input type="number" id="rating" name="rating" min="0" max="5" step="1" value="5" required>
                 <div class="rating-display">
-                    <span class="stars" id="star-display">★★★★★</span>
+                <span class="stars">
+                        <?php 
+                            $media = $a['media_avaliacao'] ? round($a['media_avaliacao']) : 0;
+                            echo str_repeat('★', $media) . str_repeat('☆', 5 - $media);
+                        ?>
+                </span>
                 </div>
             </div>
             
