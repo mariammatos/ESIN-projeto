@@ -22,6 +22,8 @@
   </head>
   <body>
 
+    <a href="login.php" class="btn-voltar">← Voltar ao Feed</a>
+
 
   <section id="registration">
     <?php echo $msg ?>
