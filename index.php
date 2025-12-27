@@ -67,6 +67,25 @@
             </div>
         </section>
 
+        <section id="sobre" class="sobre-nos">
+            <h2>Sobre o TripTales</h2>
+            <div class="cartoes-viagem">
+                <p> O TripTales nasceu da paixão por viagens de três raparigas, unidas pelo desejo de descobrir o mundo, 
+                    colecionar histórias e partilhar experiências inesquecíveis. Cada lugar, cada sabor, cada experiência e 
+                    cada pôr-do-sol é uma pequena aventura que queremos transformar em memórias para partilhar. </p>
+                <p> No TripTales, acreditamos que viajar é muito mais do que o destino: são momentos, emoções e conexões.
+                    Aqui vais encontrar dicas, relatos e inspirações para tornar cada viagem única. </p>
+
+                <p>Porque viajar é contar histórias, e cada história merece ser vivida e lembrada.
+                 Junta-te a nós, e atreve-te a escrever a tua próxima aventura!</p>
+
+                <p> Queres saber mais sobre as nossas próprias aventuras? </p>
+                <a href="perfil.php?user=maria.m.matos" class="btn-cta">@maria.m.matos</a> 
+                <a href="perfil.php?user=marta.filipee" class="btn-cta">@marta.filipee</a> 
+                <a href="perfil.php?user=saravgouveia" class="btn-cta">@saravgouveia</a>
+            </div>
+        </section>
+
     </main>
 
     <footer>
