@@ -191,21 +191,19 @@ body > p,
     width: 100%;
 }
 
-/* Estilo quando o rato passa por cima */
+
 .radio-option:hover {
     border-color: #4e8098;
     background-color: #f0f7fa;
 }
 
 
-
-/* Organiza os países em grelha para poupar espaço vertical */
+/* Organiza os países em grelha  */
 .radio-group {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 10px;
-    background: transparent; /* Remove o fundo cinza antigo */
-    padding: 0;
+    background: transparent; 
     margin-top: 15px;
 }
 
@@ -214,9 +212,8 @@ body > p,
     font-weight: bold;
     font-size: 1.1rem;
     color: #ffffff;
-    /* Define a ordem como 3 (último) */
     order: 3;
-    width: 18px; /* Mesma largura do rádio para manter o equilíbrio */
+    width: 18px; 
     text-align: right;
 }
 
