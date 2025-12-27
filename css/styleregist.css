@@ -145,6 +145,89 @@ body > p,
     box-shadow: 0 0 0 3px rgba(78, 128, 152, 0.25);
 }
 
+
+/* ================= LISTA DE PAÍSES ================= */
+
+.form-group p {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input[type="radio"] {
+    width: auto;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.form-group label[for^="pais"] {
+    display: inline;
+    margin-left: 4px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+/* Esconde o círculo original do rádio */
+.radio-option input[type="radio"] {
+    display: none;
+}
+
+/* Transforma a label/container num botão clicável */
+.radio-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border: 2px solid #ced3dc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-size: 0.9rem;
+    color: #555;
+    width: 100%;
+}
+
+/* Estilo quando o rato passa por cima */
+.radio-option:hover {
+    border-color: #4e8098;
+    background-color: #f0f7fa;
+}
+
+
+
+/* Organiza os países em grelha para poupar espaço vertical */
+.radio-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    background: transparent; /* Remove o fundo cinza antigo */
+    padding: 0;
+    margin-top: 15px;
+}
+
+.radio-option:has(input[type="radio"]:checked)::after {
+    content: "✓";
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #ffffff;
+    /* Define a ordem como 3 (último) */
+    order: 3;
+    width: 18px; /* Mesma largura do rádio para manter o equilíbrio */
+    text-align: right;
+}
+
+.radio-option:has(input[type="radio"]:checked) {
+    background-color: #4e8098;
+    border-color: #4e8098;
+    color: #ffffff;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(78, 128, 152, 0.3);
+}
+
 /* ================= BOTÕES TIPO "VERIFICAR" ================= */
 
 .form-group button[formnovalidate] {
