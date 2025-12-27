@@ -5,6 +5,37 @@
     box-sizing: border-box;
 }
 
+/* ================= BOTÃO VOLTAR ================= */
+.btn-voltar {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 16px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #4e8098;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(6px);
+
+    transition: all 0.25s ease;
+    z-index: 10;
+}
+
+.btn-voltar:hover {
+    color: #a31621;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
+}
+
 /* ================= BASE ================= */
 
 body {

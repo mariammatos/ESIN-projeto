@@ -45,6 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="css/stylefeedback.css">
 </head>
 <body>
+
+  <a href="viagem.php?id=2" class="btn-voltar">← Voltar à Viagem</a>
+
     <div>
         <h2>Dar Feedback ao Alojamento</h2>
         <form method="post">
