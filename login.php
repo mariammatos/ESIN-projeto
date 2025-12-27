@@ -15,6 +15,9 @@
   </head>
   <body>
 
+  <a href="index.php" class="btn-voltar">← Voltar ao Feed</a>
+
+
     <?php echo $msg ?>
     <section id="login">
       <h2>Login</h2>

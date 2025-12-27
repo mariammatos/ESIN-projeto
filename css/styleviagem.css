@@ -81,6 +81,7 @@ header {
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    position: relative;
 }
 
 .btn-voltar {
@@ -356,11 +357,37 @@ header {
 
 /* ========================= LIKE ========================= */
 
+.insta-heart-animation {
+    position: absolute;
+    top: -40px;
+    left: 20px;
+    font-size: 40px;
+    color: #a31621;
+    pointer-events: none;
+    z-index: 1000;
+    animation: heartFloatUp 1s ease-out forwards;
+}
+
+@keyframes heartFloatUp {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.5);
+    }
+    30% {
+        opacity: 1;
+        transform: translateY(-20px) scale(1.2);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50px) scale(1.5);
+    }
+}   
+
 .like {
+    position: relative; 
     display: flex;
     align-items: center;
     gap: 12px;
-    margin: 25px 0;
 }
 
 .like form {
@@ -384,6 +411,7 @@ header {
 .like button::before {
     content: "🤍";
     font-size: 18px;
+    
 }
 
 .like button:hover {

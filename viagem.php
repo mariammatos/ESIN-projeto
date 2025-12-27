@@ -262,13 +262,13 @@ if ($traveljournal_id) {
     
         <section class="like">
             <?php if ($current_user): ?>
-                <form action="actions/action_like.php" method="post">
+                <form action="actions/action_like.php" method="post" id="like-form">
                     <input type="hidden" name="post_id" value="<?php echo $id_viagem; ?>">
                     <button type="submit" class="<?php echo $user_liked ? 'active' : ''; ?>">
                         <?php echo $user_liked ? 'Liked' : 'Like'; ?>
                     </button>
                 </form>
-                <span><?php echo $likes_count; ?> likes</span>
+                <span id="like-count"><?php echo $likes_count; ?> likes</span>
             <?php else: ?>
                 <p>Faça login para dar like.</p>
                 <span><?php echo $likes_count; ?> likes</span>
@@ -325,7 +325,7 @@ if ($traveljournal_id) {
 
     </main>
 
-    <!-- MODAL DA GALERIA (Instagram style) -->
+
     <div class="modal-galeria" id="modalGaleria">
         <span class="modal-close" id="fecharModal">&times;</span>
         <button class="modal-btn modal-prev" id="prevFoto">‹</button>
@@ -338,8 +338,49 @@ if ($traveljournal_id) {
 </body>
 </html>
 
+
 <script>
-// Script para galeria tipo Instagram
+document.getElementById('like-form').addEventListener('submit', function(e) {
+    e.preventDefault(); 
+
+    const form = this;
+    const btn = form.querySelector('button');
+    const countSpan = document.getElementById('like-count');
+    const container = document.querySelector('.like'); 
+
+    let currentLikes = parseInt(countSpan.innerText) || 0;
+
+    if (btn.classList.contains('active')) {
+        // --- REMOVER LIKE ---
+        btn.classList.remove('active');
+        btn.innerText = 'Like'; 
+        currentLikes--; 
+        
+    } else {
+        // --- DAR LIKE ---
+        btn.classList.add('active');
+        btn.innerText = 'Liked'; 
+        currentLikes++;
+
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤️';
+        heart.className = 'insta-heart-animation';
+        container.appendChild(heart);
+        
+        setTimeout(() => { heart.remove(); }, 1000);
+    }
+    
+    countSpan.innerText = currentLikes + " likes";
+
+    const formData = new FormData(form);
+    fetch(form.action, {
+        method: 'POST',
+        body: formData
+    });
+});
+</script>
+
+<script>
 document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('modalGaleria');
     const modalImg = document.getElementById('modalImg');
@@ -350,7 +391,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const fotos = document.querySelectorAll('.foto-item img');
     let currentIndex = 0;
     
-    // Abrir modal ao clicar em foto
+    // Abrir ao clicar em foto
     fotos.forEach((foto, index) => {
         foto.addEventListener('click', () => {
             currentIndex = index;
@@ -359,7 +400,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Fechar modal
+    // Fechar 
     fecharModal.addEventListener('click', () => {
         modal.classList.remove('active');
     });
