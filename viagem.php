@@ -105,7 +105,9 @@ if ($traveljournal_id) {
                 </form>
             </div>
 
-                <div class="editar-viagem">
+
+            <p><strong>De:</strong> <?php echo htmlspecialchars($viagem['data_ida']); ?> <strong>A:</strong> <?php echo htmlspecialchars($viagem['data_volta'] ?? 'Em andamento'); ?></p>
+                 <div class="editar-viagem">
                     <?php if ($is_owner): ?>
                         <form action="editar_viagem.php" method="post">
                             <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
@@ -115,8 +117,7 @@ if ($traveljournal_id) {
                             <button type="submit">Editar Viagem</button>
                         </form>
                     <?php endif; ?>
-                </div>
-            <p><strong>De:</strong> <?php echo htmlspecialchars($viagem['data_ida']); ?> <strong>A:</strong> <?php echo htmlspecialchars($viagem['data_volta'] ?? 'Em andamento'); ?></p>
+                </div>       
         </section>
 
         <section class="galeria-fotos">

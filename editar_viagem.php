@@ -30,7 +30,7 @@
   <head>
     <title>TripTales</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/stylenova_viagem.css"> 
+    <link rel="stylesheet" href="css/styleeditarviag.css"> 
     <link href="https://fonts.googleapis.com/css?family=Libre+Franklin%7CMerriweather" rel="stylesheet"> 
   </head>
   <body>

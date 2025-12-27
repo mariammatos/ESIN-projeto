@@ -1,10 +1,22 @@
-/* ===== RESET ===== */
+/* ================= RESET ================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* ================= BODY ================= */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #4e8098, #90c2e7);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #2b2b2b;
+    padding: 20px;
+}
 
 /* ================= BOTÃO VOLTAR ================= */
 .btn-voltar {
@@ -37,20 +49,7 @@
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
 }
 
-
-/* ================= CARD BASE ================= */
-
-body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: linear-gradient(135deg, #4e8098, #90c2e7);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #2b2b2b;
-}
-
-
+/* ================= CARD ================= */
 #registration {
     background-color: #ffffff;
     margin-top: 60px;
@@ -61,8 +60,7 @@ body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
 }
 
-/* TÍTULO  */
-
+/* ================= TÍTULO ================= */
 #registration h2 {
     text-align: center;
     color: #4e8098;
@@ -71,58 +69,17 @@ body {
     font-weight: 600;
 }
 
-
 /* ================= FORM ================= */
-
 #registration form {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-#registration input,
-#registration textarea {
-    padding: 14px 16px;
-    border-radius: 8px;
-    border: 1px solid #ced3dc;
-    font-size: 0.95rem;
-    font-family: inherit;
-    transition: all 0.25s ease;
-    background-color: #fafafa;
-}
-
-#registration textarea {
-    min-height: 140px;
-    resize: vertical;
-}
-
-#registration input::placeholder,
-#registration textarea::placeholder {
-    color: #999;
-}
-
-#registration input:focus,
-#registration textarea:focus {
-    outline: none;
-    border-color: #4e8098;
-    background-color: #fff;
-    box-shadow: 0 0 0 3px rgba(78, 128, 152, 0.25);
-}
-
-#registration input[type="number"] {
-    width: 100px;
-    text-align: center;
-    font-weight: 600;
-}
-
-.form-group label + input + button {
-  justify-self: start;
-}
-
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
 }
 
 .form-group label {
@@ -131,62 +88,87 @@ body {
     font-weight: 500;
 }
 
-/* ================= BOTÕES TIPO "VERIFICAR" ================= */
-
-.form-group button[formnovalidate] {
-  background-color: #fcf7f8;
-  color: #a31621;
-  border: 1px solid #ced3dc;
-  padding: 10px 14px;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-
-
-.form-group button[formnovalidate]:hover {
-    background-color: #a31621;
-    color: #fcf7f8;
-    border-color: #a31621;
-}
-
-/* ================= BOTÃO PUBLICAR ================= */
-
-#registration button[type="submit"] {
-    width: 100%;
-    background-color: #a31621;
-    color: #fff;
-    border: none;
-    padding: 15px;
-    font-size: 1.05rem;
-    border-radius: 30px;
-    margin-top: 30px;
-    cursor: pointer;
-    font-weight: 600;
-    letter-spacing: 0.4px;
+#registration input {
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: 1px solid #ced3dc;
+    font-size: 0.95rem;
+    background-color: #fafafa;
     transition: all 0.25s ease;
 }
 
-#registration button[type="submit"]:hover {
-    background-color: #4e8098;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+#registration input:focus {
+    outline: none;
+    border-color: #4e8098;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(78, 128, 152, 0.25);
 }
 
+#registration input:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
 
+/* ================= BOTÃO SECUNDÁRIO ================= */
+.form-group button[formnovalidate] {
+    margin-top: 8px;
+    align-self: flex-start;
+    padding: 12px 18px;
+    background-color: #eef3f7;
+    color: #a31621;
+    border: 1px solid #ced3dc;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.form-group button[formnovalidate]:hover {
+    background-color: #a31621;
+    color: #ffffff;
+    border-color: #a31621;
+}
+
+/* ================= BOTÃO PRINCIPAL ================= */
+#registration button[type="submit"]:not([formnovalidate]) {
+    margin-top: 30px;
+    padding: 15px;
+    border-radius: 30px;
+    border: none;
+    background-color: #a31621;
+    color: #ffffff;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+#registration button[type="submit"]:not([formnovalidate]):hover {
+    background-color: #4e8098;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
 
 /* ================= FOOTER ================= */
-
 footer {
-    text-align: center;
     margin-top: 35px;
     color: #ffffff;
     font-size: 0.85rem;
     opacity: 0.85;
 }
 
+/* ================= RESPONSIVO ================= */
+@media (max-width: 600px) {
+    #registration {
+        padding: 35px 25px;
+        margin-top: 40px;
+    }
 
-
-
+    .btn-voltar {
+        top: 15px;
+        left: 15px;
+        padding: 8px 14px;
+        font-size: 0.85rem;
+    }
+}

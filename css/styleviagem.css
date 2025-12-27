@@ -161,6 +161,7 @@ header {
     justify-content: flex-start;
 }
 
+.viagem-detalhe-container .editar-viagem button,
 .viagem-detalhe-container .editar-fotos button,
 .viagem-detalhe-container .adicionar-travel-journal button,
 .viagem-detalhe-container .editar-travel-journal button {
@@ -175,6 +176,7 @@ header {
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
+.viagem-detalhe-container .editar-viagem button:hover,
 .viagem-detalhe-container .editar-fotos button:hover,
 .viagem-detalhe-container .adicionar-travel-journal button:hover,
 .viagem-detalhe-container .editar-travel-journal button:hover {
@@ -185,7 +187,7 @@ header {
 
 /* ========================= LOCAL + WISHLIST NA MESMA LINHA ========================= */
 
-.informacao-base form button {
+.local-wishlist form button {
     background-color: transparent;
     border: 1px solid #ced3dc;
     padding: 8px;
@@ -236,20 +238,22 @@ header {
 
 
 /* ÍCONE BOOKMARK */
-.informacao-base form button::before {
+.local-wishlist form button::before {
     content: "🔖";
     font-size: 18px;
 }
 
 /* HOVER */
-.informacao-base form button:hover {
+.local-wishlist form button:hover {
     background-color: #a31621;
     border-color: #a31621;
 }
 
-.informacao-base form button:hover::before {
+.local-wishlist form button:hover::before {
     filter: brightness(0) invert(1);
 }
+
+
 /* ========================= ESTRELAS DE AVALIAÇÃO ========================= */
 
 .viagem-detalhe-container .avaliacao-stars {
