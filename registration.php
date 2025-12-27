@@ -83,24 +83,65 @@
         <?php endif; ?>
       </div>
 
-      <div class="form-group">
+ <div class="form-group">
         <label for="preferencia_de_viagem">Preferências de viagem:</label>
-          <input type="checkbox" name="pref[]" value="Praia">Praia
-          <input type="checkbox" name="pref[]" value="Cidade">Cidade
-          <input type="checkbox" name="pref[]" value="Natureza">Natureza
-          <input type="checkbox" name="pref[]" value="Neve">Neve
-          <input type="checkbox" name="pref[]" value="Aventura">Aventura
-          <input type="checkbox" name="pref[]" value="Relaxamento">Relaxamento
-          <input type="checkbox" name="pref[]" value="Cultura">Cultura
-          <input type="checkbox" name="pref[]" value="Gastronomia">Gastronomia
-          <input type="checkbox" name="pref[]" value="Romântica">Romântica
-          <input type="checkbox" name="pref[]" value="Familiar">Familiar
-          <input type="checkbox" name="pref[]" value="Compras">Compras
-          <input type="checkbox" name="pref[]" value="Económica">Económica
-          <input type="checkbox" name="pref[]" value="Luxo">Luxo
+        <p class="helper-text">Selecione pelo menos uma opção</p>
+        <div class="checkbox-group">
+          <label class="checkbox-option">
+            <input type="checkbox" name="pref[]" value="Praia">
+            <span>Praia</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="pref[]" value="Cidade">
+            <span>Cidade</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="pref[]" value="Natureza">
+            <span>Natureza</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="pref[]" value="Neve">
+            <span>Neve</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="pref[]" value="Aventura">
+            <span>Aventura</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="pref[]" value="Relaxamento">
+            <span>Relaxamento</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="pref[]" value="Cultura">
+            <span>Cultura</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="pref[]" value="Gastronomia">
+            <span>Gastronomia</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="pref[]" value="Romântica">
+            <span>Romântica</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="pref[]" value="Familiar">
+            <span>Familiar</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="pref[]" value="Compras">
+            <span>Compras</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="pref[]" value="Económica">
+            <span>Económica</span>
+          </label>
+          <label class="checkbox-option">
+            <input type="checkbox" name="pref[]" value="Luxo">
+            <span>Luxo</span>
+          </label>
+        </div>
       </div>
       
-    
 
       <div class="form-group">
         <label for="profile_pic">Foto de perfil</label>

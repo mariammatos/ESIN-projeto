@@ -225,6 +225,63 @@ body > p,
     box-shadow: 0 4px 10px rgba(78, 128, 152, 0.3);
 }
 
+
+/* ================= PREFERÊNCIAS ================= */
+
+/* Esconde a checkbox original */
+.checkbox-option input[type="checkbox"] {
+    display: none;
+}
+
+/* Grid para organizar as preferências */
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    background: transparent;
+    padding: 0;
+    margin-top: 10px;
+}
+
+/* Estilo do botão da checkbox */
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background-color: #ffffff;
+    border: 2px solid #ced3dc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-size: 0.9rem;
+    color: #555;
+    width: 100%;
+}
+
+/* Hover */
+.checkbox-option:hover {
+    border-color: #4e8098;
+    background-color: #f0f7fa;
+}
+
+/* Check mark quando selecionado */
+.checkbox-option:has(input[type="checkbox"]:checked)::after {
+    content: "✓";
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+
+/* Estilo quando selecionado */
+.checkbox-option:has(input[type="checkbox"]:checked) {
+    background-color: #4e8098;
+    border-color: #4e8098;
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(78, 128, 152, 0.3);
+}
+
 /* ================= BOTÕES TIPO "VERIFICAR" ================= */
 
 .form-group button[formnovalidate] {
