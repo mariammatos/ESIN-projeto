@@ -149,51 +149,61 @@ if ($traveljournal_id) {
 
 
         <section class="travel-journal">
+            <h2>Travel Journal</h2>
 
-        <h2>Travel Journal</h2>
+            <?php if ($is_owner): ?>
+                <?php if (!$has_journal): ?>
+                    <section class="adicionar-travel-journal">
+                        <form action="adicionartraveljournal.php" method="post">
+                            <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                            <button type="submit">Adicionar Travel Journal</button>
+                        </form>
+                    </section>
+                <?php else: ?>
+                    <section class="editar-travel-journal">
+                        <form action="adicionartraveljournal.php" method="post">
+                            <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                            <input type="hidden" name="descricao" value="<?= htmlspecialchars($viagem['journal_descricao'] ?? '') ?>">
+                            <input type="hidden" name="avaliacao" value="<?= htmlspecialchars($viagem['journal_avaliacao'] ?? 0) ?>">
+                            <input type="hidden" name="editar" value="1">
+                            <button type="submit">Editar Travel Journal</button>
+                        </form>
+                    </section>
 
-        <?php if ($is_owner): ?>
-
-            <?php if (!$has_journal): ?>
-                <section class="adicionar-travel-journal">
-                    <form action="adicionartraveljournal.php" method="post">
-                        <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
-                        <button type="submit">Adicionar Travel Journal</button>
-                    </form>
-                </section>
-
+                    <p class="journal-texto">
+                        <?= nl2br(htmlspecialchars($viagem['journal_descricao'])) ?>
+                    </p>
+                    <div class="avaliacao-stars">
+                        <span class="avaliacao-label">Avaliação Final:</span>
+                        <span class="stars">
+                            <?php 
+                            $avaliacao = intval($viagem['journal_avaliacao'] ?? 0);
+                            echo str_repeat('★', $avaliacao) . str_repeat('☆', 5 - $avaliacao);
+                            ?>
+                        </span>
+                        <span class="avaliacao-numero"><?= htmlspecialchars($viagem['journal_avaliacao'] ?? 'N/A') ?>/5</span>
+                    </div>
+                <?php endif; ?>
             <?php else: ?>
-                <section class="editar-travel-journal">
-                    <form action="adicionartraveljournal.php" method="post">
-                        <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
-                        <input type="hidden" name="descricao" value="<?= htmlspecialchars($viagem['journal_descricao'] ?? '') ?>">
-                        <input type="hidden" name="avaliacao" value="<?= htmlspecialchars($viagem['journal_avaliacao'] ?? 0) ?>">
-                        <input type="hidden" name="editar" value="1">
-                        <button type="submit">Editar Travel Journal</button>
-                    </form>
-                </section>
-
-                <p class="journal-texto">
-                    <?= nl2br(htmlspecialchars($viagem['journal_descricao'])) ?>
-                </p>
-                <p>Avaliação Final: <?= htmlspecialchars($viagem['journal_avaliacao'] ?? 'N/A') ?>/5 ⭐</p>
-
+                <?php if (!$has_journal): ?>
+                    <p>Sem Travel Journal registado para esta viagem.</p>
+                <?php else: ?>
+                    <p class="journal-texto">
+                        <?= nl2br(htmlspecialchars($viagem['journal_descricao'])) ?>
+                    </p>
+                    <div class="avaliacao-stars">
+                        <span class="avaliacao-label">Avaliação Final:</span>
+                        <span class="stars">
+                            <?php 
+                            $avaliacao = intval($viagem['journal_avaliacao'] ?? 0);
+                            echo str_repeat('★', $avaliacao) . str_repeat('☆', 5 - $avaliacao);
+                            ?>
+                        </span>
+                        <span class="avaliacao-numero"><?= htmlspecialchars($viagem['journal_avaliacao'] ?? 'N/A') ?>/5</span>
+                    </div>
+                <?php endif; ?>
             <?php endif; ?>
-
-        <?php else: ?>
-
-            <?php if (!$has_journal): ?>
-                <p>Sem Travel Journal registado para esta viagem.</p>
-            <?php else: ?>
-                <p class="journal-texto">
-                    <?= nl2br(htmlspecialchars($viagem['journal_descricao'])) ?>
-                </p>
-                <p>Avaliação Final: <?= htmlspecialchars($viagem['journal_avaliacao'] ?? 'N/A') ?>/5 ⭐</p>
-            <?php endif; ?>
-
-        <?php endif; ?>
-
-</section>
+        </section>
 
 
         <section class="atividades-alojamentos">
@@ -201,12 +211,11 @@ if ($traveljournal_id) {
 
             <?php if (count($alojamentos) === 0): ?>
                 <p>Sem alojamentos registados nesta viagem.</p>
-                    <?php if ($current_user == $viagem['nome_de_utilizador']): ?>
-                    <!-- FORMULÁRIO PARA ADICIONAR ALOJAMENTO -->
-                        <a href="novo_alojamento.php?viagem_id=<?= $id_viagem ?>" class="btn-adicionar-alojamento">
-                            Adicionar Alojamento
-                        </a>
-                    <?php endif; ?>
+                <?php if ($current_user == $viagem['nome_de_utilizador']): ?>
+                    <a href="novo_alojamento.php?viagem_id=<?= $id_viagem ?>" class="btn-adicionar-alojamento">
+                        Adicionar Alojamento
+                    </a>
+                <?php endif; ?>
             <?php else: ?>
                 <ul>
                 <?php foreach ($alojamentos as $a): ?>
@@ -219,16 +228,27 @@ if ($traveljournal_id) {
                         <?php else: ?>
                             Em andamento
                         <?php endif; ?><br>
-                        Avaliação média: <?= $a['media_avaliacao'] ? round($a['media_avaliacao'], 1) : 'N/A' ?>/5 ⭐
+                        
+                        <div class="avaliacao-stars alojamento-stars">
+                            <span class="avaliacao-label">Avaliação:</span>
+                            <span class="stars">
+                                <?php 
+                                $media = $a['media_avaliacao'] ? round($a['media_avaliacao']) : 0;
+                                echo str_repeat('★', $media) . str_repeat('☆', 5 - $media);
+                                ?>
+                            </span>
+                            <span class="avaliacao-numero">
+                                <?= $a['media_avaliacao'] ? round($a['media_avaliacao'], 1) : 'N/A' ?>/5
+                            </span>
+                        </div>
+                        
                         <?php if ($is_owner): ?>
-                            <a href="feedback_alojamento.php?alojamento_id=<?= $a['alojamento_id'] ?>">Dar Feedback</a>
+                            <a href="feedback_alojamento.php?alojamento_id=<?= $a['alojamento_id'] ?>" class="btn-feedback">Dar Feedback</a>
                         <?php endif; ?>
                     </li>
                 <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
-
-
         </section>
 
     

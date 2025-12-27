@@ -20,7 +20,6 @@ a {
     color: inherit;
 }
 
-
 button {
     font-family: inherit;
 }
@@ -31,14 +30,12 @@ section h2 {
     gap: 8px;
 }
 
-
 /* ================= HEADER ================= */
 
 header {
     background-color: #4e8098;
     padding: 20px;
 }
-
 
 /* ==================== FEED ====================== */
 
@@ -80,13 +77,11 @@ header {
 .viagem-detalhe-container {
     max-width: 900px;
     margin: 40px auto;
-    padding: 0 20px;
+    padding: 30px;
     background-color: #ffffff;
     border-radius: 12px;
-    padding: 30px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
-
 
 .btn-voltar {
     display: inline-block;
@@ -109,7 +104,6 @@ header {
     margin-bottom: 10px;
 }
 
-
 .autor-info {
     font-size: 0.95rem;
     color: #555;
@@ -118,60 +112,58 @@ header {
 .autor-info a {
     color: #4e8098;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-
 }
 
 .autor-info a:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
     text-decoration: underline;
 }
 
-.informacao-base,
-.travel-journal,
-.atividades-alojamentos,
-.like,
-.guardar,
-.comentarios {
+.viagem-detalhe-container .informacao-base,
+.viagem-detalhe-container .travel-journal,
+.viagem-detalhe-container .atividades-alojamentos,
+.viagem-detalhe-container .like,
+.viagem-detalhe-container .guardar,
+.viagem-detalhe-container .comentarios {
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-.informacao-base,
-.travel-journal,
-.atividades-alojamentos,
-.like,
-.comentarios {
+.viagem-detalhe-container .informacao-base,
+.viagem-detalhe-container .travel-journal,
+.viagem-detalhe-container .atividades-alojamentos,
+.viagem-detalhe-container .like,
+.viagem-detalhe-container .comentarios {
     background-color: #fcf7f8;
     padding: 20px;
     border-radius: 6px;
     margin-bottom: 20px;
 }
 
-.informacao-base,
-.travel-journal,
-.atividades-alojamentos {
+.viagem-detalhe-container .informacao-base,
+.viagem-detalhe-container .travel-journal,
+.viagem-detalhe-container .atividades-alojamentos {
     border-left: 5px solid #90c2e7;
 }
 
-.travel-journal p {
+.viagem-detalhe-container .travel-journal p {
     margin-top: 10px;
 }
 
-.journal-texto {
+.viagem-detalhe-container .journal-texto {
     background-color: #ffffff;
     padding: 15px;
     border-radius: 8px;
     border: 1px solid #ced3dc;
+    margin-top: 15px;
 }
 
-.like,
-.guardar {
+.viagem-detalhe-container .like,
+.viagem-detalhe-container .guardar {
     justify-content: flex-start;
 }
 
-.editar-fotos button,
-.adicionar-travel-journal button,
-.editar-travel-journal button {
+.viagem-detalhe-container .editar-fotos button,
+.viagem-detalhe-container .adicionar-travel-journal button,
+.viagem-detalhe-container .editar-travel-journal button {
     background-color: #4e8098;
     color: #fff;
     border: none;
@@ -183,61 +175,166 @@ header {
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-.editar-fotos button:hover,
-.adicionar-travel-journal button:hover,
-.editar-travel-journal button:hover {
+.viagem-detalhe-container .editar-fotos button:hover,
+.viagem-detalhe-container .adicionar-travel-journal button:hover,
+.viagem-detalhe-container .editar-travel-journal button:hover {
     background-color: #a31621;
     transform: translateY(-2px);
     box-shadow: 0 6px 14px rgba(0,0,0,0.2);
 }
 
+/* ========================= LOCAL + WISHLIST NA MESMA LINHA ========================= */
 
-/* ========================= BOTÃO WISHLIST ========================= */
+.viagem-detalhe-container .local-wishlist {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
 
-.informacao-base form button {
+.viagem-detalhe-container .local-wishlist p {
+    margin: 0;
+    flex: 1;
+}
+
+.viagem-detalhe-container .local-wishlist form {
+    margin: 0;
+}
+
+.viagem-detalhe-container .btn-wishlist {
     background-color: transparent;
-    border: 1px solid #ced3dc;
+    border: 2px solid #ced3dc;
     padding: 8px;
     border-radius: 50%;
     cursor: pointer;
     font-size: 0;
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
 }
 
-
-/* ÍCONE BOOKMARK */
-.informacao-base p:first-of-type {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.informacao-base form button::before {
+.viagem-detalhe-container .btn-wishlist::before {
     content: "🔖";
-    font-size: 18px;
+    font-size: 20px;
 }
 
+.viagem-detalhe-container .btn-wishlist:hover {
+    background-color: #4e8098;
+    border-color: #4e8098;
+    transform: scale(1.1);
+}
 
-.informacao-base form button:hover {
+.viagem-detalhe-container .btn-wishlist.active {
     background-color: #a31621;
     border-color: #a31621;
 }
 
-.informacao-base form button:hover::before {
+.viagem-detalhe-container .btn-wishlist.active::before {
     filter: brightness(0) invert(1);
 }
 
-.informacao-base form button.active {
-    background-color: #a31621;
-    border-color: #a31621;
+/* ========================= ESTRELAS DE AVALIAÇÃO ========================= */
+
+.viagem-detalhe-container .avaliacao-stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
 }
 
+.viagem-detalhe-container .avaliacao-label {
+    font-weight: normal;
+    color: #000;
+    font-size: 0.95rem;
+}
 
+.viagem-detalhe-container .avaliacao-stars .stars {
+    font-size: 1.2rem;
+    color: #ffd700;
+    letter-spacing: 1px;
+}
+
+.viagem-detalhe-container .avaliacao-numero {
+    font-weight: normal;
+    color: #000;
+    font-size: 0.95rem;
+}
+
+/* Estrelas para alojamentos */
+.viagem-detalhe-container .alojamento-stars {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.viagem-detalhe-container .alojamento-stars .stars {
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+.viagem-detalhe-container .alojamento-stars .avaliacao-label,
+.viagem-detalhe-container .alojamento-stars .avaliacao-numero {
+    font-size: 0.9rem;
+}
+
+/* ========================= ATIVIDADES E ALOJAMENTOS ========================= */
+
+.atividades-alojamentos ul {
+    list-style: none;
+    padding: 0;
+}
+
+.atividades-alojamentos li {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.atividades-alojamentos li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.btn-adicionar-alojamento {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 18px;
+    background-color: #4e8098;
+    color: #fff;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-decoration: none;
+}
+
+.btn-adicionar-alojamento:hover {
+    background-color: #a31621;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(163, 22, 33, 0.2);
+}
+
+.btn-feedback {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #4e8098;
+    color: #fff;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.25s ease;
+    text-decoration: none;
+}
+
+.btn-feedback:hover {
+    background-color: #a31621;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(163, 22, 33, 0.2);
+}
 
 /* ========================= LIKE ========================= */
 
@@ -251,7 +348,6 @@ header {
 .like form {
     margin: 0;
 }
-
 
 .like button {
     background-color: transparent;
@@ -290,17 +386,14 @@ header {
     content: "❤️"; 
 }
 
-
 .like span {
     font-size: 0.9rem;
     color: #555;
 }
 
-
 /* ========================= BOTÃO GUARDAR ========================= */
 
-
-.guardar button{
+.guardar button {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -313,7 +406,6 @@ header {
     cursor: pointer;
     transition: all 0.2s ease;
     margin-bottom: 25px;
-
 }
 
 .guardar button:hover {
@@ -321,7 +413,6 @@ header {
     color: #fff;
     border-color: #a31621;
 }
-
 
 /* ========================= COMENTÁRIOS ========================= */
 
@@ -350,8 +441,7 @@ header {
     transition: all 0.2s ease;
 }
 
-
-/*ÍCONE */
+/* ÍCONE */
 .comentarios button::before {
     content: "💬";
     font-size: 18px;
@@ -364,7 +454,6 @@ header {
     gap: 8px; 
 }
 
-
 .comentarios button:hover {
     background-color: #a31621;
     border-color: #a31621;
@@ -374,8 +463,7 @@ header {
     filter: brightness(0) invert(1);
 }
 
-
-/* LISTA COMENTÁRIOS*/
+/* LISTA COMENTÁRIOS */
 
 .lista-comentarios {
     list-style: none;
@@ -430,70 +518,49 @@ header {
     color: #fff;
 }
 
-/* ========================= FOTOS  ========================= */
+/* ========================= GALERIA FOTOS - CLICÁVEIS ========================= */
+
+.galeria-fotos {
+    margin-bottom: 30px;
+}
 
 .galeria-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 8px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
 }
 
 .foto-item {
     position: relative;
     cursor: pointer;
+    overflow: hidden;
+    border-radius: 8px;
+    aspect-ratio: 1;
 }
 
 .foto-item img {
     width: 100%;
-    height: 120px;
+    height: 100%;
     object-fit: cover;
-    border-radius: 6px;
-    transition: all 0.25s ease;
+    transition: transform 0.3s ease;
 }
 
 .foto-item:hover img {
-    filter: brightness(0.85);
+    transform: scale(1.05);
 }
 
-/* OVERLAY */
-.foto-overlay {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0,0,0,0.85);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
-
-/* IMAGEM GRANDE */
-.foto-overlay img {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 8px;
-}
-
-/* ATIVO */
-.foto-overlay.active {
-    display: flex;
-    animation: fadeIn 0.2s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* ================= MODAL GALERIA ================= */
+/* ========================= MODAL GALERIA (INSTAGRAM STYLE) ========================= */
 
 .modal-galeria {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.85);
+    background: rgba(0, 0, 0, 0.95);
     display: none;
     align-items: center;
     justify-content: center;
     z-index: 9999;
+    animation: fadeIn 0.3s ease;
 }
 
 .modal-galeria.active {
@@ -501,51 +568,86 @@ header {
 }
 
 .modal-galeria img {
-    max-width: 90%;
+    max-width: 85%;
     max-height: 85vh;
-    border-radius: 10px;
+    border-radius: 8px;
     object-fit: contain;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* BOTÕES */
+/* BOTÕES NAVEGAÇÃO */
 
 .modal-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255,255,255,0.15);
-    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     color: white;
     font-size: 2.5rem;
-    padding: 10px 18px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     border-radius: 50%;
-    transition: background 0.2s;
+    transition: all 0.3s ease;
+    font-weight: 300;
 }
 
 .modal-btn:hover {
-    background: rgba(255,255,255,0.35);
+    background: rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-50%) scale(1.1);
 }
 
-.modal-prev { left: 30px; }
-.modal-next { right: 30px; }
+.modal-prev { 
+    left: 30px; 
+}
 
-/* FECHAR */
+.modal-next { 
+    right: 30px; 
+}
+
+/* BOTÃO FECHAR */
 
 .modal-close {
     position: absolute;
-    top: 25px;
-    right: 30px;
-    font-size: 2rem;
+    top: 30px;
+    right: 40px;
+    font-size: 3rem;
     color: white;
     cursor: pointer;
     opacity: 0.8;
+    transition: all 0.3s ease;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    font-weight: 300;
+    line-height: 1;
 }
 
 .modal-close:hover {
     opacity: 1;
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
 }
 
+/* ANIMAÇÃO FADE IN */
+@keyframes fadeIn {
+    from { 
+        opacity: 0;
+    }
+    to { 
+        opacity: 1;
+    }
+}
 
 /* ================= FOOTER ================= */
 
@@ -555,4 +657,43 @@ footer {
     text-align: center;
     padding: 20px;
     margin-top: 50px;
+}
+
+/* ========================= RESPONSIVIDADE ========================= */
+
+@media (max-width: 768px) {
+    .galeria-container {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 8px;
+    }
+    
+    .modal-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+    }
+    
+    .modal-prev { left: 15px; }
+    .modal-next { right: 15px; }
+    
+    .modal-close {
+        top: 15px;
+        right: 15px;
+        font-size: 2.5rem;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .modal-galeria img {
+        max-width: 95%;
+    }
+    
+    .local-wishlist {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .btn-wishlist {
+        align-self: flex-end;
+    }
 }
