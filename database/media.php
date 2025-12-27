@@ -2,18 +2,19 @@
   function getFotos($db, $viagem_id) {
     $stmt = $db->prepare(
         'SELECT 
-            Path, data
+            id, Path, data
         FROM 
             Media
         WHERE 
             Viagem = :viagem_id
         ORDER BY 
-            data DESC;'
+            id ASC;'
+    
     );
 
     $stmt->bindParam(':viagem_id', $viagem_id);
     $stmt->execute();
-    return $stmt->fetchAll();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
   function saveMediaViagem($db, $viagem_id) {

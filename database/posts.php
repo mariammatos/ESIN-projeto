@@ -63,9 +63,53 @@ function getViagemDetalhes($db, $id) {
     return $stmt->fetch(PDO::FETCH_ASSOC); // fetch associativo
 }
 
+function getViagensUtilizador($db, $username) {
+    $stmt = $db->prepare(
+        'SELECT 
+            V.id, V.titulo, D.cidade_local, D.pais
+        FROM 
+            Viagens V
+        JOIN 
+            Destino D ON V.destino = D.id
+        WHERE 
+            V.utilizador = :username
+        ORDER BY 
+            V.data_ida DESC;'
+    );
+
+    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function userLiked($db, $post_id, $username) {
+    $stmt = $db->prepare(
+        'SELECT 1 FROM Like_Viagem WHERE viagem = :post_id AND utilizador = :username'
+    );
+    $stmt->bindParam(':post_id', $post_id, PDO::PARAM_INT);
+    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt->execute();
+    return $stmt->fetch() !== false;
+}
+
+function removerlike($db, $viagem_id, $username) {
+    $stmt = $db->prepare("DELETE FROM Like_Viagem WHERE utilizador = :utilizador AND viagem = :viagem_id");
+    $stmt->bindParam(':utilizador', $username);
+    $stmt->bindParam(':viagem_id', $viagem_id);
+    $stmt->execute();
+}
+
+function like($db, $viagem_id, $username) {
+    $stmt = $db->prepare(
+        'INSERT INTO Like_Viagem (utilizador, viagem, data)
+        VALUES (:utilizador, :viagem_id, datetime("now"))'
+    );
+    $stmt->bindParam(':utilizador', $username);
+    $stmt->bindParam(':viagem_id', $viagem_id);
+    $stmt->execute();
+}
 
 function getViagemLikes($db, $id) {
-    // Esta query junta Viagens, Utilizador, Destino e o TravelJournal.
     $stmt = $db->prepare(
         'SELECT * FROM Like_Viagem WHERE viagem = :viagem_id'
     );
@@ -122,6 +166,12 @@ function removerComentario($db, $comentario_id) {
 function insertviagem($db, $titulo, $data_ida, $data_volta, $utilizador, $destino) {
     $stmt = $db->prepare('INSERT INTO Viagens (titulo, data_ida, data_volta, utilizador, destino) VALUES (?, ?, ?, ?, ?)');
     $stmt->execute([$titulo, $data_ida, $data_volta, $utilizador, $destino]);
+    return $db->lastInsertId();
+}
+
+function editarviagem($db, $titulo, $data_ida, $data_volta, $viagem_id) {
+    $stmt = $db->prepare('UPDATE Viagens SET titulo = ?, data_ida = ?, data_volta = ? WHERE id = (SELECT id FROM Viagens WHERE id = ?)');
+    $stmt->execute([$titulo, $data_ida, $data_volta, $viagem_id]);
     return $db->lastInsertId();
 }
 

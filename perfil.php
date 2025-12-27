@@ -1,8 +1,10 @@
 <?php
 session_start();
 require_once 'database/db_connect.php';
+require_once 'database/media.php';
+require_once 'database/posts.php';
+require_once 'database/users.php';
 
-// Se não estiver login, manda para login
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
@@ -11,50 +13,29 @@ if (!isset($_SESSION['username'])) {
 $dbh = getDatabaseConnection();
 
 
-
-
-// --- 1. Obter utilizador do perfil ---
 if (isset($_GET['user'])) {
-    $user = $_GET['user'];      // ver perfil de outro utilizador
+    $user = $_GET['user'];     
 } else {
-    $user = $_SESSION['username']; // ver o próprio perfil
+    $user = $_SESSION['username']; 
 }
 
-// Query do utilizador
-$stmt = $dbh->prepare("SELECT * FROM Utilizador WHERE nome_de_utilizador = ?");
-$stmt->execute([$user]);
-$utilizador = $stmt->fetch();
+$utilizador = getuserdetails($dbh, $user);
 
 if (!$utilizador) {
     echo "<h2>Utilizador não encontrado.</h2>";
     exit();
 }
 
-// seguir
 $perfil_user = $utilizador['nome_de_utilizador'];
 $current_user = $_SESSION['username'];
 
 $segue = false;
 
 if ($perfil_user !== $current_user) {
-    $stmt = $dbh->prepare("
-        SELECT COUNT(*) 
-        FROM Seguir 
-        WHERE utilizador1 = ? AND utilizador2 = ?
-    ");
-    $stmt->execute([$current_user, $perfil_user]);
-    $segue = $stmt->fetchColumn() > 0;
+    $segue = usersegue($dbh, $current_user, $perfil_user);
 }
 
-// --- 2. Obter viagens do utilizador ---
-$stmt = $dbh->prepare("
-    SELECT V.id, V.titulo, D.cidade_local, D.pais
-    FROM Viagens V 
-    JOIN Destino D ON V.destino = D.id
-    WHERE V.utilizador = ?
-");
-$stmt->execute([$user]);
-$viagens = $stmt->fetchAll();
+$viagens = getViagensUtilizador($dbh, $user);
 
 ?>
 <!DOCTYPE html>
@@ -114,6 +95,17 @@ $viagens = $stmt->fetchAll();
             <div class="lista-viagens">
                 <?php foreach ($viagens as $v): ?>
                     <article class="cartao">
+                        <?php 
+                            $fotos_post = getFotos($dbh, $v['id']);
+                            if (!empty($fotos_post)):
+                                $foto_principal = $fotos_post[0];
+                        ?>
+                            <div class="post-foto">
+                                <img src="<?= htmlspecialchars($foto_principal['path']); ?>" 
+                                    alt="Foto da viagem <?= htmlspecialchars($v['titulo']); ?>" 
+                                    width="200" height="200">
+                            </div>
+                        <?php endif; ?>
                         <h3><?= htmlspecialchars($v['titulo']) ?></h3>
                         <p><?= htmlspecialchars($v['cidade_local']) ?>, <?= htmlspecialchars($v['pais']) ?></p>
                         <a href="viagem.php?id=<?= $v['id'] ?>">Ver Viagem</a>

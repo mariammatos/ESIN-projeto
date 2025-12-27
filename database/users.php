@@ -13,6 +13,27 @@ function saveProfilePic($username) {
     move_uploaded_file($file['tmp_name'], $uploadPath);
 }
 
+function usersegue($db, $utilizador1, $utilizador2) {
+    $stmt = $db->prepare("
+        SELECT COUNT(*) 
+        FROM Seguir 
+        WHERE utilizador1 = ? AND utilizador2 = ?
+    ");
+    $stmt->execute([$utilizador1, $utilizador2]);
+    return $stmt->fetchColumn() > 0;
+}
+
+function seguir($db, $utilizador1, $utilizador2) {
+    $stmt = $db->prepare("INSERT INTO Seguir (utilizador1, utilizador2, data) VALUES (?, ?, datetime('now'))");
+    $stmt->execute([$utilizador1, $utilizador2]);
+}
+
+function deixarDeSeguir($db, $utilizador1, $utilizador2) {
+    $stmt = $db->prepare("DELETE FROM Seguir WHERE utilizador1 = ? AND utilizador2 = ?");
+    $stmt->execute([$utilizador1, $utilizador2]);
+}
+
+
 function procurarusers($db, $username_input) {
     $username_normalizado = normalize_string($username_input);
     $db->sqliteCreateFunction('removeacentos', 'normalize_string', 1);
