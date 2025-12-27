@@ -174,32 +174,48 @@ body {
 }
 
 /* Container para os radio buttons */
-.radio-group {
-    display: flex;
-    flex-direction: column;
+.radio-option input[type="radio"] {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 10px;
-    padding: 12px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    margin-top: 8px;
+    background: transparent; 
+    padding: 0;
+    margin-top: 15px;
 }
 
 .radio-option {
     display: flex;
     align-items: center;
-    padding: 8px;
-    border-radius: 6px;
-    transition: background-color 0.2s ease;
+    justify-content: center;
+    padding: 10px 15px;
+    background-color: #ffffff;
+    border: 2px solid #ced3dc;
+    border-radius: 8px;
     cursor: pointer;
+    transition: all 0.25s ease;
+    font-size: 0.9rem;
+    color: #555;
+    text-align: center;
 }
 
 .radio-option:hover {
-    background-color: #e9ecef;
+    border-color: #4e8098;
+    background-color: #f0f7fa;
 }
 
-.radio-option input[type="radio"] {
-    margin: 0;
-    margin-right: 10px;
+
+/* ESTADO SELECIONADO: Quando o rádio está checked, o container muda */
+.radio-option:has(input[type="radio"]:checked) {
+    background-color: #4e8098;
+    border-color: #4e8098;
+    color: #ffffff;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(78, 128, 152, 0.3);
+}
+
+.radio-option:has(input[type="radio"]:checked)::before {
+    content: "✓ ";
+    margin-right: 5px;
 }
 
 /* ================= BOTÃO PUBLICAR ================= */
@@ -256,3 +272,5 @@ footer {
         width: 100%;
     }
 }
+
+
