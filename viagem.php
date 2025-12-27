@@ -95,6 +95,17 @@ if ($traveljournal_id) {
                         <?php echo $user_wishlist ? 'Remover da Wishlist' : 'Adicionar à Wishlist'; ?>
                     </button>
                 </form></p>
+                <div class="editar-viagem">
+                    <?php if ($is_owner): ?>
+                        <form action="editar_viagem.php" method="post">
+                            <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                            <input type="hidden" name="titulo" value="<?= htmlspecialchars($viagem['titulo'] ?? '') ?>">
+                            <input type="hidden" name="data_ida" value="<?= htmlspecialchars($viagem['data_ida'] ?? '') ?>">
+                            <input type="hidden" name="data_volta" value="<?= htmlspecialchars($viagem['data_volta'] ?? '') ?>">
+                            <button type="submit">Editar Viagem</button>
+                        </form>
+                    <?php endif; ?>
+                </div>
             <p><strong>De:</strong> <?php echo htmlspecialchars($viagem['data_ida']); ?> <strong>A:</strong> <?php echo htmlspecialchars($viagem['data_volta'] ?? 'Em andamento'); ?></p>
         </section>
 

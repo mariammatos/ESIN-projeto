@@ -18,29 +18,54 @@ $data_ida = $_POST['data_ida'] ?? '';
 $pais = trim($_POST['pais_selecionado'] ?? '');
 $local_input = trim($_POST['local'] ?? '');
 $utilizador = $_SESSION['username'] ?? '';
+$editar = isset($_POST['editar']) ? true : false;
+$viagem_id_editar = $_POST['viagem_id'] ?? null;
 
-if (!$titulo || !$data_ida || !$pais || !$local_input) {
-    $_SESSION['error'] = "Todos os campos obrigatórios devem ser preenchidos.";
-    header("Location: ../nova_viagem.php");
+
+if ($editar) {
+    if (!$titulo || !$data_ida) {
+        $_SESSION['error'] = "Todos os campos obrigatórios devem ser preenchidos.";
+        header("Location: ../editar_viagem.php");
+        exit;
+    }
+    if ($data_volta && strtotime($data_volta) <= strtotime($data_ida)) {
+        $_SESSION['error'] = "A data de fim deve ser posterior à data de início.";
+        header("Location: ../editar_viagem.php");
+        exit;
+    }
+    editarviagem($dbh, $titulo, $data_ida, $data_volta, $viagem_id_editar);
+
+    $_SESSION['success'] = "Viagem criada com sucesso!";
+    header("Location: /viagem.php?id=" . $viagem_id_editar);
+    exit;
+}
+else {
+
+    if (!$titulo || !$data_ida || !$pais || !$local_input) {
+        $_SESSION['error'] = "Todos os campos obrigatórios devem ser preenchidos.";
+        header("Location: ../nova_viagem.php");
+        exit;
+    }
+
+    if ($data_volta && strtotime($data_volta) <= strtotime($data_ida)) {
+        $_SESSION['error'] = "A data de fim deve ser posterior à data de início.";
+        header("Location: ../nova_viagem.php");
+        exit;
+    }
+
+    $destino_id = getDestinoId($dbh, $pais, $local_input);
+
+    if (!$destino_id) {
+        $destino_id = insertdestino($dbh, $pais, $local_input);
+    }
+
+    $viagem_id = insertviagem($dbh, $titulo, $data_ida, $data_volta, $utilizador, $destino_id);
+
+    $_SESSION['success'] = "Viagem criada com sucesso!";
+    header("Location: /viagem.php?id=" . $viagem_id);
     exit;
 }
 
-if ($data_volta && strtotime($data_volta) <= strtotime($data_ida)) {
-    $_SESSION['error'] = "A data de fim deve ser posterior à data de início.";
-    header("Location: ../nova_viagem.php");
-    exit;
-}
-
-
-
-$destino_id = getDestinoId($dbh, $pais, $local_input);
-
-if (!$destino_id) {
-    $destino_id = insertdestino($dbh, $pais, $local_input);
-}
-
-
-$viagem_id = insertviagem($dbh, $titulo, $data_ida, $data_volta, $utilizador, $destino_id);
 
 // --- DADOS DO ALOJAMENTO ---
 $nome_alojamento = trim($_POST['nome_alojamento'] ?? '');
@@ -71,7 +96,4 @@ if ($nome_alojamento && $localizacao_alojamento && $tipo_alojamento && $data_ini
     }
 }
 
-$_SESSION['success'] = "Viagem criada com sucesso!";
-header("Location: /feed.php");
-exit;
 ?>
