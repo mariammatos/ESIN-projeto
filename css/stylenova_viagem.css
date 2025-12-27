@@ -206,13 +206,7 @@ body {
 
 /* Esconde o círculo original do rádio */
 .radio-option input[type="radio"] {
-position: static; 
-    opacity: 1;      
-    width: 18px;
-    height: 18px;
-    margin: 0;
-    cursor: pointer;
-    order: 1;
+    display: none;
 }
 
 /* Transforma a label/container num botão clicável */
