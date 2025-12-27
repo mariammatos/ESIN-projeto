@@ -25,6 +25,33 @@ function getAlojamentosViagem($db, $viagem_id) {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+// Pesquisa global de alojamentos por nome ou localização
+function procurarAlojamentosGlobais(PDO $db, string $termo): array {
+    $termo = '%' . $termo . '%';
+
+    $stmt = $db->prepare("
+        SELECT 
+            D.id AS detalhe_id,
+            D.nome AS nome_alojamento,
+            DA.tipo AS tipo_alojamento,
+            D.localizacao,
+            AVG(F.rating) AS media_avaliacao
+        FROM Detalhes D
+        JOIN Detalhes_alojamento DA ON DA.id = D.id
+        LEFT JOIN Alojamento A ON A.detalhes = D.id
+        LEFT JOIN Feedback_alojamento FA ON FA.alojamento = A.id
+        LEFT JOIN Feedback F ON F.id = FA.id
+        WHERE D.nome LIKE :termo
+           OR D.localizacao LIKE :termo
+        GROUP BY D.id
+        ORDER BY media_avaliacao DESC
+    ");
+
+    $stmt->execute(['termo' => $termo]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
 
 // Inserir um novo detalhe de alojamento
 function insertDetalheAlojamento($db, $nome, $localizacao, $tipo) {
@@ -57,6 +84,43 @@ function adicionarFeedbackAlojamento($db, $alojamento_id, $rating, $comentario =
     $stmt2->execute([$feedback_id, $alojamento_id]);
 
     return $feedback_id;
+}
+
+// Buscar detalhes completos do alojamento, rating global e viagem associada
+function getDetalhesAlojamentoCompleto($db, $alojamento_id) {
+    $stmt = $db->prepare('
+        SELECT 
+            A.id AS alojamento_id,
+            A.viagem AS viagem_id,
+            D.nome AS nome_alojamento,
+            D.localizacao,
+            DA.tipo AS tipo_alojamento,
+            AVG(F.rating) AS media_avaliacao
+        FROM Alojamento A
+        JOIN Detalhes_alojamento DA ON A.detalhes = DA.id
+        JOIN Detalhes D ON DA.id = D.id
+        LEFT JOIN Feedback_alojamento FA ON FA.alojamento = A.id
+        LEFT JOIN Feedback F ON F.id = FA.id
+        WHERE A.id = :alojamento_id
+        GROUP BY A.id
+    ');
+    $stmt->bindParam(':alojamento_id', $alojamento_id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+// Buscar todos os feedbacks de um alojamento
+function getFeedbacksAlojamento($db, $alojamento_id) {
+    $stmt = $db->prepare('
+        SELECT F.rating, F.comentario, F.precos
+        FROM Feedback_alojamento FA
+        JOIN Feedback F ON F.id = FA.id
+        WHERE FA.alojamento = :alojamento_id
+        ORDER BY F.id DESC
+    ');
+    $stmt->bindParam(':alojamento_id', $alojamento_id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function procurarAlojamentosPorDestino($db, $destino_id, $termo) {
