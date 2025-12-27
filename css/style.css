@@ -190,6 +190,89 @@ main {
 
 }
 
+/* ================= SOBRE NÓS ================= */
+
+.sobre-nos {
+    background-color: #ffffff;
+    padding: 60px 40px;
+    border-radius: 12px;
+    margin-top: 40px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.sobre-conteudo {
+    max-width: 800px; /* Texto centralizado e com largura legível */
+    margin: 0 auto;
+    text-align: center;
+}
+
+.sobre-conteudo h2 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+/* Linha decorativa debaixo do título */
+.sobre-conteudo h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: #a31621;
+    border-radius: 2px;
+}
+
+.sobre-conteudo p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+.destaque-texto {
+    font-weight: 600;
+    color: #4e8098 !important;
+    font-style: italic;
+    font-size: 1.2rem !important;
+}
+
+/* Estilo dos botões de perfil dos fundadores */
+.equipa-links {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid #eee;
+}
+
+.botoes-perfil {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.btn-perfil {
+    background-color: #a31621;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 25px; /* Formato de cápsula mais moderno */
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 2px solid #a31621;
+}
+
+.btn-perfil:hover {
+    background-color: transparent;
+    color: #a31621;
+    transform: translateY(-3px);
+}
+
 /* ================= FOOTER ================= */
 
 footer {

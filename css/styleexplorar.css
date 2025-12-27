@@ -127,7 +127,8 @@ nav ul li a:hover {
 /* ================= RESULTADOS ================= */
 
 .post-viagem,
-.post-usuario {
+.post-usuario,
+.post-alojamento {
     background-color: #ffffff;
     border-left: 5px solid #90c2e7;
     padding: 22px 24px;
@@ -137,7 +138,8 @@ nav ul li a:hover {
 }
 
 .post-viagem:hover,
-.post-usuario:hover {
+.post-usuario:hover,
+.post-alojamento:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.12);
     border-left-color: #4e8098;
@@ -187,6 +189,7 @@ nav ul li a:hover {
 .post-detalhes a:hover {
     text-decoration: underline;
 }
+
 
 /* ================= INTERAÇÕES ================= */
 

@@ -5,6 +5,7 @@
   unset($_SESSION['msg']);
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,7 +19,12 @@
   <a href="index.php" class="btn-voltar">← Voltar ao Feed</a>
 
 
-    <?php echo $msg ?>
+    <?php if (!empty($msg)): ?>
+        <p class="error-message">
+            <?php echo htmlspecialchars($msg); ?>
+        </p>
+    <?php endif; ?>
+    
     <section id="login">
       <h2>Login</h2>
       <form action="actions/action_login.php" method="post">

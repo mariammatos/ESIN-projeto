@@ -5,6 +5,37 @@
     box-sizing: border-box;
 }
 
+/* ================= BOTÃO VOLTAR ================= */
+.btn-voltar {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 16px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #4e8098;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(6px);
+
+    transition: all 0.25s ease;
+    z-index: 10;
+}
+
+.btn-voltar:hover {
+    color: #a31621;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
+}
+
 /* ===== BODY ===== */
 body {
     font-family: "Segoe UI", Arial, sans-serif;
@@ -65,10 +96,11 @@ body > p,
 }
 
 .form-group label {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #555;
     font-weight: 500;
 }
+
 
 /* ===== INPUTS E TEXTAREA ===== */
 #registration input,
@@ -145,6 +177,138 @@ body > p,
     box-shadow: 0 0 0 3px rgba(78, 128, 152, 0.25);
 }
 
+
+/* ================= LISTA DE PAÍSES ================= */
+
+.form-group p {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input[type="radio"] {
+    width: auto;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+
+
+/* Esconde o círculo original do rádio */
+.radio-option input[type="radio"] {
+    display: none;
+}
+
+/* Transforma a label/container num botão clicável */
+.radio-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border: 2px solid #ced3dc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-size: 0.5rem;
+    color: #555;
+    width: 100%;
+}
+
+
+.radio-option:hover {
+    border-color: #4e8098;
+    background-color: #f0f7fa;
+}
+
+
+/* Organiza os países em grelha  */
+.radio-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    background: transparent; 
+    margin-top: 15px;
+}
+
+.radio-option:has(input[type="radio"]:checked)::after {
+    content: "✓";
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #ffffff;
+    order: 3;
+    width: 18px; 
+    text-align: right;
+}
+
+.radio-option:has(input[type="radio"]:checked) {
+    background-color: #4e8098;
+    border-color: #4e8098;
+    color: #ffffff;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(78, 128, 152, 0.3);
+}
+
+
+/* ================= PREFERÊNCIAS ================= */
+
+/* Esconde a checkbox original */
+.checkbox-option input[type="checkbox"] {
+    display: none;
+}
+
+/* Grid para organizar as preferências */
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    background: transparent;
+    padding: 0;
+    margin-top: 10px;
+}
+
+/* Estilo do botão da checkbox */
+.checkbox-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background-color: #ffffff;
+    border: 2px solid #ced3dc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-size: 0.9rem;
+    color: #555;
+    width: 100%;
+}
+
+/* Hover */
+.checkbox-option:hover {
+    border-color: lightblue;
+    background-color: #f0f7fa;
+}
+
+/* Check mark quando selecionado */
+.checkbox-option:has(input[type="checkbox"]:checked)::after {
+    content: "✓";
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+
+/* Estilo quando selecionado */
+.checkbox-option:has(input[type="checkbox"]:checked) {
+    background-color: lightblue;
+    border-color: lightblue;
+    color: #ffffff;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(78, 128, 152, 0.3);
+}
+
 /* ================= BOTÕES TIPO "VERIFICAR" ================= */
 
 .form-group button[formnovalidate] {
@@ -202,23 +366,43 @@ body > p,
 }
 
 /* ================= MENSAGENS DE VALIDAÇÃO ================= */
-.form-group p {
+.form-group p,
+.form-group .validation-message {
     font-size: 0.85rem;
-    padding: 8px 12px;
+    padding: 10px 14px;
     border-radius: 6px;
-    margin-top: 4px;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.form-group p.success {
+.form-group p.success,
+.form-group .validation-message.success {
     background-color: rgba(40, 167, 69, 0.1);
     border-left: 3px solid #28a745;
     color: #28a745;
 }
 
-.form-group p.error {
+.form-group p.success::before,
+.form-group .validation-message.success::before {
+    content: "✓";
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.form-group p.error,
+.form-group .validation-message.error {
     background-color: rgba(163, 22, 33, 0.1);
     border-left: 3px solid #a31621;
     color: #a31621;
+}
+
+.form-group p.error::before,
+.form-group .validation-message.error::before {
+    content: "✕";
+    font-weight: bold;
+    font-size: 1.1rem;
 }
 
 /* ================= FOOTER ================= */
