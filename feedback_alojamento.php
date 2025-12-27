@@ -35,20 +35,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dar Feedback | TripTales</title>
+    <link rel="stylesheet" href="css/stylefeedback.css">
 </head>
 <body>
-    <h2>Dar Feedback ao Alojamento</h2>
-    <form method="post">
-        <label for="rating">Avaliação (0 a 5):</label>
-        <input type="number" name="rating" min="0" max="5" required>
-        <label for="comentario">Comentário:</label>
-        <textarea name="comentario"></textarea>
-        <button type="submit">Enviar Feedback</button>
-    </form>
+    <div>
+        <h2>Dar Feedback ao Alojamento</h2>
+        <form method="post">
+            <div class="form-group">
+                <label for="rating">Avaliação (0 a 5):</label>
+                <input type="number" id="rating" name="rating" min="0" max="5" step="1" value="5" required>
+                <div class="rating-display">
+                    <span class="stars" id="star-display">★★★★★</span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="comentario">Comentário:</label>
+                <textarea id="comentario" name="comentario" placeholder="Partilhe a sua experiência com este alojamento..."></textarea>
+            </div>
+            
+            <button type="submit">Enviar Feedback</button>
+        </form>
+    </div>
+
+    <script>
+        const ratingInput = document.getElementById('rating');
+        const starDisplay = document.getElementById('star-display');
+        
+        function updateStars() {
+            const value = parseInt(ratingInput.value) || 0;
+            const clampedValue = Math.max(0, Math.min(5, value));
+            const filled = '★'.repeat(clampedValue);
+            const empty = '☆'.repeat(5 - clampedValue);
+            starDisplay.textContent = filled + empty;
+            
+            // Atualizar cor baseada na avaliação
+            if (clampedValue <= 2) {
+                starDisplay.style.color = '#ff6b6b';
+            } else if (clampedValue <= 3) {
+                starDisplay.style.color = '#ffa500';
+            } else {
+                starDisplay.style.color = '#ffd700';
+            }
+        }
+        
+        ratingInput.addEventListener('input', updateStars);
+        updateStars();
+    </script>
 </body>
 </html>

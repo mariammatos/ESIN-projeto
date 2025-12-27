@@ -173,7 +173,7 @@ if ($traveljournal_id) {
                 <p class="journal-texto">
                     <?= nl2br(htmlspecialchars($viagem['journal_descricao'])) ?>
                 </p>
-                <p>Avaliação Final: <?= htmlspecialchars($viagem['journal_avaliacao'] ?? 'N/A') ?>/5</p>
+                <p>Avaliação Final: <?= htmlspecialchars($viagem['journal_avaliacao'] ?? 'N/A') ?>/5 ⭐</p>
 
             <?php endif; ?>
 
@@ -216,7 +216,7 @@ if ($traveljournal_id) {
                         <?php else: ?>
                             Em andamento
                         <?php endif; ?><br>
-                        Avaliação média: <?= $a['media_avaliacao'] ? round($a['media_avaliacao'], 1) : 'N/A' ?>/5
+                        Avaliação média: <?= $a['media_avaliacao'] ? round($a['media_avaliacao'], 1) : 'N/A' ?>/5 ⭐
                         <?php if ($is_owner): ?>
                             <a href="feedback_alojamento.php?alojamento_id=<?= $a['alojamento_id'] ?>">Dar Feedback</a>
                         <?php endif; ?>
@@ -294,6 +294,13 @@ if ($traveljournal_id) {
 
     </main>
 
+    <!-- MODAL DA GALERIA (Instagram style) -->
+    <div class="modal-galeria" id="modalGaleria">
+        <span class="modal-close" id="fecharModal">&times;</span>
+        <button class="modal-btn modal-prev" id="prevFoto">‹</button>
+        <img id="modalImg" src="">
+        <button class="modal-btn modal-next" id="nextFoto">›</button>
+    </div>
     <footer>
         </footer>
 
@@ -319,4 +326,5 @@ document.querySelectorAll('.foto-item img').forEach(img => {
         });
     });
 });
+
 </script>
