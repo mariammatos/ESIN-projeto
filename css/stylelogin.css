@@ -53,32 +53,44 @@ body {
 .login-message,
 body > p:first-of-type:not([class]) {
     color: #ffffff;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: 25px;
     text-align: center;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
     letter-spacing: 0.3px;
     background: rgba(255, 255, 255, 0.1);
-    padding: 12px 24px;
+    padding: 15px 24px;
     border-radius: 30px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* ===== MENSAGEM PHP (ERROS / SUCESSO) ===== */
-body > p {
-    margin-bottom: 20px;
-    padding: 12px 20px;
-    background-color: rgba(163, 22, 33, 0.1);
-    border-left: 4px solid #a31621;
-    color: #a31621;
-    font-weight: 500;
-    border-radius: 6px;
-    max-width: 420px;
+
+.error-message {
+    background-color: #fff; /* Fundo branco para destacar no azul */
+    color: #a31621;         /* Texto vermelho escuro */
+    padding: 15px 25px;
+    border-radius: 30px;    /* Formato de cápsula igual aos teus botões */
+    border-left: 6px solid #a31621;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-align: center;
+    margin-bottom: 25px;
     width: 100%;
+    max-width: 420px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+    
+    /* Animação para chamar a atenção */
+    animation: fadeInShake 0.4s ease-in-out;
 }
 
+@keyframes fadeInShake {
+    0% { opacity: 0; transform: translateY(-10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
 /* ===== CARTÃO LOGIN ===== */
 #login {
     background-color: #ffffff;
