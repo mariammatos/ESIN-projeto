@@ -122,7 +122,6 @@ header {
 .viagem-detalhe-container .travel-journal,
 .viagem-detalhe-container .atividades-alojamentos,
 .viagem-detalhe-container .like,
-.viagem-detalhe-container .guardar,
 .viagem-detalhe-container .comentarios {
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
@@ -174,6 +173,7 @@ header {
     cursor: pointer;
     transition: all 0.25s ease;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    margin: 5px;
 }
 
 .viagem-detalhe-container .editar-viagem button:hover,
