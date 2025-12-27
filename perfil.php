@@ -79,7 +79,7 @@ $viagens = getViagensUtilizador($dbh, $user);
         <?php if ($perfil_user !== $current_user): ?>
             <form action="actions/action_seguir.php" method="post">
                 <input type="hidden" name="seguido" value="<?= htmlspecialchars($perfil_user) ?>">
-                <button type="submit" class="btn-follow">
+                <button type="submit" class="btn-follow <?= $segue ? 'following' : '' ?>">
                     <?= $segue ? 'Deixar de seguir' : 'Seguir' ?>
                 </button>
             </form>
