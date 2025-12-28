@@ -121,8 +121,7 @@ include_once 'templates/header_tpl.php';
                             <div class="cartao-conteudo">
                                 <h3><?= htmlspecialchars($v['titulo']) ?></h3>
                                 <p class="localizacao">
-                                    <i class="fas fa-map-marker-alt"></i> 
-                                    <?= htmlspecialchars($v['cidade_local']) ?>, <?= htmlspecialchars($v['pais']) ?>
+                                    📍 <?= htmlspecialchars($v['cidade_local']) ?>, <?= htmlspecialchars($v['pais']) ?>
                                 </p>
                                 <a href="viagem.php?id=<?= $v['id'] ?>" class="btn-ver-viagem">Ver Viagem</a>
                             </div>
