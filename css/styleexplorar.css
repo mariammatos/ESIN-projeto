@@ -74,47 +74,69 @@ nav ul li a:hover {
 
 .pesquisar {
     max-width: 900px;
-    margin: 30px auto 20px;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 6px;
+    margin: 40px auto 30px;
+    padding: 28px;
+    background: linear-gradient(135deg, #ffffff, #f7fafc);
+    border-radius: 14px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    border: 1px solid #eef1f5;
 }
 
 .pesquisar form {
     display: flex;
-    gap: 10px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 30px;
+    overflow: hidden;
+    border: 1px solid #d9e2ec;
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 
+.pesquisar form:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(78, 128, 152, 0.25);
+}
+
+
+/* input */
 .pesquisar input {
     flex: 1;
-    padding: 8px 12px;
-    border: 1px solid #ced3dc;
-    border-radius: 4px;
+    padding: 12px 18px;
+    border: none;
     font-size: 0.9rem;
+    background-color: transparent;
+    color: #333;
+}
+
+.pesquisar input::placeholder {
+    color: #999;
 }
 
 .pesquisar input:focus {
     outline: none;
-    border-color: #4e8098;
 }
 
+/* botão */
 .pesquisar button {
+    width: 170px;
     background-color: #4e8098;
-    color: #fff;
+    color: #ffffff;
     border: none;
-    padding: 8px 14px;
-    border-radius: 4px;
-    cursor: pointer;
     font-size: 0.85rem;
+    font-weight: 200;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: background-color 0.25s ease;
+    white-space: nowrap;
 }
 
 .pesquisar button:hover {
-    background-color: #334f5c;
+    background-color: #a31621;
 }
+
 
 /* ================= CONTAINER ================= */
 
@@ -277,9 +299,10 @@ footer {
 
     .pesquisar {
         grid-template-columns: 1fr;
+        padding: 22px;
     }
 
-    .post-fotos {
-        grid-template-columns: repeat(2, 1fr);
+    .pesquisar button {
+        width: 150px;
     }
 }
