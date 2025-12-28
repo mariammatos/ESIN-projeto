@@ -93,7 +93,6 @@ CREATE TABLE Detalhes (
     id INTEGER PRIMARY KEY,
     nome TEXT NOT NULL,
     localizacao TEXT NOT NULL,
-    avg_rating REAL CHECK (avg_rating >= 0 AND avg_rating <= 5)
 );
 
 -- Detalhes_atividade (id (PK/FK), tipo (FK))

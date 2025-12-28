@@ -56,6 +56,9 @@ if ($traveljournal_id) {
     $has_journal = false;
 }
 
+$last_page = $_SESSION['last_page'] ?? null;
+$_SESSION['last_page'] = 'viagem.php?'
+
 // --- 2. APRESENTAÇÃO HTML/CSS ---
 ?>
 
@@ -77,7 +80,13 @@ if ($traveljournal_id) {
         </header>
 
     <main class="viagem-detalhe-container">
-        <a href="feed.php" class="btn-voltar">← Voltar ao Feed</a>
+        <?php if ($last_page === 'explorar.php'): ?>
+            <a href="explorar.php?search_user=<?= $_SESSION['search_user'] ?>&search_viagem=<?= $_SESSION['search_viagem'] ?>&search_alojamento=<?= $_SESSION['search_alojamento'] ?>&search_atividade=<?= $_SESSION['search_atividade'] ?>" class="btn-voltar">← Voltar à Pesquisa</a>
+        <?php elseif ($last_page === 'feed.php'): ?>
+            <a href="feed.php" class="btn-voltar">← Voltar ao Feed</a>
+        <?php else: ?>
+            <a href="<?= $last_page ?>" class="btn-voltar">← Voltar ao perfil</a>
+        <?php endif; ?>
 
         <h1><?php echo htmlspecialchars($viagem['titulo']); ?></h1>
         
@@ -231,7 +240,12 @@ if ($traveljournal_id) {
                 <ul>
                 <?php foreach ($alojamentos as $a): ?>
                     <li>
-                        <strong><?= htmlspecialchars($a['nome_alojamento']) ?></strong> (<?= htmlspecialchars($a['tipo_alojamento']) ?>)<br>
+                        <strong>
+                            <a href="detalhes_alojamento.php?id=<?= $a['alojamento_id'] ?>&tipo=alojamento" style="text-decoration: none; color: inherit;">
+                                <?= htmlspecialchars($a['nome_alojamento']) ?>
+                            </a>
+                        </strong> 
+                        (<?= htmlspecialchars($a['tipo_alojamento']) ?>)<br>
                         Local: <?= htmlspecialchars($a['localizacao']) ?><br>
                         De: <?= htmlspecialchars($a['data_inicio']) ?> 
                         <?php if ($a['data_fim']): ?>
@@ -301,7 +315,12 @@ if ($traveljournal_id) {
                 <ul>
                 <?php foreach ($atividades as $a): ?>
                     <li>
-                        <strong><?= htmlspecialchars($a['nome_atividade']) ?></strong> (<?= htmlspecialchars($a['tipo_atividade']) ?>)<br>
+                        <strong>
+                            <a href="detalhes_alojamento.php?id=<?= $a['atividade_id'] ?>&tipo=atividade" style="text-decoration: none; color: inherit;">
+                                <?= htmlspecialchars($a['nome_atividade']) ?>
+                            </a>
+                        </strong> 
+                        (<?= htmlspecialchars($a['tipo_atividade']) ?>)<br>
                         Local: <?= htmlspecialchars($a['localizacao']) ?><br>
                         A: <?= htmlspecialchars($a['data_inicio']) ?> 
                         <div class="avaliacao-stars alojamento-stars">
