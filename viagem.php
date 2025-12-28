@@ -266,7 +266,6 @@ include_once 'templates/header_tpl.php';
 
                     <?php include 'templates/atividades_tpl.php'; ?>
 
-
                 <?php endforeach; ?>
                 </ul>
                 <?php if ($current_user == $viagem['nome_de_utilizador']): ?>
