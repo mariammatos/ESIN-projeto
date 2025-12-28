@@ -12,15 +12,17 @@ if (!$id || !in_array($tipo, ['alojamento', 'atividade'])) {
     die('Item inválido.');
 }
 
+
 if ($tipo === 'alojamento') {
     $detalhes = getDetalhesAlojamentoCompleto($db, $id);
-    $feedbacks = getFeedbacksAlojamento($db, $id);
+    $feedbacks = getFeedbacksAlojamento($db, $detalhes['detalhe_id']);
     $label_tipo = 'Alojamento';
 } else {
     $detalhes = getDetalhesAtividadeCompleto($db, $id);
-    $feedbacks = getFeedbacksAtividade($db, $id);
+    $feedbacks = getFeedbacksAtividade($db, $detalhes['detalhe_id']);
     $label_tipo = 'Atividade';
 }
+
 
 if (!$detalhes) {
     die("$label_tipo não encontrado.");
@@ -69,7 +71,7 @@ if (!$detalhes) {
                 <?php foreach ($feedbacks as $fb): ?>
                     <div class="feedback-item">
                         <div class="fb-header">
-                            <span class="stars"><?= str_repeat('⭐', (int)$fb['rating']) ?></span>
+                            <span class="stars"><?= str_repeat('★', (int)$fb['rating']) ?></span>
                             <span class="fb-rating"><?= (int)$fb['rating'] ?>/5</span>
                         </div>
                         
