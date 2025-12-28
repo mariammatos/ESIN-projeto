@@ -138,7 +138,7 @@ function procurarAlojamentosPorDestino($db, $destino_id, $termo) {
 
     $stmt = $db->prepare('
         SELECT D.id, D.nome, D.localizacao, DA.tipo
-        FROM Detalhes D
+        FROM Atividade A
         JOIN Detalhes_alojamento DA ON D.id = DA.id
         JOIN Alojamento A ON A.detalhes = D.id
         WHERE A.viagem IN (SELECT id FROM Viagens WHERE destino = ?)
@@ -181,20 +181,19 @@ function procurarAtividadesGlobais(PDO $db, string $termo): array {
 
     $stmt = $db->prepare("
         SELECT 
-            D.id AS detalhe_id,
+            A.id AS atividade_id,
             D.nome AS nome_atividade,
             DA.tipo AS tipo_atividade,
             D.localizacao,
             AVG(F.rating) AS media_avaliacao
-        FROM Detalhes D
-        JOIN Detalhes_atividade DA ON DA.id = D.id
-        LEFT JOIN Atividade A ON A.detalhes = D.id
+        FROM Atividade A
+        JOIN Detalhes_atividade DA ON A.detalhes = DA.id
+        JOIN Detalhes D ON DA.id = D.id
         LEFT JOIN Feedback_atividade FA ON FA.atividade = A.id
         LEFT JOIN Feedback F ON F.id = FA.id
         WHERE D.nome LIKE :termo
            OR D.localizacao LIKE :termo
-        GROUP BY D.id
-        ORDER BY media_avaliacao DESC
+        GROUP BY A.id
     ");
 
     $stmt->execute(['termo' => $termo]);
@@ -244,12 +243,11 @@ function adicionarFeedbackAtividade($db, $atividade_id, $rating, $comentario = n
 }
 
 // Buscar detalhes completos da atividade, rating global e viagem associada
-function getDetalhesAtividadeCompleto($db, $atividade_id) {
-    $stmt = $db->prepare('
-        SELECT 
+function getDetalhesAtividadeCompleto(PDO $db, int $atividadeId): ?array {
+    $stmt = $db->prepare("
+        SELECT
             A.id AS atividade_id,
             A.viagem AS viagem_id,
-            A.data AS data_atividade,
             D.nome AS nome_atividade,
             D.localizacao,
             DA.tipo AS tipo_atividade,
@@ -259,12 +257,14 @@ function getDetalhesAtividadeCompleto($db, $atividade_id) {
         JOIN Detalhes D ON DA.id = D.id
         LEFT JOIN Feedback_atividade FA ON FA.atividade = A.id
         LEFT JOIN Feedback F ON F.id = FA.id
-        WHERE A.id = :atividade_id
+        WHERE A.id = :id
         GROUP BY A.id
-    ');
-    $stmt->bindParam(':atividade_id', $atividade_id, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    ");
+
+    $stmt->execute(['id' => $atividadeId]);
+    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $resultado ?: null;
 }
 
 // Buscar todos os feedbacks de uma atividade

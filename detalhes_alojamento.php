@@ -3,33 +3,55 @@ session_start();
 require_once 'database/db_connect.php';
 require_once 'database/alojamentos.php';
 
-$db = getDatabaseConnection();
-$alojamento_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-if (!$alojamento_id) {
-    die('Alojamento inválido.');
+$db = getDatabaseConnection();
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$tipo = isset($_GET['tipo']) ? $_GET['tipo'] : 'alojamento';
+
+if (!$id || !in_array($tipo, ['alojamento', 'atividade'])) {
+    die('Item inválido.');
 }
 
-// Buscar detalhes do alojamento, rating global e comentários
-$detalhes = getDetalhesAlojamentoCompleto($db, $alojamento_id);
-$feedbacks = getFeedbacksAlojamento($db, $alojamento_id);
+if ($tipo === 'alojamento') {
+    $detalhes = getDetalhesAlojamentoCompleto($db, $id);
+    $feedbacks = getFeedbacksAlojamento($db, $id);
+    $label_tipo = 'Alojamento';
+} else {
+    $detalhes = getDetalhesAtividadeCompleto($db, $id);
+    $feedbacks = getFeedbacksAtividade($db, $id);
+    $label_tipo = 'Atividade';
+}
 
 if (!$detalhes) {
-    die('Alojamento não encontrado.');
+    die("$label_tipo não encontrado.");
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Detalhes do Alojamento | TripTales</title>
+    <title>Detalhes - <?= $label_tipo ?>  | TripTales</title>
     <link rel="stylesheet" href="css/styledetalhesaloj.css">
 </head>
 <body>
  <main class="detalhes-card">
         
-        <h2><?= htmlspecialchars($detalhes['nome_alojamento']) ?></h2>
-        <p class="tipo-tag"><?= htmlspecialchars($detalhes['tipo_alojamento']) ?></p>
+        <h2>
+        <?= htmlspecialchars(
+            $tipo === 'atividade'
+                ? $detalhes['nome_atividade']
+                : $detalhes['nome_alojamento']
+        ) ?>
+        </h2>
+
+        <p class="tipo-tag">
+        <?= htmlspecialchars(
+            $tipo === 'atividade'
+                ? $detalhes['tipo_atividade']
+                : $detalhes['tipo_alojamento']
+        ) ?>
+        </p>
 
         <div class="info-geral">
             <p><strong>📍 Localização:</strong> <?= htmlspecialchars($detalhes['localizacao']) ?></p>
@@ -43,7 +65,7 @@ if (!$detalhes) {
 
         <h3>Comentários de Feedback</h3>
         <div class="lista-feedback">
-            <?php if ($feedbacks): ?>
+            <?php if (!empty($feedbacks)): ?>
                 <?php foreach ($feedbacks as $fb): ?>
                     <div class="feedback-item">
                         <div class="fb-header">
@@ -51,17 +73,17 @@ if (!$detalhes) {
                             <span class="fb-rating"><?= (int)$fb['rating'] ?>/5</span>
                         </div>
                         
-                        <?php if ($fb['comentario']): ?>
+                        <?php if (!empty($fb['comentario'])): ?>
                             <p class="fb-comentario">"<?= htmlspecialchars($fb['comentario']) ?>"</p>
                         <?php endif; ?>
                         
-                        <?php if ($fb['precos']): ?>
+                        <?php if (!empty($fb['precos'])): ?>
                             <p class="fb-precos">💰 Preço: <span><?= htmlspecialchars($fb['precos']) ?>€</span></p>
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p class="sem-feedback">Ainda não existem comentários para este alojamento.</p>
+                <p class="sem-feedback">Ainda não existem comentários.</p>
             <?php endif; ?>
         </div>
 
