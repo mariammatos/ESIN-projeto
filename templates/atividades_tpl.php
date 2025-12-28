@@ -28,7 +28,7 @@
                                 <input type="hidden" name="id" value="<?= $a['atividade_id'] ?>">
                                 <input type="hidden" name="tipo" value="atividade">
                                 <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
-                                <button type="submit" class="btn-delete" onclick="return confirm('Tem a certeza que deseja apagar esta atividade?');">Apagar</button>
+                                <button type="submit" class="btn-delete" onclick="return confirm('Tem a certeza que deseja apagar esta atividade?');">🗑️</button>
                             </form>                           
                         <?php endif; ?>
                     </li>
