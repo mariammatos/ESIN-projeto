@@ -68,6 +68,19 @@ $viagens = getViagensUtilizador($dbh, $user);
 </header>
 
 <main class="perfil-container">
+    <section class="editar-perfil">
+        <?php if ($perfil_user === $current_user): ?>
+            <form action="registration.php" method="post">
+                <input type="hidden" name="username" value="<?= $perfil_user ?>">
+                <input type="hidden" name="nome" value="<?= htmlspecialchars($utilizador['nome'] ?? '') ?>">
+                <input type="hidden" name="pais" value="<?= htmlspecialchars($utilizador['pais_de_origem'] ?? '') ?>">
+                <input type="hidden" name="pref" value="<?= htmlspecialchars($utilizador['preferencia_de_viagem'] ?? '') ?>">
+                <input type="hidden" name="email" value="<?= htmlspecialchars($utilizador['email'] ?? '') ?>">
+                <input type="hidden" name="foto_perfil" value="<?= htmlspecialchars($utilizador['foto_de_perfil'] ?? '') ?>">
+                <input type="hidden" name="editar" value="1">
+                <button type="submit">Editar Perfil</button>
+            </form>
+        <?php endif; ?>
 
     <section class="perfil-info">
         <img width="50" height= "50" src="media/profile_pictures/<?= htmlspecialchars($utilizador['foto_de_perfil']) ?>" class="foto-perfil">
