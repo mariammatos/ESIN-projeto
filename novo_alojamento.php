@@ -66,10 +66,14 @@ if ($atividade && $termo !== '') {
         <?php if (!empty($matches)): ?>
             <form action="actions/action_adicionaralojamento.php" method="post">
                 <input type="hidden" name="viagem_id" value="<?= $viagem_id ?>">
-                <input type="hidden" name="alojamento" value="1"> <?php foreach ($matches as $a): ?>
-                    <input type="radio" name="detalhe_id" value="<?= $a['id'] ?>" required>
-                    <?= htmlspecialchars($a['nome'].' ('.$a['localizacao'].')') ?><br>
-                <?php endforeach; ?>
+                <input type="hidden" name="alojamento" value="1"> 
+                    <?php foreach ($matches as $a): ?>
+                        <label class="radio-option">
+                            <input type="radio" name="detalhe_id" value="<?= $a['id'] ?>" required>
+                            <span><?= htmlspecialchars($a['nome'].' ('.$a['localizacao'].')') ?></span>
+                        </label>
+                    <?php endforeach; ?>
+                </div>
 
                 <label>Data início</label>
                 <input type="date" name="data_inicio" min="<?= $viagem['data_ida'] ?>" max="<?= $viagem['data_volta'] ?>" required>

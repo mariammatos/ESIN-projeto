@@ -155,7 +155,8 @@ select:focus {
 
 /* Estilo do "Botão" desativado */
 .radio-option {
-    display: flex;
+    display: block;
+    width: 100%;
     align-items: center;
     justify-content: center;
     padding: 12px 15px;
@@ -248,6 +249,6 @@ form button[type="submit"]:not(:last-child):hover {
 
     h2 {
         font-size: 1.3rem;
-        margin: 5px;
+        margin: 10px;
     }
 }
