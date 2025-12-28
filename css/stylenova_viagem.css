@@ -293,11 +293,10 @@ body {
 /* ================= FOOTER ================= */
 
 footer {
+    color: #fcf7f8;
     text-align: center;
-    margin-top: 35px;
-    color: #ffffff;
-    font-size: 0.85rem;
-    opacity: 0.85;
+    padding: 20px;
+    margin-top: 50px;
 }
 
 /* ================= RESPONSIVIDADE ================ */

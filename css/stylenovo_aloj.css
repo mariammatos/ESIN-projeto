@@ -236,7 +236,6 @@ form button[type="submit"]:not(:last-child):hover {
 footer {
     margin-top: 20px;
     padding: 15px;
-    font-size: 0.85rem;
     color: #ffffff;
     opacity: 0.85;
     text-align: center;

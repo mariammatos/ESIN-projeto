@@ -202,12 +202,10 @@ body > p:first-of-type:not([class]) {
 
 /* ===== FOOTER ===== */
 footer {
-    margin-top: 20px;
-    padding: 15px;
-    font-size: 0.85rem;
-    color: #ffffff;
-    opacity: 0.85;
+    color: #fcf7f8;
     text-align: center;
+    padding: 20px;
+    margin-top: 50px;
 }
 
 /* ===== RESPONSIVIDADE ===== */
