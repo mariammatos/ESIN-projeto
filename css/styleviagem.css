@@ -214,7 +214,7 @@ nav ul li a:hover {
 .viagem-detalhe-container .editar-fotos button,
 .viagem-detalhe-container .adicionar-travel-journal button,
 .viagem-detalhe-container .editar-travel-journal button,
-.viagem-detalhe-container .alojamentos button,
+.viagem-detalhe-container .adc-aloj,
 .viagem-detalhe-container .adc-atividade {
     background-color: #4e8098;
     color: #fff;
@@ -232,7 +232,7 @@ nav ul li a:hover {
 .viagem-detalhe-container .editar-fotos button:hover,
 .viagem-detalhe-container .adicionar-travel-journal button:hover,
 .viagem-detalhe-container .editar-travel-journal button:hover,
-.viagem-detalhe-container .alojamentos button:hover,
+.viagem-detalhe-container .adc-aloj:hover,
 .viagem-detalhe-container .adc-atividade:hover {
     background-color: #a31621;
     transform: translateY(-2px);
@@ -432,8 +432,8 @@ nav ul li a:hover {
     color: #ffffff;
     border: none;
     border-radius: 50%;
-    width: 25%;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     margin: 15px auto 0;
     font-size: 1.1rem;
     cursor: pointer;

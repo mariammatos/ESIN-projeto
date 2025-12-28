@@ -223,7 +223,7 @@ include_once 'templates/header_tpl.php';
                     <form action="novo_alojamento.php" method="post">
                         <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
                         <input type="hidden" name="alojamento" value="1">
-                        <button type="submit">Adicionar Alojamento</button>
+                        <button type="submit" class="adc-aloj">Adicionar Alojamento</button>
                     </form>
 
                 <?php endif; ?>
@@ -239,7 +239,7 @@ include_once 'templates/header_tpl.php';
                     <form action="novo_alojamento.php" method="post">
                         <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
                         <input type="hidden" name="alojamento" value="1">
-                        <button type="submit">Adicionar Alojamento</button>
+                        <button type="submit" class="adc-aloj">Adicionar Alojamento</button>
                     </form>
 
                 <?php endif; ?>
@@ -256,7 +256,7 @@ include_once 'templates/header_tpl.php';
                     <form action="novo_alojamento.php" method="post">
                         <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
                         <input type="hidden" name="atividade" value="1">
-                        <button type="submit">Adicionar Atividade</button>
+                        <button type="submit" class="adc-atividade">Adicionar Atividade</button>
                     </form>
 
                 <?php endif; ?>
