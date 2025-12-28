@@ -230,7 +230,9 @@ include_once 'templates/header_tpl.php';
             <?php else: ?>
                 <ul>
                 <?php foreach ($alojamentos as $a): ?>
+
                     <?php include 'templates/alojamentos_tpl.php'; ?>
+
                 <?php endforeach; ?>
                 </ul>
                 <?php if ($current_user == $viagem['nome_de_utilizador']): ?>
@@ -261,7 +263,10 @@ include_once 'templates/header_tpl.php';
             <?php else: ?>
                 <ul>
                 <?php foreach ($atividades as $a): ?>
+
                     <?php include 'templates/atividades_tpl.php'; ?>
+
+
                 <?php endforeach; ?>
                 </ul>
                 <?php if ($current_user == $viagem['nome_de_utilizador']): ?>

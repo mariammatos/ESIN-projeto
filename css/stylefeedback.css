@@ -5,9 +5,13 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+}
+
 /* ================= BOTÃO VOLTAR ================= */
 .btn-voltar {
-    position: absolute;
+    position: fixed;
     top: 30px;
     left: 30px;
     display: inline-flex;
@@ -39,32 +43,46 @@ body {
     background: linear-gradient(135deg, #4e8098, #90c2e7);
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     color: #2b2b2b;
     padding: 20px;
+    position: relative;
 }
 
 /* ================= CONTAINER DE FEEDBACK ================= */
 
-
 .feedback-container {
     background-color: #ffffff;
-    padding: 40px;
-    border-radius: 14px;
+    padding: 50px 45px;
+    border-radius: 16px;
     width: 100%;
-    max-width: 500px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+    max-width: 550px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+/* Decoração superior do card */
+.feedback-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    border-radius: 16px 16px 0 0;
 }
 
 /* ================= TÍTULO ================= */
 
 h2 {
     text-align: center;
-    color: #4e8098;
-    margin-bottom: 35px;
-    font-size: 1.6rem;
-    font-weight: 600;
+    color:  #4e8098;
+    margin-bottom: 40px;
+    font-size: 1.7rem;
+    font-weight: 500;
+    letter-spacing: -0.5px;
 }
 
 /* ================= FORM ================= */
@@ -72,66 +90,84 @@ h2 {
 form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 28px;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    padding: 5px 5px;
+    gap: 12px;
 }
 
 label {
-    font-size: 0.9rem;
-    color: #555;
-    font-weight: 500;
+    font-size: 0.95rem;
+    color: #444;
+    font-weight: 600;
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
+    letter-spacing: 0.2px;
 }
 
-/* ================= PREÇO ESTILO GOOGLE MAPS ================= */
+/* ================= PREÇO ESTILO GOOGLE MAPS (OPÇÃO 1 MELHORADA) ================= */
 
 .price-selector {
     display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .price-option {
+    flex: 1;
     cursor: pointer;
-    flex: 1; /* Faz os botões dividirem o espaço igualmente */
-    min-width: 80px;
+    position: relative;
 }
 
 .price-option input {
-    display: none; /* Esconde o rádio original */
+    display: none;
 }
 
 .price-option span {
-    display: block;
-    text-align: center;
-    padding: 10px;
-    border: 2px solid #ced3dc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 55px;
+    border: 2px solid #e0e0e0;
     border-radius: 8px;
-    background-color: #fff;
+    background-color: #fafafa;
     color: #555;
     font-weight: 600;
-    transition: all 0.2s ease;
+    font-size: 1rem;
+    transition: all 0.25s ease;
+    position: relative;
 }
 
-/* Efeito ao passar o rato */
 .price-option:hover span {
     border-color: #4e8098;
-    background-color: #f0f7fa;
+    background-color: #fff;
 }
 
-/* Estilo selecionado (Google Maps style) */
 .price-option input:checked + span {
-    background-color: #4e8098;
+    background-color: #fff;
     border-color: #4e8098;
-    color: #fff;
-    box-shadow: 0 4px 10px rgba(78, 128, 152, 0.3);
+    color: #4e8098;
+    box-shadow: 0 0 0 3px rgba(78, 128, 152, 0.15);
+}
+
+.price-option input:checked + span::after {
+    content: "✓";
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 24px;
+    height: 24px;
+    background-color: #4e8098;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(78, 128, 152, 0.4);
 }
 
 /* ================= INPUTS ================= */
@@ -182,7 +218,6 @@ textarea:focus {
     margin-top: 8px;
 }
 
-
 /* ================= BOTÃO ENVIAR ================= */
 
 button[type="submit"] {
@@ -214,21 +249,23 @@ button[type="submit"]:active {
 /* ===== FOOTER ===== */
 
 footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     text-align: center;
-    margin-top: 35px;
+    padding: 15px;
     color: #ffffff;
-    font-size: 0.85rem;
     opacity: 0.85;
+    background: transparent;
 }
 
 /* ================= RESPONSIVIDADE ================= */
 
 @media (max-width: 600px) {
-    body > div,
-    body > form,
     .feedback-container {
-        padding: 35px 25px;
-        align-items: center;
+        padding: 30px 20px;
+        margin: 60px 10px 60px 10px;
     }
     
     h2 {
@@ -236,7 +273,18 @@ footer {
         margin-bottom: 25px;
     }
     
-    .stars {
-        font-size: 1.6rem;
+    .btn-voltar {
+        top: 15px;
+        left: 15px;
+        font-size: 0.85rem;
+        padding: 8px 14px;
+    }
+    
+    .price-selector {
+        flex-direction: column;
+    }
+    
+    .price-option {
+        width: 100%;
     }
 }
