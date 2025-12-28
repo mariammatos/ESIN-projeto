@@ -48,6 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="css/stylefeedback.css">
 </head>
 <body>
+
+  <a href="viagem.php?id=2" class="btn-voltar">← Voltar à Viagem</a>
+
     <div>
         <h2>Dar Feedback ao Alojamento</h2>
         <form method="post">
@@ -55,7 +58,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="rating">Avaliação (0 a 5):</label>
                 <input type="number" id="rating" name="rating" min="0" max="5" step="1" value="5" required>
                 <div class="rating-display">
-                    <span class="stars" id="star-display">★★★★★</span>
+                <span class="stars">
+                        <?php 
+                            $media = $a['media_avaliacao'] ? round($a['media_avaliacao']) : 0;
+                            echo str_repeat('★', $media) . str_repeat('☆', 5 - $media);
+                        ?>
+                </span>
                 </div>
             </div>
             
@@ -69,28 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <script>
-        const ratingInput = document.getElementById('rating');
-        const starDisplay = document.getElementById('star-display');
-        
-        function updateStars() {
-            const value = parseInt(ratingInput.value) || 0;
-            const clampedValue = Math.max(0, Math.min(5, value));
-            const filled = '★'.repeat(clampedValue);
-            const empty = '☆'.repeat(5 - clampedValue);
-            starDisplay.textContent = filled + empty;
-            
-            // Atualizar cor baseada na avaliação
-            if (clampedValue <= 2) {
-                starDisplay.style.color = '#ff6b6b';
-            } else if (clampedValue <= 3) {
-                starDisplay.style.color = '#ffa500';
-            } else {
-                starDisplay.style.color = '#ffd700';
-            }
-        }
-        
-        ratingInput.addEventListener('input', updateStars);
-        updateStars();
-    </script>
+    
 </body>
 </html>

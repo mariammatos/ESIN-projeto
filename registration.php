@@ -160,32 +160,3 @@
     </footer>
   </body>
 </html>
-
-<script>
-    // Validação da palavra-passe em tempo real
-    const password = document.getElementById('password');
-    const passwordConfirm = document.getElementById('password_confirm');
-    const matchMessage = document.getElementById('password-match-message');
-    
-    function checkPasswordMatch() {
-      // Só mostrar mensagem se o utilizador começou a escrever na confirmação
-      if (passwordConfirm.value.length === 0) {
-        matchMessage.style.display = 'none';
-        return;
-      }
-      
-      matchMessage.style.display = 'flex';
-      
-      if (password.value === passwordConfirm.value) {
-        matchMessage.className = 'validation-message success';
-        matchMessage.textContent = 'As palavras-passe coincidem!';
-      } else {
-        matchMessage.className = 'validation-message error';
-        matchMessage.textContent = 'As palavras-passe não coincidem.';
-      }
-    }
-    
-    password.addEventListener('input', checkPasswordMatch);
-    passwordConfirm.addEventListener('input', checkPasswordMatch);
-    
-  </script>
