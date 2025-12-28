@@ -1,4 +1,4 @@
-/* ===== RESET ===== */
+
 * {
     margin: 0;
     padding: 0;
@@ -63,7 +63,7 @@ body {
     position: relative;
 }
 
-/* Decoração superior do card */
+
 .feedback-container::before {
     content: '';
     position: absolute;
@@ -108,7 +108,7 @@ label {
     letter-spacing: 0.2px;
 }
 
-/* ================= PREÇO ESTILO GOOGLE MAPS (OPÇÃO 1 MELHORADA) ================= */
+/* ================= PREÇO  ================= */
 
 .price-selector {
     display: flex;

@@ -1,4 +1,4 @@
-/* ===== RESET ===== */
+
 * {
     margin: 0;
     padding: 0;
@@ -45,7 +45,7 @@ body {
     padding: 20px;
 }
 
-/* ===== MENSAGENS PHP ===== */
+/* ===== MENSAGENS PHP===== */
 body > p,
 #registration > p {
     padding: 12px 16px;
@@ -98,7 +98,7 @@ body > p,
 }
 
 
-/* ===== INPUTS E TEXTAREA ===== */
+/* ===== INPUTS  ===== */
 #registration input,
 #registration textarea {
     padding: 14px 16px;
@@ -115,7 +115,7 @@ body > p,
     resize: vertical;
 }
 
-/* ===== INPUT FILE ESTILIZADO ===== */
+
 #registration input[type="file"] {
     padding: 14px 16px;
     background-color: #fafafa;
@@ -174,7 +174,7 @@ body > p,
 }
 
 
-/* ================= LISTA DE PAÍSES ================= */
+/* ================= RADIO BUTTONS ================= */
 
 .form-group p {
     font-size: 0.85rem;
@@ -190,7 +190,6 @@ body > p,
     margin-bottom: 8px;
     cursor: pointer;
 }
-
 
 
 
@@ -247,7 +246,6 @@ body > p,
 }
 
 
-/* ================= PREFERÊNCIAS ================= */
 
 .checkbox-option input[type="checkbox"] {
     display: none;
