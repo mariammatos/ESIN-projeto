@@ -158,8 +158,20 @@ nav ul li a:hover {
 
 .post-header h2 {
     color: #a31621;
-    text-decoration: none;
     font-size: 1.2rem;
+}
+
+.post-alojamento .post-header h2 a,
+.post-atividade .post-header h2 a {
+    color: #a31621;          /* vermelho TripTales */
+    text-decoration: none;  /* remove sublinhado */
+    font-weight: 600;
+}
+
+/* hover consistente com o resto do site */
+.post-alojamento .post-header h2 a:hover,
+.post-atividade .post-header h2 a:hover {
+    text-decoration: underline;
 }
 
 .post-header .autor {

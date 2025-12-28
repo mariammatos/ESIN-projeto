@@ -133,7 +133,7 @@ if (!empty($pesquisa_user)) {
                         <div class="post-detalhes">
                             <p><strong>Localização:</strong> <?php echo htmlspecialchars($a['localizacao']); ?></p>
                             <p><strong>Rating Global:</strong> <?php echo $a['media_avaliacao'] !== null ? number_format($a['media_avaliacao'], 1) . ' / 5' : 'Sem avaliações'; ?></p>
-                            <a href="detalhes_alojamento.php?id=<?= $a['alojamento_id'] ?>">Ver detalhes do alojamento...</a>
+                            <a href="detalhes_alojamento.php?id=<?= $a['detalhe_id'] ?>">Ver detalhes do alojamento...</a>
                         </div>
                     </article>
                 <?php endforeach; ?>

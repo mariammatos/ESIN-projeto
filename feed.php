@@ -78,16 +78,22 @@ $posts = getFeed($db, $current_user);
                     
                     <div class="post-detalhes">
                                     <?php 
-                                        $fotos_post = getFotos($db, $post['id']); // todas as fotos da viagem
+                                        $fotos_post = getFotos($db, $post['id']); 
                                         if (!empty($fotos_post)):
-                                            $foto_principal = $fotos_post[0]; // a de menor id
+                                            // Seleciona apenas as primeiras 4 fotos (podes mudar o 4 para 5)
+                                            $primeiras_fotos = array_slice($fotos_post, 0, 4);
+                                            
+                                            foreach ($primeiras_fotos as $foto): 
                                     ?>
-                                        <div class="post-foto">
-                                            <img src="<?= htmlspecialchars($foto_principal['path']); ?>" 
-                                                alt="Foto da viagem <?= htmlspecialchars($post['titulo']); ?>" 
-                                                width="200" height="200">
+                                        <div class="post-foto-mini">
+                                            <img src="<?= htmlspecialchars($foto['path']); ?>" 
+                                                alt="Foto da viagem <?= htmlspecialchars($post['titulo']); ?>">
                                         </div>
-                                    <?php endif; ?>
+                                    <?php 
+                                            endforeach; 
+                                        endif; 
+                                    ?>
+                                </div>
                         <p><strong>Destino:</strong> <?php echo htmlspecialchars($post['cidade_local']); ?>, <?php echo htmlspecialchars($post['pais']); ?></p>
                         <p><a href="viagem.php?id=<?php echo $post['id']; ?>">Ver todos os detalhes da viagem...</a></p>
                     </div>
