@@ -322,5 +322,8 @@ footer {
     nav ul {
         flex-wrap: wrap;
         justify-content: center;
+        gap: 5px;
+        font-size: 0.5rem;
+
     }
 }
