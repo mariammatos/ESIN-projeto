@@ -16,6 +16,7 @@ $destino_id = $_GET['destino'] ?? '';
 $db = getDatabaseConnection();
 $destino = getDestino($db, $destino_id);
 $posts = getPostsporDestino($db, $destino_id);
+$_SESSION['last_page'] = 'explorar_destino.php?destino=' . $destino_id;
 
 ?>
 
