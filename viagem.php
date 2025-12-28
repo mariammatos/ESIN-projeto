@@ -124,35 +124,28 @@ if ($traveljournal_id) {
         <section class="galeria-fotos">
             <?php if (!empty($fotos)): ?>
                 <div class="galeria-container">
-                    <?php foreach ($fotos as $foto): ?>
-                        <div class="foto-item">
-                            <img width="200" height="200"
-                                src="<?= htmlspecialchars($foto['path']) ?>"
-                                alt="Foto da viagem" />
+                    <?php foreach ($fotos as $index => $foto): ?>
+                        <a href="#foto-<?= $index ?>" class="foto-item">
+                            <img src="<?= htmlspecialchars($foto['path']) ?>" alt="Foto">
+                        </a>
+
+                        <div id="foto-<?= $index ?>" class="modal-sem-js">
+                            <a href="#" class="modal-overlay"></a> <div class="modal-content">
+                                <a href="#" class="modal-close-btn">&times;</a>
+                                
+                                <?php if ($index > 0): ?>
+                                    <a href="#foto-<?= $index - 1 ?>" class="nav-btn prev">‹</a>
+                                <?php endif; ?>
+
+                                <img src="<?= htmlspecialchars($foto['path']) ?>">
+
+                                <?php if ($index < count($fotos) - 1): ?>
+                                    <a href="#foto-<?= $index + 1 ?>" class="nav-btn next">›</a>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
-
-                <div class="editar-fotos">
-                    <?php if ($is_owner && count($fotos) < 16): ?>
-                        <form action="adicionarfotos.php" method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
-                            <button type="submit">Adicionar Foto</button>
-                        </form>
-                    <?php endif; ?>
-                </div>
-
-            <?php else: ?>
-
-                <?php if ($is_owner): ?>
-                    <div class="editar-fotos">
-                        <form action="adicionarfotos.php" method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
-                            <button type="submit">Adicionar Foto</button>
-                        </form>
-                    </div>
-                <?php endif; ?>
-
             <?php endif; ?>
         </section>
 
@@ -261,7 +254,9 @@ if ($traveljournal_id) {
                         </div>
                         
                         <?php if ($is_owner): ?>
-                            <a href="feedback_alojamento.php?alojamento_id=<?= $a['alojamento_id'] ?>" class="btn-feedback">Dar Feedback</a>
+                            <a href="detalhes_alojamento.php?id=<?= $a['alojamento_id'] ?>&tipo=alojamento" class="btn-detalhes">Ver Detalhes</a>
+                            <a href="feedback_alojamento.php?id=<?= $a['alojamento_id'] ?>&tipo=alojamento" class="btn-feedback">Dar Feedback</a>
+
                         <?php endif; ?>
                     </li>
                 <?php endforeach; ?>
@@ -317,7 +312,9 @@ if ($traveljournal_id) {
                         </div>
                         
                         <?php if ($is_owner): ?>
-                            <a href="feedback_alojamento.php?alojamento_id=<?= $a['atividade_id'] ?>" class="btn-feedback">Dar Feedback</a>
+                            <a href="detalhes_alojamento.php?id=<?= $a['atividade_id'] ?>&tipo=atividade" class="btn-detalhes">Ver Detalhes</a>
+                            <a href="feedback_alojamento.php?id=<?= $a['atividade_id'] ?>&tipo=atividade" class="btn-feedback">Dar Feedback</a>
+
                         <?php endif; ?>
                     </li>
                 <?php endforeach; ?>
@@ -342,6 +339,7 @@ if ($traveljournal_id) {
                     <button type="submit" class="<?php echo $user_liked ? 'active' : ''; ?>">
                         <?php echo $user_liked ? 'Liked' : 'Like'; ?>
                     </button>
+                    
                 </form>
                 <span id="like-count"><?php echo $likes_count; ?> likes</span>
             <?php else: ?>

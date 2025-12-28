@@ -16,6 +16,7 @@ $current_user = $_SESSION['username'];
 $pesquisa_user = $_GET['search_user'] ?? '';
 $pesquisa_viagem = $_GET['search_viagem'] ?? '';
 $pesquisa_alojamento = $_GET['search_alojamento'] ?? '';
+$pesquisa_atividade = $_GET['search_atividade'] ?? '';
 
 
 
@@ -31,9 +32,15 @@ if (!empty($pesquisa_user)) {
 } elseif (!empty($pesquisa_viagem)) {
     $posts = procurarviagens($db, $pesquisa_viagem);
     $alojamentos_matches = [];
+    $atividades_matches = [];
+
 } elseif (!empty($pesquisa_alojamento)) {
     $alojamentos_matches = procurarAlojamentosGlobais($db, $pesquisa_alojamento);
     $posts = [];
+} elseif (!empty($pesquisa_atividade)) {
+    $atividades_matches = procurarAtividadesGlobais($db, $pesquisa_atividade);
+    $posts = [];
+    $alojamentos_matches = [];
 } else {
     $posts = getexplorar($db);
     $alojamentos_matches = [];
@@ -85,6 +92,10 @@ if (!empty($pesquisa_user)) {
                 <input type="text" name="search_alojamento" placeholder="Procurar alojamentos..." required>
                 <button type="submit">Pesquisar Alojamentos</button>
             </form>
+            <form action="explorar.php" method="get">
+                <input type="text" name="search_atividade" placeholder="Procurar atividades..." required>
+                <button type="submit">Pesquisar Atividades</button>
+            </form>            
         </div>
 
         <div class="feed-container">
@@ -112,7 +123,7 @@ if (!empty($pesquisa_user)) {
                     <article class="post-alojamento">
                         <div class="post-header">
                             <h2>
-                                <a href="detalhes_alojamento.php?id=<?= $a['detalhe_id'] ?>">
+                                <a href="detalhes_alojamento.php?id=<?= $a['alojamento_id'] ?>">
                                     <?= htmlspecialchars($a['nome_alojamento']) ?>
                                 </a>
                             </h2>
@@ -122,7 +133,35 @@ if (!empty($pesquisa_user)) {
                         <div class="post-detalhes">
                             <p><strong>Localização:</strong> <?php echo htmlspecialchars($a['localizacao']); ?></p>
                             <p><strong>Rating Global:</strong> <?php echo $a['media_avaliacao'] !== null ? number_format($a['media_avaliacao'], 1) . ' / 5' : 'Sem avaliações'; ?></p>
-                            <a href="detalhes_alojamento.php?id=<?= $a['detalhe_id'] ?>">Ver detalhes do alojamento...</a>
+                            <a href="detalhes_alojamento.php?id=<?= $a['alojamento_id'] ?>">Ver detalhes do alojamento...</a>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            <?php elseif (!empty($atividades_matches)): ?>
+                <!-- Mostrar atividades encontradas -->
+                <?php foreach ($atividades_matches as $a): ?>
+                    <article class="post-atividade">
+                        <div class="post-header">
+                            <h2>
+                                <a href="detalhes_alojamento.php?id=<?= $a['atividade_id'] ?>&tipo=atividade">
+                                    <?= htmlspecialchars($a['nome_atividade']) ?>
+                                </a>
+                            </h2>
+                            <span class="tipo">
+                                Tipo: <?= htmlspecialchars($a['tipo_atividade']) ?>
+                            </span>
+                        </div>
+
+                        <div class="post-detalhes">
+                            <p><strong>Localização:</strong> <?= htmlspecialchars($a['localizacao']) ?></p>
+                            <p><strong>Rating Global:</strong>
+                                <?= $a['media_avaliacao'] !== null 
+                                    ? number_format($a['media_avaliacao'], 1) . ' / 5' 
+                                    : 'Sem avaliações'; ?>
+                            </p>
+                            <a href="detalhes_alojamento.php?id=<?= $a['atividade_id'] ?>&tipo=atividade">
+                                Ver detalhes da atividade...
+                            </a>
                         </div>
                     </article>
                 <?php endforeach; ?>

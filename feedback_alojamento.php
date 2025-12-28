@@ -5,38 +5,48 @@ require_once 'database/alojamentos.php';
 
 $db = getDatabaseConnection();
 
-$alojamento_id = (int)($_GET['alojamento_id'] ?? 0);
+$item_id = (int)($_GET['id'] ?? 0); // id do alojamento ou atividade
+$tipo = $_GET['tipo'] ?? 'alojamento'; // 'alojamento' ou 'atividade'
+
 $viagem_id = null;
 
-// Pegar a viagem do alojamento
-$stmt = $db->prepare('SELECT viagem FROM Alojamento WHERE id = ?');
-$stmt->execute([$alojamento_id]);
+if ($tipo === 'alojamento') {
+    $stmt = $db->prepare('SELECT viagem FROM Alojamento WHERE id = ?');
+} else { // atividade
+    $stmt = $db->prepare('SELECT viagem FROM Atividade WHERE id = ?');
+}
+$stmt->execute([$item_id]);
 $viagem_id = $stmt->fetchColumn();
 
-if (!$alojamento_id || !$viagem_id) {
-    die('Alojamento inválido.');
+if (!$item_id || !$viagem_id) {
+    die('Item inválido.');
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $comentario = trim($_POST['comentario'] ?? null);
-    $precos = trim($_POST['precos'] ?? null);
+    $comentario = trim($_POST['comentario'] ?? '');
+    $precos = trim($_POST['precos'] ?? '');
     $rating = filter_var($_POST['rating'], FILTER_VALIDATE_INT, [
         'options' => ['min_range' => 0, 'max_range' => 5]
     ]);
+
     if ($rating === false) {
         $_SESSION['error'] = "Avaliação inválida. Deve ser um número entre 0 e 5.";
-        header("Location: feedback_alojamento.php?alojamento_id=$alojamento_id");
+        header("Location: feedback.php?id=$item_id&tipo=$tipo");
         exit;
     }
 
-
-    adicionarFeedbackAlojamento($db, $alojamento_id, $rating, $comentario, $preços);
+    if ($tipo === 'alojamento') {
+        adicionarFeedbackAlojamento($db, $item_id, $rating, $comentario, $precos);
+    } else {
+        adicionarFeedbackAtividade($db, $item_id, $rating, $comentario, $precos);
+    }
 
     $_SESSION['success'] = "Feedback adicionado com sucesso!";
     header("Location: viagem.php?id=$viagem_id");
     exit;
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -52,31 +62,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <a href="viagem.php?id=2" class="btn-voltar">← Voltar à Viagem</a>
 
     <div>
-        <h2>Dar Feedback ao Alojamento</h2>
+        <h2>Dar Feedback - <?= $tipo === 'alojamento' ? 'Alojamento' : 'Atividade' ?></h2>
         <form method="post">
             <div class="form-group">
                 <label for="rating">Avaliação (0 a 5):</label>
                 <input type="number" id="rating" name="rating" min="0" max="5" step="1" value="5" required>
-                <div class="rating-display">
-                <span class="stars">
-                        <?php 
-                            $media = $a['media_avaliacao'] ? round($a['media_avaliacao']) : 0;
-                            echo str_repeat('★', $media) . str_repeat('☆', 5 - $media);
-                        ?>
-                </span>
-                </div>
             </div>
             
             <div class="form-group">
                 <label for="comentario">Comentário:</label>
-                <textarea id="comentario" name="comentario" placeholder="Partilhe a sua experiência com este alojamento..."></textarea>
+                <textarea id="comentario" name="comentario" placeholder="Partilhe a sua experiência com este <?= $tipo === 'alojamento' ? 'alojamento' : 'atividade' ?>..."></textarea>
             </div>
             
             <button type="submit">Enviar Feedback</button>
         </form>
     </div>
-
-    <script>
     
 </body>
 </html>

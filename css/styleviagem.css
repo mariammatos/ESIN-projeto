@@ -423,6 +423,7 @@ header {
     color: #555;
 }
 
+
 /* ========================= BOTÃO GUARDAR ========================= */
 
 .guardar button {
@@ -584,102 +585,72 @@ header {
 
 /* ========================= GALERIA (INSTAGRAM STYLE) ========================= */
 
-.modal-galeria {
+.modal-sem-js {
     position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.95);
-    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none; /* Escondido */
+    z-index: 10000;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
-    animation: fadeIn 0.3s ease;
 }
 
-.modal-galeria.active {
+/* Quando o ID da div está na URL (ex: #foto-0), ela aparece */
+.modal-sem-js:target {
     display: flex;
 }
 
-.modal-galeria img {
-    max-width: 85%;
-    max-height: 85vh;
-    border-radius: 8px;
-    object-fit: contain;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+/* Área para clicar e fechar (atrás da imagem) */
+.modal-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: default;
 }
 
-/* BOTÕES NAVEGAÇÃO */
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-.modal-btn {
+.modal-content img {
+    max-width: 100%;
+    max-height: 85vh;
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+/* Botões de Navegação e Fechar */
+.nav-btn, .modal-close-btn {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.3);
     color: white;
-    font-size: 2.5rem;
+    font-size: 3rem;
+    text-decoration: none;
+    background: rgba(255,255,255,0.1);
     width: 60px;
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
     border-radius: 50%;
-    transition: all 0.3s ease;
-    font-weight: 300;
+    transition: 0.3s;
+    z-index: 10001;
 }
 
-.modal-btn:hover {
-    background: rgba(255, 255, 255, 0.4);
-    border-color: rgba(255, 255, 255, 0.6);
-    transform: translateY(-50%) scale(1.1);
+.nav-btn:hover, .modal-close-btn:hover {
+    background: rgba(255,255,255,0.3);
 }
 
-.modal-prev { 
-    left: 30px; 
-}
-
-.modal-next { 
-    right: 30px; 
-}
-
-/* BOTÃO FECHAR */
-
-.modal-close {
-    position: absolute;
-    top: 30px;
-    right: 40px;
-    font-size: 3rem;
-    color: white;
-    cursor: pointer;
-    opacity: 0.8;
-    transition: all 0.3s ease;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    font-weight: 300;
-    line-height: 1;
-}
-
-.modal-close:hover {
-    opacity: 1;
-    background: rgba(255, 255, 255, 0.2);
-    transform: rotate(90deg);
-}
-
-/* ANIMAÇÃO FADE IN */
-@keyframes fadeIn {
-    from { 
-        opacity: 0;
-    }
-    to { 
-        opacity: 1;
-    }
-}
+.prev { left: -80px; }
+.next { right: -80px; }
+.modal-close-btn { top: -60px; right: -60px; }
 
 /* ========================= ALOJAMENTO E ATIVIDADES ========================= */
 
@@ -789,27 +760,10 @@ footer {
         gap: 8px;
     }
     
-    .modal-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 2rem;
-    }
-    
-    .modal-prev { left: 15px; }
-    .modal-next { right: 15px; }
-    
-    .modal-close {
-        top: 15px;
-        right: 15px;
-        font-size: 2.5rem;
-        width: 40px;
-        height: 40px;
-    }
-    
-    .modal-galeria img {
-        max-width: 95%;
-    }
-    
+    .prev { left: 10px; }
+    .next { right: 10px; }
+    .modal-close-btn { top: 10px; right: 10px; }
+
     .local-wishlist {
         display: flex;
         align-items: center;
