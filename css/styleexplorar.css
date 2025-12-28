@@ -281,26 +281,3 @@ footer {
     margin-top: 50px;
 }
 
-/* ================= RESPONSIVO ================= */
-
-@media (max-width: 768px) {
-
-    nav {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .pesquisar {
-        grid-template-columns: 1fr;
-        padding: 22px;
-    }
-
-    .pesquisar button {
-        width: auto;
-    }
-}

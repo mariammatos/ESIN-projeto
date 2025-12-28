@@ -240,21 +240,4 @@ footer {
     text-align: center;
 }
 
-/* ================= RESPONSIVO ================= */
-@media (max-width: 600px) {
-    form {
-        padding: 30px 22px;
-    }
 
-    .btn-voltar {
-        top: 15px;
-        left: 15px;
-        font-size: 0.85rem;
-        padding: 8px 14px;
-    }
-
-    h2 {
-        font-size: 1.3rem;
-        margin: 10px;
-    }
-}

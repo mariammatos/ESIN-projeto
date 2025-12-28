@@ -209,19 +209,6 @@ footer {
     margin-top: 50px;
 }
 
-/* ===== RESPONSIVIDADE ===== */
-@media (max-width: 500px) {
-    #login {
-        padding: 35px 30px;
-    }
-    
-    #login h2 {
-        font-size: 1.5rem;
-    }
-    
-    #registar h1 {
-        font-size: 1rem;
-    }
-}
+
 
 

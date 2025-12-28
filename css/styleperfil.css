@@ -243,22 +243,3 @@ footer {
     margin-top: 60px;
 }
 
-/* ===== RESPONSIVIDADE ===== */
-@media (max-width: 768px) {
-    .perfil-menu-barra {
-        flex-direction: column;
-        border-radius: 20px;
-        padding: 20px;
-        gap: 15px;
-    }
-    
-    .menu-spacer { display: none; }
-    
-    .menu-links-centrais {
-        gap: 20px;
-    }
-    
-    .btn-follow {
-        width: 100%;
-    }
-}
