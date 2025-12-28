@@ -2,6 +2,7 @@
 session_start();
 require_once 'database/db_connect.php';
 require_once 'database/posts.php';
+require_once 'database/media.php';
 
 
 
@@ -16,7 +17,7 @@ $db = getDatabaseConnection();
 $posts = getguardados($db, $current_user);
 $_SESSION['last_page'] = 'guardados.php';
 
-$css_especifico = 'styleguardados.css';
+$css_especifico = 'stylefeed.css';
 
 include_once 'templates/header_tpl.php';
 
@@ -36,30 +37,8 @@ include_once 'templates/header_tpl.php';
                 <p>Que tal começar a <a href="explorar.php">Explorar</a> novos viajantes?</p>
             </div>
         <?php else: ?>
-            <?php foreach ($posts as $post): ?>
-                <article class="post-viagem">
-                    <div class="post-header">
-                        <h2><?php echo htmlspecialchars($post['titulo']); ?></h2>
-                        <span class="autor">
-                            por 
-                            <a href="perfil.php?user=<?= urlencode($post['nome_de_utilizador']) ?>">
-                                @<?= htmlspecialchars($post['nome_de_utilizador']) ?> (<?= htmlspecialchars($post['nome']) ?>)
-                            </a>
-                        </span>
-                    </div>
-                    
-                    <div class="post-detalhes">
-                        <p><strong>Destino:</strong> <?php echo htmlspecialchars($post['cidade_local']); ?>, <?php echo htmlspecialchars($post['pais']); ?></p>
-                        <p><a href="viagem.php?id=<?php echo $post['id']; ?>">Ver todos os detalhes da viagem...</a></p>
-                    </div>
-
-                    <div class="post-interacoes">
-                        <?php $likes_count = getViagemLikesCount($db, $post['id']); ?>
-                        <?php $comentarios_count = getViagemComentariosCount($db, $post['id']); ?>
-                        <span><?php echo $likes_count; ?> Likes</span> | <span><?php echo $comentarios_count; ?> Comentários</span>
-                    </div>
-                    
-                </article>
+            <?php foreach ($posts as $viagem): ?>
+                <?php include 'templates/feed_tpl.php'; ?>
             <?php endforeach; ?>
         <?php endif; ?>
     </main>
