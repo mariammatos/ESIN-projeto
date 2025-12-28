@@ -34,7 +34,7 @@
                                 <input type="hidden" name="id" value="<?= $a['alojamento_id'] ?>">
                                 <input type="hidden" name="tipo" value="alojamento">
                                 <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
-                                <button type="submit" class="btn-delete" onclick="return confirm('Tem a certeza que deseja apagar este alojamento?');">🗑️</button>
+                                <button type="submit" class="btn-delete" onclick="return confirm('Tem a certeza que deseja apagar este alojamento?');">Apagar</button>
                             </form>
                         <?php endif; ?>
                     </li>
