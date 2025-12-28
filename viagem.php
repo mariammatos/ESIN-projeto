@@ -66,7 +66,8 @@ $last_page = $_SESSION['last_page'] ?? null;
 
 $_SESSION['last_page'] = 'viagem.php?'
 
-// --- 2. APRESENTAÇÃO HTML/CSS ---
+
+
 ?>
 
 
@@ -77,8 +78,6 @@ $_SESSION['last_page'] = 'viagem.php?'
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($viagem['titulo']); ?> | TripTales</title>
     <link rel="stylesheet" href="css/styleviagem.css">
-
-
 
 </head>
 <body>

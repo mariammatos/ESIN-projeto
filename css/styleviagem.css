@@ -30,12 +30,62 @@ section h2 {
     gap: 8px;
 }
 
-/* ================= HEADER ================= */
+/*================= HEADER ================= */
 
 header {
     background-color: #4e8098;
-    padding: 20px;
 }
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;            
+    text-decoration: none;
+}
+
+
+.logo img {
+    height: 140px;       
+    filter: brightness(1) invert(2); 
+    display: block;
+}
+
+.logo img:hover {
+    transform: scale(1.05); /* Pequeno efeito de zoom ao passar o rato */
+}
+
+.logo span {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;     
+    letter-spacing: 1px;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    color: #fcf7f8;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+nav ul li a:hover {
+    color: #334f5c
+}
+
 
 /* ==================== FEED ====================== */
 
