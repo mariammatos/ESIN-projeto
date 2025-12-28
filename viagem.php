@@ -264,12 +264,6 @@ $_SESSION['last_page'] = 'viagem.php?'
                         <button type="submit">Adicionar Alojamento</button>
                     </form>
 
-                    <form action="novo_alojamento.php" method="post">
-                        <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
-                        <input type="hidden" name="atividade" value="1">
-                        <button type="submit">Adicionar Atividade</button>
-                    </form>
-
                 <?php endif; ?>
             <?php else: ?>
                 <ul>
@@ -333,11 +327,6 @@ $_SESSION['last_page'] = 'viagem.php?'
             <?php if (count($alojamentos) === 0): ?>
                 <p>Sem alojamentos registados nesta viagem.</p>
                 <?php if ($current_user == $viagem['nome_de_utilizador']): ?>
-                    <form action="novo_alojamento.php" method="post">
-                        <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
-                        <input type="hidden" name="alojamento" value="1">
-                        <button type="submit">Adicionar Alojamento</button>
-                    </form>
 
                     <form action="novo_alojamento.php" method="post">
                         <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
