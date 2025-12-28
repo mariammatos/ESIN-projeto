@@ -55,6 +55,12 @@ function getuserwishlist($db, $username) {
     return $stmt->fetch(PDO::FETCH_COLUMN);
 }
 
+function criarwishlist($db, $username) {
+    $stmt = $db->prepare('INSERT INTO WishList (utilizador) VALUES (?)');
+    $stmt->execute(array($username));
+    return $db->lastInsertId();
+}
+
 function updateUser($db, $username, $email, $nome, $pais_de_origem, $preferencia_de_viagem, $foto_de_perfil) {
     $stmt = $db->prepare('UPDATE Utilizador SET email = ?, nome = ?, pais_de_origem = ?, preferencia_de_viagem = ?, foto_de_perfil = ? WHERE nome_de_utilizador = ?');
     $stmt->execute(array($email, $nome, $pais_de_origem, $preferencia_de_viagem, $foto_de_perfil, $username));
