@@ -181,6 +181,7 @@ color: #4e8098
 .btn-follow:not(.following) {
     background-color: #4e8098;
     color: #ffffff;
+    border-color:#4e8098 ;
 }
 
 .btn-follow:not(.following):hover {
