@@ -553,34 +553,53 @@ header {
 
 /* ========================= GALERIA FOTOS - CLICÁVEIS ========================= */
 
-.galeria-fotos {
-    margin-bottom: 30px;
-}
-
 .galeria-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+/* strip horizontal */
+.galeria-horizontal {
+    display: flex;
     gap: 12px;
-    margin-bottom: 20px;
 }
 
+/* cada foto */
 .foto-item {
-    position: relative;
-    cursor: pointer;
+    flex: 0 0 auto;
+    width: 220px;
+    aspect-ratio: 4 / 5; /* FORMATO INSTAGRAM */
+    border-radius: 12px;
     overflow: hidden;
-    border-radius: 8px;
-    aspect-ratio: 1;
+    background-color: #eee;
+    scroll-snap-align: start;
 }
 
+/* imagem */
 .foto-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform 0.35s ease;
 }
 
+/* hover */
 .foto-item:hover img {
     transform: scale(1.05);
+}
+
+/* scroll suave */
+.galeria-container {
+    scroll-snap-type: x mandatory;
+}
+
+.galeria-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.galeria-container::-webkit-scrollbar-thumb {
+    background-color: #ced3dc;
+    border-radius: 10px;
 }
 
 /* ========================= GALERIA (INSTAGRAM STYLE) ========================= */
