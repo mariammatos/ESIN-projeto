@@ -34,7 +34,7 @@
   </head>
   <body>
 
-  <a href="feed.php" class="btn-voltar">← Voltar ao Feed</a>
+  <a href="viagem.php?id=2" class="btn-voltar">← Voltar à Viagem</a>
 
   <section id="registration">
     <?php echo $msg ?>

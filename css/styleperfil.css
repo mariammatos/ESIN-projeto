@@ -99,6 +99,33 @@ color: #4e8098
 
 
 /* ===== PERFIL INFO ===== */
+
+
+.editar-perfil button {
+    max-width: 1200px;
+    margin: 10px auto;
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px 16px;
+    font-size: 0.9rem; 
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: inherit;
+    background-color: transparent; 
+    color: #a31621;
+    border: 1.5px solid #a31621;
+    border-radius: 20px; 
+    align-items: center;
+}
+
+.editar-perfil button:hover {
+    background-color: #a31621;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(163, 22, 33, 0.2);
+    transform: translateY(-1px);
+}
+
 .perfil-info {
     background-color: #fff;
     border-radius: 8px;
@@ -254,6 +281,12 @@ footer {
 
     .perfil-info {
         margin-bottom: 20px;
+    }
+
+
+    .editar-perfil button {
+        justify-content: center;
+        width: 14%; 
     }
 }
 

@@ -39,6 +39,10 @@ if ($atividade && $termo !== '') {
     <link rel="stylesheet" href="css/stylenovo_aloj.css">
 </head>
 <body>
+
+  <a href="viagem.php?id=2" class="btn-voltar">← Voltar à Viagem</a>
+
+
     <h4><?php echo $_SESSION['error'] ?? ''; unset($_SESSION['error']); ?></h4>
     <h4><?php echo $_SESSION['success'] ?? ''; unset($_SESSION['success']); ?></h4>  
     <?php if ($atividade): ?>
