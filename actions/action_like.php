@@ -9,7 +9,7 @@ $current_user = $_SESSION['username'];
 $liked_post = $_POST['post_id'];
 
 
-$like_exists = userLiked($db, $liked_post, $current_user); 
+$like_exists = userLikedViagem($db, $liked_post, $current_user); 
 
 if ($like_exists) {
     removerlike($db, $liked_post, $current_user);
