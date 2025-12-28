@@ -22,6 +22,7 @@ if (removerViagem($db, $viagem_id)) {
 }
 
 // Certifica-te de que perfil.php está no caminho correto
-header("Location: ../perfil.php");
+header("Location: ../perfil.php?user=" . urlencode($_SESSION['username']));
 exit();
+
 ?>
