@@ -40,7 +40,7 @@ if ($atividade && $termo !== '') {
 </head>
 <body>
 
-  <a href="perfil.php" class="btn-voltar">← Voltar ao Perfil</a>
+  <a href="viagem.php?id=<?= htmlspecialchars($viagem_id) ?>" class="btn-voltar">← Voltar</a>
 
 
     <h4><?php echo $_SESSION['error'] ?? ''; unset($_SESSION['error']); ?></h4>

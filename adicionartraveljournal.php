@@ -25,16 +25,17 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>TripTales</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/styletraveljournal.css"> 
-    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin%7CMerriweather" rel="stylesheet"> 
-  </head>
-  <body>
+<html lang="pt">
+<head>
+  <title>TripTales</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/styletraveljournal.css"> 
+  <link href="https://fonts.googleapis.com/css?family=Libre+Franklin%7CMerriweather" rel="stylesheet"> 
+</head>
+<body>
 
-  <a href="viagem.php?id=<?= htmlspecialchars($viagem_id) ?>" class="btn-voltar">← Voltar</a>
+<a href="viagem.php?id=<?= htmlspecialchars($viagem_id) ?>" class="btn-voltar">← Voltar</a>
+
 
   <section id="registration">
     <?php echo $msg ?>
