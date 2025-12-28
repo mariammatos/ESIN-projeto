@@ -7,7 +7,6 @@ $username = $_POST['username'] ?? '';
 
 if (strlen($username) == 0) {
     $_SESSION['msg1'] = 'Por favor, insira um nome de utilizador.';
-    // $_SESSION['form_data'] = $_POST;
     header('Location: ../registration.php');
     exit;
 }

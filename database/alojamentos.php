@@ -1,8 +1,7 @@
 <?php
 include_once 'destinos.php';
-// --- Funções de Alojamentos ---
 
-// Obter todos os alojamentos de uma viagem, incluindo média de avaliação
+// retorna todos os alojamentos da viagem e suas informações
 function getAlojamentosViagem($db, $viagem_id) {
     $stmt = $db->prepare(
         'SELECT 
@@ -26,7 +25,7 @@ function getAlojamentosViagem($db, $viagem_id) {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-// Pesquisa global de alojamentos por nome ou localização
+// retorna os alojamentos de acordo com a pesquisa 
 function procurarAlojamentosGlobais(PDO $db, string $termo): array {
     $termo = '%' . $termo . '%';
 
@@ -52,21 +51,17 @@ function procurarAlojamentosGlobais(PDO $db, string $termo): array {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-
+// adiciona um novo alojamento (novo hotel/airbnb/etc)
 function insertDetalheAlojamento($db, $nome, $localizacao, $tipo_alojamento) {
-    // Verificar se o tipo existe
     $stmtCheck = $db->prepare('SELECT tipo_alojamento FROM Tipo_alojamento WHERE tipo_alojamento = ?');
     $stmtCheck->execute([$tipo_alojamento]);
     if (!$stmtCheck->fetch()) {
         throw new Exception("O tipo de alojamento '$tipo_alojamento' não existe na tabela Tipo_alojamento");
     }
 
-    // Inserir detalhe base
     $stmt = $db->prepare('INSERT INTO Detalhes (nome, localizacao) VALUES (?, ?)');
     $stmt->execute([$nome, $localizacao]);
     $detalhe_id = $db->lastInsertId();
-
-    // Inserir tipo de alojamento
     $stmt2 = $db->prepare('INSERT INTO Detalhes_alojamento (id, tipo) VALUES (?, ?)');
     $stmt2->execute([$detalhe_id, $tipo_alojamento]);
 
@@ -74,14 +69,14 @@ function insertDetalheAlojamento($db, $nome, $localizacao, $tipo_alojamento) {
 }
 
 
-
+//adiciona um novo alojamento associado a uma viagem (não precisa de ser um hotel/ect novo)
 function insertAlojamento($db, $viagem_id, $detalhe_id, $data_inicio, $data_fim = null) {
     $stmt = $db->prepare('INSERT INTO Alojamento (data_inicio, data_fim, viagem, detalhes) VALUES (?, ?, ?, ?)');
     $stmt->execute([$data_inicio, $data_fim, $viagem_id, $detalhe_id]);
     return $db->lastInsertId();
 }
 
-
+//adiciona feedback a um alojamento
 function adicionarFeedbackAlojamento($db, $alojamento_id, $rating, $comentario = null, $precos = null) {
     $stmt = $db->prepare('INSERT INTO Feedback (rating, comentario, precos) VALUES (?, ?, ?)');
     $stmt->execute([$rating, $comentario, $precos]);
@@ -93,7 +88,7 @@ function adicionarFeedbackAlojamento($db, $alojamento_id, $rating, $comentario =
     return $feedback_id;
 }
 
-
+// retorna as informações sobre um alojamento
 function getDetalhesAlojamentoCompleto($db, $alojamento_id) {
     $stmt = $db->prepare('
         SELECT 
@@ -117,7 +112,7 @@ function getDetalhesAlojamentoCompleto($db, $alojamento_id) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-// Buscar todos os feedbacks de um alojamento
+// retorna todos os feedbacks de um alojamento
 function getFeedbacksAlojamento($db, $detalhe_id) {
     $stmt = $db->prepare('
         SELECT F.rating, F.comentario, F.precos, A.data_inicio
@@ -132,6 +127,7 @@ function getFeedbacksAlojamento($db, $detalhe_id) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+// retorna os alojamentos de um destino específico com base na pesquisa
 function procurarAlojamentosPorDestino($db, $destino_id, $termo) {
     $termo = '%' . mb_strtolower($termo, 'UTF-8') . '%'; 
     $db->sqliteCreateFunction('removeacentos', 'normalize_string', 1);
@@ -152,6 +148,8 @@ function procurarAlojamentosPorDestino($db, $destino_id, $termo) {
 
 
 #ATIVIDADES
+
+// retorna todas as atividades associadas a uma viagem específica
 function getAtividadesViagem($db, $viagem_id) {
     $stmt = $db->prepare(
         'SELECT 
@@ -176,7 +174,7 @@ function getAtividadesViagem($db, $viagem_id) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-// Pesquisa global de atividades por nome ou localização
+// retorna as atividades de acordo com a pesquisa
 function procurarAtividadesGlobais(PDO $db, string $termo): array {
     $termo = '%' . $termo . '%';
 
@@ -201,49 +199,44 @@ function procurarAtividadesGlobais(PDO $db, string $termo): array {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+# adiciona uma nova atividade (novo local de atividade)
 function insertDetalheAtividade($db, $nome, $localizacao, $tipo_atividade) {
-    // Verificar se o tipo existe
     $stmtCheck = $db->prepare('SELECT tipo_atividade FROM Tipo_atividade WHERE tipo_atividade = ?');
     $stmtCheck->execute([$tipo_atividade]);
     if (!$stmtCheck->fetch()) {
         throw new Exception("O tipo de atividade '$tipo_atividade' não existe na tabela Tipo_atividade");
     }
 
-    // Inserir detalhe base
     $stmt = $db->prepare('INSERT INTO Detalhes (nome, localizacao) VALUES (?, ?)');
     $stmt->execute([$nome, $localizacao]);
     $detalhe_id = $db->lastInsertId();
 
-    // Inserir tipo de atividade
     $stmt2 = $db->prepare('INSERT INTO Detalhes_atividade (id, tipo) VALUES (?, ?)');
     $stmt2->execute([$detalhe_id, $tipo_atividade]);
 
     return $detalhe_id;
 }
 
-// Inserir uma atividade associada a uma viagem (Apenas 1 Data)
+//adiciona uma nova atividade associado a uma viagem (não precisa de ser um hotel/ect novo)
 function insertAtividade($db, $viagem_id, $detalhe_id, $data) {
-    // Assumindo que a coluna na tabela Atividade se chama 'data'
     $stmt = $db->prepare('INSERT INTO Atividade (data, viagem, detalhes) VALUES (?, ?, ?)');
     $stmt->execute([$data, $viagem_id, $detalhe_id]);
     return $db->lastInsertId();
 }
 
-// Adicionar feedback a uma atividade
+// adiciona feedback a uma atividade
 function adicionarFeedbackAtividade($db, $atividade_id, $rating, $comentario = null, $precos = null) {
-    // Primeiro inserir o feedback
     $stmt = $db->prepare('INSERT INTO Feedback (rating, comentario, precos) VALUES (?, ?, ?)');
     $stmt->execute([$rating, $comentario, $precos]);
     $feedback_id = $db->lastInsertId();
 
-    // Depois associar à atividade
     $stmt2 = $db->prepare('INSERT INTO Feedback_atividade (id, atividade) VALUES (?, ?)');
     $stmt2->execute([$feedback_id, $atividade_id]);
 
     return $feedback_id;
 }
 
-// Buscar detalhes completos da atividade, rating global e viagem associada
+// retorna as informações completas sobre uma atividade
 function getDetalhesAtividadeCompleto(PDO $db, int $atividadeId): ?array {
     $stmt = $db->prepare("
         SELECT
@@ -269,7 +262,7 @@ function getDetalhesAtividadeCompleto(PDO $db, int $atividadeId): ?array {
     return $resultado ?: null;
 }
 
-// Buscar todos os feedbacks de uma atividade
+// retorna todos os feedbacks de uma atividade
 function getFeedbacksAtividade($db, $atividade_id) {
     $stmt = $db->prepare('
         SELECT F.rating, F.comentario, F.precos
@@ -283,6 +276,7 @@ function getFeedbacksAtividade($db, $atividade_id) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+// retorna as atividades de um destino específico com base na pesquisa
 function procurarAtividadesPorDestino($db, $destino_id, $termo) {
     $termo = '%' . mb_strtolower($termo, 'UTF-8') . '%';
     $db->sqliteCreateFunction('removeacentos', 'normalize_string', 1);
@@ -299,7 +293,7 @@ function procurarAtividadesPorDestino($db, $destino_id, $termo) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-// Busca feedbacks de QUALQUER atividade que partilhe o mesmo "Detalhe"
+// retorna todos os feedbacks de uma atividade (ex todos os feedbacks do louvre, etc)
 function getFeedbacksAtividadePorDetalhe($db, $detalhe_id) {
     $stmt = $db->prepare('
         SELECT F.rating, F.comentario, F.precos, A.data
@@ -314,21 +308,18 @@ function getFeedbacksAtividadePorDetalhe($db, $detalhe_id) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-#DELETE
+//remove atividade e feedbacks associados
 function removerAtividade($db, $atividade_id) {
-    // Apaga feedback associado
     $db->exec("DELETE FROM Feedback_atividade WHERE atividade = $atividade_id");
-    // Apaga a atividade
     $db->exec("DELETE FROM Atividade WHERE id = $atividade_id");
 }
-
+//remove atlojamento e feedbacks associados
 function removerAlojamento($db, $alojamento_id) {
-    // Apaga feedback associado
     $db->exec("DELETE FROM Feedback_alojamento WHERE alojamento = $alojamento_id");
-    // Apaga o alojamento
     $db->exec("DELETE FROM Alojamento WHERE id = $alojamento_id");
 }
 
+//verifica se a pessoa já deu feedback a um alojamento ou atividade
 function verificarFeedback($db, $id, $tipo) {
     if ($tipo === 'alojamento') {
         $stmt = $db->prepare('SELECT COUNT(*) FROM Feedback_alojamento WHERE alojamento = ?');

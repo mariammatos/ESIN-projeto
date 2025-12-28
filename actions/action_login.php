@@ -1,5 +1,6 @@
 <?php
 require_once '../database/db_connect.php';
+require_once '../database/users.php';
 
 session_start();
 
@@ -7,18 +8,6 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 $viagem = $_POST['viagem'] ?? null;
 
-// check if username and password are correct
-function loginSuccess($dbh, $username, $password) {
-    $stmt = $dbh->prepare('SELECT * FROM Utilizador WHERE nome_de_utilizador = ? AND palavra_passe = ?');
-    $stmt->execute(array($username, hash('sha256', $password)));
-    return $stmt->fetch();
-}
-
-// if login successful:
-// - redirect user to feed page
-// else:
-// - set error msg "Login failed!"
-// - redirect user back to index page
 
 try {
     $dbh = getDatabaseConnection();
@@ -35,7 +24,6 @@ try {
         exit();
     } else {
         $_SESSION['msg'] = 'Nome de utilizador ou password inválidos!';
-        // Redirecionamento alterado para a página inicial (se falhar)
         header('Location: ../login.php');
         exit();
     }

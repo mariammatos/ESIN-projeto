@@ -1,4 +1,6 @@
 <?php
+
+  // retorna as fotos associadas a uma viagem
   function getFotos($db, $viagem_id) {
     $stmt = $db->prepare(
         'SELECT 
@@ -17,6 +19,7 @@
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  // guarda fotos associadas a uma viagem
   function saveMediaViagem($db, $viagem_id) {
     $file = $_FILES['media_file'];
     $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
@@ -28,6 +31,7 @@
     move_uploaded_file($file['tmp_name'], $path);
   }
 
+  // guarda media associada a um feedback
   function saveMediaFeedback($db, $feedback_id) {
     $file = $_FILES['media_file'];
     $filename = basename($file['name']);

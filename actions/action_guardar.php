@@ -16,7 +16,6 @@ if ($guardado) {
 }
 
 
-// Redireciona de volta para a página da viagem
 header("Location: ../viagem.php?id=" . $post);
 exit;
 ?>

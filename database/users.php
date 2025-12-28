@@ -1,11 +1,20 @@
 <?php
 require_once 'destinos.php';
 
-    function insertUser($db, $username, $password, $email, $nome, $pais_de_origem, $preferencia_de_viagem, $foto_de_perfil) {
-        $stmt = $db->prepare('INSERT INTO Utilizador (nome_de_utilizador, email, nome, pais_de_origem, preferencia_de_viagem, foto_de_perfil, palavra_passe) VALUES (?, ?, ?, ?, ?, ?, ?)');
-        $stmt->execute(array($username, $email, $nome, $pais_de_origem, $preferencia_de_viagem, $foto_de_perfil, hash('sha256', $password)));
-    }
+// insere um novo utilizador
+function insertUser($db, $username, $password, $email, $nome, $pais_de_origem, $preferencia_de_viagem, $foto_de_perfil) {
+    $stmt = $db->prepare('INSERT INTO Utilizador (nome_de_utilizador, email, nome, pais_de_origem, preferencia_de_viagem, foto_de_perfil, palavra_passe) VALUES (?, ?, ?, ?, ?, ?, ?)');
+    $stmt->execute(array($username, $email, $nome, $pais_de_origem, $preferencia_de_viagem, $foto_de_perfil, hash('sha256', $password)));
+}
 
+// verifica o login
+function loginSuccess($dbh, $username, $password) {
+    $stmt = $dbh->prepare('SELECT * FROM Utilizador WHERE nome_de_utilizador = ? AND palavra_passe = ?');
+    $stmt->execute(array($username, hash('sha256', $password)));
+    return $stmt->fetch();
+}
+
+// guarda a foto de perfil do utilizador 
 function saveProfilePic($username) {
     $file = $_FILES['profile_pic'];
 
@@ -13,6 +22,7 @@ function saveProfilePic($username) {
     move_uploaded_file($file['tmp_name'], $uploadPath);
 }
 
+// verifica se o user 1 segue o user 2
 function usersegue($db, $utilizador1, $utilizador2) {
     $stmt = $db->prepare("
         SELECT COUNT(*) 
@@ -23,17 +33,19 @@ function usersegue($db, $utilizador1, $utilizador2) {
     return $stmt->fetchColumn() > 0;
 }
 
+// faz o user 1 seguir o user 2
 function seguir($db, $utilizador1, $utilizador2) {
     $stmt = $db->prepare("INSERT INTO Seguir (utilizador1, utilizador2, data) VALUES (?, ?, datetime('now'))");
     $stmt->execute([$utilizador1, $utilizador2]);
 }
 
+// user 1 deixa de seguir o user 2
 function deixarDeSeguir($db, $utilizador1, $utilizador2) {
     $stmt = $db->prepare("DELETE FROM Seguir WHERE utilizador1 = ? AND utilizador2 = ?");
     $stmt->execute([$utilizador1, $utilizador2]);
 }
 
-
+// procura utilizadores por pesquisa
 function procurarusers($db, $username_input) {
     $username_normalizado = normalize_string($username_input);
     $db->sqliteCreateFunction('removeacentos', 'normalize_string', 1);
@@ -43,24 +55,28 @@ function procurarusers($db, $username_input) {
     return $stmt->fetchAll(PDO::FETCH_COLUMN);
 }
 
+// retorna os detalhes sobre um utilizador
 function getuserdetails($db, $username) {
     $stmt = $db->prepare('SELECT * FROM Utilizador WHERE nome_de_utilizador = ?');
     $stmt->execute(array($username));
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+//retorna a wishlist de um utilizador
 function getuserwishlist($db, $username) {
     $stmt = $db->prepare('SELECT id FROM WishList WHERE utilizador = ?');
     $stmt->execute(array($username));
     return $stmt->fetch(PDO::FETCH_COLUMN);
 }
 
+// cria uma nova wishlist se o utilizador ainda não tiver
 function criarwishlist($db, $username) {
     $stmt = $db->prepare('INSERT INTO WishList (utilizador) VALUES (?)');
     $stmt->execute(array($username));
     return $db->lastInsertId();
 }
 
+//atualiza as informações do utilizador 
 function updateUser($db, $username, $email, $nome, $pais_de_origem, $preferencia_de_viagem, $foto_de_perfil) {
     $stmt = $db->prepare('UPDATE Utilizador SET email = ?, nome = ?, pais_de_origem = ?, preferencia_de_viagem = ?, foto_de_perfil = ? WHERE nome_de_utilizador = ?');
     $stmt->execute(array($email, $nome, $pais_de_origem, $preferencia_de_viagem, $foto_de_perfil, $username));
