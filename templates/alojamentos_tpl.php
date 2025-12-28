@@ -12,23 +12,25 @@
                         <?php else: ?>
                             Em andamento
                         <?php endif; ?><br>
-                        
-                        <div class="avaliacao-stars alojamento-stars">
-                            <span class="avaliacao-label">Avaliação:</span>
-                            <span class="stars">
-                                <?php 
-                                $media = $a['media_avaliacao'] ? round($a['media_avaliacao']) : 0;
-                                echo str_repeat('★', $media) . str_repeat('☆', 5 - $media);
-                                ?>
-                            </span>
-                            <span class="avaliacao-numero">
-                                <?= $a['media_avaliacao'] ? round($a['media_avaliacao'], 1) : 'N/A' ?>/5
-                            </span>
-                        </div>
+                            <?php if (verificarFeedback($db, $a['alojamento_id'], 'alojamento')): ?>
+                                <div class="avaliacao-stars alojamento-stars">
+                                    <span class="avaliacao-label">Avaliação:</span>
+                                    <span class="stars">
+                                        <?php 
+                                        $media = $a['media_avaliacao'] ? round($a['media_avaliacao']) : 0;
+                                        echo str_repeat('★', $media) . str_repeat('☆', 5 - $media);
+                                        ?>
+                                    </span>
+                                    <span class="avaliacao-numero">
+                                        <?= $a['media_avaliacao'] ? round($a['media_avaliacao'], 1) : 'N/A' ?>/5
+                                    </span>
+                                </div>
+                            <?php endif; ?>                        
                         
                         <?php if ($is_owner): ?>
-                            <a href="detalhes_alojamento.php?id=<?= $a['alojamento_id'] ?>&tipo=alojamento" class="btn-detalhes">Ver Detalhes</a>
-                            <a href="feedback_alojamento.php?id=<?= $a['alojamento_id'] ?>&tipo=alojamento" class="btn-feedback">Dar Feedback</a>
+                            <?php if (!verificarFeedback($db, $a['alojamento_id'], 'alojamento')): ?>
+                                <a href="feedback_alojamento.php?id=<?= $a['alojamento_id'] ?>&tipo=alojamento" class="btn-feedback">Dar Feedback</a>
+                            <?php endif; ?>
                             <!-- Botão Apagar Alojamento -->
                             <form method="post" action="actions/action_delete_aloj_ativ.php" style="display:inline;">
                                 <input type="hidden" name="id" value="<?= $a['alojamento_id'] ?>">
