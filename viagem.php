@@ -64,26 +64,15 @@ else {
 }
 $last_page = $_SESSION['last_page'] ?? null;
 
-$_SESSION['last_page'] = 'viagem.php?'
+$_SESSION['last_page'] = 'viagem.php?';
 
-
+$css_especifico = 'styleviagem.css';
+include_once 'templates/header_tpl.php';
 
 ?>
 
 
 <!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($viagem['titulo']); ?> | TripTales</title>
-    <link rel="stylesheet" href="css/styleviagem.css">
-
-</head>
-<body>
-
-    <header>
-        </header>
 
     <main class="viagem-detalhe-container">
         <?php if ($last_page === 'explorar.php'): ?>

@@ -80,16 +80,21 @@ background-color: #fcf7f8;
 color: #4e8098
 }
 
-.btn-signup {
+.btn-signup,
+.btn-logout {
     padding: 6px 14px;
     background-color: #a31621;
     border-radius: 4px;
 }
 
-.btn-signup:hover {
+.btn-signup:hover,
+.btn-logout:hover {
     background-color: #b66168 ;
     color: #fffae2
 }
+
+
+
 
 /* ================= MAIN ================= */
 
@@ -273,6 +278,29 @@ main {
     transform: translateY(-3px);
 }
 
+.btn-novaviagem {
+    background-color: whitesmoke;
+    color: #a31621;
+    border: 1.5px solid #a31621;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-novaviagem:hover {
+    background-color: #a31621;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(163, 22, 33, 0.2);
+}
+
+/* Ajuste para o símbolo de "+" ficar ligeiramente maior */
+.btn-novaviagem::before {
+    margin-right: 5px;
+    font-size: 1.1rem;
+}
 /* ================= FOOTER ================= */
 
 footer {
