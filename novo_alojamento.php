@@ -54,7 +54,7 @@ if ($atividade && $termo !== '') {
 
 
 <?php if ($alojamento && !$atividade): ?>
-    <h4>Procure um alojamento existente</h4>
+    <h3>Procure um alojamento existente</h4>
     <form method="post">
         <input type="hidden" name="viagem_id" value="<?= $viagem_id ?>">
         <input type="hidden" name="alojamento" value="1">
@@ -80,7 +80,7 @@ if ($atividade && $termo !== '') {
         <?php else: ?>
             <h5>Nenhum encontrado – crie um novo alojamento</h5>
         <?php endif; ?>
-        <h4>Ou adicione um novo:</h4>
+        <h4>Adicione um novo:</h4>
         <form action="actions/action_adicionaralojamento.php" method="post">
             <input type="hidden" name="viagem_id" value="<?= $viagem_id ?>">
             <input type="hidden" name="alojamento" value="1">
@@ -114,8 +114,10 @@ if ($atividade && $termo !== '') {
                 <input type="hidden" name="viagem_id" value="<?= $viagem_id ?>">
                 <input type="hidden" name="atividade" value="1"> 
                 <?php foreach ($matches as $a): ?>
-                    <input type="radio" name="detalhe_id" value="<?= $a['id'] ?>" required>
-                    <?= htmlspecialchars($a['nome'].' ('.$a['localizacao'].')') ?><br>
+                    <label class="radio-option">
+                        <input type="radio" name="detalhe_id" value="<?= $a['id'] ?>" required>
+                        <span><?= htmlspecialchars($a['nome'].' ('.$a['localizacao'].')') ?></span>
+                    </label>
                 <?php endforeach; ?>
 
                 <label>Data</label>
