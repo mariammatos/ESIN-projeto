@@ -22,6 +22,8 @@ $current_user = $_SESSION['username'];
 $db = getDatabaseConnection();
 $posts = getFeed($db, $current_user);
 
+$_SESSION['last_page'] = 'feed.php';
+
 // --- 2. APRESENTAÇÃO HTML/CSS ---
 ?>
 
