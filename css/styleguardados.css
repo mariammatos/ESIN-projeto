@@ -11,7 +11,7 @@ body {
     line-height: 1.6;
 }
 
-/* ================= HEADER ================= */
+/*================= HEADER ================= */
 
 header {
     background-color: #4e8098;
@@ -66,7 +66,6 @@ nav ul li a {
 nav ul li a:hover {
     color: #334f5c
 }
-
 
 /* ================= FEED ================= */
 
