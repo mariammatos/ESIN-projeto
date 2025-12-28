@@ -19,7 +19,7 @@ if ($tipo === 'alojamento') {
     $label_tipo = 'Alojamento';
 } else {
     $detalhes = getDetalhesAtividadeCompleto($db, $id);
-    $feedbacks = getFeedbacksAtividade($db, $detalhes['detalhe_id']);
+    $feedbacks = getFeedbacksAtividade($db, $detalhes['atividade_id']);
     $label_tipo = 'Atividade';
 }
 
