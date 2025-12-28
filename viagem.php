@@ -56,7 +56,14 @@ if ($traveljournal_id) {
     $has_journal = false;
 }
 
+if ($_SESSION['last_page'] == 'viagem.php?') {
+    $_SESSION['last_page'] = $_SESSION['last_page_2'];
+}
+else {
+    $_SESSION['last_page_2'] = $_SESSION['last_page'];
+}
 $last_page = $_SESSION['last_page'] ?? null;
+
 $_SESSION['last_page'] = 'viagem.php?'
 
 // --- 2. APRESENTAÇÃO HTML/CSS ---
@@ -84,6 +91,10 @@ $_SESSION['last_page'] = 'viagem.php?'
             <a href="explorar.php?search_user=<?= $_SESSION['search_user'] ?>&search_viagem=<?= $_SESSION['search_viagem'] ?>&search_alojamento=<?= $_SESSION['search_alojamento'] ?>&search_atividade=<?= $_SESSION['search_atividade'] ?>" class="btn-voltar">← Voltar à Pesquisa</a>
         <?php elseif ($last_page === 'feed.php'): ?>
             <a href="feed.php" class="btn-voltar">← Voltar ao Feed</a>
+        <?php elseif ($last_page === 'guardados.php'): ?>
+            <a href="guardados.php" class="btn-voltar">← Voltar às viagens guardadas</a>
+        <?php elseif (strpos($last_page, 'explorar_destino.php') !== false): ?>
+            <a href="<?= $last_page ?>" class="btn-voltar">← Voltar a explorar destino</a>
         <?php else: ?>
             <a href="<?= $last_page ?>" class="btn-voltar">← Voltar ao perfil</a>
         <?php endif; ?>

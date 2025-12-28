@@ -10,6 +10,10 @@ $destino = $_POST['destino_id'];
 $post = $_POST['post_id'];
 $wishlist = getuserwishlist($db, $current_user);
 
+if ($wishlist === false) {
+    $wishlist = criarwishlist($db, $current_user);
+}
+
 $guardado =  destinonaWishlist($db, $destino, $wishlist);
 if ($guardado) {
     removerwishlist($db, $destino, $wishlist);

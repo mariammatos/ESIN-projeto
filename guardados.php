@@ -14,6 +14,7 @@ $current_user = $_SESSION['username'];
 
 $db = getDatabaseConnection();
 $posts = getguardados($db, $current_user);
+$_SESSION['last_page'] = 'guardados.php';
 
 
 ?>
