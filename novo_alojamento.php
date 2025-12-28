@@ -9,16 +9,13 @@ $db = getDatabaseConnection();
 
 $viagem_id = (int)($_GET['viagem_id'] ?? $_POST['viagem_id'] ?? 0);
 
-// estado
 $alojamento = isset($_POST['alojamento']);
 $atividade  = isset($_POST['atividade']);
 
-// pesquisa
 $termo = $_POST['termo'] ?? '';
 
 $viagem = getViagemDetalhes($db, $viagem_id);
 
-// resultados
 $matches = [];
 
 if ($alojamento && $termo !== '') {

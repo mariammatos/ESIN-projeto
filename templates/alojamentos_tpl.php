@@ -31,7 +31,6 @@
                             <?php if (!verificarFeedback($db, $a['alojamento_id'], 'alojamento')): ?>
                                 <a href="feedback_alojamento.php?id=<?= $a['alojamento_id'] ?>&tipo=alojamento" class="btn-feedback">Dar Feedback</a>
                             <?php endif; ?>
-                            <!-- Botão Apagar Alojamento -->
                             <form method="post" action="actions/action_delete_aloj_ativ.php" style="display:inline;">
                                 <input type="hidden" name="id" value="<?= $a['alojamento_id'] ?>">
                                 <input type="hidden" name="tipo" value="alojamento">

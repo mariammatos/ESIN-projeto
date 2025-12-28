@@ -26,7 +26,7 @@
         </div>
     <?php endforeach; ?>
 
-                <?php if ($is_owner && count($fotos) < 16): ?>
+                <?php if ($is_owner && count($fotos) < 10): ?>
                     <form action="adicionarfotos.php" method="post" class="editar-fotos">
                         <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
                         <button type="submit">Adicionar Fotos</button>

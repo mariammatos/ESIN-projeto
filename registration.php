@@ -28,11 +28,9 @@ if ($editar) {
  $prefSelecionadas = [];
 
   if (!empty($_SESSION['pref'])) {
-      // Se já for um array (vem do formulário/POST), usa diretamente
       if (is_array($_SESSION['pref'])) {
           $prefSelecionadas = $_SESSION['pref'];
       } 
-      // Se for uma string (vem da Base de Dados), usa o explode
       else {
           $prefSelecionadas = array_map('trim', explode(',', $_SESSION['pref']));
       }
