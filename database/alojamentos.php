@@ -250,6 +250,7 @@ function getDetalhesAtividadeCompleto(PDO $db, int $atividadeId): ?array {
         SELECT
             A.id AS atividade_id,
             A.viagem AS viagem_id,
+            D.id AS detalhe_id,   /* <--- ADICIONADO: O ID do local/tipo de atividade */
             D.nome AS nome_atividade,
             D.localizacao,
             DA.tipo AS tipo_atividade,
@@ -298,3 +299,19 @@ function procurarAtividadesPorDestino($db, $destino_id, $termo) {
     $stmt->execute([$destino_id, $termo]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+// Busca feedbacks de QUALQUER atividade que partilhe o mesmo "Detalhe"
+function getFeedbacksAtividadePorDetalhe($db, $detalhe_id) {
+    $stmt = $db->prepare('
+        SELECT F.rating, F.comentario, F.precos, A.data
+        FROM Feedback F
+        JOIN Feedback_atividade FA ON F.id = FA.id
+        JOIN Atividade A ON FA.atividade = A.id
+        WHERE A.detalhes = :detalhe_id
+        ORDER BY F.id DESC
+    ');
+    $stmt->bindParam(':detalhe_id', $detalhe_id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+?>

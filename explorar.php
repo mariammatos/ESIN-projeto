@@ -123,7 +123,7 @@ if (!empty($pesquisa_user)) {
                     <article class="post-alojamento">
                         <div class="post-header">
                             <h2>
-                                <a href="detalhes_alojamento.php?id=<?= $a['alojamento_id'] ?>">
+                                <a href="detalhes_alojamento.php?id=<?= $a['detalhe_id']?>&tipo=alojamento">
                                     <?= htmlspecialchars($a['nome_alojamento']) ?>
                                 </a>
                             </h2>
