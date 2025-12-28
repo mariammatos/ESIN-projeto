@@ -294,5 +294,16 @@ function removerPublicacaoGuardada($db, $utilizador, $viagem_id) {
     $stmt->execute();
     return $stmt->fetchAll();
   }
-
+  
+function removerViagem($db, $viagem_id) {
+    // Apagar a viagem e todos os registos dependentes (feedback, alojamentos, atividades, etc.)
+    try {
+        $stmt = $db->prepare("DELETE FROM Viagens WHERE id = :id");
+        $stmt->bindParam(':id', $viagem_id, PDO::PARAM_INT);
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        error_log($e->getMessage());
+        return false;
+    }
+}
 ?>

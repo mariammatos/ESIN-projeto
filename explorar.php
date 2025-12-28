@@ -18,7 +18,11 @@ $pesquisa_viagem = $_GET['search_viagem'] ?? '';
 $pesquisa_alojamento = $_GET['search_alojamento'] ?? '';
 $pesquisa_atividade = $_GET['search_atividade'] ?? '';
 
-
+$_SESSION['last_page'] = 'explorar.php';
+$_SESSION['search_user'] = $pesquisa_user;
+$_SESSION['search_viagem'] = $pesquisa_viagem;
+$_SESSION['search_alojamento'] = $pesquisa_alojamento;
+$_SESSION['search_atividade'] = $pesquisa_atividade;
 
 $db = getDatabaseConnection();
 if (!empty($pesquisa_user)) {

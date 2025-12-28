@@ -314,4 +314,20 @@ function getFeedbacksAtividadePorDetalhe($db, $detalhe_id) {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+#DELETE
+function removerAtividade($db, $atividade_id) {
+    // Apaga feedback associado
+    $db->exec("DELETE FROM Feedback_atividade WHERE atividade = $atividade_id");
+    // Apaga a atividade
+    $db->exec("DELETE FROM Atividade WHERE id = $atividade_id");
+}
+
+function removerAlojamento($db, $alojamento_id) {
+    // Apaga feedback associado
+    $db->exec("DELETE FROM Feedback_alojamento WHERE alojamento = $alojamento_id");
+    // Apaga o alojamento
+    $db->exec("DELETE FROM Alojamento WHERE id = $alojamento_id");
+}
+
 ?>

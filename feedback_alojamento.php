@@ -24,7 +24,7 @@ if (!$item_id || !$viagem_id) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $comentario = trim($_POST['comentario'] ?? '');
-    $precos = trim($_POST['precos'] ?? '');
+    $precos = $precos = isset($_POST['precos']) ? (int)$_POST['precos'] : null;
     $rating = filter_var($_POST['rating'], FILTER_VALIDATE_INT, [
         'options' => ['min_range' => 0, 'max_range' => 5]
     ]);
@@ -69,6 +69,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="number" id="rating" name="rating" min="0" max="5" step="1" value="5" required>
             </div>
             
+            <div class="form-group">
+                <label>Preço:</label>
+                <div style="display: flex; gap: 15px; margin-top: 5px;">
+                    <label style="cursor: pointer;">
+                        <input type="radio" name="precos" value="0" required> Gratuito
+                    </label>
+                    <label style="cursor: pointer;">
+                        <input type="radio" name="precos" value="1"> $
+                    </label>
+                    <label style="cursor: pointer;">
+                        <input type="radio" name="precos" value="2"> $$
+                    </label>
+                    <label style="cursor: pointer;">
+                        <input type="radio" name="precos" value="3"> $$$
+                    </label>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label for="comentario">Comentário:</label>
                 <textarea id="comentario" name="comentario" placeholder="Partilhe a sua experiência com este <?= $tipo === 'alojamento' ? 'alojamento' : 'atividade' ?>..."></textarea>
