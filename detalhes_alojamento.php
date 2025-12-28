@@ -23,6 +23,18 @@ if ($tipo === 'alojamento') {
     $label_tipo = 'Atividade';
 }
 
+$media_real = 0;
+$total_reviews = count($feedbacks);
+
+if ($total_reviews > 0) {
+    $soma_ratings = 0;
+    foreach ($feedbacks as $fb) {
+        $soma_ratings += (int)$fb['rating'];
+    }
+    $media_real = $soma_ratings / $total_reviews;
+} else {
+    $media_real = null;
+}
 
 if (!$detalhes) {
     die("$label_tipo não encontrado.");
@@ -59,7 +71,7 @@ if (!$detalhes) {
             <p><strong>📍 Localização:</strong> <?= htmlspecialchars($detalhes['localizacao']) ?></p>
             <div class="rating-badge">
                 <span>Rating Global</span>
-                <strong><?= $detalhes['media_avaliacao'] !== null ? number_format($detalhes['media_avaliacao'], 1) . ' / 5.0' : '---' ?></strong>
+                <<strong><?= $media_real !== null ? number_format($media_real, 1) . ' / 5.0' : '---' ?></strong>
             </div>
         </div>
 
@@ -80,7 +92,15 @@ if (!$detalhes) {
                         <?php endif; ?>
                         
                         <?php if (!empty($fb['precos'])): ?>
-                            <p class="fb-precos">💰 Preço: <span><?= htmlspecialchars($fb['precos']) ?>€</span></p>
+                            <?php if ($fb['precos'] == 0): ?>
+                                <p class="fb-precos"> Preço: <span>Gratuito</span></p>
+                            <?php elseif ($fb['precos'] == 1): ?>
+                                <p class="fb-precos"> Preço: <span>$</span></p>
+                            <?php elseif ($fb['precos'] == 2): ?>
+                                <p class="fb-precos"> Preço: <span>$$</span></p>
+                            <?php elseif ($fb['precos'] == 3): ?>
+                                <p class="fb-precos"> Preço: <span>$$$</span></p>
+                            <?php endif; ?>
                         <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
@@ -88,8 +108,13 @@ if (!$detalhes) {
                 <p class="sem-feedback">Ainda não existem comentários.</p>
             <?php endif; ?>
         </div>
-
-        <a href="viagem.php?id=<?= (int)($detalhes['viagem_id'] ?? 0) ?>" class="btn-voltar-viagem">← Voltar à Viagem</a>
+        
+        <?php if ($_SESSION['last_page'] === 'explorar.php'): ?>
+            <a href="explorar.php?search_user=<?= $_SESSION['search_user'] ?>&search_viagem=<?= $_SESSION['search_viagem'] ?>&search_alojamento=<?= $_SESSION['search_alojamento'] ?>&search_atividade=<?= $_SESSION['search_atividade'] ?>" class="btn-voltar-viagem">← Voltar à Pesquisa</a>
+            <?php unset($_SESSION['last_page']); ?>
+        <?php else: ?>
+            <a href="viagem.php?id=<?= (int)($detalhes['viagem_id'] ?? 0) ?>" class="btn-voltar-viagem">← Voltar à Viagem</a>
+        <?php endif; ?>
     </main>
 </body>
 </html>
