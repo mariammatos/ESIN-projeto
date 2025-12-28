@@ -10,11 +10,9 @@
     position: absolute;
     top: 30px;
     left: 30px;
-
     display: inline-flex;
     align-items: center;
     gap: 8px;
-
     padding: 10px 16px;
     background-color: rgba(255, 255, 255, 0.9);
     color: #4e8098;
@@ -22,10 +20,8 @@
     font-size: 0.9rem;
     font-weight: 500;
     text-decoration: none;
-
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(6px);
-
     transition: all 0.25s ease;
     z-index: 10;
 }
@@ -55,10 +51,10 @@ body > div,
 body > form,
 .feedback-container {
     background-color: #ffffff;
-    padding: 45px 50px;
+    padding: 30px 50px;
     border-radius: 14px;
     width: 100%;
-    max-width: 520px;
+    max-width: 500px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
 }
 
@@ -77,13 +73,14 @@ h2 {
 form {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 2px;
+    padding: 5px 5px;
 }
 
 label {
@@ -92,6 +89,50 @@ label {
     font-weight: 500;
     display: block;
     margin-bottom: 8px;
+}
+
+/* ================= PREÇO ESTILO GOOGLE MAPS ================= */
+
+.price-selector {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.price-option {
+    cursor: pointer;
+    flex: 1; /* Faz os botões dividirem o espaço igualmente */
+    min-width: 80px;
+}
+
+.price-option input {
+    display: none; /* Esconde o rádio original */
+}
+
+.price-option span {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    border: 2px solid #ced3dc;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #555;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+/* Efeito ao passar o rato */
+.price-option:hover span {
+    border-color: #4e8098;
+    background-color: #f0f7fa;
+}
+
+/* Estilo selecionado (Google Maps style) */
+.price-option input:checked + span {
+    background-color: #4e8098;
+    border-color: #4e8098;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(78, 128, 152, 0.3);
 }
 
 /* ================= INPUTS ================= */
@@ -142,6 +183,7 @@ textarea:focus {
     margin-top: 8px;
 }
 
+
 /* ================= BOTÃO ENVIAR ================= */
 
 button[type="submit"] {
@@ -171,13 +213,13 @@ button[type="submit"]:active {
 }
 
 /* ===== FOOTER ===== */
+
 footer {
-    margin-top: 20px;
-    padding: 15px;
-    font-size: 0.85rem;
-    color: #ffffff;
-    opacity: 0.85;
     text-align: center;
+    margin-top: 35px;
+    color: #ffffff;
+    font-size: 0.85rem;
+    opacity: 0.85;
 }
 
 /* ================= RESPONSIVIDADE ================= */
@@ -187,6 +229,7 @@ footer {
     body > form,
     .feedback-container {
         padding: 35px 25px;
+        align-items: center;
     }
     
     h2 {
