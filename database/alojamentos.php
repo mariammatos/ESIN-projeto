@@ -101,6 +101,7 @@ function getDetalhesAlojamentoCompleto($db, $alojamento_id) {
         SELECT 
             A.id AS alojamento_id,
             A.viagem AS viagem_id,
+            D.id AS detalhe_id,  /* <--- ADICIONADO ISTO */
             D.nome AS nome_alojamento,
             D.localizacao,
             DA.tipo AS tipo_alojamento,
@@ -119,15 +120,16 @@ function getDetalhesAlojamentoCompleto($db, $alojamento_id) {
 }
 
 // Buscar todos os feedbacks de um alojamento
-function getFeedbacksAlojamento($db, $alojamento_id) {
+function getFeedbacksAlojamento($db, $detalhe_id) {
     $stmt = $db->prepare('
-        SELECT F.rating, F.comentario, F.precos
-        FROM Feedback_alojamento FA
-        JOIN Feedback F ON F.id = FA.id
-        WHERE FA.alojamento = :alojamento_id
+        SELECT F.rating, F.comentario, F.precos, A.data_inicio
+        FROM Feedback F
+        JOIN Feedback_alojamento FA ON F.id = FA.id
+        JOIN Alojamento A ON FA.alojamento = A.id
+        WHERE A.detalhes = :detalhe_id
         ORDER BY F.id DESC
     ');
-    $stmt->bindParam(':alojamento_id', $alojamento_id, PDO::PARAM_INT);
+    $stmt->bindParam(':detalhe_id', $detalhe_id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

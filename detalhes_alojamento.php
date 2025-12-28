@@ -12,7 +12,7 @@ if (!$alojamento_id) {
 
 // Buscar detalhes do alojamento, rating global e comentários
 $detalhes = getDetalhesAlojamentoCompleto($db, $alojamento_id);
-$feedbacks = getFeedbacksAlojamento($db, $alojamento_id);
+$feedbacks = getFeedbacksAlojamento($db, $detalhes['detalhe_id']);
 
 if (!$detalhes) {
     die('Alojamento não encontrado.');
@@ -47,7 +47,7 @@ if (!$detalhes) {
                 <?php foreach ($feedbacks as $fb): ?>
                     <div class="feedback-item">
                         <div class="fb-header">
-                            <span class="stars"><?= str_repeat('⭐', (int)$fb['rating']) ?></span>
+                            <span class="stars"><?= str_repeat('★', (int)$fb['rating']) ?></span>
                             <span class="fb-rating"><?= (int)$fb['rating'] ?>/5</span>
                         </div>
                         
