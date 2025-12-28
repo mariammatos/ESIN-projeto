@@ -254,7 +254,9 @@ if ($traveljournal_id) {
                         </div>
                         
                         <?php if ($is_owner): ?>
-                            <a href="feedback_alojamento.php?alojamento_id=<?= $a['alojamento_id'] ?>" class="btn-feedback">Dar Feedback</a>
+                            <a href="detalhes_alojamento.php?id=<?= $a['alojamento_id'] ?>&tipo=alojamento" class="btn-detalhes">Ver Detalhes</a>
+                            <a href="feedback_alojamento.php?id=<?= $a['alojamento_id'] ?>&tipo=alojamento" class="btn-feedback">Dar Feedback</a>
+
                         <?php endif; ?>
                     </li>
                 <?php endforeach; ?>
@@ -310,7 +312,9 @@ if ($traveljournal_id) {
                         </div>
                         
                         <?php if ($is_owner): ?>
-                            <a href="feedback_alojamento.php?alojamento_id=<?= $a['atividade_id'] ?>" class="btn-feedback">Dar Feedback</a>
+                            <a href="detalhes_alojamento.php?id=<?= $a['atividade_id'] ?>&tipo=atividade" class="btn-detalhes">Ver Detalhes</a>
+                            <a href="feedback_alojamento.php?id=<?= $a['atividade_id'] ?>&tipo=atividade" class="btn-feedback">Dar Feedback</a>
+
                         <?php endif; ?>
                     </li>
                 <?php endforeach; ?>
