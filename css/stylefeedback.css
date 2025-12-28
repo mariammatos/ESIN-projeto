@@ -260,31 +260,3 @@ footer {
     background: transparent;
 }
 
-/* ================= RESPONSIVIDADE ================= */
-
-@media (max-width: 600px) {
-    .feedback-container {
-        padding: 30px 20px;
-        margin: 60px 10px 60px 10px;
-    }
-    
-    h2 {
-        font-size: 1.4rem;
-        margin-bottom: 25px;
-    }
-    
-    .btn-voltar {
-        top: 15px;
-        left: 15px;
-        font-size: 0.85rem;
-        padding: 8px 14px;
-    }
-    
-    .price-selector {
-        flex-direction: column;
-    }
-    
-    .price-option {
-        width: 100%;
-    }
-}

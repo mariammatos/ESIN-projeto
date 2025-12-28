@@ -209,21 +209,3 @@ footer {
     margin-top: auto;
 }
 
-/* ================= RESPONSIVIDADE ================= */
-
-@media (max-width: 600px) {
-    body > div,
-    body > form,
-    .feedback-container {
-        padding: 35px 25px;
-    }
-    
-    h2 {
-        font-size: 1.4rem;
-        margin-bottom: 25px;
-    }
-    
-    .stars {
-        font-size: 1.6rem;
-    }
-}

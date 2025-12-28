@@ -66,6 +66,7 @@ $last_page = $_SESSION['last_page'] ?? null;
 $_SESSION['last_page'] = 'viagem.php?';
 
 $css_especifico = 'styleviagem.css';
+
 include_once 'templates/header_tpl.php';
 
 ?>
