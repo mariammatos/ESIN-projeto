@@ -54,7 +54,7 @@ $destinos = getwishlistdestinos($db, $wishlist_id);
         <?php if (isset($error_message)): ?>
             <p class="error"><?php echo $error_message; ?></p>
         <?php elseif (empty($destinos)): ?>
-            <div class="sem-destinos">
+            <div class="sem-posts">
                 <p>Sem destinos na WishList.</p>
                 <p>Que tal começar a <a href="explorar.php">Explorar</a> novos locais?</p>
             </div>
