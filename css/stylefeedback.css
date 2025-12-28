@@ -142,13 +142,6 @@ textarea:focus {
     margin-top: 8px;
 }
 
-.stars {
-    font-size: 2rem;
-    color: #ffd700;
-    letter-spacing: 4px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 /* ================= BOTÃO ENVIAR ================= */
 
 button[type="submit"] {
@@ -175,6 +168,16 @@ button[type="submit"]:hover {
 button[type="submit"]:active {
     transform: translateY(0);
     box-shadow: 0 4px 8px rgba(163, 22, 33, 0.2);
+}
+
+/* ===== FOOTER ===== */
+footer {
+    margin-top: 20px;
+    padding: 15px;
+    font-size: 0.85rem;
+    color: #ffffff;
+    opacity: 0.85;
+    text-align: center;
 }
 
 /* ================= RESPONSIVIDADE ================= */

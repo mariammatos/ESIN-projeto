@@ -231,6 +231,16 @@ form button[type="submit"]:not(:last-child):hover {
     color: #ffffff;
 }
 
+/* ===== FOOTER ===== */
+footer {
+    margin-top: 20px;
+    padding: 15px;
+    font-size: 0.85rem;
+    color: #ffffff;
+    opacity: 0.85;
+    text-align: center;
+}
+
 /* ================= RESPONSIVO ================= */
 @media (max-width: 600px) {
     form {
