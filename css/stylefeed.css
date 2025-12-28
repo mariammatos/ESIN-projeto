@@ -199,7 +199,8 @@ footer {
     margin-top: 50px;
 }
 
-/* ============== responsivo =================*/
+/* ============== RESPONSIVO =================*/
+
 @media (max-width: 700px) {
     .post-fotos {
         grid-template-columns: repeat(2, 1fr);
