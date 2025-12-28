@@ -35,8 +35,8 @@
                     <li><a href="feed.php">Feed</a></li>
                     <li><a href="explorar.php">Explorar</a></li>
                     <li><a href="perfil.php?user=<?php echo htmlspecialchars($current_user); ?>">Perfil</a></li>
-                    <li><a href="logout.php" class="btn-logout">Sair</a></li>
                     <li><a href="nova_viagem.php" class="btn-novaviagem"> + Nova Viagem</a></li>
+                    <li><a href="logout.php" class="btn-logout">Sair</a></li>
                 <?php endif; ?>
             </ul>
         </nav>
