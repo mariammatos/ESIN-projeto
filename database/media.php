@@ -19,7 +19,8 @@
 
   function saveMediaViagem($db, $viagem_id) {
     $file = $_FILES['media_file'];
-    $filename = basename($file['name']);
+    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+    $filename = $viagem_id . '_' . uniqid() . '.' . $extension;
     $path = "../media/viagens/$filename";
     $data = date('Y-m-d H:i:s');
     $stmt = $db->prepare('INSERT INTO Media (Viagem, path, data) VALUES (?, ?, ?)');
