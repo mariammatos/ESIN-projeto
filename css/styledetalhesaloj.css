@@ -1,4 +1,4 @@
-/* ===== RESET ===== */
+
 * {
     margin: 0;
     padding: 0;
@@ -147,7 +147,6 @@ button[type="submit"]:active {
 }
 
 
-/* Ajuste do Cartão Principal */
 .detalhes-card {
     background-color: #ffffff;
     padding: 40px;
@@ -157,7 +156,6 @@ button[type="submit"]:active {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
 }
 
-/* Títulos e Tags */
 .tipo-tag {
     text-align: center;
     background: #f0f7fa;
@@ -185,7 +183,6 @@ button[type="submit"]:active {
     margin-top: 10px;
 }
 
-/* Lista de Feedback */
 .lista-feedback {
     margin: 20px 0;
     max-height: 400px;
@@ -218,7 +215,6 @@ button[type="submit"]:active {
     color: #666;
 }
 
-/* Botão Voltar */
 .btn-voltar-viagem {
     display: block;
     text-align: center;
@@ -239,6 +235,19 @@ hr {
     margin: 20px 0;
 }
 
+/* ================= FOOTER ================= */
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 15px;
+    color: #ffffff;
+    opacity: 0.85;
+    background: transparent;
+}
 /* ================= RESPONSIVIDADE ================= */
 
 @media (max-width: 600px) {

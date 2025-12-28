@@ -1,4 +1,4 @@
-/* ===== RESET & BASE ===== */
+
 * {
     margin: 0;
     padding: 0;
@@ -23,7 +23,7 @@ body {
     width: 100%;
 }
 
-/* ===== NOVA BARRA DE MENU (WISH LIST / EDITAR) ===== */
+/* ===== MENU WISH LIST / EDITAR ===== */
 .perfil-menu-barra {
     display: flex;
     align-items: center;
@@ -55,7 +55,7 @@ body {
     color: #a31621;
 }
 
-/* Espaçador para manter o centro perfeito */
+
 .menu-spacer {
     width: 120px; 
 }
@@ -173,7 +173,7 @@ body {
 .cartao {
     background-color: #FCF7F8;
     border-radius: 10px;
-    overflow: hidden; /* Garante que a imagem não sai das bordas */
+    overflow: hidden; 
     border-left: 5px solid #90c2e7;
     transition: all 0.3s ease;
     display: flex;

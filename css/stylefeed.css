@@ -1,4 +1,4 @@
-/* RESET */
+
 * {
     margin: 0;
     padding: 0;
@@ -40,7 +40,7 @@ nav {
 }
 
 .logo img:hover {
-    transform: scale(1.05); /* Pequeno efeito de zoom ao passar o rato */
+    transform: scale(1.05); 
 }
 
 .logo span {
@@ -138,7 +138,7 @@ nav ul li a:hover {
     color: #555;
 }
 
-/* ===== GALERIA DE FOTOS NO FEED ===== */
+/* ===== FOTOS NO FEED ===== */
 
 .post-fotos {
     display: grid;
@@ -162,7 +162,7 @@ nav ul li a:hover {
     transition: transform 0.4s ease;
 }
 
-/* zoom suave ao passar o rato */
+
 .post-viagem:hover .post-foto img {
     transform: scale(1.08);
 }

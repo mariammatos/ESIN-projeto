@@ -1,4 +1,4 @@
-/* ===== RESET ===== */
+
 * {
     margin: 0;
     padding: 0;
@@ -10,11 +10,9 @@
     position: absolute;
     top: 30px;
     left: 30px;
-
     display: inline-flex;
     align-items: center;
     gap: 8px;
-
     padding: 10px 16px;
     background-color: rgba(255, 255, 255, 0.9);
     color: #4e8098;
@@ -22,10 +20,8 @@
     font-size: 0.9rem;
     font-weight: 500;
     text-decoration: none;
-
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(6px);
-
     transition: all 0.25s ease;
     z-index: 10;
 }
@@ -49,7 +45,7 @@ body {
     padding: 20px;
 }
 
-/* ===== MENSAGENS PHP ===== */
+/* ===== MENSAGENS PHP===== */
 body > p,
 #registration > p {
     padding: 12px 16px;
@@ -102,7 +98,7 @@ body > p,
 }
 
 
-/* ===== INPUTS E TEXTAREA ===== */
+/* ===== INPUTS  ===== */
 #registration input,
 #registration textarea {
     padding: 14px 16px;
@@ -119,7 +115,7 @@ body > p,
     resize: vertical;
 }
 
-/* ===== INPUT FILE ESTILIZADO ===== */
+
 #registration input[type="file"] {
     padding: 14px 16px;
     background-color: #fafafa;
@@ -142,7 +138,7 @@ body > p,
     box-shadow: 0 0 0 3px rgba(78, 128, 152, 0.25);
 }
 
-/* Estilizar o botão "Escolher ficheiro" */
+
 #registration input[type="file"]::file-selector-button {
     padding: 10px 18px;
     background-color: #fcf7f8;
@@ -178,7 +174,7 @@ body > p,
 }
 
 
-/* ================= LISTA DE PAÍSES ================= */
+/* ================= RADIO BUTTONS ================= */
 
 .form-group p {
     font-size: 0.85rem;
@@ -197,12 +193,10 @@ body > p,
 
 
 
-/* Esconde o círculo original do rádio */
 .radio-option input[type="radio"] {
     display: none;
 }
 
-/* Transforma a label/container num botão clicável */
 .radio-option {
     display: flex;
     align-items: center;
@@ -225,7 +219,6 @@ body > p,
 }
 
 
-/* Organiza os países em grelha  */
 .radio-group {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -253,14 +246,11 @@ body > p,
 }
 
 
-/* ================= PREFERÊNCIAS ================= */
 
-/* Esconde a checkbox original */
 .checkbox-option input[type="checkbox"] {
     display: none;
 }
 
-/* Grid para organizar as preferências */
 .checkbox-group {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -270,7 +260,6 @@ body > p,
     margin-top: 10px;
 }
 
-/* Estilo do botão da checkbox */
 .checkbox-option {
     display: flex;
     align-items: center;
@@ -286,13 +275,11 @@ body > p,
     width: 100%;
 }
 
-/* Hover */
 .checkbox-option:hover {
     border-color: lightblue;
     background-color: #f0f7fa;
 }
 
-/* Check mark quando selecionado */
 .checkbox-option:has(input[type="checkbox"]:checked)::after {
     content: "✓";
     font-weight: bold;
@@ -300,7 +287,6 @@ body > p,
     color: #ffffff;
 }
 
-/* Estilo quando selecionado */
 .checkbox-option:has(input[type="checkbox"]:checked) {
     background-color: lightblue;
     border-color: lightblue;
@@ -309,7 +295,7 @@ body > p,
     box-shadow: 0 4px 10px rgba(78, 128, 152, 0.3);
 }
 
-/* ================= BOTÕES TIPO "VERIFICAR" ================= */
+/* ================= BOTÕES ================= */
 
 .form-group button[formnovalidate] {
     background-color: #fcf7f8;
@@ -338,7 +324,6 @@ body > p,
     transform: translateY(0);
 }
 
-/* ===== BOTÃO REGISTAR ===== */
 
 #registration button[type="submit"]:not([formnovalidate]) {
     width: 100%;
