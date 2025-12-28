@@ -137,7 +137,7 @@ if (!empty($pesquisa_user)) {
                         <div class="post-detalhes">
                             <p><strong>Localização:</strong> <?php echo htmlspecialchars($a['localizacao']); ?></p>
                             <p><strong>Rating Global:</strong> <?php echo $a['media_avaliacao'] !== null ? number_format($a['media_avaliacao'], 1) . ' / 5' : 'Sem avaliações'; ?></p>
-                            <a href="detalhes_alojamento.php?id=<?= $a['alojamento_id'] ?>">Ver detalhes do alojamento...</a>
+                            <a href="detalhes_alojamento.php?id=<?= $a['detalhe_id'] ?>">Ver detalhes do alojamento...</a>
                         </div>
                     </article>
                 <?php endforeach; ?>
@@ -178,15 +178,17 @@ if (!empty($pesquisa_user)) {
                         </div>
                         
                         <div class="post-detalhes">
-                                    <?php 
-                                        $fotos_post = getFotos($db, $post['id']); // todas as fotos da viagem
+                                    <?php
+                                        $fotos_post = array_slice(getFotos($db, $post['id']), 0, 4);
                                         if (!empty($fotos_post)):
-                                            $foto_principal = $fotos_post[0]; // a de menor id
                                     ?>
-                                        <div class="post-foto">
-                                            <img src="<?= htmlspecialchars($foto_principal['path']); ?>" 
-                                                alt="Foto da viagem <?= htmlspecialchars($post['titulo']); ?>" 
-                                                width="200" height="200">
+                                        <div class="post-fotos">
+                                            <?php foreach ($fotos_post as $foto): ?>
+                                                <div class="post-foto">
+                                                    <img src="<?= htmlspecialchars($foto['path']); ?>"
+                                                        alt="Foto da viagem <?= htmlspecialchars($post['titulo']); ?>">
+                                                </div>
+                                            <?php endforeach; ?>
                                         </div>
                                     <?php endif; ?>
                             <p><strong>Destino:</strong> <?php echo htmlspecialchars($post['cidade_local']); ?>, <?php echo htmlspecialchars($post['pais']); ?></p>

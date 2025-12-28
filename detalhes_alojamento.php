@@ -108,6 +108,7 @@ if (!$detalhes) {
                 <p class="sem-feedback">Ainda não existem comentários.</p>
             <?php endif; ?>
         </div>
+
         
         <?php if ($_SESSION['last_page'] === 'explorar.php'): ?>
             <a href="explorar.php?search_user=<?= $_SESSION['search_user'] ?>&search_viagem=<?= $_SESSION['search_viagem'] ?>&search_alojamento=<?= $_SESSION['search_alojamento'] ?>&search_atividade=<?= $_SESSION['search_atividade'] ?>" class="btn-voltar-viagem">← Voltar à Pesquisa</a>
@@ -115,6 +116,7 @@ if (!$detalhes) {
         <?php else: ?>
             <a href="viagem.php?id=<?= (int)($detalhes['viagem_id'] ?? 0) ?>" class="btn-voltar-viagem">← Voltar à Viagem</a>
         <?php endif; ?>
+
     </main>
 </body>
 </html>
