@@ -26,7 +26,6 @@ if ($jaSegue) {
     seguir($db, $utilizador1, $utilizador2);
 }
 
-// Voltar ao perfil
 header("Location: ../perfil.php?user=" . $utilizador2);
 exit();
 

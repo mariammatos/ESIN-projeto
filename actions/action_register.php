@@ -47,7 +47,7 @@ if (!$editar) {
 
     try {
 
-        insertUser($dbh, $username, $password, $email, $nome, $pais_de_origem, $preferencia_de_viagem, $foto_de_perfil); // Parâmetros adicionados
+        insertUser($dbh, $username, $password, $email, $nome, $pais_de_origem, $preferencia_de_viagem, $foto_de_perfil);
         saveProfilePic($username);
         unset($_SESSION['form_data']);
         $_SESSION['username'] = $username;
@@ -58,11 +58,11 @@ if (!$editar) {
         $error_msg = $e->getMessage();
 
         if (strpos($error_msg, 'UNIQUE')) {
-            $_SESSION['msg'] = 'Nome de utilizador ou E-mail já existe(m)!'; // Mensagem ajustada
-        } else if (strpos($error_msg, 'FOREIGN KEY constraint failed')) { // Adicionado para capturar erros de FK (ex: País não existe)
+            $_SESSION['msg'] = 'Nome de utilizador ou E-mail já existe(m)!'; 
+        } else if (strpos($error_msg, 'FOREIGN KEY constraint failed')) { 
             $_SESSION['msg'] = 'O País de origem selecionado é inválido. Tente novamente.';
         } else {
-            $_SESSION['msg'] = "Falha no Registo! ($error_msg)"; // Mensagem ajustada
+            $_SESSION['msg'] = "Falha no Registo! ($error_msg)"; 
         }
         header('Location: ..\registration.php');
     }

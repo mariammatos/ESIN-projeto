@@ -17,7 +17,6 @@ if ($like_exists) {
     like($db, $liked_post, $current_user);
 }
 
-// Redireciona de volta para a página da viagem
 header("Location: ../viagem.php?id=" . $liked_post);
 exit;
 ?>

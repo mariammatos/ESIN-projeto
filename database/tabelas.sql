@@ -79,7 +79,7 @@ CREATE TABLE Media (
     Viagem INTEGER,
     Feedback INTEGER,
 
-    FOREIGN KEY (TravelJournal) REFERENCES TravelJournals(id),
+    FOREIGN KEY (Viagem) REFERENCES Viagem(id),
     FOREIGN KEY (Feedback) REFERENCES Feedback(id)
 );
 

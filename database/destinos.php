@@ -1,5 +1,6 @@
 <?php
 
+    // necessária para as pesquisas
     function normalize_string($string) {
         $string = mb_strtolower($string, 'UTF-8');
         return preg_replace(
@@ -11,7 +12,7 @@
         );
     }
 
-
+    // retorna o id do destino dado país e local
     function getDestinoId($db, $pais, $local) {
         $local_normalizado = normalize_string($local);
         $db->sqliteCreateFunction('removeacentos', 'normalize_string', 1);
@@ -20,13 +21,15 @@
         $stmt->execute(array($pais, $local_normalizado));
         return $stmt->fetchColumn();
     }
-
+    
+    // insere um novo destino na base de dados
     function insertdestino($db, $pais, $local) {
         $stmt = $db->prepare('INSERT INTO Destino (cidade_local, pais) VALUES (?, ?)');
         $stmt->execute(array($local, $pais));
         return $db->lastInsertId();
     }
 
+    // retorna países por pesquisa
     function procurarpaises($db, $pais_input) {
         $pais_normalizado = normalize_string($pais_input);
         $db->sqliteCreateFunction('removeacentos', 'normalize_string', 1);
@@ -36,7 +39,7 @@
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
 
-
+    // verifica se um destino está na wishlist do utilizador
     function destinonaWishlist($db, $destino, $wishlist) {
         $stmt = $db->prepare("SELECT COUNT(*) FROM Adicionar_wishlist WHERE destino = :destino AND wishlist = :wishlist");
         $stmt->bindParam(':destino', $destino);
@@ -47,16 +50,19 @@
         return $guardado > 0;
     }
 
+    // adiciona um destino à wishlist
     function adicionarwishlist($db, $destino, $wishlist) {
         $stmt = $db->prepare('INSERT INTO Adicionar_wishlist (destino, wishlist) VALUES (?, ?)');
         $stmt->execute(array($destino, $wishlist));
     }
 
+    // remove um destino da wishlist
     function removerwishlist($db, $destino, $wishlist) {
         $stmt = $db->prepare('DELETE FROM Adicionar_wishlist WHERE destino = ? AND wishlist = ?');
         $stmt->execute(array($destino, $wishlist));
     }
 
+    // retorna os destinos na wishlist de um utilizador
     function getwishlistdestinos($db, $wishlist) {
         $stmt = $db->prepare(
             'SELECT D.id, D.cidade_local, D.pais
@@ -68,8 +74,8 @@
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    // retorna os detalhes de um destino
     function getDestino($db, $id) {
-        $local_normalizado = normalize_string($local);
         $db->sqliteCreateFunction('removeacentos', 'normalize_string', 1);
 
         $stmt = $db->prepare('SELECT cidade_local, pais FROM Destino WHERE id = ?');
