@@ -51,8 +51,8 @@ if ($editar) {
   </head>
   <body>
 
-    <?php if (!isset($editar)): ?>
-      <a href="login.php" class="btn-voltar">← Voltar ao Login</a>
+    <?php if (!$editar): ?>
+      <a href="index.php" class="btn-voltar">← Voltar</a>
     <?php else: ?>
       <a href="perfil.php?user=<?= urlencode($_SESSION['form_data']['username']) ?>" class="btn-voltar">← Voltar ao Perfil</a>
     <?php endif; ?>
@@ -88,18 +88,6 @@ if ($editar) {
         <?php endif; ?>
       </div>
 
-      <?php if (!$editar): ?>
-        <div class="form-group">
-          <label for="password">Palavra-passe:</label>
-          <input type="password" id="password" name="password">
-        </div>
-
-        <div class="form-group">
-          <label for="password_confirm">Confirmar palavra-passe:</label>
-          <input type="password" id="password_confirm" name="password_confirm" required>
-            <div id="password-match-message" class="validation-message" style="display: none;"></div>
-        </div>
-      <?php endif; ?>
 
       <div class="form-group">
         <label for="email">Endereço de e-mail:</label>
@@ -112,7 +100,7 @@ if ($editar) {
       </div>
 
         <div class="form-group">
-            <label for="pais">País:</label>
+            <label for="pais">País de origem:</label>
             <input type="text" name="pais" id="pais" value="<?= htmlspecialchars($_SESSION['pais'] ?? '') ?>" required>
             <input type="hidden" name="registar" id="registar" value="1">
             <button type="submit" formaction="actions/action_procurarpais.php" formnovalidate>Procurar país</button>
@@ -131,6 +119,19 @@ if ($editar) {
           </div>
         <?php endif; ?>
       </div>
+      
+      <?php if (!$editar): ?>
+        <div class="form-group">
+          <label for="password">Palavra-passe:</label>
+          <input type="password" id="password" name="password">
+        </div>
+
+        <div class="form-group">
+          <label for="password_confirm">Confirmar palavra-passe:</label>
+          <input type="password" id="password_confirm" name="password_confirm" required>
+            <div id="password-match-message" class="validation-message" style="display: none;"></div>
+        </div>
+      <?php endif; ?>
 
  <div class="form-group">
         <label for="preferencia_de_viagem">Preferências de viagem:</label>
@@ -208,8 +209,4 @@ if ($editar) {
   </section>
 
 
-    <footer>
-      <p>&copy; 2025 TripTales. Projeto ESIN.</p>
-    </footer>
-  </body>
-</html>
+<?php include_once 'templates/footer_tpl.php'; ?>

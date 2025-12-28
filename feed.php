@@ -5,55 +5,24 @@ require_once 'database/posts.php';
 require_once 'database/media.php';
 require_once 'database/users.php';
 
-
-// --- 1. LÓGICA DE AUTENTICAÇÃO E BUSCA DE DADOS ---
-
-// SIMULAÇÃO: Aqui, o seu código real iria verificar a sessão para obter o nome de utilizador logado.
-// Usamos 'sara' como um utilizador de teste por agora.
-// $current_user = 'mariasouza'; 
 if (!isset($_SESSION['username'])) {
-    header('Location: login.php'); // Se falhar, volta para a página de login
+    header('Location: login.php'); 
     exit();
 }
 $current_user = $_SESSION['username'];
 
-// Consulta SQL para obter as publicações das pessoas que o utilizador segue.
-// Esta consulta junta Viagens (V) com Utilizador (U) e Seguir (S).
 $db = getDatabaseConnection();
 $posts = getFeed($db, $current_user);
 
 $_SESSION['last_page'] = 'feed.php';
+$css_especifico = 'stylefeed.css';
 
-// --- 2. APRESENTAÇÃO HTML/CSS ---
+include_once 'templates/header_tpl.php';
+
+
 ?>
 
 <!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feed | TripTales</title>
-    <link rel="stylesheet" href="css/stylefeed.css">
-    </head>
-<body>
-
-    <header>
-        <nav>
-            <div class="logo">
-                <a href="index.php">
-                    <img src="logo TripTales.png" alt="TripTales Logo">
-                    <span>TripTales</span>
-                </a>
-            </div>
-            <ul>
-                <li><a href="feed.php">Feed</a></li>
-                <li><a href="explorar.php">Explorar</a></li>
-                <li><a href="perfil.php?user=<?php echo htmlspecialchars($current_user); ?>">Perfil</a></li>
-                <li><a href="logout.php" class="btn-logout">Sair</a></li>
-                <li><a href="nova_viagem.php" class="btn-novaviagem">Nova Viagem</a></li>
-            </ul>
-        </nav>
-    </header>
 
     <main class="feed-container">
         <h1>Bem-vindo, <?php echo htmlspecialchars($current_user); ?>!</h1>
@@ -108,9 +77,4 @@ $_SESSION['last_page'] = 'feed.php';
         <?php endif; ?>
     </main>
 
-    <footer>
-        <p>&copy; 2025 TripTales. Projeto ESIN.</p>
-    </footer>
-
-</body>
-</html>
+<?php include_once 'templates/footer_tpl.php'; ?>

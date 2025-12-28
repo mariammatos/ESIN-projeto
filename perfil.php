@@ -130,9 +130,4 @@ $_SESSION['last_page'] = 'perfil.php?user=' . urlencode($perfil_user);
 
 </main>
 
-<footer>
-    <p>&copy; 2025 TripTales</p>
-</footer>
-
-</body>
-</html>
+<?php include_once 'templates/footer_tpl.php'; ?>

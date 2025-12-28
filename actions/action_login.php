@@ -5,6 +5,7 @@ session_start();
 
 $username = $_POST['username'];
 $password = $_POST['password'];
+$viagem = $_POST['viagem'] ?? null;
 
 // check if username and password are correct
 function loginSuccess($dbh, $username, $password) {
@@ -25,8 +26,12 @@ try {
 
     if (loginSuccess($dbh, $username, $password)) {
         $_SESSION['username'] = $username;
-        // Redirecionamento alterado para 'feed.php'
-        header('Location: ../feed.php');
+
+        if (!empty($viagem)) {
+            header('Location: ../viagem.php?id=' . $viagem);
+        } else {
+            header('Location: ../feed.php');
+        }
         exit();
     } else {
         $_SESSION['msg'] = 'Nome de utilizador ou password inválidos!';
