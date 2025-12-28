@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Inclui o ficheiro que faz a ligação à base de dados.
 require_once 'database/db_connect.php';
 require_once 'database/posts.php';
 require_once 'database/alojamentos.php';
@@ -73,6 +72,18 @@ include_once 'templates/header_tpl.php';
 
 
 <!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo htmlspecialchars($viagem['titulo']); ?> | TripTales</title>
+    <link rel="stylesheet" href="css/styleviagem.css">
+
+</head>
+<body>
+
+    <header>
+        </header>
 
     <main class="viagem-detalhe-container">
         <?php if ($last_page === 'explorar.php'): ?>
@@ -133,50 +144,16 @@ include_once 'templates/header_tpl.php';
 
         <section class="galeria-fotos">
             <?php if (!empty($fotos)): ?>
-                <div class="galeria-container">
-                    <div class="galeria-horizontal">
-                        <?php foreach ($fotos as $index => $foto): ?>
-                            <a href="#foto-<?= $index ?>" class="foto-item">
-                                <img src="<?= htmlspecialchars($foto['path']) ?>" alt="Foto da viagem">
-                            </a>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-                <?php foreach ($fotos as $index => $foto): ?>
-                                <div id="foto-<?= $index ?>" class="modal-sem-js">
-                                    <a href="#" class="modal-overlay"></a>
-                                    <div class="modal-content">
-                                        <a href="#" class="modal-close-btn">&times;</a>
+                <?php include_once 'templates/galeria_tpl.php'; ?>
+            <?php elseif ($is_owner): ?>
 
-                                        <?php if ($index > 0): ?>
-                                            <a href="#foto-<?= $index - 1 ?>" class="nav-btn prev">‹</a>
-                                        <?php endif; ?>
+                <form action="adicionarfotos.php" method="post" class="editar-fotos">
+                    <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                    <button type="submit">Adicionar Fotos</button>
+                </form>
 
-                                        <img src="<?= htmlspecialchars($foto['path']) ?>">
-
-                                        <?php if ($index < count($fotos) - 1): ?>
-                                            <a href="#foto-<?= $index + 1 ?>" class="nav-btn next">›</a>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-
-                            <?php if ($is_owner && count($fotos) < 16): ?>
-                                <form action="adicionarfotos.php" method="post" class="editar-fotos">
-                                    <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
-                                    <button type="submit">Adicionar Foto</button>
-                                </form>
-                            <?php endif; ?>
-
-                        <?php elseif ($is_owner): ?>
-
-                            <form action="adicionarfotos.php" method="post" class="editar-fotos">
-                                <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
-                                <button type="submit">Adicionar Foto</button>
-                            </form>
-
-                        <?php endif; ?>
-                    </section>
+            <?php endif; ?>
+        </section>
 
 
         <section class="travel-journal">
