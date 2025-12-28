@@ -813,7 +813,7 @@ section.atividades form {
 .nav-btn, .modal-close-btn {
     position: absolute;
     color: white;
-    font-size: 2rem; 
+    font-size: 1.4rem; 
     text-decoration: none;
     background: rgba(0, 0, 0, 0.5); 
     width: 50px;
@@ -833,7 +833,8 @@ section.atividades form {
 }
 
 .prev { 
-    left: -60px; 
+    left: -60px;
+     
 }
 
 .next { 
