@@ -96,5 +96,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </div>
     
-</body>
-</html>
+<?php include_once 'templates/footer_tpl.php'; ?>

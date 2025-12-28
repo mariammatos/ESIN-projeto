@@ -153,7 +153,5 @@ if ($atividade && $termo !== '') {
 
 
 
-
-</body>
-</html>
+<?php include_once 'templates/footer_tpl.php'; ?>
 

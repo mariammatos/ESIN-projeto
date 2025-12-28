@@ -118,5 +118,4 @@ if (!$detalhes) {
         <?php endif; ?>
 
     </main>
-</body>
-</html>
+<?php include_once 'templates/footer_tpl.php'; ?>  

@@ -1,11 +1,6 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['username'])) {
-    $_SESSION['msg'] = "Faça login para ver mais!";
-    header('Location: login.php'); // Se falhar, volta para a página de login
-    exit();
-}
 // Inclui o ficheiro que faz a ligação à base de dados.
 require_once 'database/db_connect.php';
 require_once 'database/posts.php';
@@ -15,15 +10,20 @@ require_once 'database/destinos.php';
 require_once 'database/traveljournals.php';
 require_once 'database/media.php';
 
-// --- 1. LÓGICA DE AUTENTICAÇÃO E BUSCA DE DADOS ---
 
-// SIMULAÇÃO: Aqui, o seu código real iria verificar a sessão para obter o nome de utilizador logado.
-// Usamos 'sara' como um utilizador de teste por agora.
 $id_viagem = (int)$_GET['id'];
 
 
-// Consulta SQL para obter as publicações das pessoas que o utilizador segue.
-// Esta consulta junta Viagens (V) com Utilizador (U) e Seguir (S).
+
+
+if (!isset($_SESSION['username'])) {
+    $_SESSION['msg'] = "Faça login para ver mais!";
+    $_SESSION['viagem'] = $id_viagem;
+    header('Location: login.php');
+    exit();
+}
+
+
 $db = getDatabaseConnection();
 $viagem = getViagemDetalhes($db, $id_viagem);
 $fotos = getFotos($db, $id_viagem);
@@ -451,15 +451,6 @@ $_SESSION['last_page'] = 'viagem.php?'
     </main>
 
 
-    <div class="modal-galeria" id="modalGaleria">
-        <span class="modal-close" id="fecharModal">&times;</span>
-        <button class="modal-btn modal-prev" id="prevFoto">‹</button>
-        <img id="modalImg" src="">
-        <button class="modal-btn modal-next" id="nextFoto">›</button>
-    </div>
-    <footer>
-        </footer>
 
-</body>
-</html>
+    <?php include_once 'templates/footer_tpl.php'; ?>
 

@@ -3,6 +3,8 @@
 
   $msg = $_SESSION['msg'];
   unset($_SESSION['msg']);
+  $viagem = $_SESSION['viagem'];
+  unset($_SESSION['viagem']);
 ?>
 
 
@@ -16,7 +18,8 @@
   </head>
   <body>
 
-  <a href="index.php" class="btn-voltar">← Voltar ao Feed</a>
+  <a href="index.php" class="btn-voltar">← Voltar</a>
+  <?php echo htmlspecialchars($viagem); ?>
 
 
     <?php if (!empty($msg)): ?>
@@ -28,6 +31,7 @@
     <section id="login">
       <h2>Login</h2>
       <form action="actions/action_login.php" method="post">
+        <input type="hidden" name="viagem" value="<?php echo htmlspecialchars($viagem); ?>">
         <input type="text" name="username" placeholder="username">
         <input type="password" name="password" placeholder="password">
         <button>Login</button>
@@ -37,8 +41,5 @@
         <h1>Ainda não tem uma conta?</h1>
         <a href="registration.php" class="btn-signup">Registe-se agora!</a>
     </section>
-    <footer>
-      <p>&copy; 2025 TripTales. Projeto ESIN.</p>
-    </footer>
-  </body>
-</html>
+
+<?php include_once 'templates/footer_tpl.php'; ?>

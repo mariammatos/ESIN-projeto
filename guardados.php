@@ -16,36 +16,14 @@ $db = getDatabaseConnection();
 $posts = getguardados($db, $current_user);
 $_SESSION['last_page'] = 'guardados.php';
 
+$css_especifico = 'styleguardados.css';
+
+include_once 'templates/header_tpl.php';
 
 ?>
 
 <!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feed | TripTales</title>
-    <link rel="stylesheet" href="css/styleguardados.css">
-    </head>
-<body>
 
-    <header>
-        <nav>
-            <div class="logo">
-                <a href="index.html">
-                    <img src="logo TripTales.png" alt="TripTales Logo">
-                    <span>TripTales</span>
-                </a>
-            </div>
-            <ul>
-                <li><a href="feed.php">Feed</a></li>
-                <li><a href="explorar.php">Explorar</a></li>
-                <li><a href="perfil.php?user=<?php echo htmlspecialchars($current_user); ?>">Perfil</a></li>
-                <li><a href="logout.php" class="btn-logout">Sair</a></li>
-                <li><a href="nova_viagem.php" class="btn-novaviagem">Nova Viagem</a></li>
-            </ul>
-        </nav>
-    </header>
 
     <main class="feed-container">
         <h1>Bem-vindo, <?php echo htmlspecialchars($current_user); ?>!</h1>
@@ -86,9 +64,4 @@ $_SESSION['last_page'] = 'guardados.php';
         <?php endif; ?>
     </main>
 
-    <footer>
-        <p>&copy; 2025 TripTales. Projeto ESIN.</p>
-    </footer>
-
-</body>
-</html>
+<?php include_once 'templates/footer_tpl.php'; ?>
