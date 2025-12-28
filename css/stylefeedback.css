@@ -47,11 +47,10 @@ body {
 
 /* ================= CONTAINER DE FEEDBACK ================= */
 
-body > div,
-body > form,
+
 .feedback-container {
     background-color: #ffffff;
-    padding: 30px 50px;
+    padding: 40px;
     border-radius: 14px;
     width: 100%;
     max-width: 500px;
