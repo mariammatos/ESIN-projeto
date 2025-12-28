@@ -197,7 +197,7 @@ nav ul li a:hover {
 }
 
 .viagem-detalhe-container .travel-journal p {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .viagem-detalhe-container .journal-texto {
@@ -613,6 +613,7 @@ nav ul li a:hover {
     display: flex;
     gap: 12px;
 }
+
 
 /* cada foto */
 .foto-item {
