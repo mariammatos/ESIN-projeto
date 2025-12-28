@@ -140,37 +140,62 @@ select:focus {
 }
 
 /* ================= RADIO BUTTONS ================= */
-input[type="radio"] {
-    margin-right: 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between; 
-    padding: 10px 20px;
-    background-color: #ffffff;
-    border: 2px solid #ced3dc;
-    border-radius: 8px;
-    transition: all 0.25s ease;
-    font-size: 0.5rem;
-    color: #555;
-    width: 100%;
+/* Contentor da grelha */
+.radio-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin: 15px 0;
 }
 
-input[type="radio"]:hover {
+/* Esconde o círculo original do rádio */
+.radio-option input[type="radio"] {
+    display: none;
+}
+
+/* Estilo do "Botão" desativado */
+.radio-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 15px;
+    background-color: #ffffff;
+    border: 1px solid #ced3dc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-size: 0.9rem;
+    color: #4e8098;
+    text-align: center;
+}
+
+/* Hover no botão */
+.radio-option:hover {
     border-color: #4e8098;
     background-color: #f0f7fa;
 }
 
-
-form br {
-    display: none;
+/* ESTADO SELECIONADO (O TRUQUE) */
+/* Quando o input escondido está :checked, o estilo da label muda */
+.radio-option:has(input:checked) {
+    background-color: #90c2e7; /* Azul claro do teu degradê */
+    border-color: #4e8098;
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(78, 128, 152, 0.2);
 }
 
-form input[type="radio"] + span,
-form input[type="radio"] + label {
-    cursor: pointer;
+/* Adiciona um checkmark (opcional, como na imagem) */
+.radio-option:has(input:checked)::after {
+    content: '✓';
+    margin-left: 8px;
+    font-size: 0.8rem;
 }
 
+/* Limpeza de regras antigas que podem conflitar */
+input[type="radio"] {
+    width: auto; /* Remove o width 100% que tinhas antes */
+}
 
 
 
