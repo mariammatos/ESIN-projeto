@@ -1,8 +1,20 @@
-/* ===== RESET ===== */
+/* ================= RESET ================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* ================= BODY ================= */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #4e8098, #90c2e7);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #2b2b2b;
+    padding: 40px 20px;
 }
 
 /* ================= BOTÃO VOLTAR ================= */
@@ -25,166 +37,192 @@
 
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(6px);
-
     transition: all 0.25s ease;
-    z-index: 10;
 }
 
 .btn-voltar:hover {
     color: #a31621;
     transform: translateY(-2px);
-    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
 }
 
-/* ================= CARD BASE ================= */
+/* ================= TÍTULOS ================= */
+h2 {
+    color: #ffffff;
+    margin-bottom: 25px;
+    text-align: center;
+    max-width: 700px;
+}
 
-body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: linear-gradient(135deg, #4e8098, #90c2e7);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #2b2b2b;
+h3 {
+    color: #4e8098;
+    margin: 25px 0 10px;
+    background-color: lightcyan;
+    padding: 12px 18px;
+    border-radius: 8px;
+    max-width: 520px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+h5 {
+    background-color: #fff;  
+    color: #a31621;         
+    padding: 15px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-align: center;
+    margin-bottom: 25px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+    animation: fadeInShake 0.4s ease-in-out;
+}
+
+@keyframes fadeInShake {
+    0% { opacity: 0; transform: translateY(-10px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 
-#registration {
+h4:empty {
+    display: none;
+}
+
+h4 {
+    color: #4e8098;
+    margin: 25px 0 10px;
     background-color: #ffffff;
-    margin-top: 60px;
-    padding: 45px 50px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    max-width: 520px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* ================= FORM CARD ================= */
+form {
+    background-color: #ffffff;
+    padding: 35px 40px;
     border-radius: 14px;
     width: 100%;
     max-width: 520px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
-}
-
-/* TÍTULO  */
-
-#registration h2 {
-    text-align: center;
-    color: #4e8098;
-    margin-bottom: 35px;
-    font-size: 1.6rem;
-    font-weight: 600;
-}
-
-
-/* ================= FORM ================= */
-
-#registration form {
+    box-shadow: 0 20px 40px rgba(0,0,0,0.18);
+    margin-bottom: 30px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
 }
 
-#registration input,
-#registration textarea {
+/* ================= INPUTS ================= */
+input,
+select {
     padding: 14px 16px;
     border-radius: 8px;
     border: 1px solid #ced3dc;
     font-size: 0.95rem;
-    font-family: inherit;
-    transition: all 0.25s ease;
     background-color: #fafafa;
+    transition: all 0.25s ease;
+    font-family: inherit;
 }
 
-#registration textarea {
-    min-height: 140px;
-    resize: vertical;
-}
-
-#registration input::placeholder,
-#registration textarea::placeholder {
+input::placeholder {
     color: #999;
 }
 
-#registration input:focus,
-#registration textarea:focus {
+input:focus,
+select:focus {
     outline: none;
     border-color: #4e8098;
-    background-color: #fff;
-    box-shadow: 0 0 0 3px rgba(78, 128, 152, 0.25);
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(78,128,152,0.25);
 }
 
-#registration input[type="number"] {
-    width: 100px;
-    text-align: center;
-    font-weight: 600;
-}
-
-.form-group label + input + button {
-  justify-self: start;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.form-group label {
-    font-size: 0.9rem;
-    color: #555;
-    font-weight: 500;
-}
-
-/* ================= BOTÕES TIPO "VERIFICAR" ================= */
-
-.form-group button[formnovalidate] {
-  background-color: #fcf7f8;
-  color: #a31621;
-  border: 1px solid #ced3dc;
-  padding: 10px 14px;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-
-
-.form-group button[formnovalidate]:hover {
-    background-color: #a31621;
-    color: #fcf7f8;
-    border-color: #a31621;
-}
-
-/* ================= BOTÃO PUBLICAR ================= */
-
-#registration button[type="submit"] {
-    width: 100%;
-    background-color: #a31621;
-    color: #fff;
-    border: none;
-    padding: 15px;
-    font-size: 1.05rem;
-    border-radius: 30px;
-    margin-top: 30px;
+/* ================= RADIO BUTTONS ================= */
+input[type="radio"] {
+    margin-right: 8px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border: 2px solid #ced3dc;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+    font-size: 0.5rem;
+    color: #555;
+    width: 100%;
+}
+
+input[type="radio"]:hover {
+    border-color: #4e8098;
+    background-color: #f0f7fa;
+}
+
+
+form br {
+    display: none;
+}
+
+form input[type="radio"] + span,
+form input[type="radio"] + label {
+    cursor: pointer;
+}
+
+
+
+
+/* ================= BOTÕES ================= */
+button {
+    padding: 14px;
+    border-radius: 30px;
+    border: none;
+    background-color: #a31621;
+    color: #ffffff;
+    font-size: 1rem;
     font-weight: 600;
-    letter-spacing: 0.4px;
+    cursor: pointer;
     transition: all 0.25s ease;
 }
 
-#registration button[type="submit"]:hover {
+button:hover {
     background-color: #4e8098;
-    transform: translateY(-3px);
+    transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-
-
-/* ================= FOOTER ================= */
-
-footer {
-    text-align: center;
-    margin-top: 35px;
-    color: #ffffff;
+/* ================= BOTÃO PROCURAR ================= */
+form button[type="submit"]:not(:last-child) {
+    background-color: #eef3f7;
+    color: #a31621;
+    border: 1px solid #ced3dc;
+    border-radius: 8px;
     font-size: 0.85rem;
-    opacity: 0.85;
+    padding: 10px 14px;
 }
 
+form button[type="submit"]:not(:last-child):hover {
+    background-color: #a31621;
+    color: #ffffff;
+}
 
+/* ================= RESPONSIVO ================= */
+@media (max-width: 600px) {
+    form {
+        padding: 30px 22px;
+    }
 
+    .btn-voltar {
+        top: 15px;
+        left: 15px;
+        font-size: 0.85rem;
+        padding: 8px 14px;
+    }
 
+    h2 {
+        font-size: 1.3rem;
+        margin: 5px;
+    }
+}
