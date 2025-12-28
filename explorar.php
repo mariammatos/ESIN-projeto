@@ -181,8 +181,7 @@ if (!empty($pesquisa_user)) {
                                     ?>
                                         <div class="post-foto">
                                             <img src="<?= htmlspecialchars($foto_principal['path']); ?>" 
-                                                alt="Foto da viagem <?= htmlspecialchars($post['titulo']); ?>" 
-                                                width="200" height="200">
+                                                alt="Foto da viagem <?= htmlspecialchars($v['titulo']); ?>">
                                         </div>
                                     <?php endif; ?>
                             <p><strong>Destino:</strong> <?php echo htmlspecialchars($post['cidade_local']); ?>, <?php echo htmlspecialchars($post['pais']); ?></p>

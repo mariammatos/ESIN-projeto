@@ -170,10 +170,11 @@ nav ul li a:hover {
 /* ================= PERFIL ================= */
 
 .foto-perfil {
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     object-fit: cover;
+    border: 2px solid #90c2e7; /* Adiciona um pequeno rebordo para destacar */
 }
 
 /* ================= DETALHES ================= */
@@ -193,6 +194,30 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
+.post-foto {
+    width: 100%;
+    height: 200px; /* Aumentei um pouco para o feed ter mais impacto */
+    overflow: hidden;
+    border-radius: 8px;
+    margin: 10px 0 15px 0;
+    background-color: #eee;
+}
+
+/* A imagem em si */
+.post-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Impede que a imagem fique esticada */
+    transition: transform 0.5s ease;
+    display: block;
+}
+
+/* Efeito de zoom ao passar o rato no post inteiro */
+.post-viagem:hover .post-foto img,
+.post-alojamento:hover .post-foto img,
+.post-atividade:hover .post-foto img {
+    transform: scale(1.08);
+}
 
 /* ================= INTERAÇÕES ================= */
 
