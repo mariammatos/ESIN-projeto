@@ -256,7 +256,13 @@ if ($traveljournal_id) {
                         <?php if ($is_owner): ?>
                             <a href="detalhes_alojamento.php?id=<?= $a['alojamento_id'] ?>&tipo=alojamento" class="btn-detalhes">Ver Detalhes</a>
                             <a href="feedback_alojamento.php?id=<?= $a['alojamento_id'] ?>&tipo=alojamento" class="btn-feedback">Dar Feedback</a>
-
+                            <!-- Botão Apagar Alojamento -->
+                            <form method="post" action="actions/action_delete_aloj_ativ.php" style="display:inline;">
+                                <input type="hidden" name="id" value="<?= $a['alojamento_id'] ?>">
+                                <input type="hidden" name="tipo" value="alojamento">
+                                <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                                <button type="submit" class="btn-delete" onclick="return confirm('Tem a certeza que deseja apagar este alojamento?');">Apagar</button>
+                            </form>
                         <?php endif; ?>
                     </li>
                 <?php endforeach; ?>
@@ -314,7 +320,13 @@ if ($traveljournal_id) {
                         <?php if ($is_owner): ?>
                             <a href="detalhes_alojamento.php?id=<?= $a['atividade_id'] ?>&tipo=atividade" class="btn-detalhes">Ver Detalhes</a>
                             <a href="feedback_alojamento.php?id=<?= $a['atividade_id'] ?>&tipo=atividade" class="btn-feedback">Dar Feedback</a>
-
+                            <!-- Botão Apagar Atividade -->
+                            <form method="post" action="actions/action_delete_aloj_ativ.php" style="display:inline;">
+                                <input type="hidden" name="id" value="<?= $a['atividade_id'] ?>">
+                                <input type="hidden" name="tipo" value="atividade">
+                                <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                                <button type="submit" class="btn-delete" onclick="return confirm('Tem a certeza que deseja apagar esta atividade?');">Apagar</button>
+                            </form>                           
                         <?php endif; ?>
                     </li>
                 <?php endforeach; ?>
