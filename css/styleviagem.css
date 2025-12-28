@@ -620,6 +620,11 @@ section.atividades form {
     border-color: #a31621;
 }
 
+.guardar button.active {
+    background-color: #a31621;
+    border-color: #a31621;
+    color: #fff;
+}
 /* ========================= COMENTÁRIOS ========================= */
 
 .comentarios form {

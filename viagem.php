@@ -301,7 +301,8 @@ include_once 'templates/header_tpl.php';
             <?php if ($current_user): ?>
                 <form action="actions/action_guardar.php" method="post">
                     <input type="hidden" name="post_id" value="<?php echo $id_viagem; ?>">
-                    <button type="submit" ><?php echo $user_guardou ? 'Guardado' : 'Guardar'; ?>
+                    <button type="submit" class="<?php echo $user_guardou ? 'active' : ''; ?>">
+                       <?php echo $user_guardou ? 'Guardado' : 'Guardar'; ?>
                     </button>
                 </form>
             <?php else: ?>
