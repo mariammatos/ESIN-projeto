@@ -4,8 +4,8 @@
   require_once 'database/db_connect.php';
   require_once 'database/posts.php';
   $db = getDatabaseConnection();
-  $posts = getexplorar($db, 4)
-
+  $posts = getexplorar($db, 4);
+  $_SESSION['last_page'] = 'index.php';
 ?>
 
 <!DOCTYPE html>

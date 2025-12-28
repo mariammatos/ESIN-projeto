@@ -95,8 +95,10 @@ $_SESSION['last_page'] = 'viagem.php?'
             <a href="guardados.php" class="btn-voltar">← Voltar às viagens guardadas</a>
         <?php elseif (strpos($last_page, 'explorar_destino.php') !== false): ?>
             <a href="<?= $last_page ?>" class="btn-voltar">← Voltar a explorar destino</a>
-        <?php else: ?>
+        <?php elseif (strpos($last_page, 'perfil.php') !== false): ?>
             <a href="<?= $last_page ?>" class="btn-voltar">← Voltar ao perfil</a>
+        <?php else: ?>
+            <a href="<?="index.php" ?>" class="btn-voltar">← Voltar</a>
         <?php endif; ?>
 
         <h1><?php echo htmlspecialchars($viagem['titulo']); ?></h1>
@@ -150,7 +152,8 @@ $_SESSION['last_page'] = 'viagem.php?'
                         </a>
 
                         <div id="foto-<?= $index ?>" class="modal-sem-js">
-                            <a href="#" class="modal-overlay"></a> <div class="modal-content">
+                            <a href="#" class="modal-overlay"></a>
+                            <div class="modal-content">
                                 <a href="#" class="modal-close-btn">&times;</a>
                                 
                                 <?php if ($index > 0): ?>
@@ -166,6 +169,27 @@ $_SESSION['last_page'] = 'viagem.php?'
                         </div>
                     <?php endforeach; ?>
                 </div>
+
+                <?php if ($is_owner && count($fotos) < 16): ?>
+                    <div class="editar-fotos">
+                        <form action="adicionarfotos.php" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                            <button type="submit">Adicionar Foto</button>
+                        </form>
+                    </div>
+                <?php endif; ?>
+
+            <?php else: ?>
+
+                <?php if ($is_owner): ?>
+                    <div class="editar-fotos">
+                        <form action="adicionarfotos.php" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                            <button type="submit">Adicionar Foto</button>
+                        </form>
+                    </div>
+                <?php endif; ?>
+
             <?php endif; ?>
         </section>
 
