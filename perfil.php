@@ -115,8 +115,7 @@ $viagens = getViagensUtilizador($dbh, $user);
                         ?>
                             <div class="post-foto">
                                 <img src="<?= htmlspecialchars($foto_principal['path']); ?>" 
-                                    alt="Foto da viagem <?= htmlspecialchars($v['titulo']); ?>" 
-                                    width="200" height="200">
+                                    alt="Foto da viagem <?= htmlspecialchars($v['titulo']); ?>">
                             </div>
                         <?php endif; ?>
                         <h3><?= htmlspecialchars($v['titulo']) ?></h3>

@@ -89,7 +89,7 @@ if (!$detalhes) {
             <?php endif; ?>
         </div>
 
-        <a href="viagem.php?id=<?= (int)($detalhes['viagem_id'] ?? 0) ?>" class="btn-voltar-viagem">← Voltar à Viagem</a>
+        <a href="explorar.php?id=<?= (int)($detalhes['viagem_id'] ?? 0) ?>" class="btn-voltar-viagem">← Voltar</a>
     </main>
 </body>
 </html>
