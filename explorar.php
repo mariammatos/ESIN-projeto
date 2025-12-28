@@ -174,14 +174,17 @@ if (!empty($pesquisa_user)) {
                         </div>
                         
                         <div class="post-detalhes">
-                                    <?php 
-                                        $fotos_post = getFotos($db, $post['id']); // todas as fotos da viagem
+                                    <?php
+                                        $fotos_post = array_slice(getFotos($db, $post['id']), 0, 4);
                                         if (!empty($fotos_post)):
-                                            $foto_principal = $fotos_post[0]; // a de menor id
                                     ?>
-                                        <div class="post-foto">
-                                            <img src="<?= htmlspecialchars($foto_principal['path']); ?>" 
-                                                alt="Foto da viagem <?= htmlspecialchars($v['titulo']); ?>">
+                                        <div class="post-fotos">
+                                            <?php foreach ($fotos_post as $foto): ?>
+                                                <div class="post-foto">
+                                                    <img src="<?= htmlspecialchars($foto['path']); ?>"
+                                                        alt="Foto da viagem <?= htmlspecialchars($post['titulo']); ?>">
+                                                </div>
+                                            <?php endforeach; ?>
                                         </div>
                                     <?php endif; ?>
                             <p><strong>Destino:</strong> <?php echo htmlspecialchars($post['cidade_local']); ?>, <?php echo htmlspecialchars($post['pais']); ?></p>
