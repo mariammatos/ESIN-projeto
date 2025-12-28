@@ -35,7 +35,7 @@
   </head>
   <body>
 
-  <a href="perfil.php" class="btn-voltar">← Voltar ao Perfil</a>
+  <a href="viagem.php?id=<?= htmlspecialchars($viagem_id) ?>" class="btn-voltar">← Voltar</a>
 
   <section id="registration">
     <?php echo $msg ?>

@@ -38,36 +38,14 @@ if ($perfil_user !== $current_user) {
 $viagens = getViagensUtilizador($dbh, $user);
 $_SESSION['last_page'] = 'perfil.php?user=' . urlencode($perfil_user);
 
+$css_especifico = 'styleperfil.css';
+
+include_once 'templates/header_tpl.php';
+
 ?>
 <!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Perfil - <?= htmlspecialchars($utilizador['nome_de_utilizador']) ?></title>
-    <link rel="stylesheet" href="css/styleperfil.css">
-</head>
 
 <body>
-
-<header>
-    <nav>
-        <div class="logo">
-                <a href="index.php">
-                    <img src="logo TripTales.png" alt="TripTales Logo">
-                    <span>TripTales</span>
-                </a>
-        </div>
-        <ul>
-            <li><a href="feed.php">Feed</a></li>
-            <li><a href="logout.php">Sair</a></li>
-            <?php if ($perfil_user == $current_user): ?>
-                <li><a href="guardados.php">Viagens guardadas</a></li>
-                <li><a href="wishlist.php">Wishlist 🔖</a></li>
-            <?php endif; ?>
-        </ul>
-    </nav>
-</header>
-
 <main class="perfil-container">
     <section class="editar-perfil">
         <?php if ($perfil_user === $current_user): ?>
@@ -81,8 +59,11 @@ $_SESSION['last_page'] = 'perfil.php?user=' . urlencode($perfil_user);
                 <input type="hidden" name="editar" value="1">
                 <button type="submit">Editar Perfil</button>
             </form>
+            <li><a href="guardados.php">Viagens guardadas</a></li>
+            <li><a href="wishlist.php">Wishlist 🔖</a></li>
         <?php endif; ?>
-
+    </section>
+        
     <section class="perfil-info">
         <img width="50" height= "50" src="media/profile_pictures/<?= htmlspecialchars($utilizador['foto_de_perfil']) ?>" class="foto-perfil">
         <h1>@<?= htmlspecialchars($utilizador['nome_de_utilizador']) ?></h1>
