@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
-  <a href="viagem.php?id=2" class="btn-voltar">← Voltar à Viagem</a>
+  <a href="perfil.php?" class="btn-voltar">← Voltar ao Perfil</a>
 
     <div>
         <h2>Dar Feedback - <?= $tipo === 'alojamento' ? 'Alojamento' : 'Atividade' ?></h2>
