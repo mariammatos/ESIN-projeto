@@ -124,7 +124,7 @@ nav ul li a:hover {
     color: #ffffff;
     border: none;
     font-size: 0.85rem;
-    font-weight: 200;
+    font-weight: 300;
     cursor: pointer;
     letter-spacing: 0.3px;
     transition: background-color 0.25s ease;
@@ -301,6 +301,6 @@ footer {
     }
 
     .pesquisar button {
-        width: 150px;
+        width: auto;
     }
 }
