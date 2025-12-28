@@ -69,7 +69,7 @@
 
       <button type="submit">Guardar Alterações</button>
     </form>
-    <!-- FORMULÁRIO PARA APAGAR VIAGEM -->
+
     <form 
         action="actions/action_delete_viagem.php" 
         method="post"

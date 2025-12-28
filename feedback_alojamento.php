@@ -5,14 +5,14 @@ require_once 'database/alojamentos.php';
 
 $db = getDatabaseConnection();
 
-$item_id = (int)($_GET['id'] ?? 0); // id do alojamento ou atividade
-$tipo = $_GET['tipo'] ?? 'alojamento'; // 'alojamento' ou 'atividade'
+$item_id = (int)($_GET['id'] ?? 0); 
+$tipo = $_GET['tipo'] ?? 'alojamento'; 
 
 $viagem_id = null;
 
 if ($tipo === 'alojamento') {
     $stmt = $db->prepare('SELECT viagem FROM Alojamento WHERE id = ?');
-} else { // atividade
+} else {
     $stmt = $db->prepare('SELECT viagem FROM Atividade WHERE id = ?');
 }
 $stmt->execute([$item_id]);
