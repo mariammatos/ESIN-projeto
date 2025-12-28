@@ -135,18 +135,19 @@ function getFeedbacksAlojamento($db, $detalhe_id) {
 }
 
 function procurarAlojamentosPorDestino($db, $destino_id, $termo) {
-    $termo = '%' . mb_strtolower($termo, 'UTF-8') . '%';
+    $termo = '%' . mb_strtolower($termo, 'UTF-8') . '%'; 
     $db->sqliteCreateFunction('removeacentos', 'normalize_string', 1);
 
     $stmt = $db->prepare('
         SELECT D.id, D.nome, D.localizacao, DA.tipo
-        FROM Atividade A
-        JOIN Detalhes_alojamento DA ON D.id = DA.id
+        FROM Detalhes D
+        JOIN Detalhes_alojamento DA ON D.id = DA.id 
         JOIN Alojamento A ON A.detalhes = D.id
         WHERE A.viagem IN (SELECT id FROM Viagens WHERE destino = ?)
-        AND LOWER(removeacentos(D.nome)) LIKE ?
+        AND LOWER(removeacentos(D.nome)) LIKE ? 
         GROUP BY D.id
     ');
+
     $stmt->execute([$destino_id, $termo]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -250,6 +251,7 @@ function getDetalhesAtividadeCompleto(PDO $db, int $atividadeId): ?array {
         SELECT
             A.id AS atividade_id,
             A.viagem AS viagem_id,
+            D.id AS detalhe_id,   /* <--- ADICIONADO: O ID do local/tipo de atividade */
             D.nome AS nome_atividade,
             D.localizacao,
             DA.tipo AS tipo_atividade,
@@ -298,3 +300,35 @@ function procurarAtividadesPorDestino($db, $destino_id, $termo) {
     $stmt->execute([$destino_id, $termo]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+// Busca feedbacks de QUALQUER atividade que partilhe o mesmo "Detalhe"
+function getFeedbacksAtividadePorDetalhe($db, $detalhe_id) {
+    $stmt = $db->prepare('
+        SELECT F.rating, F.comentario, F.precos, A.data
+        FROM Feedback F
+        JOIN Feedback_atividade FA ON F.id = FA.id
+        JOIN Atividade A ON FA.atividade = A.id
+        WHERE A.detalhes = :detalhe_id
+        ORDER BY F.id DESC
+    ');
+    $stmt->bindParam(':detalhe_id', $detalhe_id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+#DELETE
+function removerAtividade($db, $atividade_id) {
+    // Apaga feedback associado
+    $db->exec("DELETE FROM Feedback_atividade WHERE atividade = $atividade_id");
+    // Apaga a atividade
+    $db->exec("DELETE FROM Atividade WHERE id = $atividade_id");
+}
+
+function removerAlojamento($db, $alojamento_id) {
+    // Apaga feedback associado
+    $db->exec("DELETE FROM Feedback_alojamento WHERE alojamento = $alojamento_id");
+    // Apaga o alojamento
+    $db->exec("DELETE FROM Alojamento WHERE id = $alojamento_id");
+}
+
+?>

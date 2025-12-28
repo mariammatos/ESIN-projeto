@@ -1,4 +1,4 @@
-/* ================= RESET ================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -17,16 +17,15 @@ body {
     padding: 40px 20px;
 }
 
+
 /* ================= BOTÃO VOLTAR ================= */
 .btn-voltar {
     position: absolute;
     top: 30px;
     left: 30px;
-
     display: inline-flex;
     align-items: center;
     gap: 8px;
-
     padding: 10px 16px;
     background-color: rgba(255, 255, 255, 0.9);
     color: #4e8098;
@@ -34,7 +33,6 @@ body {
     font-size: 0.9rem;
     font-weight: 500;
     text-decoration: none;
-
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(6px);
     transition: all 0.25s ease;
@@ -48,7 +46,7 @@ body {
 /* ================= TÍTULOS ================= */
 h2 {
     color: #ffffff;
-    margin-bottom: 25px;
+    margin: 40px auto 30px;
     text-align: center;
     max-width: 700px;
 }
@@ -140,7 +138,7 @@ select:focus {
 }
 
 /* ================= RADIO BUTTONS ================= */
-/* Contentor da grelha */
+
 .radio-group {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -148,14 +146,15 @@ select:focus {
     margin: 15px 0;
 }
 
-/* Esconde o círculo original do rádio */
+
 .radio-option input[type="radio"] {
     display: none;
 }
 
-/* Estilo do "Botão" desativado */
+
 .radio-option {
-    display: flex;
+    display: block;
+    width: 100%;
     align-items: center;
     justify-content: center;
     padding: 12px 15px;
@@ -169,32 +168,31 @@ select:focus {
     text-align: center;
 }
 
-/* Hover no botão */
+
 .radio-option:hover {
     border-color: #4e8098;
     background-color: #f0f7fa;
 }
 
-/* ESTADO SELECIONADO (O TRUQUE) */
-/* Quando o input escondido está :checked, o estilo da label muda */
+
 .radio-option:has(input:checked) {
-    background-color: #90c2e7; /* Azul claro do teu degradê */
+    background-color: #90c2e7; 
     border-color: #4e8098;
     color: #ffffff;
     font-weight: 600;
     box-shadow: 0 4px 10px rgba(78, 128, 152, 0.2);
 }
 
-/* Adiciona um checkmark (opcional, como na imagem) */
+
 .radio-option:has(input:checked)::after {
     content: '✓';
     margin-left: 8px;
     font-size: 0.8rem;
 }
 
-/* Limpeza de regras antigas que podem conflitar */
+
 input[type="radio"] {
-    width: auto; /* Remove o width 100% que tinhas antes */
+    width: auto; 
 }
 
 
@@ -218,7 +216,7 @@ button:hover {
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-/* ================= BOTÃO PROCURAR ================= */
+
 form button[type="submit"]:not(:last-child) {
     background-color: #eef3f7;
     color: #a31621;
@@ -231,6 +229,15 @@ form button[type="submit"]:not(:last-child) {
 form button[type="submit"]:not(:last-child):hover {
     background-color: #a31621;
     color: #ffffff;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    margin-top: 20px;
+    padding: 15px;
+    color: #ffffff;
+    opacity: 0.85;
+    text-align: center;
 }
 
 /* ================= RESPONSIVO ================= */
@@ -248,6 +255,6 @@ form button[type="submit"]:not(:last-child):hover {
 
     h2 {
         font-size: 1.3rem;
-        margin: 5px;
+        margin: 10px;
     }
 }

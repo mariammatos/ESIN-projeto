@@ -35,7 +35,7 @@
   </head>
   <body>
 
-  <a href="viagem.php?id=2" class="btn-voltar">← Voltar à Viagem</a>
+  <a href="viagem.php?id=<?= htmlspecialchars($viagem_id) ?>" class="btn-voltar">← Voltar</a>
 
   <section id="registration">
     <?php echo $msg ?>
@@ -72,8 +72,4 @@
   </section>
 
 
-    <footer>
-      <p>&copy; 2025 TripTales. Projeto ESIN.</p>
-    </footer>
-  </body>
-</html>
+<?php include_once 'templates/footer_tpl.php'; ?>

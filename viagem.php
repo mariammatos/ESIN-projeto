@@ -1,12 +1,6 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['username'])) {
-    $_SESSION['msg'] = "Faça login para ver mais!";
-    header('Location: login.php'); // Se falhar, volta para a página de login
-    exit();
-}
-// Inclui o ficheiro que faz a ligação à base de dados.
 require_once 'database/db_connect.php';
 require_once 'database/posts.php';
 require_once 'database/alojamentos.php';
@@ -15,15 +9,20 @@ require_once 'database/destinos.php';
 require_once 'database/traveljournals.php';
 require_once 'database/media.php';
 
-// --- 1. LÓGICA DE AUTENTICAÇÃO E BUSCA DE DADOS ---
 
-// SIMULAÇÃO: Aqui, o seu código real iria verificar a sessão para obter o nome de utilizador logado.
-// Usamos 'sara' como um utilizador de teste por agora.
 $id_viagem = (int)$_GET['id'];
 
 
-// Consulta SQL para obter as publicações das pessoas que o utilizador segue.
-// Esta consulta junta Viagens (V) com Utilizador (U) e Seguir (S).
+
+
+if (!isset($_SESSION['username'])) {
+    $_SESSION['msg'] = "Faça login para ver mais!";
+    $_SESSION['viagem'] = $id_viagem;
+    header('Location: login.php');
+    exit();
+}
+
+
 $db = getDatabaseConnection();
 $viagem = getViagemDetalhes($db, $id_viagem);
 $fotos = getFotos($db, $id_viagem);
@@ -56,7 +55,19 @@ if ($traveljournal_id) {
     $has_journal = false;
 }
 
-// --- 2. APRESENTAÇÃO HTML/CSS ---
+if ($_SESSION['last_page'] == 'viagem.php?') {
+    $_SESSION['last_page'] = $_SESSION['last_page_2'];
+}
+else {
+    $_SESSION['last_page_2'] = $_SESSION['last_page'];
+}
+$last_page = $_SESSION['last_page'] ?? null;
+
+$_SESSION['last_page'] = 'viagem.php?';
+
+$css_especifico = 'styleviagem.css';
+include_once 'templates/header_tpl.php';
+
 ?>
 
 
@@ -68,8 +79,6 @@ if ($traveljournal_id) {
     <title><?php echo htmlspecialchars($viagem['titulo']); ?> | TripTales</title>
     <link rel="stylesheet" href="css/styleviagem.css">
 
-
-
 </head>
 <body>
 
@@ -77,7 +86,19 @@ if ($traveljournal_id) {
         </header>
 
     <main class="viagem-detalhe-container">
-        <a href="feed.php" class="btn-voltar">← Voltar ao Feed</a>
+        <?php if ($last_page === 'explorar.php'): ?>
+            <a href="explorar.php?search_user=<?= $_SESSION['search_user'] ?>&search_viagem=<?= $_SESSION['search_viagem'] ?>&search_alojamento=<?= $_SESSION['search_alojamento'] ?>&search_atividade=<?= $_SESSION['search_atividade'] ?>" class="btn-voltar">← Voltar à Pesquisa</a>
+        <?php elseif ($last_page === 'feed.php'): ?>
+            <a href="feed.php" class="btn-voltar">← Voltar ao Feed</a>
+        <?php elseif ($last_page === 'guardados.php'): ?>
+            <a href="guardados.php" class="btn-voltar">← Voltar às viagens guardadas</a>
+        <?php elseif (strpos($last_page, 'explorar_destino.php') !== false): ?>
+            <a href="<?= $last_page ?>" class="btn-voltar">← Voltar a explorar destino</a>
+        <?php elseif (strpos($last_page, 'perfil.php') !== false): ?>
+            <a href="<?= $last_page ?>" class="btn-voltar">← Voltar ao perfil</a>
+        <?php else: ?>
+            <a href="<?="index.php" ?>" class="btn-voltar">← Voltar</a>
+        <?php endif; ?>
 
         <h1><?php echo htmlspecialchars($viagem['titulo']); ?></h1>
         
@@ -123,29 +144,14 @@ if ($traveljournal_id) {
 
         <section class="galeria-fotos">
             <?php if (!empty($fotos)): ?>
-                <div class="galeria-container">
-                    <?php foreach ($fotos as $index => $foto): ?>
-                        <a href="#foto-<?= $index ?>" class="foto-item">
-                            <img src="<?= htmlspecialchars($foto['path']) ?>" alt="Foto">
-                        </a>
+                <?php include_once 'templates/galeria_tpl.php'; ?>
+            <?php elseif ($is_owner): ?>
 
-                        <div id="foto-<?= $index ?>" class="modal-sem-js">
-                            <a href="#" class="modal-overlay"></a> <div class="modal-content">
-                                <a href="#" class="modal-close-btn">&times;</a>
-                                
-                                <?php if ($index > 0): ?>
-                                    <a href="#foto-<?= $index - 1 ?>" class="nav-btn prev">‹</a>
-                                <?php endif; ?>
+                <form action="adicionarfotos.php" method="post" class="editar-fotos">
+                    <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                    <button type="submit">Adicionar Fotos</button>
+                </form>
 
-                                <img src="<?= htmlspecialchars($foto['path']) ?>">
-
-                                <?php if ($index < count($fotos) - 1): ?>
-                                    <a href="#foto-<?= $index + 1 ?>" class="nav-btn next">›</a>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
             <?php endif; ?>
         </section>
 
@@ -220,45 +226,13 @@ if ($traveljournal_id) {
                         <button type="submit">Adicionar Alojamento</button>
                     </form>
 
-                    <form action="novo_alojamento.php" method="post">
-                        <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
-                        <input type="hidden" name="atividade" value="1">
-                        <button type="submit">Adicionar Atividade</button>
-                    </form>
-
                 <?php endif; ?>
             <?php else: ?>
                 <ul>
                 <?php foreach ($alojamentos as $a): ?>
-                    <li>
-                        <strong><?= htmlspecialchars($a['nome_alojamento']) ?></strong> (<?= htmlspecialchars($a['tipo_alojamento']) ?>)<br>
-                        Local: <?= htmlspecialchars($a['localizacao']) ?><br>
-                        De: <?= htmlspecialchars($a['data_inicio']) ?> 
-                        <?php if ($a['data_fim']): ?>
-                            Até: <?= htmlspecialchars($a['data_fim']) ?>
-                        <?php else: ?>
-                            Em andamento
-                        <?php endif; ?><br>
-                        
-                        <div class="avaliacao-stars alojamento-stars">
-                            <span class="avaliacao-label">Avaliação:</span>
-                            <span class="stars">
-                                <?php 
-                                $media = $a['media_avaliacao'] ? round($a['media_avaliacao']) : 0;
-                                echo str_repeat('★', $media) . str_repeat('☆', 5 - $media);
-                                ?>
-                            </span>
-                            <span class="avaliacao-numero">
-                                <?= $a['media_avaliacao'] ? round($a['media_avaliacao'], 1) : 'N/A' ?>/5
-                            </span>
-                        </div>
-                        
-                        <?php if ($is_owner): ?>
-                            <a href="detalhes_alojamento.php?id=<?= $a['alojamento_id'] ?>&tipo=alojamento" class="btn-detalhes">Ver Detalhes</a>
-                            <a href="feedback_alojamento.php?id=<?= $a['alojamento_id'] ?>&tipo=alojamento" class="btn-feedback">Dar Feedback</a>
 
-                        <?php endif; ?>
-                    </li>
+                    <?php include 'templates/alojamentos_tpl.php'; ?>
+
                 <?php endforeach; ?>
                 </ul>
                 <?php if ($current_user == $viagem['nome_de_utilizador']): ?>
@@ -275,14 +249,9 @@ if ($traveljournal_id) {
         <section class="atividades">
             <h2>Atividades</h2>
 
-            <?php if (count($alojamentos) === 0): ?>
-                <p>Sem alojamentos registados nesta viagem.</p>
+            <?php if (count($atividades) === 0): ?>
+                <p>Sem atividades registadas nesta viagem.</p>
                 <?php if ($current_user == $viagem['nome_de_utilizador']): ?>
-                    <form action="novo_alojamento.php" method="post">
-                        <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
-                        <input type="hidden" name="alojamento" value="1">
-                        <button type="submit">Adicionar Alojamento</button>
-                    </form>
 
                     <form action="novo_alojamento.php" method="post">
                         <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
@@ -294,29 +263,9 @@ if ($traveljournal_id) {
             <?php else: ?>
                 <ul>
                 <?php foreach ($atividades as $a): ?>
-                    <li>
-                        <strong><?= htmlspecialchars($a['nome_atividade']) ?></strong> (<?= htmlspecialchars($a['tipo_atividade']) ?>)<br>
-                        Local: <?= htmlspecialchars($a['localizacao']) ?><br>
-                        A: <?= htmlspecialchars($a['data_inicio']) ?> 
-                        <div class="avaliacao-stars alojamento-stars">
-                            <span class="avaliacao-label">Avaliação:</span>
-                            <span class="stars">
-                                <?php 
-                                $media = $a['media_avaliacao'] ? round($a['media_avaliacao']) : 0;
-                                echo str_repeat('★', $media) . str_repeat('☆', 5 - $media);
-                                ?>
-                            </span>
-                            <span class="avaliacao-numero">
-                                <?= $a['media_avaliacao'] ? round($a['media_avaliacao'], 1) : 'N/A' ?>/5
-                            </span>
-                        </div>
-                        
-                        <?php if ($is_owner): ?>
-                            <a href="detalhes_alojamento.php?id=<?= $a['atividade_id'] ?>&tipo=atividade" class="btn-detalhes">Ver Detalhes</a>
-                            <a href="feedback_alojamento.php?id=<?= $a['atividade_id'] ?>&tipo=atividade" class="btn-feedback">Dar Feedback</a>
 
-                        <?php endif; ?>
-                    </li>
+                    <?php include 'templates/atividades_tpl.php'; ?>
+
                 <?php endforeach; ?>
                 </ul>
                 <?php if ($current_user == $viagem['nome_de_utilizador']): ?>
@@ -399,15 +348,6 @@ if ($traveljournal_id) {
     </main>
 
 
-    <div class="modal-galeria" id="modalGaleria">
-        <span class="modal-close" id="fecharModal">&times;</span>
-        <button class="modal-btn modal-prev" id="prevFoto">‹</button>
-        <img id="modalImg" src="">
-        <button class="modal-btn modal-next" id="nextFoto">›</button>
-    </div>
-    <footer>
-        </footer>
 
-</body>
-</html>
+    <?php include_once 'templates/footer_tpl.php'; ?>
 

@@ -1,302 +1,264 @@
-/* ===== RESET ===== */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-
-/* ===== BODY ===== */
 body {
     font-family: "Segoe UI", Arial, sans-serif;
     background-color: #FCF7F8;
     color: #2b2b2b;
+    line-height: 1.6;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/*================= HEADER ================= */
-
-header {
-    background-color: #4e8098;
+/* ===== LAYOUT CONTAINER ===== */
+.perfil-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+    width: 100%;
 }
 
-nav {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0px 15px;
+/* ===== MENU WISH LIST / EDITAR ===== */
+.perfil-menu-barra {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 12px 25px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
 }
 
-.logo a {
+.menu-links-centrais {
     display: flex;
-    align-items: center;            
+    gap: 40px;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.menu-links-centrais a {
     text-decoration: none;
-}
-
-
-.logo img {
-    height: 140px;       
-    filter: brightness(1) invert(2); 
-    display: block;
-}
-
-.logo img:hover {
-    transform: scale(1.05); /* Pequeno efeito de zoom ao passar o rato */
-}
-
-.logo span {
-    font-size: 2rem;
-    font-weight: bold;
-    color: black;     
-    letter-spacing: 1px;
-    font-family: "Segoe UI", Arial, sans-serif;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-nav ul li a {
-    color: #fcf7f8;
-    text-decoration: none;
-    font-size: 0.95rem;
-}
-
-nav ul li a:hover {
-    color: #334f5c
-}
-
-
-/* BOTÕES */
-
-.btn-login {
-    padding: 6px 14px;
-    border: 1px solid #fcf7f8;
-    border-radius: 4px;
-}
-
-.btn-login:hover {
-background-color: #fcf7f8;
-color: #4e8098
-}
-
-.btn-signup {
-    padding: 6px 14px;
-    background-color: #a31621;
-    border-radius: 4px;
-}
-
-.btn-signup:hover {
-    background-color: #b66168 ;
-    color: #fffae2
-}
-
-
-/* ===== PERFIL INFO ===== */
-
-
-.editar-perfil button {
-    max-width: 1200px;
-    margin: 10px auto;
-    display: flex;
-    justify-content: flex-end;
-    padding: 8px 16px;
-    font-size: 0.9rem; 
+    color: #4e8098;
     font-weight: 600;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    font-family: inherit;
-    background-color: transparent; 
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.menu-links-centrais a:hover {
+    color: #a31621;
+}
+
+
+.menu-spacer {
+    width: 120px; 
+}
+
+.menu-botao-editar button {
+    background-color: transparent;
     color: #a31621;
     border: 1.5px solid #a31621;
-    border-radius: 20px; 
-    align-items: center;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.editar-perfil button:hover {
+.menu-botao-editar button:hover {
     background-color: #a31621;
-    color: #ffffff;
+    color: #fff;
     box-shadow: 0 4px 8px rgba(163, 22, 33, 0.2);
-    transform: translateY(-1px);
 }
 
+/* ===== INFO DO PERFIL ===== */
 .perfil-info {
     background-color: #fff;
-    border-radius: 8px;
-    padding: 25px;
+    border-radius: 12px;
+    padding: 40px 25px;
     text-align: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
 }
 
 .foto-perfil {
-    width: 110px;
-    height: 110px;
+    width: 130px;
+    height: 130px;
     object-fit: cover;
     border-radius: 50%;
     border: 4px solid #90C2E7;
     margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.foto-perfil:hover {
+    transform: scale(1.03);
 }
 
 .perfil-info h1 {
     color: #A31621;
+    font-size: 2rem;
     margin-bottom: 5px;
 }
 
 .perfil-info h2 {
-    font-size: 1.1rem;
-    color: #4E8098;;
-    margin-bottom: 15px;
+    font-size: 1.2rem;
+    color: #4E8098;
+    margin-bottom: 20px;
+    font-weight: 400;
 }
 
-.perfil-info p {
+.detalhes-texto p {
     margin-bottom: 8px;
-    font-size: 0.9rem;
-}
-
-/* ===== PSEGUIR / DEIXAR DE SEGUIR ===== */
-
-.perfil-info form {
-    margin-top: 20px;
-}
-
-.btn-follow {
-    width: 25%;
-    padding: 10px 20px;
     font-size: 0.95rem;
+}
+
+/* ===== BOTÃO SEGUIR ===== */
+.btn-follow {
+    margin-top: 20px;
+    padding: 10px 30px;
+    font-size: 1rem;
     font-weight: 600;
-    border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: all 0.25s ease;
-    font-family: inherit;
+    transition: all 0.3s ease;
+    border: 2px solid #4e8098;
 }
 
-/* "Seguir"  */
 .btn-follow:not(.following) {
     background-color: #4e8098;
-    color: #ffffff;
+    color: #fff;
 }
 
-.btn-follow:not(.following):hover {
-    background-color: #3d6576;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(78, 128, 152, 0.3);
-}
-
-/* "Deixar de seguir" */
 .btn-follow.following {
-    background-color: #ffffff;
+    background-color: transparent;
     color: #a31621;
-    border: 1px solid #a31621;
+    border-color: #a31621;
 }
 
-.btn-follow.following:hover {
-    background-color: whitesmoke;
-    border-color: brown;
-    color: darkred;
-    box-shadow: 0 4px 12px rgba(78, 128, 152, 0.3);
-
+.btn-follow:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
 }
 
-.btn-follow:active {
-    transform: scale(0.98);
-}
-
-/* ===== VIAGENS ===== */
+/* ===== SECÇÃO VIAGENS ===== */
 .perfil-viagens {
     background-color: #fff;
-    border-radius: 8px;
-    padding: 25px;
+    border-radius: 12px;
+    padding: 30px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.perfil-viagens h2 {
-    color: #4E8098;;
-    margin-bottom: 20px;
+.titulo-seccao {
+    color: #4E8098;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
 }
 
-/* ===== LISTA DE VIAGENS ===== */
 .lista-viagens {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
 }
 
-/* ===== CARTÕES ===== */
+/* ===== CARTÃO DE VIAGEM ===== */
 .cartao {
     background-color: #FCF7F8;
+    border-radius: 10px;
+    overflow: hidden; 
     border-left: 5px solid #90c2e7;
-    padding: 18px;
-    border-radius: 6px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .cartao:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     border-left-color: #4e8098;
+}
 
+.post-foto {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    background-color: #eee;
+}
+
+.post-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.cartao:hover .post-foto img {
+    transform: scale(1.1);
+}
+
+.cartao-conteudo {
+    padding: 15px;
 }
 
 .cartao h3 {
     color: #A31621;
+    font-size: 1.1rem;
     margin-bottom: 8px;
 }
 
-.cartao p {
-    font-size: 0.9rem;
-    margin-bottom: 12px;
+.localizacao {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 15px;
 }
 
-.cartao a {
+.btn-ver-viagem {
+    display: inline-block;
     text-decoration: none;
-    color:#4E8098;;
-    font-weight: 500;
+    color: #4E8098;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.2s;
 }
 
-.cartao a:hover {
+.btn-ver-viagem:hover {
+    color: #a31621;
     text-decoration: underline;
 }
 
 /* ===== FOOTER ===== */
 footer {
-    background-color: #4E8098;;
-    color: #FCF7F8;
-    text-align: center;
-    padding: 20px;
-    margin-top: auto;
-}
-
-/* ===== RESPONSIVO ===== */
-@media (max-width: 900px) {
-    .perfil-container {
-        grid-template-columns: 1fr;
-    }
-
-    .perfil-info {
-        margin-bottom: 20px;
-    }
-
-
-    .editar-perfil button {
-        justify-content: center;
-        width: 14%; 
-    }
-}
-
-
-/* ================= FOOTER ================= */
-
-footer {
     background-color: #4e8098;
     color: #fcf7f8;
     text-align: center;
-    padding: 20px;
-    margin-top: 50px;
+    padding: 25px;
+    margin-top: 60px;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+    .perfil-menu-barra {
+        flex-direction: column;
+        border-radius: 20px;
+        padding: 20px;
+        gap: 15px;
+    }
+    
+    .menu-spacer { display: none; }
+    
+    .menu-links-centrais {
+        gap: 20px;
+    }
+    
+    .btn-follow {
+        width: 100%;
+    }
 }

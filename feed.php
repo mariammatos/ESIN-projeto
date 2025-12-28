@@ -5,53 +5,24 @@ require_once 'database/posts.php';
 require_once 'database/media.php';
 require_once 'database/users.php';
 
-
-// --- 1. LÓGICA DE AUTENTICAÇÃO E BUSCA DE DADOS ---
-
-// SIMULAÇÃO: Aqui, o seu código real iria verificar a sessão para obter o nome de utilizador logado.
-// Usamos 'sara' como um utilizador de teste por agora.
-// $current_user = 'mariasouza'; 
 if (!isset($_SESSION['username'])) {
-    header('Location: login.php'); // Se falhar, volta para a página de login
+    header('Location: login.php'); 
     exit();
 }
 $current_user = $_SESSION['username'];
 
-// Consulta SQL para obter as publicações das pessoas que o utilizador segue.
-// Esta consulta junta Viagens (V) com Utilizador (U) e Seguir (S).
 $db = getDatabaseConnection();
 $posts = getFeed($db, $current_user);
 
-// --- 2. APRESENTAÇÃO HTML/CSS ---
+$_SESSION['last_page'] = 'feed.php';
+$css_especifico = 'stylefeed.css';
+
+include_once 'templates/header_tpl.php';
+
+
 ?>
 
 <!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feed | TripTales</title>
-    <link rel="stylesheet" href="css/stylefeed.css">
-    </head>
-<body>
-
-    <header>
-        <nav>
-            <div class="logo">
-                <a href="index.php">
-                    <img src="logo TripTales.png" alt="TripTales Logo">
-                    <span>TripTales</span>
-                </a>
-            </div>
-            <ul>
-                <li><a href="feed.php">Feed</a></li>
-                <li><a href="explorar.php">Explorar</a></li>
-                <li><a href="perfil.php?user=<?php echo htmlspecialchars($current_user); ?>">Perfil</a></li>
-                <li><a href="logout.php" class="btn-logout">Sair</a></li>
-                <li><a href="nova_viagem.php" class="btn-novaviagem">Nova Viagem</a></li>
-            </ul>
-        </nav>
-    </header>
 
     <main class="feed-container">
         <h1>Bem-vindo, <?php echo htmlspecialchars($current_user); ?>!</h1>
@@ -64,48 +35,10 @@ $posts = getFeed($db, $current_user);
                 <p>Que tal começar a <a href="explorar.php">Explorar</a> novos viajantes?</p>
             </div>
         <?php else: ?>
-            <?php foreach ($posts as $post): ?>
-                <article class="post-viagem">
-                    <div class="post-header">
-                        <h2><?php echo htmlspecialchars($post['titulo']); ?></h2>
-                        <span class="autor">
-                            por 
-                            <a href="perfil.php?user=<?= urlencode($post['nome_de_utilizador']) ?>">
-                                @<?= htmlspecialchars($post['nome_de_utilizador']) ?> (<?= htmlspecialchars($post['nome']) ?>)
-                            </a>
-                        </span>
-                    </div>
-                    
-                    <div class="post-detalhes">
-                                    <?php 
-                                        $fotos_post = getFotos($db, $post['id']); // todas as fotos da viagem
-                                        if (!empty($fotos_post)):
-                                            $foto_principal = $fotos_post[0]; // a de menor id
-                                    ?>
-                                        <div class="post-foto">
-                                            <img src="<?= htmlspecialchars($foto_principal['path']); ?>" 
-                                                alt="Foto da viagem <?= htmlspecialchars($post['titulo']); ?>" 
-                                                width="200" height="200">
-                                        </div>
-                                    <?php endif; ?>
-                        <p><strong>Destino:</strong> <?php echo htmlspecialchars($post['cidade_local']); ?>, <?php echo htmlspecialchars($post['pais']); ?></p>
-                        <p><a href="viagem.php?id=<?php echo $post['id']; ?>">Ver todos os detalhes da viagem...</a></p>
-                    </div>
-
-                    <div class="post-interacoes">
-                        <?php $likes_count = getViagemLikesCount($db, $post['id']); ?>
-                        <?php $comentarios_count = getViagemComentariosCount($db, $post['id']); ?>
-                        <span><?php echo $likes_count; ?> Likes</span> | <span><?php echo $comentarios_count; ?> Comentários</span>
-                    </div>
-                    
-                </article>
+            <?php foreach ($posts as $viagem): ?>
+                <?php include 'templates/feed_tpl.php'; ?>
             <?php endforeach; ?>
         <?php endif; ?>
     </main>
 
-    <footer>
-        <p>&copy; 2025 TripTales. Projeto ESIN.</p>
-    </footer>
-
-</body>
-</html>
+<?php include_once 'templates/footer_tpl.php'; ?>

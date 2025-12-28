@@ -1,6 +1,3 @@
-/* =========================
-   RESET + BASE
-========================= */
 
 * {
     margin: 0;
@@ -30,12 +27,62 @@ section h2 {
     gap: 8px;
 }
 
-/* ================= HEADER ================= */
+/*================= HEADER ================= */
 
 header {
     background-color: #4e8098;
-    padding: 20px;
 }
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;            
+    text-decoration: none;
+}
+
+
+.logo img {
+    height: 140px;       
+    filter: brightness(1) invert(2); 
+    display: block;
+}
+
+.logo img:hover {
+    transform: scale(1.05); 
+}
+
+.logo span {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;     
+    letter-spacing: 1px;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    color: #fcf7f8;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+nav ul li a:hover {
+    color: #334f5c
+}
+
 
 /* ==================== FEED ====================== */
 
@@ -147,7 +194,7 @@ header {
 }
 
 .viagem-detalhe-container .travel-journal p {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .viagem-detalhe-container .journal-texto {
@@ -192,7 +239,7 @@ header {
     box-shadow: 0 6px 14px rgba(0,0,0,0.2);
 }
 
-/* ========================= LOCAL + WISHLIST NA MESMA LINHA ========================= */
+/* ========================= LOCAL + WISHLIST  ========================= */
 
 .local-wishlist form button {
     background-color: transparent;
@@ -215,7 +262,6 @@ header {
     gap: 10px;
 }
 
-/* remove margens que empurram o botão */
 .local-wishlist p {
     margin: 0;
     display: flex;
@@ -223,12 +269,10 @@ header {
     gap: 4px;
 }
 
-/* evita que o form vá para baixo */
 .local-wishlist form {
     margin: 0;
 }
 
-/* botão da wishlist */
 .local-wishlist form button {
     background-color: transparent;
     border: 1px solid #ced3dc;
@@ -244,7 +288,6 @@ header {
 }
 
 
-/* ÍCONE BOOKMARK */
 .local-wishlist form button::before {
     content: "🔖";
     font-size: 18px;
@@ -255,7 +298,7 @@ header {
     border-color: #a31621;
 }
 
-/* HOVER */
+
 .local-wishlist form button:hover {
     background-color: #a31621;
     border-color: #a31621;
@@ -293,7 +336,6 @@ header {
     font-size: 0.95rem;
 }
 
-/* Estrelas para alojamentos */
 .viagem-detalhe-container .alojamento-stars {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -322,6 +364,7 @@ header {
     border-bottom: 1px solid #e0e0e0;
 }
 
+
 .atividades-alojamentos li:last-child {
     border-bottom: none;
     margin-bottom: 0;
@@ -347,23 +390,143 @@ header {
     box-shadow: 0 4px 8px rgba(163, 22, 33, 0.2);
 }
 
-.btn-feedback {
+.btn-detalhes {
     display: inline-block;
-    margin-top: 10px;
-    padding: 8px 16px;
-    background-color: #4e8098;
-    color: #fff;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    transition: all 0.25s ease;
     text-decoration: none;
+    color: #4E8098;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.btn-detalhes:hover {
+    color: #a31621;
+    text-decoration: underline;
+}
+
+
+.btn-feedback {
+    display: block;
+    text-align: center;
+    margin-top: auto; 
+    background-color: #fcf7f8;
+    color: #a31621;
+    border: 1px solid #f1e1e1;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    transition: all 0.2s;
 }
 
 .btn-feedback:hover {
     background-color: #a31621;
+    color: #fff;
+    transform: none; 
+}
+
+.btn-delete {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #a31621;
+    color: #fffae2;
+    border: 1px solid #a31621;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: inherit;
+}
+
+.btn-delete:hover {
+    background-color: #b66168 ;
+    color: #fffae2;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(163, 22, 33, 0.2);
+    box-shadow: 0 4px 8px rgba(163, 22, 33, 0.3);
+}
+
+.alojamentos ul, 
+.atividades ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.alojamentos li, 
+.atividades li {
+    background: #ffffff;
+    border: 1px solid #eef0f2;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-bottom: none; 
+}
+
+.alojamentos li:hover, 
+.atividades li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+
+.alojamentos li strong, 
+.atividades li strong {
+    color: #a31621;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.atividades li {
+    border-top: 4px solid #90c2e7;
+}
+
+.alojamentos li {
+    border-top: 4px solid #90c2e7;
+}
+
+.btn-feedback {
+    display: block;
+    text-align: center;
+    margin-top: auto; 
+    background-color: #fcf7f8;
+    color: #a31621;
+    border: 1px solid #f1e1e1;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.btn-feedback:hover {
+    background-color: #a31621;
+    color: #fff;
+    transform: none; 
+}
+
+
+section.alojamentos form, 
+section.atividades form {
+    display: inline-block;
+    margin-top: 15px;
+}
+
+
+
+.alojamento-stars {
+    background: #fafafa;
+    padding: 8px;
+    border-radius: 6px;
+    margin: 10px 0;
+    width: 100%;
+    justify-content: center;
 }
 
 /* ========================= LIKE ========================= */
@@ -393,7 +556,6 @@ header {
     transition: all 0.2s ease;
 }
 
-/* CORAÇÃO */
 .like button::before {
     content: "🤍";
     font-size: 18px;
@@ -474,7 +636,6 @@ header {
     transition: all 0.2s ease;
 }
 
-/* ÍCONE */
 .comentarios button::before {
     content: "💬";
     font-size: 18px;
@@ -496,14 +657,12 @@ header {
     filter: brightness(0) invert(1);
 }
 
-/* LISTA COMENTÁRIOS */
 
 .lista-comentarios {
     list-style: none;
     margin-top: 20px;
 }
 
-/* CARD DO COMENTÁRIO */
 
 .lista-comentarios li {
     background-color: #ffffff;
@@ -516,21 +675,18 @@ header {
     gap: 8px;
 }
 
-/* AUTOR */
 
 .lista-comentarios strong {
     color: #4e8098;
     font-weight: 600;
 }
 
-/* TEXTO */
 
 .lista-comentarios li em {
     font-size: 0.8rem;
     color: #777;
 }
 
-/* BOTÃO ELIMINAR */
 
 .lista-comentarios form {
     align-self: flex-end;
@@ -551,39 +707,58 @@ header {
     color: #fff;
 }
 
-/* ========================= GALERIA FOTOS - CLICÁVEIS ========================= */
-
-.galeria-fotos {
-    margin-bottom: 30px;
-}
+/* =========================  FOTOS  ========================= */
 
 .galeria-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.galeria-horizontal {
+    display: flex;
     gap: 12px;
-    margin-bottom: 20px;
+}
+
+.editar-fotos {
+    margin-top: 8px;
+    margin-bottom: 10px;    
 }
 
 .foto-item {
-    position: relative;
-    cursor: pointer;
+    flex: 0 0 auto;
+    width: 220px;
+    aspect-ratio: 4 / 5; 
+    border-radius: 12px;
     overflow: hidden;
-    border-radius: 8px;
-    aspect-ratio: 1;
+    background-color: #eee;
+    scroll-snap-align: start;
 }
+
 
 .foto-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform 0.35s ease;
 }
 
 .foto-item:hover img {
     transform: scale(1.05);
 }
 
-/* ========================= GALERIA (INSTAGRAM STYLE) ========================= */
+.galeria-container {
+    scroll-snap-type: x mandatory;
+}
+
+.galeria-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.galeria-container::-webkit-scrollbar-thumb {
+    background-color: #ced3dc;
+    border-radius: 10px;
+}
+
 
 .modal-sem-js {
     position: fixed;
@@ -592,18 +767,16 @@ header {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.9);
-    display: none; /* Escondido */
+    display: none; 
     z-index: 10000;
     align-items: center;
     justify-content: center;
 }
 
-/* Quando o ID da div está na URL (ex: #foto-0), ela aparece */
 .modal-sem-js:target {
     display: flex;
 }
 
-/* Área para clicar e fechar (atrás da imagem) */
 .modal-overlay {
     position: absolute;
     width: 100%;
@@ -627,7 +800,6 @@ header {
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
-/* Botões de Navegação e Fechar */
 .nav-btn, .modal-close-btn {
     position: absolute;
     color: white;
@@ -663,7 +835,6 @@ header {
     padding: 10px 0;
 }
 
-/* Transforma cada <li> num Card */
 .alojamentos li, 
 .atividades li {
     background: #ffffff;
@@ -675,7 +846,7 @@ header {
     display: flex;
     flex-direction: column;
     position: relative;
-    border-bottom: none; /* Remove a linha cinzenta antiga */
+    border-bottom: none; 
 }
 
 .alojamentos li:hover, 
@@ -684,7 +855,7 @@ header {
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
-/* Estilo para o Nome (o strong) */
+
 .alojamentos li strong, 
 .atividades li strong {
     color: #a31621;
@@ -693,7 +864,6 @@ header {
     margin-bottom: 5px;
 }
 
-/* Diferenciação de cor para Atividades */
 .atividades li {
     border-top: 4px solid #90c2e7;
 }
@@ -702,11 +872,10 @@ header {
     border-top: 4px solid #90c2e7;
 }
 
-/* Ajuste dos botões dentro dos cards */
 .btn-feedback {
     display: block;
     text-align: center;
-    margin-top: auto; /* Empurra o botão para o fundo do card */
+    margin-top: auto; 
     background-color: #fcf7f8;
     color: #a31621;
     border: 1px solid #f1e1e1;
@@ -719,10 +888,10 @@ header {
 .btn-feedback:hover {
     background-color: #a31621;
     color: #fff;
-    transform: none; /* Evita conflitos de animação */
+    transform: none; 
 }
 
-/* Estilo para os formulários de "Adicionar" que estão soltos */
+
 section.alojamentos form, 
 section.atividades form {
     display: inline-block;
@@ -731,7 +900,6 @@ section.atividades form {
 
 
 
-/* Ajuste das estrelas dentro do card */
 .alojamento-stars {
     background: #fafafa;
     padding: 8px;

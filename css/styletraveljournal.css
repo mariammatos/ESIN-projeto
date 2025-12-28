@@ -1,4 +1,4 @@
-/* ===== RESET ===== */
+
 * {
     margin: 0;
     padding: 0;
@@ -38,7 +38,7 @@
 }
 
 
-/* ================= CARD BASE ================= */
+/* ================= BASE ================= */
 
 body {
     font-family: "Segoe UI", Arial, sans-serif;
@@ -61,7 +61,7 @@ body {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
 }
 
-/* TÍTULO  */
+
 
 #registration h2 {
     text-align: center;
@@ -131,7 +131,7 @@ body {
     font-weight: 500;
 }
 
-/* ================= BOTÕES TIPO "VERIFICAR" ================= */
+/* ================= BOTÕES  ================= */
 
 .form-group button[formnovalidate] {
   background-color: #fcf7f8;
@@ -152,7 +152,7 @@ body {
     border-color: #a31621;
 }
 
-/* ================= BOTÃO PUBLICAR ================= */
+
 
 #registration button[type="submit"] {
     width: 100%;
@@ -183,7 +183,6 @@ footer {
     text-align: center;
     margin-top: 35px;
     color: #ffffff;
-    font-size: 0.85rem;
     opacity: 0.85;
 }
 

@@ -6,6 +6,7 @@
                         </strong> 
                         (<?= htmlspecialchars($a['tipo_atividade']) ?>)<br>
                         Local: <?= htmlspecialchars($a['localizacao']) ?><br>
+
                         Data: <?= htmlspecialchars($a['data_atividade']) ?> 
                         <div class="avaliacao-stars alojamento-stars">
                             <span class="avaliacao-label">Avaliação:</span>

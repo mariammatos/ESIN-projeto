@@ -1,4 +1,4 @@
-/* ================= RESET ================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -154,7 +154,6 @@ body {
 footer {
     margin-top: 35px;
     color: #ffffff;
-    font-size: 0.85rem;
     opacity: 0.85;
 }
 

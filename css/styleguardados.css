@@ -1,4 +1,4 @@
-/* RESET */
+
 * {
     margin: 0;
     padding: 0;
@@ -11,7 +11,7 @@ body {
     line-height: 1.6;
 }
 
-/* ================= HEADER ================= */
+/*================= HEADER ================= */
 
 header {
     background-color: #4e8098;
@@ -40,7 +40,7 @@ nav {
 }
 
 .logo img:hover {
-    transform: scale(1.05); /* Pequeno efeito de zoom ao passar o rato */
+    transform: scale(1.05); 
 }
 
 .logo span {
@@ -66,7 +66,6 @@ nav ul li a {
 nav ul li a:hover {
     color: #334f5c
 }
-
 
 /* ================= FEED ================= */
 
@@ -143,7 +142,9 @@ nav ul li a:hover {
     text-align: center;
     border-radius: 8px;
     border: 2px dashed #ced3dc;
+    color: #555;
 }
+
 
 .sem-posts a {
    color: #4e8098; 

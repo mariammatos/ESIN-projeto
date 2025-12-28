@@ -18,7 +18,11 @@ $pesquisa_viagem = $_GET['search_viagem'] ?? '';
 $pesquisa_alojamento = $_GET['search_alojamento'] ?? '';
 $pesquisa_atividade = $_GET['search_atividade'] ?? '';
 
-
+$_SESSION['last_page'] = 'explorar.php';
+$_SESSION['search_user'] = $pesquisa_user;
+$_SESSION['search_viagem'] = $pesquisa_viagem;
+$_SESSION['search_alojamento'] = $pesquisa_alojamento;
+$_SESSION['search_atividade'] = $pesquisa_atividade;
 
 $db = getDatabaseConnection();
 if (!empty($pesquisa_user)) {
@@ -46,36 +50,15 @@ if (!empty($pesquisa_user)) {
     $alojamentos_matches = [];
 }
 
+$css_especifico = 'styleexplorar.css';
+
+include_once 'templates/header_tpl.php';
+
 
 ?>
 
 <!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feed | TripTales</title>
-    <link rel="stylesheet" href="css/styleexplorar.css">
-    </head>
-<body>
 
-    <header>
-        <nav>
-            <div class="logo">
-                <a href="index.php">
-                    <img src="logo TripTales.png" alt="TripTales Logo">
-                    <span>TripTales</span>
-                </a>
-            </div>
-            <ul>
-                <li><a href="feed.php">Feed</a></li>
-                <li><a href="explorar.php">Explorar</a></li>
-                <li><a href="perfil.php?user=<?php echo htmlspecialchars($current_user); ?>">Perfil</a></li>
-                <li><a href="logout.php" class="btn-logout">Sair</a></li>
-                <li><a href="nova_viagem.php" class="btn-novaviagem">Nova Viagem</a></li>
-            </ul>
-        </nav>
-    </header>
 
     <main>
 
@@ -123,7 +106,7 @@ if (!empty($pesquisa_user)) {
                     <article class="post-alojamento">
                         <div class="post-header">
                             <h2>
-                                <a href="detalhes_alojamento.php?id=<?= $a['alojamento_id'] ?>">
+                                <a href="detalhes_alojamento.php?id=<?= $a['detalhe_id']?>&tipo=alojamento">
                                     <?= htmlspecialchars($a['nome_alojamento']) ?>
                                 </a>
                             </h2>
@@ -133,7 +116,7 @@ if (!empty($pesquisa_user)) {
                         <div class="post-detalhes">
                             <p><strong>Localização:</strong> <?php echo htmlspecialchars($a['localizacao']); ?></p>
                             <p><strong>Rating Global:</strong> <?php echo $a['media_avaliacao'] !== null ? number_format($a['media_avaliacao'], 1) . ' / 5' : 'Sem avaliações'; ?></p>
-                            <a href="detalhes_alojamento.php?id=<?= $a['alojamento_id'] ?>">Ver detalhes do alojamento...</a>
+                            <a href="detalhes_alojamento.php?id=<?= $a['detalhe_id'] ?>">Ver detalhes do alojamento...</a>
                         </div>
                     </article>
                 <?php endforeach; ?>
@@ -166,35 +149,8 @@ if (!empty($pesquisa_user)) {
                     </article>
                 <?php endforeach; ?>
             <?php elseif (!empty($posts)): ?>
-                <?php foreach ($posts as $post): ?>
-                    <article class="post-viagem">
-                        <div class="post-header">
-                            <h2><?php echo htmlspecialchars($post['titulo']); ?></h2>
-                            <span class="autor">por <a href="perfil.php?user=<?php echo htmlspecialchars($post['nome_de_utilizador']); ?>">@<?php echo htmlspecialchars($post['nome_de_utilizador']); ?> (<?php echo htmlspecialchars($post['nome']); ?>)</a></span>
-                        </div>
-                        
-                        <div class="post-detalhes">
-                                    <?php 
-                                        $fotos_post = getFotos($db, $post['id']); // todas as fotos da viagem
-                                        if (!empty($fotos_post)):
-                                            $foto_principal = $fotos_post[0]; // a de menor id
-                                    ?>
-                                        <div class="post-foto">
-                                            <img src="<?= htmlspecialchars($foto_principal['path']); ?>" 
-                                                alt="Foto da viagem <?= htmlspecialchars($post['titulo']); ?>" 
-                                                width="200" height="200">
-                                        </div>
-                                    <?php endif; ?>
-                            <p><strong>Destino:</strong> <?php echo htmlspecialchars($post['cidade_local']); ?>, <?php echo htmlspecialchars($post['pais']); ?></p>
-                            <p><a href="viagem.php?id=<?php echo $post['id']; ?>">Ver todos os detalhes da viagem...</a></p>
-                        </div>
-
-                        <div class="post-interacoes">
-                            <?php $likes_count = getViagemLikesCount($db, $post['id']); ?>
-                            <?php $comentarios_count = getViagemComentariosCount($db, $post['id']); ?>
-                            <span><?php echo $likes_count; ?> Likes</span> | <span><?php echo $comentarios_count; ?> Comentários</span>
-                        </div>
-                    </article>
+                <?php foreach ($posts as $viagem): ?>
+                    <?php include 'templates/feed_tpl.php'; ?>
                 <?php endforeach; ?>
             <?php else: ?>
                 <p>Nenhum resultado encontrado.</p>
@@ -202,9 +158,4 @@ if (!empty($pesquisa_user)) {
         </div>
     </main>
 
-    <footer>
-        <p>&copy; 2025 TripTales. Projeto ESIN.</p>
-    </footer>
-
-</body>
-</html>
+<?php include_once 'templates/footer_tpl.php'; ?>

@@ -1,4 +1,4 @@
-/* RESET */
+
 * {
     margin: 0;
     padding: 0;
@@ -40,7 +40,7 @@ nav {
 }
 
 .logo img:hover {
-    transform: scale(1.05); /* Pequeno efeito de zoom ao passar o rato */
+    transform: scale(1.05); 
 }
 
 .logo span {
@@ -67,7 +67,7 @@ nav ul li a:hover {
     color: #334f5c
 }
 
-/* BOTÕES */
+/* ================= BOTÕES ================= */
 
 .btn-login {
     padding: 6px 14px;
@@ -80,16 +80,19 @@ background-color: #fcf7f8;
 color: #4e8098
 }
 
-.btn-signup {
+.btn-signup,
+.btn-logout {
     padding: 6px 14px;
     background-color: #a31621;
     border-radius: 4px;
 }
 
-.btn-signup:hover {
+.btn-signup:hover,
+.btn-logout:hover {
     background-color: #b66168 ;
     color: #fffae2
 }
+
 
 /* ================= MAIN ================= */
 
@@ -201,7 +204,7 @@ main {
 }
 
 .sobre-conteudo {
-    max-width: 800px; /* Texto centralizado e com largura legível */
+    max-width: 800px; 
     margin: 0 auto;
     text-align: center;
 }
@@ -213,7 +216,7 @@ main {
     padding-bottom: 10px;
 }
 
-/* Linha decorativa debaixo do título */
+
 .sobre-conteudo h2::after {
     content: '';
     position: absolute;
@@ -240,7 +243,7 @@ main {
     font-size: 1.2rem !important;
 }
 
-/* Estilo dos botões de perfil dos fundadores */
+
 .equipa-links {
     margin-top: 40px;
     padding-top: 30px;
@@ -260,7 +263,7 @@ main {
     color: white;
     padding: 10px 20px;
     text-decoration: none;
-    border-radius: 25px; /* Formato de cápsula mais moderno */
+    border-radius: 25px; 
     font-weight: 500;
     font-size: 0.9rem;
     transition: all 0.3s ease;
@@ -273,6 +276,29 @@ main {
     transform: translateY(-3px);
 }
 
+.btn-novaviagem {
+    background-color: whitesmoke;
+    color: #a31621;
+    border: 1.5px solid #a31621;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-novaviagem:hover {
+    background-color: #a31621;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(163, 22, 33, 0.2);
+}
+
+
+.btn-novaviagem::before {
+    margin-right: 5px;
+    font-size: 1.1rem;
+}
 /* ================= FOOTER ================= */
 
 footer {
@@ -294,5 +320,8 @@ footer {
     nav ul {
         flex-wrap: wrap;
         justify-content: center;
+        gap: 5px;
+        font-size: 0.5rem;
+
     }
 }

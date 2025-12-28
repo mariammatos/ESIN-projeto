@@ -98,9 +98,4 @@
     </form>
   </section>
 
-
-    <footer>
-      <p>&copy; 2025 TripTales. Projeto ESIN.</p>
-    </footer>
-  </body>
-</html>
+<?php include_once 'templates/footer_tpl.php'; ?>

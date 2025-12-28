@@ -24,7 +24,7 @@ if (!$item_id || !$viagem_id) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $comentario = trim($_POST['comentario'] ?? '');
-    $precos = trim($_POST['precos'] ?? '');
+    $precos = $precos = isset($_POST['precos']) ? (int)$_POST['precos'] : null;
     $rating = filter_var($_POST['rating'], FILTER_VALIDATE_INT, [
         'options' => ['min_range' => 0, 'max_range' => 5]
     ]);
@@ -59,10 +59,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
-  <a href="viagem.php?id=2" class="btn-voltar">← Voltar à Viagem</a>
+  <a href="viagem.php?id=<?= htmlspecialchars($viagem_id) ?>" class="btn-voltar">← Voltar</a>
 
-    <div>
+    <div class="feedback-container">
         <h2>Dar Feedback - <?= $tipo === 'alojamento' ? 'Alojamento' : 'Atividade' ?></h2>
+        
         <form method="post">
             <div class="form-group">
                 <label for="rating">Avaliação (0 a 5):</label>
@@ -70,13 +71,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             
             <div class="form-group">
+                <label>Preço:</label>
+                <div class="price-selector">
+                    <label class="price-option">
+                        <input type="radio" name="precos" value="0" required>
+                        <span>Gratuito</span>
+                    </label>
+                    <label class="price-option">
+                        <input type="radio" name="precos" value="1">
+                        <span>$</span>
+                    </label>
+                    <label class="price-option">
+                        <input type="radio" name="precos" value="2">
+                        <span>$$</span>
+                    </label>
+                    <label class="price-option">
+                        <input type="radio" name="precos" value="3">
+                        <span>$$$</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label for="comentario">Comentário:</label>
-                <textarea id="comentario" name="comentario" placeholder="Partilhe a sua experiência com este <?= $tipo === 'alojamento' ? 'alojamento' : 'atividade' ?>..."></textarea>
+                <textarea id="comentario" name="comentario" placeholder="Partilhe a sua experiência..."></textarea>
             </div>
             
             <button type="submit">Enviar Feedback</button>
         </form>
     </div>
-    
-</body>
-</html>
+
+<?php include_once 'templates/footer_tpl.php'; ?>

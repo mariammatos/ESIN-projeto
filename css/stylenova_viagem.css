@@ -1,4 +1,4 @@
-/* ===== RESET ===== */
+
 * {
     margin: 0;
     padding: 0;
@@ -36,7 +36,7 @@
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
 }
 
-/* ================= CARD BASE ================= */
+/* =================  BASE ================= */
 
 body {
     font-family: "Segoe UI", Arial, sans-serif;
@@ -139,7 +139,7 @@ body {
     opacity: 0.6;
 }
 
-/* ================= GRUPO DE INPUT + BOTÃO ================= */
+/* =================  INPUT ================= */
 
 .form-group-inline {
     display: flex;
@@ -151,7 +151,7 @@ body {
     flex: 1;
 }
 
-/* ================= BOTÕES TIPO "VERIFICAR" / SECUNDÁRIOS ================= */
+/* ================= BOTÕES ================= */
 
 .form-group button[formnovalidate] {
     background-color: #fcf7f8;
@@ -180,7 +180,7 @@ body {
     transform: translateY(0);
 }
 
-/* ================= LISTA DE PAÍSES ================= */
+/* ================= LISTA DE PAÍSES / PREFERÊNCIAS ================= */
 
 .form-group p {
     font-size: 0.85rem;
@@ -204,7 +204,7 @@ body {
     cursor: pointer;
 }
 
-/* Esconde o círculo original do rádio */
+
 .radio-option input[type="radio"] {
     display: none;
 }
@@ -231,7 +231,7 @@ body {
 }
 
 
-/* Organiza os países em grelha  */
+
 .radio-group {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -259,7 +259,6 @@ body {
     box-shadow: 0 4px 10px rgba(78, 128, 152, 0.3);
 }
 
-/* ================= PREFERÊNCIAS ================= */
 
 
 /* ================= BOTÃO PUBLICAR ================= */
@@ -293,11 +292,10 @@ body {
 /* ================= FOOTER ================= */
 
 footer {
+    color: #fcf7f8;
     text-align: center;
-    margin-top: 35px;
-    color: #ffffff;
-    font-size: 0.85rem;
-    opacity: 0.85;
+    padding: 20px;
+    margin-top: 50px;
 }
 
 /* ================= RESPONSIVIDADE ================ */

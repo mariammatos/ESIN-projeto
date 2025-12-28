@@ -25,16 +25,17 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>TripTales</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/styletraveljournal.css"> 
-    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin%7CMerriweather" rel="stylesheet"> 
-  </head>
-  <body>
+<html lang="pt">
+<head>
+  <title>TripTales</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/styletraveljournal.css"> 
+  <link href="https://fonts.googleapis.com/css?family=Libre+Franklin%7CMerriweather" rel="stylesheet"> 
+</head>
+<body>
 
-  <a href="viagem.php?id=2" class="btn-voltar">← Voltar à Viagem</a>
+  <a href="viagem.php?id=<?= htmlspecialchars($id_viagem) ?>" class="btn-voltar">← Voltar</a>
+
 
   <section id="registration">
     <?php echo $msg ?>
@@ -60,9 +61,4 @@
     </form>
   </section>
 
-
-    <footer>
-      <p>&copy; 2025 TripTales. Projeto ESIN.</p>
-    </footer>
-  </body>
-</html>
+<?php include_once 'templates/footer_tpl.php'; ?>

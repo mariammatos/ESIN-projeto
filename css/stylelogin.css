@@ -1,4 +1,4 @@
-/* ===== RESET ===== */
+
 * {
     margin: 0;
     padding: 0;
@@ -66,7 +66,7 @@ body > p:first-of-type:not([class]) {
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* ===== MENSAGEM PHP (ERROS / SUCESSO) ===== */
+/* ===== MENSAGEM ERROS / SUCESSO ===== */
 
 .error-message {
     background-color: #fff;  
@@ -88,7 +88,8 @@ body > p:first-of-type:not([class]) {
     0% { opacity: 0; transform: translateY(-10px); }
     100% { opacity: 1; transform: translateY(0); }
 }
-/* ===== CARTÃO LOGIN ===== */
+
+/* =====  LOGIN ===== */
 #login {
     background-color: #ffffff;
     padding: 45px 50px;
@@ -99,7 +100,7 @@ body > p:first-of-type:not([class]) {
     margin-bottom: 30px;
 }
 
-/* ===== TÍTULO LOGIN ===== */
+
 #login h2 {
     text-align: center;
     margin-bottom: 35px;
@@ -108,7 +109,7 @@ body > p:first-of-type:not([class]) {
     font-weight: 600;
 }
 
-/* ===== FORM ===== */
+
 #login form {
     display: flex;
     flex-direction: column;
@@ -137,7 +138,7 @@ body > p:first-of-type:not([class]) {
     box-shadow: 0 0 0 3px rgba(78, 128, 152, 0.25);
 }
 
-/* ===== BOTÃO LOGIN ===== */
+/* ===== BOTÃO  ===== */
 #login button {
     padding: 15px;
     background-color: #a31621;
@@ -162,7 +163,7 @@ body > p:first-of-type:not([class]) {
     transform: translateY(-1px);
 }
 
-/* ===== SECÇÃO REGISTAR ===== */
+/* =====  REGISTAR ===== */
 #registar {
     text-align: center;
     margin-bottom: 30px;
@@ -175,7 +176,7 @@ body > p:first-of-type:not([class]) {
     font-weight: 500;
 }
 
-/* BOTÃO REGISTAR */
+
 #registar .btn-signup {
     display: inline-block;
     padding: 12px 28px;
@@ -202,12 +203,10 @@ body > p:first-of-type:not([class]) {
 
 /* ===== FOOTER ===== */
 footer {
-    margin-top: 20px;
-    padding: 15px;
-    font-size: 0.85rem;
-    color: #ffffff;
-    opacity: 0.85;
+    color: #fcf7f8;
     text-align: center;
+    padding: 20px;
+    margin-top: 50px;
 }
 
 /* ===== RESPONSIVIDADE ===== */
