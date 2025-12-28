@@ -36,7 +36,7 @@ if ($perfil_user !== $current_user) {
 }
 
 $viagens = getViagensUtilizador($dbh, $user);
-$_SESSION['last_page'] = 'perfil.php?user=' . urlencode($perfil_user);
+//$_SESSION['last_page'] = 'perfil.php?user=' . urlencode($perfil_user);
 
 ?>
 <!DOCTYPE html>
