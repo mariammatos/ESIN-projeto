@@ -193,6 +193,7 @@ nav ul li a:hover {
 .viagem-detalhe-container .travel-journal,
 .viagem-detalhe-container .atividades-alojamentos {
     border-left: 5px solid #90c2e7;
+    margin-top: 20px;
 }
 
 .viagem-detalhe-container .travel-journal p {
@@ -813,26 +814,38 @@ section.atividades form {
 .nav-btn, .modal-close-btn {
     position: absolute;
     color: white;
-    font-size: 3rem;
+    font-size: 1.4rem; 
     text-decoration: none;
-    background: rgba(255,255,255,0.1);
-    width: 60px;
-    height: 60px;
+    background: rgba(0, 0, 0, 0.5); 
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
     transition: 0.3s;
     z-index: 10001;
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .nav-btn:hover, .modal-close-btn:hover {
-    background: rgba(255,255,255,0.3);
+    background: #a31621; 
+    transform: scale(1.1);
 }
 
-.prev { left: -80px; }
-.next { right: -80px; }
-.modal-close-btn { top: -60px; right: -60px; }
+.prev { 
+    left: -60px;
+     
+}
+
+.next { 
+    right: -60px; 
+}
+
+.modal-close-btn { 
+    top: -50px; 
+    right: -50px; 
+}
 
 /* ========================= ALOJAMENTO E ATIVIDADES ========================= */
 
@@ -938,6 +951,12 @@ footer {
         gap: 8px;
     }
     
+    .nav-btn, .modal-close-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+
     .prev { left: 10px; }
     .next { right: 10px; }
     .modal-close-btn { top: 10px; right: 10px; }

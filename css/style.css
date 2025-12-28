@@ -76,8 +76,8 @@ nav ul li a:hover {
 }
 
 .btn-login:hover {
-background-color: #fcf7f8;
-color: #4e8098
+    background-color: #fcf7f8;
+    color: #4e8098
 }
 
 .btn-signup,
@@ -312,16 +312,22 @@ footer {
 /* ================= RESPONSIVO ================= */
 
 @media (max-width: 768px) {
+    header{
+        width: 100%;
+    }
+
     nav {
+        max-width: 900px;
         flex-direction: column;
         gap: 15px;
+        width: 100%;
     }
 
     nav ul {
         flex-wrap: wrap;
         justify-content: center;
-        gap: 5px;
-        font-size: 0.5rem;
-
+        gap: auto;
+        font-size: 0.3rem;
+        gap: 2px;
     }
 }

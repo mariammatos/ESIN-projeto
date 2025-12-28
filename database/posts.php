@@ -300,14 +300,66 @@ function removerPublicacaoGuardada($db, $utilizador, $viagem_id) {
   }
   
 function removerViagem($db, $viagem_id) {
-    // Apagar a viagem e todos os registos dependentes (feedback, alojamentos, atividades, etc.)
+    $db->exec("PRAGMA foreign_keys = ON");
+
     try {
-        $stmt = $db->prepare("DELETE FROM Viagens WHERE id = :id");
-        $stmt->bindParam(':id', $viagem_id, PDO::PARAM_INT);
-        return $stmt->execute();
-    } catch (PDOException $e) {
-        error_log($e->getMessage());
+        $db->beginTransaction();
+
+        // 1. Apagar Media associada aos Feedbacks das Atividades/Alojamentos desta viagem
+        $db->prepare("
+            DELETE FROM Media WHERE Feedback IN (
+                SELECT id FROM Feedback_atividade WHERE atividade IN (SELECT id FROM Atividade WHERE viagem = ?)
+                UNION
+                SELECT id FROM Feedback_alojamento WHERE alojamento IN (SELECT id FROM Alojamento WHERE viagem = ?)
+            )
+        ")->execute([$viagem_id, $viagem_id]);
+
+        // 2. Apagar Media diretamente associada à Viagem (se existir a coluna TravelJournal/Viagem)
+        $db->prepare("DELETE FROM Media WHERE Viagem = ?")->execute([$viagem_id]);
+
+        // 3. Guardar os IDs dos Feedbacks antes de apagar as relações
+        // Isso evita o erro de restrição ao tentar limpar a tabela Feedback depois
+        $stmtF = $db->prepare("
+            SELECT id FROM Feedback_atividade WHERE atividade IN (SELECT id FROM Atividade WHERE viagem = ?)
+            UNION
+            SELECT id FROM Feedback_alojamento WHERE alojamento IN (SELECT id FROM Alojamento WHERE viagem = ?)
+        ");
+        $stmtF->execute([$viagem_id, $viagem_id]);
+        $feedbackIds = $stmtF->fetchAll(PDO::FETCH_COLUMN);
+
+        // 4. Apagar as relações de Feedback
+        $db->prepare("DELETE FROM Feedback_atividade WHERE atividade IN (SELECT id FROM Atividade WHERE viagem = ?)")->execute([$viagem_id]);
+        $db->prepare("DELETE FROM Feedback_alojamento WHERE alojamento IN (SELECT id FROM Alojamento WHERE viagem = ?)")->execute([$viagem_id]);
+
+        // 5. Agora sim, apagar os registos da tabela Feedback
+        if (!empty($feedbackIds)) {
+            $placeholders = implode(',', array_fill(0, count($feedbackIds), '?'));
+            $db->prepare("DELETE FROM Feedback WHERE id IN ($placeholders)")->execute($feedbackIds);
+        }
+
+        // 6. Apagar Atividades e Alojamentos
+        $db->prepare("DELETE FROM Atividade WHERE viagem = ?")->execute([$viagem_id]);
+        $db->prepare("DELETE FROM Alojamento WHERE viagem = ?")->execute([$viagem_id]);
+
+        // 7. Interações sociais e Jornal
+        $db->prepare("DELETE FROM Comentario WHERE viagem = ?")->execute([$viagem_id]);
+        $db->prepare("DELETE FROM Like_Viagem WHERE viagem = ?")->execute([$viagem_id]);
+        $db->prepare("DELETE FROM Guardar_publicacao WHERE viagem = ?")->execute([$viagem_id]);
+        $db->prepare("DELETE FROM TravelJournals WHERE viagem_id = ?")->execute([$viagem_id]);
+
+        // 8. Finalmente, a Viagem
+        $result = $db->prepare("DELETE FROM Viagens WHERE id = ?")->execute([$viagem_id]);
+        
+        $db->commit();
+        return $result;
+
+    } catch (Exception $e) {
+        $db->rollBack();
+        // Opcional: error_log($e->getMessage());
         return false;
     }
 }
+
+
+
 ?>

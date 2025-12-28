@@ -69,6 +69,16 @@
 
       <button type="submit">Guardar Alterações</button>
     </form>
+    <!-- FORMULÁRIO PARA APAGAR VIAGEM -->
+    <form 
+        action="actions/action_delete_viagem.php" 
+        method="post"
+        onsubmit="return confirm('Tens a certeza que queres apagar esta viagem? Esta ação é irreversível.');"
+        style="margin-top: 20px;"
+    >
+        <input type="hidden" name="viagem_id" value="<?= htmlspecialchars($viagem_id) ?>">
+        <button type="submit" class="btn-delete">Apagar Viagem</button>
+    </form>
   </section>
 
 
