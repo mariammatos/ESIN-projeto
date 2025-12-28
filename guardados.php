@@ -59,30 +59,60 @@ $_SESSION['last_page'] = 'guardados.php';
             </div>
         <?php else: ?>
             <?php foreach ($posts as $post): ?>
-                <article class="post-viagem">
-                    <div class="post-header">
-                        <h2><?php echo htmlspecialchars($post['titulo']); ?></h2>
-                        <span class="autor">
-                            por 
-                            <a href="perfil.php?user=<?= urlencode($post['nome_de_utilizador']) ?>">
-                                @<?= htmlspecialchars($post['nome_de_utilizador']) ?> (<?= htmlspecialchars($post['nome']) ?>)
-                            </a>
-                        </span>
-                    </div>
-                    
-                    <div class="post-detalhes">
-                        <p><strong>Destino:</strong> <?php echo htmlspecialchars($post['cidade_local']); ?>, <?php echo htmlspecialchars($post['pais']); ?></p>
-                        <p><a href="viagem.php?id=<?php echo $post['id']; ?>">Ver todos os detalhes da viagem...</a></p>
-                    </div>
+           <article class="post-viagem">
 
-                    <div class="post-interacoes">
-                        <?php $likes_count = getViagemLikesCount($db, $post['id']); ?>
-                        <?php $comentarios_count = getViagemComentariosCount($db, $post['id']); ?>
-                        <span><?php echo $likes_count; ?> Likes</span> | <span><?php echo $comentarios_count; ?> Comentários</span>
-                    </div>
-                    
-                </article>
-            <?php endforeach; ?>
+                <div class="post-header">
+                    <h2><?= htmlspecialchars($post['titulo']) ?></h2>
+                    <span class="autor">
+                        por
+                        <a href="perfil.php?user=<?= urlencode($post['nome_de_utilizador']) ?>">
+                            @<?= htmlspecialchars($post['nome_de_utilizador']) ?>
+                            (<?= htmlspecialchars($post['nome']) ?>)
+                        </a>
+                    </span>
+                </div>
+
+                <div class="post-detalhes">
+
+                    <?php
+                        $fotos_post = array_slice(getFotos($db, $post['id']), 0, 4);
+                        if (!empty($fotos_post)):
+                    ?>
+                        <div class="post-fotos">
+                            <?php foreach ($fotos_post as $foto): ?>
+                                <div class="post-foto">
+                                    <img src="<?= htmlspecialchars($foto['path']) ?>"
+                                        alt="Foto da viagem <?= htmlspecialchars($post['titulo']) ?>">
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <p>
+                        <strong>Destino:</strong>
+                        <?= htmlspecialchars($post['cidade_local']) ?>,
+                        <?= htmlspecialchars($post['pais']) ?>
+                    </p>
+
+                    <p>
+                        <a href="viagem.php?id=<?= $post['id'] ?>">
+                            Ver todos os detalhes da viagem...
+                        </a>
+                    </p>
+
+                </div>
+
+                <div class="post-interacoes">
+                    <?php
+                        $likes_count = getViagemLikesCount($db, $post['id']);
+                        $comentarios_count = getViagemComentariosCount($db, $post['id']);
+                    ?>
+                    <span><?= $likes_count ?> Likes</span> |
+                    <span><?= $comentarios_count ?> Comentários</span>
+                </div>
+
+            </article>
+        <?php endforeach; ?>
         <?php endif; ?>
     </main>
 
