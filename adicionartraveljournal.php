@@ -34,7 +34,7 @@
 </head>
 <body>
 
-<a href="viagem.php?id=<?= htmlspecialchars($viagem_id) ?>" class="btn-voltar">← Voltar</a>
+  <a href="viagem.php?id=<?= htmlspecialchars($viagem_id) ?>" class="btn-voltar">← Voltar</a>
 
 
   <section id="registration">
