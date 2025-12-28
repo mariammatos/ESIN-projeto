@@ -397,6 +397,22 @@ nav ul li a:hover {
     box-shadow: 0 4px 8px rgba(163, 22, 33, 0.2);
 }
 
+.btn-detalhes {
+    display: inline-block;
+    text-decoration: none;
+    color: #4E8098;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.btn-detalhes:hover {
+    color: #a31621;
+    text-decoration: underline;
+}
+
+
+
 .btn-feedback {
     display: inline-block;
     margin-top: 10px;
