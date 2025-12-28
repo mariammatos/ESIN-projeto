@@ -193,6 +193,7 @@ nav ul li a:hover {
 .viagem-detalhe-container .travel-journal,
 .viagem-detalhe-container .atividades-alojamentos {
     border-left: 5px solid #90c2e7;
+    margin-top: 20px;
 }
 
 .viagem-detalhe-container .travel-journal p {
