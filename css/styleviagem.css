@@ -133,7 +133,7 @@ nav ul li a:hover {
 
 .btn-voltar {
     display: inline-block;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     color: #4e8098;
 }
 
@@ -155,7 +155,7 @@ nav ul li a:hover {
 .autor-info {
     font-size: 0.95rem;
     color: #555;
-    margin-bottom: 10px; 
+    margin-bottom: 15px; 
 
 }
 
