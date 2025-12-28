@@ -6,6 +6,7 @@
   $db = getDatabaseConnection();
   $posts = getexplorar($db, 4);
   $_SESSION['last_page'] = 'index.php';
+  $página_atual = 'index';
 ?>
 
 <!DOCTYPE html>
