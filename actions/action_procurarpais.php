@@ -18,10 +18,17 @@ if (isset($_POST['registar'])) {
     $_SESSION['form_data']['username'] = $_POST['username'] ?? '';
     $_SESSION['form_data']['email'] = $_POST['email'] ?? '';
     $_SESSION['form_data']['nome'] = $_POST['nome'] ?? '';
-    $_SESSION['local'] = $_POST['local'] ?? '';
-    header('Location: ../registration.php');
-    exit;
-}  
+    $_SESSION['pais'] = $_POST['pais'] ?? '';
+    $_SESSION['pref'] = $_POST['pref'] ?? '';
+    if (isset($_POST['editar'])) {
+        header('Location: ../registration.php?editar=1');
+        exit;
+    }
+    else {
+        header('Location: ../registration.php');
+        exit;
+    }
+} 
 else {
     $_SESSION['form_data']['titulo'] = $_POST['titulo'] ?? '';
     $_SESSION['form_data']['data_ida'] = $_POST['data_ida'] ?? '';
