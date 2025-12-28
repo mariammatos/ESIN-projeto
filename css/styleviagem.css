@@ -215,7 +215,7 @@ nav ul li a:hover {
 .viagem-detalhe-container .adicionar-travel-journal button,
 .viagem-detalhe-container .editar-travel-journal button,
 .viagem-detalhe-container .alojamentos button,
-.viagem-detalhe-container .atividades button {
+.viagem-detalhe-container .adc-atividade {
     background-color: #4e8098;
     color: #fff;
     border: none;
@@ -233,7 +233,7 @@ nav ul li a:hover {
 .viagem-detalhe-container .adicionar-travel-journal button:hover,
 .viagem-detalhe-container .editar-travel-journal button:hover,
 .viagem-detalhe-container .alojamentos button:hover,
-.viagem-detalhe-container .atividades button:hover {
+.viagem-detalhe-container .adc-atividade:hover {
     background-color: #a31621;
     transform: translateY(-2px);
     box-shadow: 0 6px 14px rgba(0,0,0,0.2);
@@ -425,7 +425,7 @@ nav ul li a:hover {
 }
 
 .btn-delete {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     background-color: #a31621;
@@ -433,7 +433,8 @@ nav ul li a:hover {
     border: none;
     border-radius: 50%;
     width: 25%;
-    height: 36px;
+    height: 40px;
+    margin: 15px auto 0;
     font-size: 1.1rem;
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(163, 22, 33, 0.35);
@@ -446,7 +447,7 @@ nav ul li a:hover {
 
 .btn-delete:hover {
     background-color: #c94a52; 
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.1);
     box-shadow: 0 6px 14px rgba(163, 22, 33, 0.45);
 }
 
