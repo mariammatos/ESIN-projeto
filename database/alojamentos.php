@@ -1,4 +1,5 @@
 <?php
+include_once 'destinos.php';
 // --- Funções de Alojamentos ---
 
 // Obter todos os alojamentos de uma viagem, incluindo média de avaliação
@@ -52,8 +53,6 @@ function procurarAlojamentosGlobais(PDO $db, string $termo): array {
 }
 
 
-
-// Inserir um novo detalhe de alojamento
 function insertDetalheAlojamento($db, $nome, $localizacao, $tipo_alojamento) {
     // Verificar se o tipo existe
     $stmtCheck = $db->prepare('SELECT tipo_alojamento FROM Tipo_alojamento WHERE tipo_alojamento = ?');
@@ -152,23 +151,139 @@ function procurarAlojamentosPorDestino($db, $destino_id, $termo) {
 
 
 #ATIVIDADES
-// Criar detalhes base (nome + localização)
-function insertDetalhes($db, $nome, $localizacao) {
+function getAtividadesViagem($db, $viagem_id) {
+    $stmt = $db->prepare(
+        'SELECT 
+            A.id AS atividade_id,
+            A.data AS data_atividade, 
+            D.id AS detalhe_id,
+            D.nome AS nome_atividade,
+            D.localizacao,
+            DA.tipo AS tipo_atividade,
+            AVG(F.rating) AS media_avaliacao
+        FROM Atividade A
+        JOIN Detalhes_atividade DA ON A.detalhes = DA.id
+        JOIN Detalhes D ON DA.id = D.id
+        LEFT JOIN Feedback_atividade FA ON FA.atividade = A.id
+        LEFT JOIN Feedback F ON F.id = FA.id
+        WHERE A.viagem = :viagem_id
+        GROUP BY A.id
+        ORDER BY A.data ASC'
+    );
+    $stmt->bindParam(':viagem_id', $viagem_id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// Pesquisa global de atividades por nome ou localização
+function procurarAtividadesGlobais(PDO $db, string $termo): array {
+    $termo = '%' . $termo . '%';
+
+    $stmt = $db->prepare("
+        SELECT 
+            D.id AS detalhe_id,
+            D.nome AS nome_atividade,
+            DA.tipo AS tipo_atividade,
+            D.localizacao,
+            AVG(F.rating) AS media_avaliacao
+        FROM Detalhes D
+        JOIN Detalhes_atividade DA ON DA.id = D.id
+        LEFT JOIN Atividade A ON A.detalhes = D.id
+        LEFT JOIN Feedback_atividade FA ON FA.atividade = A.id
+        LEFT JOIN Feedback F ON F.id = FA.id
+        WHERE D.nome LIKE :termo
+           OR D.localizacao LIKE :termo
+        GROUP BY D.id
+        ORDER BY media_avaliacao DESC
+    ");
+
+    $stmt->execute(['termo' => $termo]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function insertDetalheAtividade($db, $nome, $localizacao, $tipo_atividade) {
+    // Verificar se o tipo existe
+    $stmtCheck = $db->prepare('SELECT tipo_atividade FROM Tipo_atividade WHERE tipo_atividade = ?');
+    $stmtCheck->execute([$tipo_atividade]);
+    if (!$stmtCheck->fetch()) {
+        throw new Exception("O tipo de atividade '$tipo_atividade' não existe na tabela Tipo_atividade");
+    }
+
+    // Inserir detalhe base
     $stmt = $db->prepare('INSERT INTO Detalhes (nome, localizacao) VALUES (?, ?)');
     $stmt->execute([$nome, $localizacao]);
+    $detalhe_id = $db->lastInsertId();
+
+    // Inserir tipo de atividade
+    $stmt2 = $db->prepare('INSERT INTO Detalhes_atividade (id, tipo) VALUES (?, ?)');
+    $stmt2->execute([$detalhe_id, $tipo_atividade]);
+
+    return $detalhe_id;
+}
+
+// Inserir uma atividade associada a uma viagem (Apenas 1 Data)
+function insertAtividade($db, $viagem_id, $detalhe_id, $data) {
+    // Assumindo que a coluna na tabela Atividade se chama 'data'
+    $stmt = $db->prepare('INSERT INTO Atividade (data, viagem, detalhes) VALUES (?, ?, ?)');
+    $stmt->execute([$data, $viagem_id, $detalhe_id]);
     return $db->lastInsertId();
 }
 
-// Certifica-te que insertDetalhesAtividade existe e funciona assim:
-function insertDetalhesAtividade($db, $detalhes_id, $tipo_atividade) {
-    $stmt = $db->prepare('INSERT INTO Detalhes_atividade (id, tipo) VALUES (?, ?)');
-    return $stmt->execute([$detalhes_id, $tipo_atividade]);
+// Adicionar feedback a uma atividade
+function adicionarFeedbackAtividade($db, $atividade_id, $rating, $comentario = null, $precos = null) {
+    // Primeiro inserir o feedback
+    $stmt = $db->prepare('INSERT INTO Feedback (rating, comentario, precos) VALUES (?, ?, ?)');
+    $stmt->execute([$rating, $comentario, $precos]);
+    $feedback_id = $db->lastInsertId();
+
+    // Depois associar à atividade
+    $stmt2 = $db->prepare('INSERT INTO Feedback_atividade (id, atividade) VALUES (?, ?)');
+    $stmt2->execute([$feedback_id, $atividade_id]);
+
+    return $feedback_id;
+}
+
+// Buscar detalhes completos da atividade, rating global e viagem associada
+function getDetalhesAtividadeCompleto($db, $atividade_id) {
+    $stmt = $db->prepare('
+        SELECT 
+            A.id AS atividade_id,
+            A.viagem AS viagem_id,
+            A.data AS data_atividade,
+            D.nome AS nome_atividade,
+            D.localizacao,
+            DA.tipo AS tipo_atividade,
+            AVG(F.rating) AS media_avaliacao
+        FROM Atividade A
+        JOIN Detalhes_atividade DA ON A.detalhes = DA.id
+        JOIN Detalhes D ON DA.id = D.id
+        LEFT JOIN Feedback_atividade FA ON FA.atividade = A.id
+        LEFT JOIN Feedback F ON F.id = FA.id
+        WHERE A.id = :atividade_id
+        GROUP BY A.id
+    ');
+    $stmt->bindParam(':atividade_id', $atividade_id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+// Buscar todos os feedbacks de uma atividade
+function getFeedbacksAtividade($db, $atividade_id) {
+    $stmt = $db->prepare('
+        SELECT F.rating, F.comentario, F.precos
+        FROM Feedback_atividade FA
+        JOIN Feedback F ON F.id = FA.id
+        WHERE FA.atividade = :atividade_id
+        ORDER BY F.id DESC
+    ');
+    $stmt->bindParam(':atividade_id', $atividade_id, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function procurarAtividadesPorDestino($db, $destino_id, $termo) {
     $termo = '%' . mb_strtolower($termo, 'UTF-8') . '%';
     $db->sqliteCreateFunction('removeacentos', 'normalize_string', 1);
-
     $stmt = $db->prepare('
         SELECT D.id, D.nome, D.localizacao, DA.tipo
         FROM Detalhes D
@@ -181,11 +296,3 @@ function procurarAtividadesPorDestino($db, $destino_id, $termo) {
     $stmt->execute([$destino_id, $termo]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-// Criar a atividade associada à viagem
-// Certifica-te que insertAtividade usa os nomes de colunas corretos da tua DB:
-function insertAtividade($db, $viagem_id, $detalhes_id, $data) {
-    $stmt = $db->prepare('INSERT INTO Atividade (viagem, detalhes, data) VALUES (?, ?, ?)');
-    return $stmt->execute([$viagem_id, $detalhes_id, $data]);
-}
-
-?>

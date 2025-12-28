@@ -20,7 +20,7 @@ if (isset($_POST['registar'])) {
     $_SESSION['form_data']['nome'] = $_POST['nome'] ?? '';
     $_SESSION['pais'] = $_POST['pais'] ?? '';
     $_SESSION['pref'] = $_POST['pref'] ?? '';
-    if (isset($_POST['editar'])) {
+    if (isset($_POST['editar']) && $_POST['editar'] == '1') {
         header('Location: ../registration.php?editar=1');
         exit;
     }

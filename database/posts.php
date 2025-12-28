@@ -34,12 +34,12 @@ require_once 'destinos.php';
  */
 
 function getViagemDetalhes($db, $id) {
-    // Esta query junta Viagens, Utilizador, Destino e, opcionalmente, o TravelJournal.
     $stmt = $db->prepare(
         'SELECT 
             V.titulo, 
             U.nome_de_utilizador, 
             U.nome, 
+            D.id AS destino_id,
             D.cidade_local, 
             D.pais, 
             V.data_ida, 

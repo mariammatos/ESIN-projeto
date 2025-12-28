@@ -70,7 +70,7 @@ if (!$editar) {
 
     try {
         updateUser($dbh, $username, $email, $nome, $pais_de_origem, $preferencia_de_viagem, $foto_de_perfil);
-        if (!empty($_FILES['foto_de_perfil']['name'])) {
+        if (!empty($_FILES['profile_pic']['name'])) {
             saveProfilePic($username);
         }
         unset($_SESSION['form_data']);

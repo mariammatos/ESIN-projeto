@@ -31,6 +31,7 @@ $likes = getViagemLikes($db, $id_viagem);
 $likes_count = getViagemLikesCount($db, $id_viagem);
 $comentarios = getComentarios($db, $id_viagem);
 $alojamentos = getAlojamentosViagem($db, $id_viagem);
+$atividades = getAtividadesViagem($db, $id_viagem);
 
 
 session_start();
@@ -214,15 +215,22 @@ if ($traveljournal_id) {
         </section>
 
 
-        <section class="atividades-alojamentos">
-            <h2>Atividades e Alojamentos</h2>
+        <section class="alojamentos">
+            <h2>Alojamentos</h2>
 
             <?php if (count($alojamentos) === 0): ?>
                 <p>Sem alojamentos registados nesta viagem.</p>
                 <?php if ($current_user == $viagem['nome_de_utilizador']): ?>
                     <form action="novo_alojamento.php" method="post">
                         <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
-                        <button type="submit">Adicionar Alojamento / Atividade</button>
+                        <input type="hidden" name="alojamento" value="1">
+                        <button type="submit">Adicionar Alojamento</button>
+                    </form>
+
+                    <form action="novo_alojamento.php" method="post">
+                        <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                        <input type="hidden" name="atividade" value="1">
+                        <button type="submit">Adicionar Atividade</button>
                     </form>
 
                 <?php endif; ?>
@@ -259,10 +267,68 @@ if ($traveljournal_id) {
                 <?php endforeach; ?>
                 </ul>
                 <?php if ($current_user == $viagem['nome_de_utilizador']): ?>
-                <form action="novo_alojamento.php" method="post">
-                    <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
-                    <button type="submit">Adicionar Alojamento / Atividade</button>
-                </form>
+                    <form action="novo_alojamento.php" method="post">
+                        <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                        <input type="hidden" name="alojamento" value="1">
+                        <button type="submit">Adicionar Alojamento</button>
+                    </form>
+
+                <?php endif; ?>
+            <?php endif; ?>
+        </section>
+
+        <section class="atividades">
+            <h2>Atividades</h2>
+
+            <?php if (count($alojamentos) === 0): ?>
+                <p>Sem alojamentos registados nesta viagem.</p>
+                <?php if ($current_user == $viagem['nome_de_utilizador']): ?>
+                    <form action="novo_alojamento.php" method="post">
+                        <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                        <input type="hidden" name="alojamento" value="1">
+                        <button type="submit">Adicionar Alojamento</button>
+                    </form>
+
+                    <form action="novo_alojamento.php" method="post">
+                        <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                        <input type="hidden" name="atividade" value="1">
+                        <button type="submit">Adicionar Atividade</button>
+                    </form>
+
+                <?php endif; ?>
+            <?php else: ?>
+                <ul>
+                <?php foreach ($atividades as $a): ?>
+                    <li>
+                        <strong><?= htmlspecialchars($a['nome_atividade']) ?></strong> (<?= htmlspecialchars($a['tipo_atividade']) ?>)<br>
+                        Local: <?= htmlspecialchars($a['localizacao']) ?><br>
+                        A: <?= htmlspecialchars($a['data_inicio']) ?> 
+                        <div class="avaliacao-stars alojamento-stars">
+                            <span class="avaliacao-label">Avaliação:</span>
+                            <span class="stars">
+                                <?php 
+                                $media = $a['media_avaliacao'] ? round($a['media_avaliacao']) : 0;
+                                echo str_repeat('★', $media) . str_repeat('☆', 5 - $media);
+                                ?>
+                            </span>
+                            <span class="avaliacao-numero">
+                                <?= $a['media_avaliacao'] ? round($a['media_avaliacao'], 1) : 'N/A' ?>/5
+                            </span>
+                        </div>
+                        
+                        <?php if ($is_owner): ?>
+                            <a href="feedback_alojamento.php?alojamento_id=<?= $a['atividade_id'] ?>" class="btn-feedback">Dar Feedback</a>
+                        <?php endif; ?>
+                    </li>
+                <?php endforeach; ?>
+                </ul>
+                <?php if ($current_user == $viagem['nome_de_utilizador']): ?>
+                    
+                    <form action="novo_alojamento.php" method="post">
+                        <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                        <input type="hidden" name="atividade" value="1">
+                        <button type="submit">Adicionar Atividade</button>
+                    </form>
 
                 <?php endif; ?>
             <?php endif; ?>
