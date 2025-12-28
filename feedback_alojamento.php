@@ -18,16 +18,19 @@ if (!$alojamento_id || !$viagem_id) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $rating = (int)$_POST['rating'];
     $comentario = trim($_POST['comentario'] ?? null);
-
-    if ($rating < 0 || $rating > 5) {
-        $_SESSION['error'] = "Avaliação deve ser entre 0 e 5.";
+    $precos = trim($_POST['precos'] ?? null);
+    $rating = filter_var($_POST['rating'], FILTER_VALIDATE_INT, [
+        'options' => ['min_range' => 0, 'max_range' => 5]
+    ]);
+    if ($rating === false) {
+        $_SESSION['error'] = "Avaliação inválida. Deve ser um número entre 0 e 5.";
         header("Location: feedback_alojamento.php?alojamento_id=$alojamento_id");
         exit;
     }
 
-    adicionarFeedbackAlojamento($db, $alojamento_id, $rating, $comentario);
+
+    adicionarFeedbackAlojamento($db, $alojamento_id, $rating, $comentario, $preços);
 
     $_SESSION['success'] = "Feedback adicionado com sucesso!";
     header("Location: viagem.php?id=$viagem_id");

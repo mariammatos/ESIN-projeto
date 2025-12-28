@@ -220,9 +220,11 @@ if ($traveljournal_id) {
             <?php if (count($alojamentos) === 0): ?>
                 <p>Sem alojamentos registados nesta viagem.</p>
                 <?php if ($current_user == $viagem['nome_de_utilizador']): ?>
-                    <a href="novo_alojamento.php?viagem_id=<?= $id_viagem ?>" class="btn-adicionar-alojamento">
-                        Adicionar Alojamento
-                    </a>
+                    <form action="novo_alojamento.php" method="post">
+                        <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                        <button type="submit">Adicionar Alojamento / Atividade</button>
+                    </form>
+
                 <?php endif; ?>
             <?php else: ?>
                 <ul>
@@ -256,6 +258,13 @@ if ($traveljournal_id) {
                     </li>
                 <?php endforeach; ?>
                 </ul>
+                <?php if ($current_user == $viagem['nome_de_utilizador']): ?>
+                <form action="novo_alojamento.php" method="post">
+                    <input type="hidden" name="viagem_id" value="<?= $id_viagem ?>">
+                    <button type="submit">Adicionar Alojamento / Atividade</button>
+                </form>
+
+                <?php endif; ?>
             <?php endif; ?>
         </section>
 
