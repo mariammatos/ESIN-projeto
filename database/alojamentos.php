@@ -74,28 +74,26 @@ function insertDetalheAlojamento($db, $nome, $localizacao, $tipo_alojamento) {
 }
 
 
-// Inserir um alojamento associado a uma viagem
+
 function insertAlojamento($db, $viagem_id, $detalhe_id, $data_inicio, $data_fim = null) {
     $stmt = $db->prepare('INSERT INTO Alojamento (data_inicio, data_fim, viagem, detalhes) VALUES (?, ?, ?, ?)');
     $stmt->execute([$data_inicio, $data_fim, $viagem_id, $detalhe_id]);
     return $db->lastInsertId();
 }
 
-// Adicionar feedback a um alojamento
+
 function adicionarFeedbackAlojamento($db, $alojamento_id, $rating, $comentario = null, $precos = null) {
-    // Primeiro inserir o feedback
     $stmt = $db->prepare('INSERT INTO Feedback (rating, comentario, precos) VALUES (?, ?, ?)');
     $stmt->execute([$rating, $comentario, $precos]);
     $feedback_id = $db->lastInsertId();
 
-    // Depois associar ao alojamento
     $stmt2 = $db->prepare('INSERT INTO Feedback_alojamento (id, alojamento) VALUES (?, ?)');
     $stmt2->execute([$feedback_id, $alojamento_id]);
 
     return $feedback_id;
 }
 
-// Buscar detalhes completos do alojamento, rating global e viagem associada
+
 function getDetalhesAlojamentoCompleto($db, $alojamento_id) {
     $stmt = $db->prepare('
         SELECT 
@@ -329,6 +327,19 @@ function removerAlojamento($db, $alojamento_id) {
     $db->exec("DELETE FROM Feedback_alojamento WHERE alojamento = $alojamento_id");
     // Apaga o alojamento
     $db->exec("DELETE FROM Alojamento WHERE id = $alojamento_id");
+}
+
+function verificarFeedback($db, $id, $tipo) {
+    if ($tipo === 'alojamento') {
+        $stmt = $db->prepare('SELECT COUNT(*) FROM Feedback_alojamento WHERE alojamento = ?');
+    } elseif ($tipo === 'atividade') {
+        $stmt = $db->prepare('SELECT COUNT(*) FROM Feedback_atividade WHERE atividade = ?');
+    } else {
+        return false;
+    }
+
+    $stmt->execute([$id]);
+    return $stmt->fetchColumn() > 0;
 }
 
 ?>
