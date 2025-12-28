@@ -241,69 +241,41 @@ function guardarPublicacao($db, $utilizador, $viagem_id) {
     $stmt->execute(array($utilizador, $viagem_id, $data_atual));
 }
 
-function removerPublicacaoGuardada($db, $utilizador, $viagem_id) {
-    $stmt = $db->prepare('DELETE FROM Guardar_publicacao WHERE utilizador = ? AND viagem = ?');
-    $stmt->execute(array($utilizador, $viagem_id));}
-
-  function getguardados($db, $current_user) {
-    $stmt = $db->prepare(
-      'SELECT 
-            V.id, 
-            V.titulo, 
-            U.nome_de_utilizador, -- O criador da viagem
-            U.nome,               -- O nome do criador
-            D.cidade_local, 
-            D.pais
-        FROM 
-            Viagens V
-        JOIN 
-            Guardar_publicacao GP ON V.id = GP.viagem
-        JOIN 
-            Utilizador U ON V.utilizador = U.nome_de_utilizador
-        JOIN
-            Destino D ON V.destino = D.id
-        WHERE 
-            GP.utilizador = :current_user
-        ORDER BY 
-            V.data_ida DESC;'
-    );
-
-    $stmt->bindParam(':current_user', $current_user);
-
-    $stmt->execute();
-    return $stmt->fetchAll();
-  }
-
-  function getPostsporDestino($db, $destino) {
-    $stmt = $db->prepare(
-        'SELECT 
-            V.id, V.titulo, V.data_ida, U.nome_de_utilizador, U.nome, D.cidade_local, D.pais
-        FROM 
-            Viagens V
-        JOIN 
-            Utilizador U ON V.utilizador = U.nome_de_utilizador
-        JOIN
-            Destino D ON V.destino = D.id
-        WHERE 
-            V.destino = :destino
-        ORDER BY 
-            V.data_ida DESC;'
-    );
-    
-    $stmt->bindParam(':destino', $destino);
-    $stmt->execute();
-    return $stmt->fetchAll();
-  }
-  
 function removerViagem($db, $viagem_id) {
-    // Apagar a viagem e todos os registos dependentes (feedback, alojamentos, atividades, etc.)
-    try {
-        $stmt = $db->prepare("DELETE FROM Viagens WHERE id = :id");
-        $stmt->bindParam(':id', $viagem_id, PDO::PARAM_INT);
-        return $stmt->execute();
-    } catch (PDOException $e) {
-        error_log($e->getMessage());
-        return false;
-    }
+    $db->exec("PRAGMA foreign_keys = ON");
+
+    // 1️⃣ Apagar Feedback de atividades
+    $db->prepare("
+        DELETE FROM Feedback_atividade 
+        WHERE atividade IN (SELECT id FROM Atividade WHERE viagem = ?)
+    ")->execute([$viagem_id]);
+
+    // 2️⃣ Apagar Feedback de alojamentos
+    $db->prepare("
+        DELETE FROM Feedback_alojamento
+        WHERE alojamento IN (SELECT id FROM Alojamento WHERE viagem = ?)
+    ")->execute([$viagem_id]);
+
+    // 3️⃣ Apagar Feedbacks “soltos” que não têm ligação a nada
+    $db->prepare("
+        DELETE FROM Feedback 
+        WHERE id NOT IN (SELECT id FROM Feedback_atividade)
+          AND id NOT IN (SELECT id FROM Feedback_alojamento)
+    ")->execute();
+
+    // 4️⃣ Comentários, Likes, Guardados
+    $db->prepare("DELETE FROM Comentario WHERE viagem = ?")->execute([$viagem_id]);
+    $db->prepare("DELETE FROM Like_Viagem WHERE viagem = ?")->execute([$viagem_id]);
+    $db->prepare("DELETE FROM Guardar_publicacao WHERE viagem = ?")->execute([$viagem_id]);
+
+    // 5️⃣ Travel Journals
+    $db->prepare("DELETE FROM TravelJournals WHERE viagem_id = ?")->execute([$viagem_id]);
+
+    // 6️⃣ Atividades e Alojamentos
+    $db->prepare("DELETE FROM Atividade WHERE viagem = ?")->execute([$viagem_id]);
+    $db->prepare("DELETE FROM Alojamento WHERE viagem = ?")->execute([$viagem_id]);
+
+    // 7️⃣ Finalmente apagar a viagem
+    return $db->prepare("DELETE FROM Viagens WHERE id = ?")->execute([$viagem_id]);
 }
 ?>
