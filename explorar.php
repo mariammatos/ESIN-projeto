@@ -5,6 +5,7 @@ require_once 'database/posts.php';
 require_once 'database/alojamentos.php';
 require_once 'database/users.php';
 require_once 'database/media.php';
+require_once 'database/destinos.php';
 
 
 if (!isset($_SESSION['username'])) {
@@ -34,8 +35,6 @@ if (!empty($pesquisa_user)) {
     $atividades_matches = [];
 
 } elseif (!empty($pesquisa_alojamento)) {
-    // Pesquisa alojamentos por nome ou localização
-    require_once 'database/destinos.php';
     $alojamentos_matches = procurarAlojamentosGlobais($db, $pesquisa_alojamento);
     $posts = [];
 } elseif (!empty($pesquisa_atividade)) {
