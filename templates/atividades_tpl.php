@@ -27,7 +27,7 @@
                         
                         <?php if ($is_owner): ?>
                             <?php if (!verificarFeedback($db, $a['atividade_id'], 'atividade')): ?>
-                                <a href="feedback_atividade.php?id=<?= $a['atividade_id'] ?>&tipo=atividade" class="btn-feedback">Dar Feedback</a>
+                                <a href="feedback_alojamento.php?id=<?= $a['atividade_id'] ?>&tipo=atividade" class="btn-feedback">Dar Feedback</a>
                             <?php endif; ?>
 
                             <form method="post" action="actions/action_delete_aloj_ativ.php" style="display:inline;">

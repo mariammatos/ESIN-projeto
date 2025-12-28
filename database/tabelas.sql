@@ -1,28 +1,24 @@
--- É fundamental incluir esta linha no início do script SQLite para ativar as Foreign Keys.
+
 PRAGMA foreign_keys = ON;
 
-----------------------------------------------------
--- 1. TABELAS BASE E TIPOS (Entidades e Domínios)
-----------------------------------------------------
 
--- País (nome)
 CREATE TABLE Pais (
     nome TEXT PRIMARY KEY
 );
 
--- Tipo_atividade (tipo atividade)
+
 CREATE TABLE Tipo_atividade (
     tipo_atividade TEXT PRIMARY KEY,
     CHECK (tipo_atividade IN ('Atração', 'Restauração', 'Experiência'))
 );
 
--- Tipo_alojamento (tipo alojamento)
+
 CREATE TABLE Tipo_alojamento (
     tipo_alojamento TEXT PRIMARY KEY,
     CHECK (tipo_alojamento IN ('Hostel', 'Hotel', 'Alojamento Local', 'Outro'))
 );
 
--- Utilizador (nome de utilizador (PK), nome, e-mail(UNIQUE), país_de_origem (FK), preferência_de_viagem, foto_de_perfil)
+
 CREATE TABLE Utilizador (
     nome_de_utilizador TEXT PRIMARY KEY,
     nome TEXT NOT NULL,
@@ -35,7 +31,7 @@ CREATE TABLE Utilizador (
     FOREIGN KEY (pais_de_origem) REFERENCES Pais(nome)
 );
 
--- Destino (id (PK), cidade_local, país (FK))
+
 CREATE TABLE Destino (
     id INTEGER PRIMARY KEY,
     cidade_local TEXT NOT NULL,
@@ -44,7 +40,7 @@ CREATE TABLE Destino (
     FOREIGN KEY (pais) REFERENCES Pais(nome)
 );
 
--- TraveJournals (id (PK), descrição, avaliação)
+
 CREATE TABLE TravelJournals (
     id INTEGER PRIMARY KEY,
     viagem_id INTEGER UNIQUE NOT NULL,
@@ -54,7 +50,7 @@ CREATE TABLE TravelJournals (
     FOREIGN KEY (viagem_id) REFERENCES Viagens(id)
 );
 
--- WishList (id (PK), utilizador (FK/UNIQUE))
+
 CREATE TABLE WishList (
     id INTEGER PRIMARY KEY,
     utilizador TEXT NOT NULL UNIQUE,
@@ -62,7 +58,7 @@ CREATE TABLE WishList (
     FOREIGN KEY (utilizador) REFERENCES Utilizador(nome_de_utilizador)
 );
 
--- Feedback (id (PK), rating, preços, comentário)
+
 CREATE TABLE Feedback (
     id INTEGER PRIMARY KEY,
     rating INTEGER NOT NULL CHECK (rating >= 0 AND rating <= 5),
@@ -70,32 +66,26 @@ CREATE TABLE Feedback (
     comentario TEXT
 );
 
--- Media (id (PK), data, path, TravelJournal (FK), Feedback (FK))
+
 CREATE TABLE Media (
     id INTEGER PRIMARY KEY,
     data TEXT NOT NULL,
     path TEXT NOT NULL,
     
     Viagem INTEGER,
-    Feedback INTEGER,
 
     FOREIGN KEY (Viagem) REFERENCES Viagem(id),
-    FOREIGN KEY (Feedback) REFERENCES Feedback(id)
 );
 
 
-----------------------------------------------------
--- 2. TABELAS DE DETALHES (Herança de Detalhes)
-----------------------------------------------------
 
--- Detalhes (id (PK), nome, localização, avg_rating)
 CREATE TABLE Detalhes (
     id INTEGER PRIMARY KEY,
     nome TEXT NOT NULL,
     localizacao TEXT NOT NULL,
 );
 
--- Detalhes_atividade (id (PK/FK), tipo (FK))
+
 CREATE TABLE Detalhes_atividade (
     id INTEGER PRIMARY KEY,
     tipo TEXT NOT NULL, 
@@ -104,7 +94,7 @@ CREATE TABLE Detalhes_atividade (
     FOREIGN KEY (tipo) REFERENCES Tipo_atividade(tipo_atividade)
 );
 
--- Detalhes_alojamento (id (PK/FK), tipo (FK))
+
 CREATE TABLE Detalhes_alojamento (
     id INTEGER PRIMARY KEY,
     tipo TEXT NOT NULL,
@@ -114,11 +104,7 @@ CREATE TABLE Detalhes_alojamento (
 );
 
 
-----------------------------------------------------
--- 3. VIAGENS, ATIVIDADES E ALOJAMENTOS
-----------------------------------------------------
 
--- Viagens (id (PK), título, data_ida, data_volta, utilizador (FK), destino (FK), travel_journal (FK/UNIQUE))
 CREATE TABLE Viagens (
     id INTEGER PRIMARY KEY,
     titulo TEXT NOT NULL,
@@ -128,14 +114,13 @@ CREATE TABLE Viagens (
     utilizador TEXT NOT NULL,
     destino INTEGER NOT NULL,
 
-    -- Restrição de datas: data_volta deve ser > data_ida
     CHECK (data_volta IS NULL OR julianday(data_volta) > julianday(data_ida)),
 
     FOREIGN KEY (utilizador) REFERENCES Utilizador(nome_de_utilizador),
     FOREIGN KEY (destino) REFERENCES Destino(id)
 );
 
--- Atividade (id (PK), data, viagem (FK), detalhes (FK))
+
 CREATE TABLE Atividade (
     id INTEGER PRIMARY KEY,
     data TEXT NOT NULL,
@@ -146,7 +131,7 @@ CREATE TABLE Atividade (
     FOREIGN KEY (detalhes) REFERENCES Detalhes_atividade(id)
 );
 
--- Alojamento (id (PK), data_início, data_fim, viagem (FK), detalhes (FK))
+
 CREATE TABLE Alojamento (
     id INTEGER PRIMARY KEY,
     data_inicio TEXT NOT NULL,
@@ -155,7 +140,7 @@ CREATE TABLE Alojamento (
     viagem INTEGER NOT NULL,
     detalhes INTEGER NOT NULL,
 
-    -- Restrição de datas: data_fim deve ser > data_início
+
     CHECK (data_fim IS NULL OR julianday(data_fim) > julianday(data_inicio)),
 
     FOREIGN KEY (viagem) REFERENCES Viagens(id),
@@ -163,11 +148,7 @@ CREATE TABLE Alojamento (
 );
 
 
-----------------------------------------------------
--- 4. RELACIONAMENTOS (Associações N:M, 1:N)
-----------------------------------------------------
 
--- Seguir (utilizador1 (PK/FK), utilizador2 (PK/FK), data)
 CREATE TABLE Seguir (
     utilizador1 TEXT, 
     utilizador2 TEXT, 
@@ -180,7 +161,7 @@ CREATE TABLE Seguir (
     CHECK (utilizador1 <> utilizador2) 
 );
 
--- Comentário (id (PK), utilizador (FK), viagem (FK), texto, data, hora)
+
 CREATE TABLE Comentario (
     id INTEGER PRIMARY KEY,
     utilizador TEXT NOT NULL,
@@ -193,7 +174,7 @@ CREATE TABLE Comentario (
     FOREIGN KEY (viagem) REFERENCES Viagens(id)
 );
 
--- Like (utilizador (PK/FK), viagem (PK/FK), data)
+
 CREATE TABLE Like_Viagem ( 
     utilizador TEXT,
     viagem INTEGER,
@@ -205,7 +186,7 @@ CREATE TABLE Like_Viagem (
     FOREIGN KEY (viagem) REFERENCES Viagens(id)
 );
 
--- Guardar_publicação (utilizador (PK/FK), viagem (PK/FK), data)
+
 CREATE TABLE Guardar_publicacao (
     utilizador TEXT,
     viagem INTEGER,
@@ -217,7 +198,7 @@ CREATE TABLE Guardar_publicacao (
     FOREIGN KEY (viagem) REFERENCES Viagens(id)
 );
 
--- Adicionar_wishlist (wishlist (PK/FK), destino (PK/FK))
+
 CREATE TABLE Adicionar_wishlist (
     wishlist INTEGER,
     destino INTEGER,
@@ -228,11 +209,7 @@ CREATE TABLE Adicionar_wishlist (
     FOREIGN KEY (destino) REFERENCES Destino(id)
 );
 
-----------------------------------------------------
--- 5. FEEDBACKS (Relação 1:1 via Chave)
-----------------------------------------------------
 
--- Feedback_alojamento (id (PK/FK), alojamento (FK/UNIQUE))
 CREATE TABLE Feedback_alojamento (
     id INTEGER PRIMARY KEY, 
     alojamento INTEGER NOT NULL UNIQUE, 
@@ -241,7 +218,7 @@ CREATE TABLE Feedback_alojamento (
     FOREIGN KEY (alojamento) REFERENCES Alojamento(id)
 );
 
--- Feedback_atividade (id (PK/FK), atividade (FK/UNIQUE))
+
 CREATE TABLE Feedback_atividade (
     id INTEGER PRIMARY KEY, 
     atividade INTEGER NOT NULL UNIQUE, 

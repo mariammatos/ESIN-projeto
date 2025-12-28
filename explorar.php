@@ -83,7 +83,6 @@ include_once 'templates/header_tpl.php';
 
         <div class="feed-container">
             <?php if (!empty($pesquisa_user) && !empty($user_matches)): ?>
-                <!-- Mostrar utilizadores -->
                 <?php foreach ($user_matches as $user): ?>
                     <article class="post-usuario">
                         <div class="post-header">
@@ -101,7 +100,6 @@ include_once 'templates/header_tpl.php';
                     </article>
                 <?php endforeach; ?>
             <?php elseif (!empty($alojamentos_matches)): ?>
-                <!-- Mostrar alojamentos encontrados -->
                 <?php foreach ($alojamentos_matches as $a): ?>
                     <article class="post-alojamento">
                         <div class="post-header">
@@ -121,7 +119,6 @@ include_once 'templates/header_tpl.php';
                     </article>
                 <?php endforeach; ?>
             <?php elseif (!empty($atividades_matches)): ?>
-                <!-- Mostrar atividades encontradas -->
                 <?php foreach ($atividades_matches as $a): ?>
                     <article class="post-atividade">
                         <div class="post-header">
