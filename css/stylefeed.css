@@ -145,6 +145,7 @@ nav ul li a:hover {
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
     margin-bottom: 12px;
+    margin-top: 12px;
 }
 
 .post-foto {
