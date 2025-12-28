@@ -614,7 +614,10 @@ nav ul li a:hover {
     gap: 12px;
 }
 
-
+.editar-fotos {
+    margin-top: 8px;
+    margin-bottom: 10px;    
+}
 /* cada foto */
 .foto-item {
     flex: 0 0 auto;
