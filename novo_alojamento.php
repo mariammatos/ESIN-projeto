@@ -36,7 +36,7 @@ if ($atividade && $termo !== '') {
 <head>
     <meta charset="UTF-8">
     <title>Adicionar Alojamento | TripTales</title>
-    <link rel="stylesheet" href="css/stylenova_viagem.css">
+    <link rel="stylesheet" href="css/stylenovo_aloj.css">
 </head>
 <body>
     <h4><?php echo $_SESSION['error'] ?? ''; unset($_SESSION['error']); ?></h4>

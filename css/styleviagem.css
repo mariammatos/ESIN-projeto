@@ -131,7 +131,9 @@ header {
 .viagem-detalhe-container .travel-journal,
 .viagem-detalhe-container .atividades-alojamentos,
 .viagem-detalhe-container .like,
-.viagem-detalhe-container .comentarios {
+.viagem-detalhe-container .comentarios,
+.viagem-detalhe-container .alojamentos,
+.viagem-detalhe-container .atividades {
     background-color: #fcf7f8;
     padding: 20px;
     border-radius: 6px;
@@ -164,7 +166,9 @@ header {
 .viagem-detalhe-container .editar-viagem button,
 .viagem-detalhe-container .editar-fotos button,
 .viagem-detalhe-container .adicionar-travel-journal button,
-.viagem-detalhe-container .editar-travel-journal button {
+.viagem-detalhe-container .editar-travel-journal button,
+.viagem-detalhe-container .alojamentos button,
+.viagem-detalhe-container .atividades button {
     background-color: #4e8098;
     color: #fff;
     border: none;
@@ -174,13 +178,15 @@ header {
     cursor: pointer;
     transition: all 0.25s ease;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    margin: 5px;
+    margin: 7px;
 }
 
 .viagem-detalhe-container .editar-viagem button:hover,
 .viagem-detalhe-container .editar-fotos button:hover,
 .viagem-detalhe-container .adicionar-travel-journal button:hover,
-.viagem-detalhe-container .editar-travel-journal button:hover {
+.viagem-detalhe-container .editar-travel-journal button:hover,
+.viagem-detalhe-container .alojamentos button:hover,
+.viagem-detalhe-container .atividades button:hover {
     background-color: #a31621;
     transform: translateY(-2px);
     box-shadow: 0 6px 14px rgba(0,0,0,0.2);
@@ -361,32 +367,7 @@ header {
 }
 
 /* ========================= LIKE ========================= */
-
-.insta-heart-animation {
-    position: absolute;
-    top: -40px;
-    left: 20px;
-    font-size: 40px;
-    color: #a31621;
-    pointer-events: none;
-    z-index: 1000;
-    animation: heartFloatUp 1s ease-out forwards;
-}
-
-@keyframes heartFloatUp {
-    0% {
-        opacity: 0;
-        transform: translateY(0) scale(0.5);
-    }
-    30% {
-        opacity: 1;
-        transform: translateY(-20px) scale(1.2);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(-50px) scale(1.5);
-    }
-}   
+ 
 
 .like {
     position: relative; 
@@ -601,7 +582,7 @@ header {
     transform: scale(1.05);
 }
 
-/* ========================= MODAL GALERIA (INSTAGRAM STYLE) ========================= */
+/* ========================= GALERIA (INSTAGRAM STYLE) ========================= */
 
 .modal-galeria {
     position: fixed;
@@ -700,6 +681,96 @@ header {
     }
 }
 
+/* ========================= ALOJAMENTO E ATIVIDADES ========================= */
+
+.alojamentos ul, 
+.atividades ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 10px 0;
+}
+
+/* Transforma cada <li> num Card */
+.alojamentos li, 
+.atividades li {
+    background: #ffffff;
+    border: 1px solid #eef0f2;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-bottom: none; /* Remove a linha cinzenta antiga */
+}
+
+.alojamentos li:hover, 
+.atividades li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Estilo para o Nome (o strong) */
+.alojamentos li strong, 
+.atividades li strong {
+    color: #a31621;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Diferenciação de cor para Atividades */
+.atividades li {
+    border-top: 4px solid #90c2e7;
+}
+
+.alojamentos li {
+    border-top: 4px solid #90c2e7;
+}
+
+/* Ajuste dos botões dentro dos cards */
+.btn-feedback {
+    display: block;
+    text-align: center;
+    margin-top: auto; /* Empurra o botão para o fundo do card */
+    background-color: #fcf7f8;
+    color: #a31621;
+    border: 1px solid #f1e1e1;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.btn-feedback:hover {
+    background-color: #a31621;
+    color: #fff;
+    transform: none; /* Evita conflitos de animação */
+}
+
+/* Estilo para os formulários de "Adicionar" que estão soltos */
+section.alojamentos form, 
+section.atividades form {
+    display: inline-block;
+    margin-top: 15px;
+}
+
+
+
+/* Ajuste das estrelas dentro do card */
+.alojamento-stars {
+    background: #fafafa;
+    padding: 8px;
+    border-radius: 6px;
+    margin: 10px 0;
+    width: 100%;
+    justify-content: center;
+}
+
+
 /* ================= FOOTER ================= */
 
 footer {
@@ -747,5 +818,9 @@ footer {
     
     .btn-wishlist {
         align-self: flex-end;
+    }
+
+    .alojamentos ul, .atividades ul {
+        grid-template-columns: 1fr;
     }
 }
