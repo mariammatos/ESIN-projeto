@@ -27,7 +27,7 @@ include_once 'templates/header_tpl.php';
 
 
     <main class="feed-container">
-        <h1>Bem-vindo, <?php echo htmlspecialchars($current_user); ?>!</h1>
+        <h1>As suas viagens guardadas</h1>
 
         <?php if (isset($error_message)): ?>
             <p class="error"><?php echo $error_message; ?></p>
