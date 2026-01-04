@@ -28,7 +28,8 @@ function getAlojamentosViagem($db, $viagem_id) {
 // retorna os alojamentos de acordo com a pesquisa 
 function procurarAlojamentosGlobais(PDO $db, string $termo): array {
     $termo = '%' . $termo . '%';
-
+    $termo_normalizado = normalize_string($termo);
+    $db->sqliteCreateFunction('removeacentos', 'normalize_string', 1);
     $stmt = $db->prepare("
         SELECT 
             D.id AS detalhe_id,
@@ -41,13 +42,13 @@ function procurarAlojamentosGlobais(PDO $db, string $termo): array {
         LEFT JOIN Alojamento A ON A.detalhes = D.id
         LEFT JOIN Feedback_alojamento FA ON FA.alojamento = A.id
         LEFT JOIN Feedback F ON F.id = FA.id
-        WHERE D.nome LIKE :termo
-           OR D.localizacao LIKE :termo
+        WHERE LOWER(removeacentos(D.nome)) LIKE :termo
+           OR LOWER(removeacentos(D.localizacao)) LIKE :termo
         GROUP BY D.id
         ORDER BY media_avaliacao DESC
     ");
 
-    $stmt->execute(['termo' => $termo]);
+    $stmt->execute(['termo' => $termo_normalizado]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -94,24 +95,23 @@ function getDetalhesAlojamentoCompleto($db, $alojamento_id) {
         SELECT 
             A.id AS alojamento_id,
             A.viagem AS viagem_id,
-            D.id AS detalhe_id,  /* <--- ADICIONADO ISTO */
+            D.id AS detalhe_id, 
             D.nome AS nome_alojamento,
             D.localizacao,
             DA.tipo AS tipo_alojamento,
             AVG(F.rating) AS media_avaliacao
-        FROM Alojamento A
+        FROM Detalhes D
+        JOIN Alojamento A ON A.detalhes = D.id
         JOIN Detalhes_alojamento DA ON A.detalhes = DA.id
-        JOIN Detalhes D ON DA.id = D.id
         LEFT JOIN Feedback_alojamento FA ON FA.alojamento = A.id
         LEFT JOIN Feedback F ON F.id = FA.id
-        WHERE A.id = :alojamento_id
+        WHERE D.id = :alojamento_id
         GROUP BY A.id
     ');
     $stmt->bindParam(':alojamento_id', $alojamento_id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-
 // retorna todos os feedbacks de um alojamento
 function getFeedbacksAlojamento($db, $detalhe_id) {
     $stmt = $db->prepare('
@@ -177,25 +177,27 @@ function getAtividadesViagem($db, $viagem_id) {
 // retorna as atividades de acordo com a pesquisa
 function procurarAtividadesGlobais(PDO $db, string $termo): array {
     $termo = '%' . $termo . '%';
+    $termo_normalizado = normalize_string($termo);
+    $db->sqliteCreateFunction('removeacentos', 'normalize_string', 1);
 
     $stmt = $db->prepare("
         SELECT 
-            A.id AS atividade_id,
+            D.id AS atividade_id,
             D.nome AS nome_atividade,
             DA.tipo AS tipo_atividade,
             D.localizacao,
             AVG(F.rating) AS media_avaliacao
-        FROM Atividade A
-        JOIN Detalhes_atividade DA ON A.detalhes = DA.id
-        JOIN Detalhes D ON DA.id = D.id
+        FROM Detalhes D
+        JOIN Detalhes_atividade DA ON D.id = DA.id
+        LEFT JOIN Atividade A ON A.detalhes = D.id
         LEFT JOIN Feedback_atividade FA ON FA.atividade = A.id
         LEFT JOIN Feedback F ON F.id = FA.id
-        WHERE D.nome LIKE :termo
-           OR D.localizacao LIKE :termo
-        GROUP BY A.id
-    ");
+        WHERE LOWER(removeacentos(D.nome)) LIKE :termo
+           OR LOWER(removeacentos(D.localizacao)) LIKE :termo
+        GROUP BY D.id
 
-    $stmt->execute(['termo' => $termo]);
+    ");
+    $stmt->execute(['termo' => $termo_normalizado]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -239,21 +241,21 @@ function adicionarFeedbackAtividade($db, $atividade_id, $rating, $comentario = n
 // retorna as informações completas sobre uma atividade
 function getDetalhesAtividadeCompleto(PDO $db, int $atividadeId): ?array {
     $stmt = $db->prepare("
-        SELECT
+        SELECT 
             A.id AS atividade_id,
             A.viagem AS viagem_id,
-            D.id AS detalhe_id,   /* <--- ADICIONADO: O ID do local/tipo de atividade */
+            D.id AS detalhe_id, 
             D.nome AS nome_atividade,
             D.localizacao,
             DA.tipo AS tipo_atividade,
             AVG(F.rating) AS media_avaliacao
-        FROM Atividade A
+        FROM Detalhes D
+        JOIN Atividade A ON A.detalhes = D.id
         JOIN Detalhes_atividade DA ON A.detalhes = DA.id
-        JOIN Detalhes D ON DA.id = D.id
         LEFT JOIN Feedback_atividade FA ON FA.atividade = A.id
         LEFT JOIN Feedback F ON F.id = FA.id
-        WHERE A.id = :id
-        GROUP BY A.id
+        WHERE D.id = :id
+        GROUP BY D.id
     ");
 
     $stmt->execute(['id' => $atividadeId]);

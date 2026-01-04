@@ -5,19 +5,20 @@ require_once 'database/media.php';
 require_once 'database/posts.php';
 require_once 'database/users.php';
 
+if (isset($_GET['user'])) {
+    $user = $_GET['user'];     
+} else {
+    $user = $_SESSION['username']; 
+}
+
 if (!isset($_SESSION['username'])) {
+    $_SESSION['next_page'] = 'perfil.php?user=' . urlencode($user);
     header("Location: login.php");
     exit();
 }
 
 $dbh = getDatabaseConnection();
 
-
-if (isset($_GET['user'])) {
-    $user = $_GET['user'];     
-} else {
-    $user = $_SESSION['username']; 
-}
 
 $utilizador = getuserdetails($dbh, $user);
 
@@ -36,7 +37,7 @@ if ($perfil_user !== $current_user) {
 }
 
 $viagens = getViagensUtilizador($dbh, $user);
-//$_SESSION['last_page'] = 'perfil.php?user=' . urlencode($perfil_user);
+$_SESSION['last_page'] = 'perfil.php?user=' . urlencode($perfil_user);
 
 $css_especifico = 'styleperfil.css';
 

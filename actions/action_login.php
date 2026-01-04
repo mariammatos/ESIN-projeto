@@ -6,7 +6,8 @@ session_start();
 
 $username = $_POST['username'];
 $password = $_POST['password'];
-$viagem = $_POST['viagem'] ?? null;
+$next_page = $_SESSION['next_page'] ?? null;
+unset($_SESSION['next_page']);
 
 
 try {
@@ -16,8 +17,8 @@ try {
     if (loginSuccess($dbh, $username, $password)) {
         $_SESSION['username'] = $username;
 
-        if (!empty($viagem)) {
-            header('Location: ../viagem.php?id=' . $viagem);
+        if (!empty($next_page)) {
+            header('Location: ../' . $next_page);
         } else {
             header('Location: ../feed.php');
         }

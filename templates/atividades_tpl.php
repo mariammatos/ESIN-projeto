@@ -1,6 +1,6 @@
                     <li>
                         <strong>
-                            <a href="detalhes_alojamento.php?id=<?= $a['atividade_id'] ?>&tipo=atividade" style="text-decoration: none; color: inherit;">
+                            <a href="detalhes_alojamento.php?id=<?= $a['detalhe_id'] ?>&tipo=atividade" style="text-decoration: none; color: inherit;">
                                 <?= htmlspecialchars($a['nome_atividade']) ?>
                             </a>
                         </strong> 

@@ -8,7 +8,7 @@ $dbh = getDatabaseConnection();
 $viagem_id = $_POST['viagem_id'] ?? null;
 $descricao = trim($_POST['descricao'] ?? '');
 $avaliacao = floatval($_POST['avaliacao'] ?? 0);
-$editar = isset($_POST['editar']) ? true : false;
+$editar = ($_POST['editar'] ?? '') === '1';
 
 if (!$viagem_id || !$descricao || $avaliacao < 0 || $avaliacao > 5) {
     $_SESSION['error'] = "Todos os campos obrigatórios devem ser preenchidos.";

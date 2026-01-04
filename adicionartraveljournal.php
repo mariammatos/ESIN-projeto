@@ -44,7 +44,7 @@
     <form action="actions/action_criartraveljournal.php" method="post" enctype="multipart/form-data">
 
         <input type="hidden" name="viagem_id" value="<?= htmlspecialchars($id_viagem) ?>">
-        <input type="hidden" name="editar" value="<?= htmlspecialchars($editar ?? false) ?>">
+        <input type="hidden" name="editar" value="<?= $editar ? '1' : '0' ?>">
 
 
         <div class="form-group">

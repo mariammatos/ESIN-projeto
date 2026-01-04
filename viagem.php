@@ -17,7 +17,7 @@ $id_viagem = (int)$_GET['id'];
 
 if (!isset($_SESSION['username'])) {
     $_SESSION['msg'] = "Faça login para ver mais!";
-    $_SESSION['viagem'] = $id_viagem;
+    $_SESSION['next_page'] = 'viagem.php?id=' . urlencode($id_viagem);
     header('Location: login.php');
     exit();
 }
